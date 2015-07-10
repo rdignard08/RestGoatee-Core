@@ -221,7 +221,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
             [self rg_initProperty:overrides[key] withValue:value inContext:context];
             [intializedProperties addObject:rg_canonicalForm(overrides[key])];
         } @catch (NSException* e) { /* Should this fail the property is left alone */
-            RGLog(@"initializing property %@ on type %@ failed: %@", overrides[key], [ret class], e);
+            RGLog(@"initializing property %@ on type %@ failed: %@", overrides[key], [self class], e);
         }
     }
     return self;

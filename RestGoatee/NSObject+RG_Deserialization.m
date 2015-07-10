@@ -84,6 +84,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
     for (NSString* key in overrides) { /* The developer provided an override keypath */
         if ([intializedProperties containsObject:rg_canonicalForm(key)]) continue;
         id value = [source valueForKeyPath:key];
+        if (!value) continue; // nil should not be pushed into the property
         @try {
             [ret rg_initProperty:overrides[key] withValue:value inContext:context];
             [intializedProperties addObject:rg_canonicalForm(overrides[key])];
@@ -217,6 +218,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
     for (NSString* key in overrides) { /* The developer provided an override keypath */
         if ([intializedProperties containsObject:rg_canonicalForm(key)]) continue;
         id value = [object valueForKeyPath:key];
+        if (!value && rg_isDataSourceClass([object class])) continue; // empty dictionary entry doesn't get pushed
         @try {
             [self rg_initProperty:overrides[key] withValue:value inContext:context];
             [intializedProperties addObject:rg_canonicalForm(overrides[key])];

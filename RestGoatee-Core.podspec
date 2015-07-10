@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "RestGoatee-Core"
-  s.version          = '1.0.3'
+  s.version          = '1.0.4'
   s.summary          = "An intuitive JSON & XML deserialization library"
   s.homepage         = "https://github.com/rdignard08/RestGoatee-Core"
   s.license          = 'BSD'

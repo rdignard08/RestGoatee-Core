@@ -207,8 +207,22 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
 }
 
 - (instancetype) extendWith:(id)object inContext:(id)context {
-    for (NSString* propertyName in [object rg_keys]) {
-        [self rg_initCanonically:propertyName withValue:object[propertyName] inContext:context];
+    NSDictionary* overrides = [[self class] respondsToSelector:@selector(overrideKeysForMapping)] ? [[self class] overrideKeysForMapping] : nil;
+    NSMutableArray* intializedProperties = [NSMutableArray new];
+    for (NSString* key in [object rg_keys]) {
+        if (overrides[key]) continue;
+        [self rg_initCanonically:key withValue:object[key] inContext:context];
+        [intializedProperties addObject:rg_canonicalForm(key)];
+    }
+    for (NSString* key in overrides) { /* The developer provided an override keypath */
+        if ([intializedProperties containsObject:rg_canonicalForm(key)]) continue;
+        id value = [object valueForKeyPath:key];
+        @try {
+            [self rg_initProperty:overrides[key] withValue:value inContext:context];
+            [intializedProperties addObject:rg_canonicalForm(overrides[key])];
+        } @catch (NSException* e) { /* Should this fail the property is left alone */
+            RGLog(@"initializing property %@ on type %@ failed: %@", overrides[key], [ret class], e);
+        }
     }
     return self;
 }

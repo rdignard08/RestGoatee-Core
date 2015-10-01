@@ -21,6 +21,10 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSManagedObjectContext;
 
 /**
@@ -30,18 +34,14 @@
 
 @optional
 /**
- @abstract Provide any overrides for default mapping behavior here.  The returned dictionary should have keys and values of type NSString and should be read left-to-right JSON source to target key.  Any unspecified key(s) will use the default behavior for mapping.
- 
-  Instance mappings will override class mappings if both are implemented.
+ @abstract Provide any overrides for default mapping behavior here.  The returned dictionary should have keys and values of type NSString and should be read left-to-right JSON source to target key.  Any unspecified key(s) will use the default behavior for mapping.  Can return `nil` (say you're overriding a class that implements this).
  */
-+ (NSDictionary*) overrideKeysForMapping;
++ (nullable NSDictionary*) overrideKeysForMapping;
 
 /**
- @abstract Provide a custom date format for use with the given property `key`.  See documentation for NSDate for proper formats.
- 
- Instance mappings will override class mappings if both are implemented.
+ @abstract Provide a custom date format for use with the given property `key`.  See documentation for NSDate for proper formats.  Can return `nil` (say you're overriding a class that implements this).
  */
-+ (NSString*) dateFormatForKey:(NSString*)key;
++ (nullable NSString*) dateFormatForKey:(NSString*)key;
 
 /**
  @abstract implement this method to provide custom logic on a given property.  Return the original value if this method is implemented and the default is desired.
@@ -50,7 +50,7 @@
  
  This method tends to be necessary for deserializing arrays that lack a metadata key indicating the type of the object.
  */
-- (id) transformValue:(id)value forProperty:(NSString*)property inContext:(NSManagedObjectContext*)context;
+- (id) transformValue:(id)value forProperty:(NSString*)property inContext:(nullable NSManagedObjectContext*)context;
 
 @end
 
@@ -65,7 +65,7 @@
 /**
  @abstract subclasses of `NSManagedObject` must use this method since they cannot be initialized without a context.
  */
-+ (instancetype) objectFromDataSource:(id<RGDataSourceProtocol>)source inContext:(NSManagedObjectContext*)context;
++ (instancetype) objectFromDataSource:(id<RGDataSourceProtocol>)source inContext:(nullable NSManagedObjectContext*)context;
 
 /**
  @abstract the receiver (the Class object) which receives this method will attempt to initialize an instance of this class with properties assigned from a data source.
@@ -75,7 +75,7 @@
 /**
  @abstract creates and returns an array of objects of the type of the receiver.  Need only be something iteratable.
  */
-+ (NSArray*) objectsFromArraySource:(id<NSFastEnumeration>)source inContext:(NSManagedObjectContext*)context;
++ (NSArray*) objectsFromArraySource:(id<NSFastEnumeration>)source inContext:(nullable NSManagedObjectContext*)context;
 
 /**
  @abstract creates and returns an array of objects of the type of the receiver.
@@ -92,6 +92,9 @@
 /**
  Same as `-extendWith:` but since there may be sub objects which are `NSManagedObject` subclasses, it may be necessary to provide an `NSManagedContext` to contain them.
  */
-- (instancetype) extendWith:(id)object inContext:(NSManagedObjectContext*)context;
+- (instancetype) extendWith:(id)object inContext:(nullable NSManagedObjectContext*)context;
 
 @end
+
+NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

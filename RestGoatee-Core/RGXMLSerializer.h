@@ -21,6 +21,10 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+NS_ASSUME_NONNULL_BEGIN
+
 @class RGXMLNode;
 
 /**
@@ -46,3 +50,6 @@
 @property (nonatomic, strong, readonly) RGXMLNode* rootNode;
 
 @end
+
+NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

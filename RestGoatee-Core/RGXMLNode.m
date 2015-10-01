@@ -23,10 +23,16 @@
 
 #import "RGXMLNode.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation RGXMLNode
 @synthesize parentNode = _parentNode;
 @synthesize attributes = _attributes;
 @synthesize childNodes = _childNodes;
+@synthesize name = _name;
+@synthesize innerXML = _innerXML;
 
 - (NSArray*) childNodes {
     if (!_childNodes) {
@@ -58,3 +64,6 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

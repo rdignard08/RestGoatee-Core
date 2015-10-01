@@ -21,6 +21,10 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Provides a default behavior of key based subscripting to all `NSObject` subclasses.
  
@@ -28,17 +32,22 @@
  UITextField* textField = [UITextField new];
  textField[@"text"] = @"foo bar"; // equivalent to `textField.text = @"foo bar";`
  NSString* theText = textField[@"text"]; // equivalent to `NSString* theText = textField.text;`
+ 
+ Obviously the advantage now is you can use non constant strings for property access.  Use it wisely.
  */
 @interface NSObject (RG_KeyedSubscripting)
 
 /**
  @abstract returns the property or instance variable of the name given by `key`.
  */
-- (id) objectForKeyedSubscript:(id<NSCopying, NSObject>)key;
+- (nullable id) objectForKeyedSubscript:(id<NSCopying, NSObject>)key;
 
 /**
  @abstract set the value of the particular property or instance variable specified by `key`.
  */
-- (void) setObject:(id)obj forKeyedSubscript:(id<NSCopying, NSObject>)key;
+- (void) setObject:(nullable id)obj forKeyedSubscript:(id<NSCopying, NSObject>)key;
 
 @end
+
+NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

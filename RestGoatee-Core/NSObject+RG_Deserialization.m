@@ -20,8 +20,13 @@
  ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
-#import "Core-RestGoatee.h"
+
+#import "RestGoatee-Core.h"
 #import "NSObject+RG_SharedImpl.h"
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (RGForwardDeclarations)
 + (id) insertNewObjectForEntityForName:(NSString*)entityName inManagedObjectContext:(id)context;
@@ -45,7 +50,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
     return [self objectsFromArraySource:source inContext:nil];
 }
 
-+ (NSArray*) objectsFromArraySource:(id<NSFastEnumeration>)source inContext:(NSManagedObjectContext*)context {
++ (NSArray*) objectsFromArraySource:(id<NSFastEnumeration>)source inContext:(nullable NSManagedObjectContext*)context {
     NSMutableArray* objects = [NSMutableArray new];
     for (NSDictionary* object in source) {
         if (rg_isDataSourceClass([object class])) {
@@ -62,10 +67,10 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
     return [self objectFromDataSource:source inContext:nil];
 }
 
-+ (instancetype) objectFromDataSource:(id<RGDataSourceProtocol>)source inContext:(id)context {
++ (instancetype) objectFromDataSource:(id<RGDataSourceProtocol>)source inContext:(nullable NSManagedObjectContext*)context {
     NSObject<RestGoateeSerialization>* ret;
     if ([self isSubclassOfClass:rg_sNSManagedObject]) {
-        context ?: [NSException raise:NSGenericException format:@"A subclass of NSManagedObject must be created within a valid NSManagedObjectContext."];
+        context ? VOID_NOOP : [NSException raise:NSGenericException format:@"A subclass of NSManagedObject must be created within a valid NSManagedObjectContext."];
         DO_RISKY_BUSINESS
         ret = [rg_sNSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:context];
         END_RISKY_BUSINESS
@@ -186,8 +191,8 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
             self[key] = [dateFormatter dateFromString:value];
             return; /* Let's not second-guess the developer... */
         } else {
-            for (NSString* dateFormat in rg_dateFormats()) {
-                dateFormatter.dateFormat = dateFormat;
+            for (NSString* predefinedFormat in rg_dateFormats()) {
+                dateFormatter.dateFormat = predefinedFormat;
                 self[key] = [dateFormatter dateFromString:value];
                 if (self[key]) break;
             }
@@ -197,17 +202,17 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
     } else if (rg_isDataSourceClass([value class])) { /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
         self[key] = [propertyType objectFromDataSource:value inContext:context];
     } else if ([value isKindOfClass:[NSArray class]]) { /* single entry arrays are converted to an inplace object */
-        [value count] > 1 ? RGLog(@"Warning, data loss on property %@ on type %@", key, [self class]) : nil;
+        [(NSArray*)value count] > 1 ? RGLog(@"Warning, data loss on property %@ on type %@", key, [self class]) : VOID_NOOP;
         id firstValue = [value firstObject];
         if (!firstValue || [firstValue isKindOfClass:propertyType]) {
             self[key] = value;
         }
     }
     
-    self[key] ?: RGLog(@"Warning, initialization failed on property %@ on type %@", key, [self class]);
+    self[key] ? VOID_NOOP : RGLog(@"Warning, initialization failed on property %@ on type %@", key, [self class]);
 }
 
-- (instancetype) extendWith:(id)object inContext:(id)context {
+- (instancetype) extendWith:(id)object inContext:(nullable NSManagedObjectContext*)context {
     NSDictionary* overrides = [[self class] respondsToSelector:@selector(overrideKeysForMapping)] ? [[self class] overrideKeysForMapping] : nil;
     NSMutableArray* intializedProperties = [NSMutableArray new];
     for (NSString* key in [object rg_keys]) {
@@ -234,3 +239,6 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
 }
 
 @end
+
+NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

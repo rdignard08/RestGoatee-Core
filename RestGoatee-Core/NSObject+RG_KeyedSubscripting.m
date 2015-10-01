@@ -21,7 +21,11 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "Core-RestGoatee.h"
+#import "RestGoatee-Core.h"
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+NS_ASSUME_NONNULL_BEGIN
 
 #ifndef STRICT_KVC
     #define STRICT_KVC 0
@@ -29,7 +33,7 @@
 
 @implementation NSObject (RG_KeyedSubscripting)
 
-- (id) objectForKeyedSubscript:(id<NSCopying, NSObject>)key {
+- (nullable id) objectForKeyedSubscript:(id<NSCopying, NSObject>)key {
 #if !(STRICT_KVC)
     @try {
 #endif
@@ -42,7 +46,7 @@
 #endif
 }
 
-- (void) setObject:(id)obj forKeyedSubscript:(id<NSCopying, NSObject>)key {
+- (void) setObject:(nullable id)obj forKeyedSubscript:(id<NSCopying, NSObject>)key {
 #if !(STRICT_KVC)
     @try {
 #endif
@@ -59,7 +63,7 @@
 @implementation NSMutableDictionary (RG_KeyedSubscripting)
 
 /* fuck you apple */
-- (void) setObject:(id)obj forKeyedSubscript:(id<NSCopying, NSObject>)key {
+- (void) setObject:(nullable id)obj forKeyedSubscript:(id<NSCopying, NSObject>)key {
     if (obj) {
         [self setObject:obj forKey:key];
     } else {
@@ -68,3 +72,6 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

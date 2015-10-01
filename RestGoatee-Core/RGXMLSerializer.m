@@ -22,15 +22,24 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RGXMLSerializer.h"
-#import "Core-RestGoatee.h"
+#import "RestGoatee-Core.h"
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+NS_ASSUME_NONNULL_BEGIN
 
 @interface RGXMLSerializer () <NSXMLParserDelegate>
+
 @property (nonatomic, weak) RGXMLNode* currentNode;
 @property (nonatomic, strong) NSMutableString* currentString;
+
 @end
 
 @implementation RGXMLSerializer
 @synthesize rootNode = _rootNode;
+@synthesize parser = _parser;
+@synthesize currentNode = _currentNode;
+@synthesize currentString = _currentString;
 
 - (instancetype) initWithParser:(NSXMLParser*)parser {
     self = [super init];
@@ -69,7 +78,8 @@
     RGXMLNode* node = [RGXMLNode new];
     node.name = element;
     [node.attributes addEntriesFromDictionary:attributes];
-    [self.currentNode addChildNode:node];
+    __strong RGXMLNode* strongNode = self.currentNode;
+    [strongNode addChildNode:node];
     self.currentNode = node;
 }
 
@@ -78,9 +88,10 @@
 }
 
 - (void) parser:(__unused NSXMLParser*)p didEndElement:(__unused NSString*)e namespaceURI:(__unused NSString*)n qualifiedName:(__unused NSString*)q {
-    self.currentNode.innerXML = self->_currentString;
+    __strong RGXMLNode* strongNode = self.currentNode;
+    strongNode.innerXML = self->_currentString;
     self->_currentString = nil;
-    self.currentNode = self.currentNode.parentNode; /* move up the parse tree */
+    self.currentNode = strongNode.parentNode; /* move up the parse tree */
 }
 
 - (void) parser:(__unused NSXMLParser*)p foundCDATA:(NSData*)CDATABlock {
@@ -88,3 +99,6 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

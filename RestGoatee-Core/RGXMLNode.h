@@ -21,6 +21,10 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  The `RGXMLNode` is the parse result of `NSXMLParser`.
  */
@@ -70,3 +74,6 @@
 - (void) addChildNode:(RGXMLNode*)node;
 
 @end
+
+NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

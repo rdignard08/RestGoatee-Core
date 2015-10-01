@@ -23,7 +23,11 @@
 
 #import "NSObject+RG_SharedImpl.h"
 #import <objc/runtime.h>
-#import "Core-RestGoatee.h"
+#import "RestGoatee-Core.h"
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+NS_ASSUME_NONNULL_BEGIN
 
 /* Property Description Keys */
 NSString* const kRGPropertyAtomicType = @"atomicity";
@@ -118,7 +122,7 @@ BOOL rg_isDataSourceClass(Class cls) {
 NSString* rg_trimLeadingAndTrailingQuotes(NSString* str) {
     NSArray* substrs = [str componentsSeparatedByString:@"\""];
     if (substrs.count != 3) {
-        substrs.count > 1 ? RGLog(@"Warning: Could not determine class name %@", str) : nil;
+        substrs.count > 1 ? RGLog(@"Warning: Could not determine class name %@", str) : VOID_NOOP;
         return str; /* there should be 2 '"' on each end, the class is in the middle, if not, give up */
     }
     return substrs[1];
@@ -217,7 +221,7 @@ void rg_calculateIvarSize(Class object, NSMutableArray/*NSMutableDictionary*/* p
         }
     }
     [offsets sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        return [obj1[@"o"] compare:obj2[@"o"]];
+        return [(NSNumber*)obj1[@"o"] compare:obj2[@"o"]];
     }];
     for (NSUInteger i = 0; i < offsets.count; i++) {
         NSDictionary* obj = offsets[i];
@@ -324,3 +328,6 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
 }
 
 @end
+
+NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

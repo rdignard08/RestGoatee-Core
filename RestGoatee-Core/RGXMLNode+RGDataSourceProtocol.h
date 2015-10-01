@@ -23,6 +23,10 @@
 
 #import "RGXMLNode.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  These are the methods that a data source must implement in order to be consumable by the `+[NSObject objectFromDataSource:]` family of methods.
  
@@ -60,3 +64,6 @@
  `RGXMLNode` does not provide these method implicitly.  They are implemented in the category `RGXMLNode+RGDataSourceProtocol`.
  */
 @interface RGXMLNode (RGDataSourceProtocol) <RGDataSourceProtocol> @end
+
+NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

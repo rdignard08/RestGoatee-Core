@@ -1,0 +1,356 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BEAB13C61BBDB4960027300D /* RestGoatee-Core.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13B71BBDB4960027300D /* RestGoatee-Core.m */; };
+		BEAB13C71BBDB4960027300D /* NSObject+RG_Deserialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13B91BBDB4960027300D /* NSObject+RG_Deserialization.m */; };
+		BEAB13C81BBDB4960027300D /* NSObject+RG_KeyedSubscripting.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BB1BBDB4960027300D /* NSObject+RG_KeyedSubscripting.m */; };
+		BEAB13C91BBDB4960027300D /* NSObject+RG_Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BD1BBDB4960027300D /* NSObject+RG_Serialization.m */; };
+		BEAB13CA1BBDB4960027300D /* NSObject+RG_SharedImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BF1BBDB4960027300D /* NSObject+RG_SharedImpl.m */; };
+		BEAB13CB1BBDB4960027300D /* RGXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13C11BBDB4960027300D /* RGXMLNode.m */; };
+		BEAB13CC1BBDB4960027300D /* RGXMLNode+RGDataSourceProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13C31BBDB4960027300D /* RGXMLNode+RGDataSourceProtocol.m */; };
+		BEAB13CD1BBDB4960027300D /* RGXMLSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13C51BBDB4960027300D /* RGXMLSerializer.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BEFFB83F1BBDB15900EAF95D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		BEAB13B51BBDB45A0027300D /* RestGoatee-Core.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = "RestGoatee-Core.podspec"; sourceTree = "<group>"; };
+		BEAB13B61BBDB4960027300D /* RestGoatee-Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RestGoatee-Core.h"; sourceTree = "<group>"; };
+		BEAB13B71BBDB4960027300D /* RestGoatee-Core.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RestGoatee-Core.m"; sourceTree = "<group>"; };
+		BEAB13B81BBDB4960027300D /* NSObject+RG_Deserialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RG_Deserialization.h"; sourceTree = "<group>"; };
+		BEAB13B91BBDB4960027300D /* NSObject+RG_Deserialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RG_Deserialization.m"; sourceTree = "<group>"; };
+		BEAB13BA1BBDB4960027300D /* NSObject+RG_KeyedSubscripting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RG_KeyedSubscripting.h"; sourceTree = "<group>"; };
+		BEAB13BB1BBDB4960027300D /* NSObject+RG_KeyedSubscripting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RG_KeyedSubscripting.m"; sourceTree = "<group>"; };
+		BEAB13BC1BBDB4960027300D /* NSObject+RG_Serialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RG_Serialization.h"; sourceTree = "<group>"; };
+		BEAB13BD1BBDB4960027300D /* NSObject+RG_Serialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RG_Serialization.m"; sourceTree = "<group>"; };
+		BEAB13BE1BBDB4960027300D /* NSObject+RG_SharedImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RG_SharedImpl.h"; sourceTree = "<group>"; };
+		BEAB13BF1BBDB4960027300D /* NSObject+RG_SharedImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RG_SharedImpl.m"; sourceTree = "<group>"; };
+		BEAB13C01BBDB4960027300D /* RGXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGXMLNode.h; sourceTree = "<group>"; };
+		BEAB13C11BBDB4960027300D /* RGXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGXMLNode.m; sourceTree = "<group>"; };
+		BEAB13C21BBDB4960027300D /* RGXMLNode+RGDataSourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RGXMLNode+RGDataSourceProtocol.h"; sourceTree = "<group>"; };
+		BEAB13C31BBDB4960027300D /* RGXMLNode+RGDataSourceProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RGXMLNode+RGDataSourceProtocol.m"; sourceTree = "<group>"; };
+		BEAB13C41BBDB4960027300D /* RGXMLSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGXMLSerializer.h; sourceTree = "<group>"; };
+		BEAB13C51BBDB4960027300D /* RGXMLSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGXMLSerializer.m; sourceTree = "<group>"; };
+		BEAB13CF1BBDB5530027300D /* RestGoatee-Core.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RestGoatee-Core.pch"; sourceTree = "<group>"; };
+		BEFFB8411BBDB15900EAF95D /* libRestGoatee-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libRestGoatee-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BEFFB83E1BBDB15900EAF95D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BEAB13CE1BBDB5370027300D /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				BEAB13B51BBDB45A0027300D /* RestGoatee-Core.podspec */,
+				BEAB13CF1BBDB5530027300D /* RestGoatee-Core.pch */,
+			);
+			name = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		BEFFB8381BBDB15900EAF95D = {
+			isa = PBXGroup;
+			children = (
+				BEAB13CE1BBDB5370027300D /* SupportingFiles */,
+				BEFFB8431BBDB15900EAF95D /* RestGoatee-Core */,
+				BEFFB8421BBDB15900EAF95D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BEFFB8421BBDB15900EAF95D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BEFFB8411BBDB15900EAF95D /* libRestGoatee-Core.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BEFFB8431BBDB15900EAF95D /* RestGoatee-Core */ = {
+			isa = PBXGroup;
+			children = (
+				BEAB13B61BBDB4960027300D /* RestGoatee-Core.h */,
+				BEAB13B71BBDB4960027300D /* RestGoatee-Core.m */,
+				BEAB13B81BBDB4960027300D /* NSObject+RG_Deserialization.h */,
+				BEAB13B91BBDB4960027300D /* NSObject+RG_Deserialization.m */,
+				BEAB13BA1BBDB4960027300D /* NSObject+RG_KeyedSubscripting.h */,
+				BEAB13BB1BBDB4960027300D /* NSObject+RG_KeyedSubscripting.m */,
+				BEAB13BC1BBDB4960027300D /* NSObject+RG_Serialization.h */,
+				BEAB13BD1BBDB4960027300D /* NSObject+RG_Serialization.m */,
+				BEAB13BE1BBDB4960027300D /* NSObject+RG_SharedImpl.h */,
+				BEAB13BF1BBDB4960027300D /* NSObject+RG_SharedImpl.m */,
+				BEAB13C01BBDB4960027300D /* RGXMLNode.h */,
+				BEAB13C11BBDB4960027300D /* RGXMLNode.m */,
+				BEAB13C21BBDB4960027300D /* RGXMLNode+RGDataSourceProtocol.h */,
+				BEAB13C31BBDB4960027300D /* RGXMLNode+RGDataSourceProtocol.m */,
+				BEAB13C41BBDB4960027300D /* RGXMLSerializer.h */,
+				BEAB13C51BBDB4960027300D /* RGXMLSerializer.m */,
+			);
+			path = "RestGoatee-Core";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BEFFB8401BBDB15900EAF95D /* RestGoatee-Core */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEFFB8551BBDB15900EAF95D /* Build configuration list for PBXNativeTarget "RestGoatee-Core" */;
+			buildPhases = (
+				BEFFB83D1BBDB15900EAF95D /* Sources */,
+				BEFFB83E1BBDB15900EAF95D /* Frameworks */,
+				BEFFB83F1BBDB15900EAF95D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RestGoatee-Core";
+			productName = "RestGoatee-Core";
+			productReference = BEFFB8411BBDB15900EAF95D /* libRestGoatee-Core.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BEFFB8391BBDB15900EAF95D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = RestGoatee;
+				TargetAttributes = {
+					BEFFB8401BBDB15900EAF95D = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = BEFFB83C1BBDB15900EAF95D /* Build configuration list for PBXProject "RestGoatee-Core" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BEFFB8381BBDB15900EAF95D;
+			productRefGroup = BEFFB8421BBDB15900EAF95D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BEFFB8401BBDB15900EAF95D /* RestGoatee-Core */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BEFFB83D1BBDB15900EAF95D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEAB13CD1BBDB4960027300D /* RGXMLSerializer.m in Sources */,
+				BEAB13CC1BBDB4960027300D /* RGXMLNode+RGDataSourceProtocol.m in Sources */,
+				BEAB13CB1BBDB4960027300D /* RGXMLNode.m in Sources */,
+				BEAB13CA1BBDB4960027300D /* NSObject+RG_SharedImpl.m in Sources */,
+				BEAB13C81BBDB4960027300D /* NSObject+RG_KeyedSubscripting.m in Sources */,
+				BEAB13C71BBDB4960027300D /* NSObject+RG_Deserialization.m in Sources */,
+				BEAB13C61BBDB4960027300D /* RestGoatee-Core.m in Sources */,
+				BEAB13C91BBDB4960027300D /* NSObject+RG_Serialization.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		BEFFB8531BBDB15900EAF95D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
+				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_CW_ASM_SYNTAX = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = "RestGoatee-Core.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LLVM_LTO = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BEFFB8541BBDB15900EAF95D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
+				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_CW_ASM_SYNTAX = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_PREFIX_HEADER = "RestGoatee-Core.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LLVM_LTO = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		BEFFB8561BBDB15900EAF95D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		BEFFB8571BBDB15900EAF95D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BEFFB83C1BBDB15900EAF95D /* Build configuration list for PBXProject "RestGoatee-Core" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEFFB8531BBDB15900EAF95D /* Debug */,
+				BEFFB8541BBDB15900EAF95D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEFFB8551BBDB15900EAF95D /* Build configuration list for PBXNativeTarget "RestGoatee-Core" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEFFB8561BBDB15900EAF95D /* Debug */,
+				BEFFB8571BBDB15900EAF95D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BEFFB8391BBDB15900EAF95D /* Project object */;
+}

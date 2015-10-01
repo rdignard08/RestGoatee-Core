@@ -21,8 +21,12 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "Core-RestGoatee.h"
+#import "RestGoatee-Core.h"
 #import "NSObject+RG_SharedImpl.h"
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  This category is private, and methods defined therein are subject to change (moderately frequently).
@@ -98,12 +102,12 @@
     } else if (rg_isInlineObject([self class]) || rg_isClassObject(self)) { /* classes can be stored as strings too */
         ret = [self description];
     } else if (rg_isCollectionObject([self class])) {
-        ret = [[NSMutableArray alloc] initWithCapacity:[(id)self count]];
+        ret = [NSMutableArray new];
         for (id object in (id)self) {
             [ret addObject:[object rg_dictionaryHelper:pointersSeen followWeak:followWeak]];
         }
     } else if (rg_isKeyedCollectionObject([self class])) {
-        ret = [[NSMutableDictionary alloc] initWithCapacity:[(id)self count]];
+        ret = [NSMutableDictionary new];
         for (id key in (id)self) {
             ret[key] = [self[key] rg_dictionaryHelper:pointersSeen followWeak:followWeak];
         }
@@ -143,3 +147,6 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

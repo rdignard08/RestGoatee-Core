@@ -21,10 +21,14 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  This category can be used for the latter half of the serialization => deserialization => serialization process.
  
- Methods here can turn typical (i.e. non-cyclically strong) objects into JSON (specifically a JSON composed solely only of arrays, dictionaries, strings, and null).
+ Methods here can turn typical (i.e. non-cyclically strong) objects into JSON (specifically a JSON composed solely only of arrays, dictionaries, strings, and null; `true`, `false`, and numerics are written out as strings).
  */
 @interface NSObject (RG_SerializationPublic)
 
@@ -44,3 +48,6 @@
 - (NSDictionary*) dictionaryRepresentationShouldFollowWeakReferences:(BOOL)weakReferences;
 
 @end
+
+NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

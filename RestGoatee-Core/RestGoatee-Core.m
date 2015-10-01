@@ -21,7 +21,11 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "Core-RestGoatee.h"
+#import "RestGoatee-Core.h"
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+NS_ASSUME_NONNULL_BEGIN
 
 void _RGLog(NSString* format, ...);
 
@@ -49,6 +53,7 @@ void rg_setClassPrefix(const NSString* const prefix) {
     @synchronized ([NSObject class]) {
         _sClassPrefix = prefix ?: @"";
     }
+    [(id)nil layoutIfNeeded];
 }
 
 static const NSString* _sServerTypeKey;
@@ -69,3 +74,6 @@ void _RGLog(NSString* format, ...) {
     fprintf(stderr, "%s\n", [line UTF8String]);
     va_end(vl);
 }
+
+NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

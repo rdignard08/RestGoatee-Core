@@ -21,6 +21,18 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+#import "RGXMLNode+RGDataSourceProtocol.h"
+#import "NSObject+RG_KeyedSubscripting.h"
+#import "NSObject+RG_Deserialization.h"
+#import "NSObject+RG_Serialization.h"
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+NS_ASSUME_NONNULL_BEGIN
+
+/* for some reason I can't trust `NULL` or `nil` to be typed `void` */
+#define VOID_NOOP ((void)0)
+
 /**
  Optionally use this function to provide your project's class prefix.
  
@@ -63,8 +75,8 @@ const NSString* const rg_serverTypeKey(void);
     #define RGLog(format, ...) _RGLog(format, __SOURCE_FILE__, (long)__LINE__, ##__VA_ARGS__)
     void _RGLog(NSString* format, ...);
 #else
-    /* we define out with `(void)0` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */
-    #define RGLog(...) ((void)0)
+    /* we define out with `VOID_NOOP` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */
+    #define RGLog(...) VOID_NOOP
 #endif
 
 #define DO_RISKY_BUSINESS \
@@ -82,7 +94,5 @@ DO_RISKY_BUSINESS \
 statement \
 END_RISKY_BUSINESS
 
-#import "RGXMLNode+RGDataSourceProtocol.h"
-#import "NSObject+RG_KeyedSubscripting.h"
-#import "NSObject+RG_Deserialization.h"
-#import "NSObject+RG_Serialization.h"
+NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

@@ -25,9 +25,13 @@
 #import "NSObject+RG_KeyedSubscripting.h"
 #import <objc/runtime.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+NS_ASSUME_NONNULL_BEGIN
+
 @interface RGXMLNode (_RGDataSourceProtocol)
 
-@property (nonatomic, strong) NSArray* keys;
+@property (nonatomic, strong, null_resettable) NSArray* keys;
 
 @end
 
@@ -46,7 +50,7 @@
     return ret;
 }
 
-- (void) setKeys:(NSArray*)keys {
+- (void) setKeys:(nullable NSArray*)keys {
     objc_setAssociatedObject(self, @selector(keys), keys, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -85,3 +89,6 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

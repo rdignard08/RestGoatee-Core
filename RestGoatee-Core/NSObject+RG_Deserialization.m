@@ -71,9 +71,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
     NSObject<RestGoateeSerialization>* ret;
     if ([self isSubclassOfClass:rg_sNSManagedObject]) {
         context ? VOID_NOOP : [NSException raise:NSGenericException format:@"A subclass of NSManagedObject must be created within a valid NSManagedObjectContext."];
-        DO_RISKY_BUSINESS
         ret = [rg_sNSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:context];
-        END_RISKY_BUSINESS
     } else {
         ret = [self new];
     }

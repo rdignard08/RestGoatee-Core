@@ -2,5 +2,11 @@
 #import "RestGoatee-Core.pch"
 #import <XCTest/XCTest.h>
 
-#define SPEC(className) @interface className ## Spec : XCTestCase @end\
+#define SPEC(className) \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Wgnu\"") \
+@interface className ## Spec : XCTestCase @end \
 @implementation className ## Spec
+
+#define SPEC_END @end \
+_Pragma("clang diagnostic pop")

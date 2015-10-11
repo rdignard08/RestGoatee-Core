@@ -23,4 +23,4 @@ SPEC(RGXMLNode)
     }];
 }
 
-@end
+SPEC_END

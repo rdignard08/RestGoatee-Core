@@ -29,42 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 void _RGLog(NSString* format, ...);
 
-static const NSString* _sClassPrefix;
-const NSString* const rg_classPrefix() {
-    @synchronized ([NSObject class]) {
-        if (!_sClassPrefix) {
-            NSString* appDelegateName = [[[UIApplication sharedApplication].delegate class] description];
-            for (NSUInteger i = 0; i < appDelegateName.length; i++) {
-                unichar c = [appDelegateName characterAtIndex:i];
-                if (c < 'A' || c > 'Z') { /* if it's not a capital letter, we've found the end of the prefix */
-                    _sClassPrefix = [appDelegateName stringByReplacingCharactersInRange:NSMakeRange(i == 0 ?: i - 1, i == 0 ? appDelegateName.length : appDelegateName.length - i + 1) withString:@""]; /* the last capital character is not part of the prefix since it's the class name */
-                    break;
-                }
-            }
-            if (!_sClassPrefix) {
-                _sClassPrefix = @""; /* In case nothing is found, we still want to return some string */
-            }
-        }
-    }
-    return _sClassPrefix;
-}
-
-void rg_setClassPrefix(const NSString* const prefix) {
-    @synchronized ([NSObject class]) {
-        _sClassPrefix = prefix ?: @"";
-    }
-    [(id)nil layoutIfNeeded];
-}
-
-static const NSString* _sServerTypeKey;
-void rg_setServerTypeKey(const NSString* const typeKey) {
-    _sServerTypeKey = typeKey;
-}
-
-const NSString* const rg_serverTypeKey() {
-    return _sServerTypeKey;
-}
-
 void _RGLog(NSString* format, ...) {
     va_list vl;
     va_start(vl, format);

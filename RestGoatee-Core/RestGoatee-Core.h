@@ -34,40 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 #define VOID_NOOP ((void)0)
 
 /**
- Optionally use this function to provide your project's class prefix.
- 
- XYZMyClass -> provide @"XYZ"
- */
-void rg_setClassPrefix(const NSString* const prefix);
-
-/**
- @abstract returns the currently set class prefix.  The default value is a string composed of the capitalized letters leading your application's appDelegate.  For example default when nothing is given takes `XYZApplicationDelegate` and returns @"XYZ".
- */
-const NSString* const rg_classPrefix(void);
-
-/**
- Optionally use this function to provide your server's type keyPath.
- 
- @example
- 
- Given a JSON body of:
- {
- "class" : "message"
- "message" : "hello!"
- }
- 
- return literal `class` to indicate that the type of this object is found on the key "class" (in this case `message`).
- 
- In conjuction with `rg_classPrefix(void)` this will construct the type to deserialize into as "XYZMessage" for this object.  If this type doesn't exist deserialization will look for its own indications, which if fail will return the original dictionary.
- */
-void rg_setServerTypeKey(const NSString* const typeKey);
-
-/**
- @abstract returns the currently set server type.  The default is `nil` if no value is set.
- */
-const NSString* const rg_serverTypeKey(void);
-
-/**
  The `RGLog` function is a debug only function (inactive in a live app).  It logs the file name & line number of the call site.
  */
 #ifdef DEBUG

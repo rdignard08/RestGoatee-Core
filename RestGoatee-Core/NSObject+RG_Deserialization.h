@@ -84,15 +84,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  @abstract merges two objects into a single object.  The return value is not a new object, but rather is the receiver augmented with the values in `object`.
- @param object Can be of type NSDictionary or the receiving type.
+ @param object Can be of type NSDictionary, RGXMLNode, or a user defined type conforming to `RGDataSourceProtocol`.
  @return the receiving object extended with `object`; any conflicts will take `object`'s value as precedent.
  */
-- (instancetype) extendWith:(id)object;
+- (instancetype) extendWith:(NSObject<RGDataSourceProtocol>*)object;
 
 /**
- Same as `-extendWith:` but since there may be sub objects which are `NSManagedObject` subclasses, it may be necessary to provide an `NSManagedContext` to contain them.
+ Same as `-extendWith:` but since there may be sub objects which are `NSManagedObject` subclasses, it may be necessary to provide an `NSManagedObjectContext` to contain them.
  */
-- (instancetype) extendWith:(id)object inContext:(nullable NSManagedObjectContext*)context;
+- (instancetype) extendWith:(NSObject<RGDataSourceProtocol>*)object inContext:(nullable NSManagedObjectContext*)context;
 
 @end
 

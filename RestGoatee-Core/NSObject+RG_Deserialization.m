@@ -212,7 +212,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
     self[key] ? VOID_NOOP : RGLog(@"Warning, initialization failed on property %@ on type %@", key, [self class]);
 }
 
-- (instancetype) extendWith:(id)object inContext:(nullable NSManagedObjectContext*)context {
+- (instancetype) extendWith:(NSObject<RGDataSourceProtocol>*)object inContext:(nullable NSManagedObjectContext*)context {
     NSDictionary* overrides = [[self class] respondsToSelector:@selector(overrideKeysForMapping)] ? [[self class] overrideKeysForMapping] : nil;
     NSMutableArray* intializedProperties = [NSMutableArray new];
     for (NSString* key in [object rg_keys]) {
@@ -234,7 +234,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
     return self;
 }
 
-- (instancetype) extendWith:(id)object {
+- (instancetype) extendWith:(NSObject<RGDataSourceProtocol>*)object {
     return [self extendWith:object inContext:nil];
 }
 

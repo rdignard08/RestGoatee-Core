@@ -1,0 +1,6 @@
+
+#import "RestGoatee-Core.pch"
+#import <XCTest/XCTest.h>
+
+#define SPEC(className) @interface className ## Spec : XCTestCase @end\
+@implementation className ## Spec

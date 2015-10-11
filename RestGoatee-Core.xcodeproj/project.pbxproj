@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE20095A1BCA252000A9E8A0 /* libRestGoatee-Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFFB8411BBDB15900EAF95D /* libRestGoatee-Core.a */; };
+		BE2009651BCA27AE00A9E8A0 /* RGXMLNodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2009641BCA27AE00A9E8A0 /* RGXMLNodeSpec.m */; };
 		BEAB13C61BBDB4960027300D /* RestGoatee-Core.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13B71BBDB4960027300D /* RestGoatee-Core.m */; };
 		BEAB13C71BBDB4960027300D /* NSObject+RG_Deserialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13B91BBDB4960027300D /* NSObject+RG_Deserialization.m */; };
 		BEAB13C81BBDB4960027300D /* NSObject+RG_KeyedSubscripting.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BB1BBDB4960027300D /* NSObject+RG_KeyedSubscripting.m */; };
@@ -16,6 +18,16 @@
 		BEAB13CC1BBDB4960027300D /* RGXMLNode+RGDataSourceProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13C31BBDB4960027300D /* RGXMLNode+RGDataSourceProtocol.m */; };
 		BEAB13CD1BBDB4960027300D /* RGXMLSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13C51BBDB4960027300D /* RGXMLSerializer.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BE20095B1BCA252000A9E8A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEFFB8391BBDB15900EAF95D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BEFFB8401BBDB15900EAF95D;
+			remoteInfo = "RestGoatee-Core";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		BEFFB83F1BBDB15900EAF95D /* CopyFiles */ = {
@@ -30,6 +42,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE2009541BCA252000A9E8A0 /* RestGoatee-Core-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RestGoatee-Core-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE2009571BCA252000A9E8A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE2009631BCA265F00A9E8A0 /* RestGoatee-Core-Tests.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RestGoatee-Core-Tests.pch"; sourceTree = "<group>"; };
+		BE2009641BCA27AE00A9E8A0 /* RGXMLNodeSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGXMLNodeSpec.m; sourceTree = "<group>"; };
 		BEAB13B51BBDB45A0027300D /* RestGoatee-Core.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = "RestGoatee-Core.podspec"; sourceTree = "<group>"; };
 		BEAB13B61BBDB4960027300D /* RestGoatee-Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RestGoatee-Core.h"; sourceTree = "<group>"; };
 		BEAB13B71BBDB4960027300D /* RestGoatee-Core.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RestGoatee-Core.m"; sourceTree = "<group>"; };
@@ -52,6 +68,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BE2009511BCA252000A9E8A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE20095A1BCA252000A9E8A0 /* libRestGoatee-Core.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BEFFB83E1BBDB15900EAF95D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -62,6 +86,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE2009551BCA252000A9E8A0 /* RestGoatee-Core-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				BE2009621BCA262500A9E8A0 /* ClassSpecs */,
+				BE2009611BCA25BC00A9E8A0 /* CategorySpecs */,
+				BE2009561BCA252000A9E8A0 /* Supporting Files */,
+			);
+			path = "RestGoatee-Core-Tests";
+			sourceTree = "<group>";
+		};
+		BE2009561BCA252000A9E8A0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BE2009631BCA265F00A9E8A0 /* RestGoatee-Core-Tests.pch */,
+				BE2009571BCA252000A9E8A0 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BE2009611BCA25BC00A9E8A0 /* CategorySpecs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CategorySpecs;
+			sourceTree = "<group>";
+		};
+		BE2009621BCA262500A9E8A0 /* ClassSpecs */ = {
+			isa = PBXGroup;
+			children = (
+				BE2009641BCA27AE00A9E8A0 /* RGXMLNodeSpec.m */,
+			);
+			name = ClassSpecs;
+			sourceTree = "<group>";
+		};
 		BEAB13CE1BBDB5370027300D /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +134,7 @@
 			children = (
 				BEAB13CE1BBDB5370027300D /* SupportingFiles */,
 				BEFFB8431BBDB15900EAF95D /* RestGoatee-Core */,
+				BE2009551BCA252000A9E8A0 /* RestGoatee-Core-Tests */,
 				BEFFB8421BBDB15900EAF95D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				BEFFB8411BBDB15900EAF95D /* libRestGoatee-Core.a */,
+				BE2009541BCA252000A9E8A0 /* RestGoatee-Core-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -114,6 +174,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BE2009531BCA252000A9E8A0 /* RestGoatee-Core-Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE20095D1BCA252000A9E8A0 /* Build configuration list for PBXNativeTarget "RestGoatee-Core-Tests" */;
+			buildPhases = (
+				BE2009501BCA252000A9E8A0 /* Sources */,
+				BE2009511BCA252000A9E8A0 /* Frameworks */,
+				BE2009521BCA252000A9E8A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BE20095C1BCA252000A9E8A0 /* PBXTargetDependency */,
+			);
+			name = "RestGoatee-Core-Tests";
+			productName = "RestGoatee-Core-Tests";
+			productReference = BE2009541BCA252000A9E8A0 /* RestGoatee-Core-Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BEFFB8401BBDB15900EAF95D /* RestGoatee-Core */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BEFFB8551BBDB15900EAF95D /* Build configuration list for PBXNativeTarget "RestGoatee-Core" */;
@@ -140,6 +218,9 @@
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = RestGoatee;
 				TargetAttributes = {
+					BE2009531BCA252000A9E8A0 = {
+						CreatedOnToolsVersion = 6.4;
+					};
 					BEFFB8401BBDB15900EAF95D = {
 						CreatedOnToolsVersion = 6.4;
 					};
@@ -158,11 +239,30 @@
 			projectRoot = "";
 			targets = (
 				BEFFB8401BBDB15900EAF95D /* RestGoatee-Core */,
+				BE2009531BCA252000A9E8A0 /* RestGoatee-Core-Tests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		BE2009521BCA252000A9E8A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		BE2009501BCA252000A9E8A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE2009651BCA27AE00A9E8A0 /* RGXMLNodeSpec.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BEFFB83D1BBDB15900EAF95D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -180,7 +280,68 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		BE20095C1BCA252000A9E8A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BEFFB8401BBDB15900EAF95D /* RestGoatee-Core */;
+			targetProxy = BE20095B1BCA252000A9E8A0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		BE20095E1BCA252000A9E8A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "RestGoatee-Core-Tests/RestGoatee-Core-Tests.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "RestGoatee-Core-Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BE20095F1BCA252000A9E8A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "RestGoatee-Core-Tests/RestGoatee-Core-Tests.pch";
+				INFOPLIST_FILE = "RestGoatee-Core-Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		BEFFB8531BBDB15900EAF95D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -332,6 +493,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BE20095D1BCA252000A9E8A0 /* Build configuration list for PBXNativeTarget "RestGoatee-Core-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE20095E1BCA252000A9E8A0 /* Debug */,
+				BE20095F1BCA252000A9E8A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		BEFFB83C1BBDB15900EAF95D /* Build configuration list for PBXProject "RestGoatee-Core" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

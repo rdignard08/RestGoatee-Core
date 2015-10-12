@@ -1,4 +1,4 @@
-/* Copyright (c) 6/10/14, Ryan Dignard
+/* Copyright (c) 10/12/15, Ryan Dignard
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -21,28 +21,39 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "RGDataSourceProtocol.h"
-#import "RGDeserializationDelegate.h"
-#import "RGXMLNode+RGDataSourceProtocol.h"
-#import "NSObject+RG_KeyedSubscripting.h"
-#import "NSObject+RG_Deserialization.h"
-#import "NSObject+RG_Serialization.h"
-
 FILE_START
 
-/* for some reason I can't trust `NULL` or `nil` to be typed `void` */
-#define VOID_NOOP ((void)0)
+/**
+ These are the methods that a data source must implement in order to be consumable by the `+[NSObject objectFromDataSource:]` family of methods.
+ 
+ Currently NSDictionary and RGXMLNode (the parsed output from NSXMLParser) are supported implicitly.
+ 
+ must be able to `for X in id<RGDataSourceProtocol>`
+ */
+@protocol RGDataSourceProtocol <NSObject, NSFastEnumeration>
+
+@required
 
 /**
- The `RGLog` function is a debug only function (inactive in a live app).  It logs the file name & line number of the call site.
+ The data source must support `id value = dataSource[@"key"]`.
  */
-#ifdef DEBUG
-    #define __SOURCE_FILE__ ({char* c = strrchr(__FILE__, '/'); c ? c + 1 : __FILE__;})
-    #define RGLog(format, ...) _RGLog(format, __SOURCE_FILE__, (long)__LINE__, ##__VA_ARGS__)
-    void _RGLog(NSString* format, ...);
-#else
-    /* we define out with `VOID_NOOP` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */
-    #define RGLog(...) VOID_NOOP
-#endif
+- (nullable id) objectForKeyedSubscript:(id<NSCopying, NSObject>)key;
+
+/**
+ The data source must support `dataSource[@"key"] = value`.
+ */
+- (void) setObject:(nullable id)object forKeyedSubscript:(nonnull id<NSCopying, NSObject>)key;
+
+/**
+ The data source must support `id value = dataSource[@"foo.bar"]`.
+ */
+- (nullable id) valueForKeyPath:(NSString*)string;
+
+/**
+ Returns an array of the keys which are present in this data source (but NOT sub data sources).
+ */
+- (nonnull NSArray*) allKeys;
+
+@end
 
 FILE_END

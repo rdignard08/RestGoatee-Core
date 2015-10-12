@@ -22,41 +22,9 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RGXMLNode.h"
+#import "RGDataSourceProtocol.h"
 
 FILE_START
-
-/**
- These are the methods that a data source must implement in order to be consumable by the `+[NSObject objectFromDataSource:]` family of methods.
- 
- Currently NSDictionary and RGXMLNode (the parsed output from NSXMLParser) are supported implicitly.
- 
- must be able to `for X in id<RGDataSourceProtocol>`
- */
-@protocol RGDataSourceProtocol <NSObject, NSFastEnumeration>
-
-@required
-
-/**
- The data source must support `id value = dataSource[@"key"]`.
- */
-- (nullable id) objectForKeyedSubscript:(id<NSCopying, NSObject>)key;
-
-/**
- The data source must support `dataSource[@"key"] = value`.
- */
-- (void) setObject:(nullable id)object forKeyedSubscript:(nonnull id<NSCopying, NSObject>)key;
-
-/**
- The data source must support `id value = dataSource[@"foo.bar"]`.
- */
-- (nullable id) valueForKeyPath:(NSString*)string;
-
-/**
- Returns an array of the keys which are present in this data source (but NOT sub data sources).
- */
-- (nonnull NSArray*) allKeys;
-
-@end
 
 /**
  `NSDictionary` already declares and implements all of these methods.  This allows us to pass an `NSDictionary*` where ever a variable is typed `id<RGDataSourceProtocol>`.

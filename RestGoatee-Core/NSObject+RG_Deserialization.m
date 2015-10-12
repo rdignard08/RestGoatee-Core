@@ -23,6 +23,7 @@
 
 #import "RestGoatee-Core.h"
 #import "NSObject+RG_SharedImpl.h"
+#import "RGDeserializationDelegate.h"
 
 FILE_START
 
@@ -68,7 +69,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
 }
 
 + (instancetype) objectFromDataSource:(id<RGDataSourceProtocol>)source inContext:(nullable NSManagedObjectContext*)context {
-    NSObject<RestGoateeSerialization>* ret;
+    NSObject<RGDeserializationDelegate>* ret;
     if ([self isSubclassOfClass:rg_sNSManagedObject]) {
         context ? VOID_NOOP : [NSException raise:NSGenericException format:@"A subclass of NSManagedObject must be created within a valid NSManagedObjectContext."];
         ret = [rg_sNSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:context];

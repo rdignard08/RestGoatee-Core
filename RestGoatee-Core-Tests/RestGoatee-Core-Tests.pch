@@ -2,10 +2,15 @@
 #import "RestGoatee-Core.pch"
 #import <XCTest/XCTest.h>
 
-#define SPEC(className) \
+#define CLASS_SPEC(className) \
 FILE_START \
 @interface className ## Spec : XCTestCase @end \
 @implementation className ## Spec
+
+#define CATEGORY_SPEC(className, categoryName) \
+FILE_START \
+@interface className ## categoryName ## Spec : XCTestCase @end \
+@implementation className ## categoryName ## Spec
 
 #define SPEC_END @end \
 FILE_END

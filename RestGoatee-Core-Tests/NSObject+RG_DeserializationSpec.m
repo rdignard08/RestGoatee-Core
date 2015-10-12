@@ -1,4 +1,4 @@
-/* Copyright (c) 6/10/14, Ryan Dignard
+/* Copyright (c) 10/12/15, Ryan Dignard
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -21,28 +21,8 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "RGDataSourceProtocol.h"
-#import "RGDeserializationDelegate.h"
-#import "RGXMLNode+RGDataSourceProtocol.h"
-#import "NSObject+RG_KeyedSubscripting.h"
 #import "NSObject+RG_Deserialization.h"
-#import "NSObject+RG_Serialization.h"
 
-FILE_START
+CATEGORY_SPEC(NSObject, RG_Deserialization)
 
-/* for some reason I can't trust `NULL` or `nil` to be typed `void` */
-#define VOID_NOOP ((void)0)
-
-/**
- The `RGLog` function is a debug only function (inactive in a live app).  It logs the file name & line number of the call site.
- */
-#ifdef DEBUG
-    #define __SOURCE_FILE__ ({char* c = strrchr(__FILE__, '/'); c ? c + 1 : __FILE__;})
-    #define RGLog(format, ...) _RGLog(format, __SOURCE_FILE__, (long)__LINE__, ##__VA_ARGS__)
-    void _RGLog(NSString* format, ...);
-#else
-    /* we define out with `VOID_NOOP` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */
-    #define RGLog(...) VOID_NOOP
-#endif
-
-FILE_END
+SPEC_END

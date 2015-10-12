@@ -26,34 +26,6 @@ FILE_START
 @class NSManagedObjectContext;
 
 /**
- Class objects which are passed to `RGAPIClient` methods may (but are not required) to conform to this protocol.  You may return non-standard data formats for use with `NSDataFormatter` and a dictionary of response keys which map to property names.
- */
-@protocol RestGoateeSerialization <NSObject>
-
-@optional
-/**
- @abstract Provide any overrides for default mapping behavior here.  The returned dictionary should have keys and values of type NSString and should be read left-to-right JSON source to target key.  Any unspecified key(s) will use the default behavior for mapping.  Can return `nil` (say you're overriding a class that implements this).
- */
-+ (nullable NSDictionary*) overrideKeysForMapping;
-
-/**
- @abstract Provide a custom date format for use with the given property `key`.  See documentation for NSDate for proper formats.  Can return `nil` (say you're overriding a class that implements this).
- */
-+ (nullable NSString*) dateFormatForKey:(NSString*)key;
-
-/**
- @abstract implement this method to provide custom logic on a given property.  Return the original value if this method is implemented and the default is desired.
- 
- If the deserialization desired is an `NSManagedObject` subclass you may use the context parameter for construction.
- 
- This method tends to be necessary for deserializing arrays that lack a metadata key indicating the type of the object.
- */
-- (id) transformValue:(id)value forProperty:(NSString*)property inContext:(nullable NSManagedObjectContext*)context;
-
-@end
-
-
-/**
  This category provides generalized constructors for all objects from a response object (these may be `NSDictionary*` from JSON or `NSXMLParser*` from XML).
  
  You usually do not need to use these methods directly, since calls through the `RGAPIClient` will call the appropriate family of methods from this category.

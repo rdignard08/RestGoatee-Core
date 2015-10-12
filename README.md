@@ -11,7 +11,7 @@ This library's aim is one of simplicity in the common case and extensibility in 
 3) Due to JSON and XML having limited types, the deserializer needs to be able to intelligently map to a larger standard family of types.<br/>
 4) CoreData support is usually not done at the outset of a project; this library makes it easier to turn it on with minimal refactoring.  CoreData support is implicit, but inactive in projects without it.<br/>
 5) The default mapping behavior should be both generally intuitive (correct 99% of the time) and extensible.<br/>
-6) The default should be the least verbose in terms of complexity and lines of code.  You don't specify mappings for objects that are obviously one-to-one and well-named.
+6) The default should be the least verbose in terms of complexity and lines of code.  You don't specify mappings for objects that are one-to-one, well named, and explicitly typed.
 
 Why Use RestGoatee?
 ===================

@@ -32,7 +32,7 @@ FILE_START
 @implementation NSObject (RG_SerializationPrivate)
 
 /** Certain classes are too difficult to serialize in a straight-forward manner, so we skip the properties on those classes.  Pretty much any class with cyclical references is gonna suck. */
-+ (NSArray*) rg_propertyListsToSkip {
++ (prefix_nonnull NSArray*) rg_propertyListsToSkip {
     static NSArray* _classes;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -50,7 +50,7 @@ FILE_START
 /**
  Is this property bad for serialization?
  */
-+ (BOOL) rg_isPropertyToBeAvoided:(NSString*)propertyName {
++ (BOOL) rg_isPropertyToBeAvoided:(prefix_nonnull NSString*)propertyName {
     for (Class cls in [self rg_propertyListsToSkip]) {
         if ([self isSubclassOfClass:cls] && [cls rg_declarationForProperty:propertyName]) {
             return YES;
@@ -62,14 +62,14 @@ FILE_START
 /**
  Is this property bad for serialization?
  */
-- (BOOL) rg_isPropertyToBeAvoided:(NSString*)propertyName {
+- (BOOL) rg_isPropertyToBeAvoided:(prefix_nonnull NSString*)propertyName {
     return [[self class] rg_isPropertyToBeAvoided:propertyName];
 }
 
 /**
  Is this property a weak/assign object?
  */
-+ (BOOL) rg_propertyIsWeak:(NSString*)propertyName {
++ (BOOL) rg_propertyIsWeak:(prefix_nonnull NSString*)propertyName {
     NSDictionary* declaration;
     if ((declaration = [self rg_declarationForProperty:propertyName])) {
         if (NSClassFromString(declaration[kRGPropertyRawType])) { /* primitives are assign, but we still want them */
@@ -84,14 +84,14 @@ FILE_START
 /**
  Is this property a weak/assign object?
  */
-- (BOOL) rg_propertyIsWeak:(NSString*)propertyName {
+- (BOOL) rg_propertyIsWeak:(prefix_nonnull NSString*)propertyName {
     return [[self class] rg_propertyIsWeak:propertyName];
 }
 
 /**
  This is called recursively to build up the response.
  */
-- (id) rg_dictionaryHelper:(NSMutableArray*)pointersSeen followWeak:(BOOL)followWeak {
+- (prefix_nonnull id) rg_dictionaryHelper:(prefix_nonnull NSMutableArray*)pointersSeen followWeak:(BOOL)followWeak {
     if ([pointersSeen indexOfObject:self] != NSNotFound) return [NSNull null];
     /* [pointersSeen addObject:self]; // disable DAG for now */
     id ret;
@@ -131,16 +131,16 @@ FILE_START
 
 @implementation NSObject (RG_SerializationPublic)
 
-- (NSDictionary*) dictionaryRepresentationShouldFollowWeakReferences:(BOOL)weakReferences {
-    NSMutableArray* pointersSeen = [NSMutableArray array];
+- (prefix_nonnull NSDictionary*) dictionaryRepresentationShouldFollowWeakReferences:(BOOL)weakReferences {
+    NSMutableArray* pointersSeen = [NSMutableArray new];
     return [self rg_dictionaryHelper:pointersSeen followWeak:weakReferences];
 }
 
-- (NSDictionary*) dictionaryRepresentation {
+- (prefix_nonnull NSDictionary*) dictionaryRepresentation {
     return [self dictionaryRepresentationShouldFollowWeakReferences:YES];
 }
 
-- (NSData*) JSONRepresentation {
+- (prefix_nonnull NSData*) JSONRepresentation {
     return [NSJSONSerialization dataWithJSONObject:[self dictionaryRepresentation] options:(NSJSONWritingOptions)0 error:nil];
 }
 

@@ -37,22 +37,22 @@ FILE_START
 /**
  The data source must support `id value = dataSource[@"key"]`.
  */
-- (nullable id) objectForKeyedSubscript:(id<NSCopying, NSObject>)key;
+- (prefix_nullable id) objectForKeyedSubscript:(prefix_nonnull id<NSCopying, NSObject>)key;
 
 /**
  The data source must support `dataSource[@"key"] = value`.
  */
-- (void) setObject:(nullable id)object forKeyedSubscript:(nonnull id<NSCopying, NSObject>)key;
+- (void) setObject:(prefix_nullable id)object forKeyedSubscript:(prefix_nonnull id<NSCopying, NSObject>)key;
 
 /**
  The data source must support `id value = dataSource[@"foo.bar"]`.
  */
-- (nullable id) valueForKeyPath:(NSString*)string;
+- (prefix_nullable id) valueForKeyPath:(prefix_nonnull NSString*)string;
 
 /**
  Returns an array of the keys which are present in this data source (but NOT sub data sources).
  */
-- (nonnull NSArray*) allKeys;
+- (prefix_nonnull NSArray*) allKeys;
 
 @end
 

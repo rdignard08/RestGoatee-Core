@@ -21,6 +21,8 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+#import "RGDataSourceProtocol.h"
+
 FILE_START
 
 @class NSManagedObjectContext;
@@ -35,34 +37,34 @@ FILE_START
 /**
  @abstract subclasses of `NSManagedObject` must use this method since they cannot be initialized without a context.
  */
-+ (instancetype) objectFromDataSource:(id<RGDataSourceProtocol>)source inContext:(nullable NSManagedObjectContext*)context;
++ (prefix_nonnull instancetype) objectFromDataSource:(prefix_nullable id<RGDataSourceProtocol>)source inContext:(prefix_nullable NSManagedObjectContext*)context;
 
 /**
  @abstract the receiver (the Class object) which receives this method will attempt to initialize an instance of this class with properties assigned from a data source.
  */
-+ (instancetype) objectFromDataSource:(id<RGDataSourceProtocol>)source;
++ (prefix_nonnull instancetype) objectFromDataSource:(prefix_nullable id<RGDataSourceProtocol>)source;
 
 /**
  @abstract creates and returns an array of objects of the type of the receiver.  Need only be something iteratable.
  */
-+ (NSArray*) objectsFromArraySource:(id<NSFastEnumeration>)source inContext:(nullable NSManagedObjectContext*)context;
++ (prefix_nonnull NSArray*) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source inContext:(prefix_nullable NSManagedObjectContext*)context;
 
 /**
  @abstract creates and returns an array of objects of the type of the receiver.
  */
-+ (NSArray*) objectsFromArraySource:(id<NSFastEnumeration>)source;
++ (prefix_nonnull NSArray*) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source;
 
 /**
  @abstract merges two objects into a single object.  The return value is not a new object, but rather is the receiver augmented with the values in `object`.
  @param object Can be of type NSDictionary, RGXMLNode, or a user defined type conforming to `RGDataSourceProtocol`.
  @return the receiving object extended with `object`; any conflicts will take `object`'s value as precedent.
  */
-- (instancetype) extendWith:(NSObject<RGDataSourceProtocol>*)object;
+- (prefix_nonnull instancetype) extendWith:(prefix_nullable NSObject<RGDataSourceProtocol>*)object;
 
 /**
  Same as `-extendWith:` but since there may be sub objects which are `NSManagedObject` subclasses, it may be necessary to provide an `NSManagedObjectContext` to contain them.
  */
-- (instancetype) extendWith:(NSObject<RGDataSourceProtocol>*)object inContext:(nullable NSManagedObjectContext*)context;
+- (prefix_nonnull instancetype) extendWith:(prefix_nullable NSObject<RGDataSourceProtocol>*)object inContext:(prefix_nullable NSManagedObjectContext*)context;
 
 @end
 

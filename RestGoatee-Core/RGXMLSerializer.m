@@ -28,21 +28,21 @@ FILE_START
 
 @interface RGXMLSerializer () <NSXMLParserDelegate>
 
-@property (nonatomic, weak) RGXMLNode* currentNode;
-@property (nonatomic, strong) NSMutableString* currentString;
+@property (nonatomic, weak, property_nullable) RGXMLNode* currentNode;
+@property (nonatomic, strong, property_null_resettable) NSMutableString* currentString;
 
 @end
 
 @implementation RGXMLSerializer
 @synthesize rootNode = _rootNode;
 
-- (instancetype) initWithParser:(NSXMLParser*)parser {
+- (prefix_nonnull instancetype) initWithParser:(prefix_nullable NSXMLParser*)parser {
     self = [super init];
     self.parser = parser;
     return self;
 }
 
-- (RGXMLNode*) rootNode {
+- (prefix_nonnull RGXMLNode*) rootNode {
     if (!_rootNode) {
         _rootNode = [RGXMLNode new];
         _currentNode = _rootNode;
@@ -53,14 +53,14 @@ FILE_START
     return _rootNode;
 }
 
-- (NSMutableString*) currentString {
+- (prefix_nonnull NSMutableString*) currentString {
     if (!_currentString) {
         _currentString = [NSMutableString new];
     }
     return _currentString;
 }
 
-- (void) setParser:(NSXMLParser*)parser {
+- (void) setParser:(prefix_nullable NSXMLParser*)parser {
     if (_parser != parser) {
         _rootNode = nil;
         _parser = parser;

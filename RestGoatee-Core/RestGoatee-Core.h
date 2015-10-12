@@ -21,8 +21,33 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+/*
+ For properties this sucks really badly. 
+ A less hack way might be to wrap the property attributes into avar arg macro.
+ It would insert the correct attribute when the feature is available.
+ */
+#if __has_feature(nullability)
+    #define prefix_nullable nullable
+    #define suffix_nullable __nullable
+    #define property_nullable nullable
+    #define prefix_nonnull nonnull
+    #define suffix_nonnull __nonnull
+    #define property_nonnull nonnull
+    #define property_null_resettable null_resettable
+#else
+    #define prefix_nullable
+    #define suffix_nullable
+    #define property_nullable nonatomic
+    #define prefix_nonnull
+    #define suffix_nonnull
+    #define property_nonnull nonatomic
+    #define property_null_resettable nonatomic
+#endif
+
 #import "RGDataSourceProtocol.h"
 #import "RGDeserializationDelegate.h"
+#import "RGXMLNode.h"
+#import "RGXMLSerializer.h"
 #import "RGXMLNode+RGDataSourceProtocol.h"
 #import "NSObject+RG_KeyedSubscripting.h"
 #import "NSObject+RG_Deserialization.h"

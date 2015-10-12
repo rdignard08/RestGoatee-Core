@@ -29,7 +29,7 @@ FILE_START
 
 @interface NSObject (RGForwardDeclarations)
 
-+ (id) insertNewObjectForEntityForName:(NSString*)entityName inManagedObjectContext:(id)context;
++ (prefix_nonnull id) insertNewObjectForEntityForName:(prefix_nonnull NSString*)entityName inManagedObjectContext:(prefix_nonnull id)context;
 
 @end
 
@@ -47,11 +47,11 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
 
 @implementation NSObject (RG_Deserialization)
 
-+ (NSArray*) objectsFromArraySource:(id<NSFastEnumeration>)source {
++ (prefix_nonnull NSArray*) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source {
     return [self objectsFromArraySource:source inContext:nil];
 }
 
-+ (NSArray*) objectsFromArraySource:(id<NSFastEnumeration>)source inContext:(nullable NSManagedObjectContext*)context {
++ (prefix_nonnull NSArray*) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source inContext:(prefix_nullable NSManagedObjectContext*)context {
     NSMutableArray* objects = [NSMutableArray new];
     for (NSDictionary* object in source) {
         if (rg_isDataSourceClass([object class])) {
@@ -61,14 +61,14 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
     return source ? [objects copy] : nil;
 }
 
-+ (instancetype) objectFromDataSource:(id<RGDataSourceProtocol>)source {
++ (prefix_nonnull instancetype) objectFromDataSource:(prefix_nullable id<RGDataSourceProtocol>)source {
     if ([self isSubclassOfClass:rg_sNSManagedObject]) {
         [NSException raise:NSGenericException format:@"Managed object subclasses must be initialized within a managed object context.  Use +objectFromJSON:inContext:"];
     }
     return [self objectFromDataSource:source inContext:nil];
 }
 
-+ (instancetype) objectFromDataSource:(id<RGDataSourceProtocol>)source inContext:(nullable NSManagedObjectContext*)context {
++ (prefix_nonnull instancetype) objectFromDataSource:(prefix_nullable id<RGDataSourceProtocol>)source inContext:(prefix_nullable NSManagedObjectContext*)context {
     NSObject<RGDeserializationDelegate>* ret;
     if ([self isSubclassOfClass:rg_sNSManagedObject]) {
         context ? VOID_NOOP : [NSException raise:NSGenericException format:@"A subclass of NSManagedObject must be created within a valid NSManagedObjectContext."];
@@ -100,7 +100,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
     return ret;
 }
 
-- (void)rg_initCanonically:(NSString*)key withValue:(id)value inContext:(id)context {
+- (void) rg_initCanonically:(prefix_nonnull NSString*)key withValue:(prefix_nullable id)value inContext:(prefix_nullable id)context {
     NSUInteger index = [self.__property_list__[kRGPropertyCanonicalName] indexOfObject:rg_canonicalForm(key)];
     if (index != NSNotFound) {
         if (topClassDeclaringPropertyNamed([self class], rg_canonicalForm(key)) != [NSObject class]) {
@@ -118,7 +118,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
  
  @discussion JSON types when deserialized from NSData are: NSNull, NSNumber (number or boolean), NSString, NSArray, NSDictionary
  */
-- (void) rg_initProperty:(NSString*)key withValue:(id)value inContext:(id)context {
+- (void) rg_initProperty:(prefix_nonnull NSString*)key withValue:(prefix_nullable id)value inContext:(prefix_nullable id)context {
     static NSDateFormatter* dateFormatter;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -184,7 +184,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
         self[key] = [[propertyType alloc] initWithString:value];
     } else if ([propertyType isSubclassOfClass:[NSDate class]]) { /* NSDate */
         if ([value isKindOfClass:[RGXMLNode class]]) value = [value innerXML];
-        NSString* dateFormat = [[self class] respondsToSelector:@selector(dateFormatForKey:)] ? [[self class] dateFormatForKey:key] : nil;
+        NSString* dateFormat = [[self class] respondsToSelector:@selector(dateFormatForProperty:)] ? [[self class] dateFormatForProperty:key] : nil;
         if (dateFormat) {
             dateFormatter.dateFormat = dateFormat;
             self[key] = [dateFormatter dateFromString:value];
@@ -211,7 +211,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
     self[key] ? VOID_NOOP : RGLog(@"Warning, initialization failed on property %@ on type %@", key, [self class]);
 }
 
-- (instancetype) extendWith:(NSObject<RGDataSourceProtocol>*)object inContext:(nullable NSManagedObjectContext*)context {
+- (prefix_nonnull instancetype) extendWith:(prefix_nullable NSObject<RGDataSourceProtocol>*)object inContext:(prefix_nullable NSManagedObjectContext*)context {
     NSDictionary* overrides = [[self class] respondsToSelector:@selector(overrideKeysForMapping)] ? [[self class] overrideKeysForMapping] : nil;
     NSMutableArray* intializedProperties = [NSMutableArray new];
     for (NSString* key in [object rg_keys]) {
@@ -233,7 +233,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
     return self;
 }
 
-- (instancetype) extendWith:(NSObject<RGDataSourceProtocol>*)object {
+- (prefix_nonnull instancetype) extendWith:(prefix_nullable NSObject<RGDataSourceProtocol>*)object {
     return [self extendWith:object inContext:nil];
 }
 

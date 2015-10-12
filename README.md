@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/rdignard08/RestGoatee-Core.svg?branch=master)](https://travis-ci.org/rdignard08/RestGoatee-Core)
-RestGoatee
-==========
+RestGoatee-Core
+===============
 
 RestGoatee-Core is a framework which takes raw `NSDictionary` and `NSXMLParser` objects and convienently converts them to your own domain models.
 
@@ -24,7 +24,7 @@ Consider your favorite or most popular model framework:
   * JSON or XML? <img src="https://github.com/jloughry/Unicode/raw/master/graphics/green_check.png"/>
 
 # Installation
-Using cocoapods add `pod 'RestGoatee'` to your Podfile and run `pod install`.  People without cocoapods can include the top level folder "RestGoatee-Core" in their repository.  Include `#import <RestGoatee-Core.h>` to include all public headers and start using the library. 
+Using cocoapods add `pod 'RestGoatee-Core'` to your Podfile and run `pod install`.  People without cocoapods can include the top level folder "RestGoatee-Core" in their repository.  Include `#import <RestGoatee-Core.h>` to include all public headers and start using the library. 
 
 Example
 =======

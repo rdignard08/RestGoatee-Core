@@ -1,3 +1,4 @@
+<img src="https://travis-ci.org/rdignard08/RestGoatee-Core.svg?branch=master"/>
 RestGoatee
 ==========
 

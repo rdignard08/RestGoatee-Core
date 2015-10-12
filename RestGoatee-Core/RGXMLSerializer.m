@@ -24,9 +24,7 @@
 #import "RGXMLSerializer.h"
 #import "RestGoatee-Core.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu"
-NS_ASSUME_NONNULL_BEGIN
+FILE_START
 
 @interface RGXMLSerializer () <NSXMLParserDelegate>
 
@@ -37,9 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation RGXMLSerializer
 @synthesize rootNode = _rootNode;
-@synthesize parser = _parser;
-@synthesize currentNode = _currentNode;
-@synthesize currentString = _currentString;
 
 - (instancetype) initWithParser:(NSXMLParser*)parser {
     self = [super init];
@@ -100,5 +95,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
-#pragma clang diagnostic pop
+FILE_END

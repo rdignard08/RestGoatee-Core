@@ -23,47 +23,42 @@
 
 #import "RGXMLNode.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu"
-NS_ASSUME_NONNULL_BEGIN
+FILE_START
 
 @implementation RGXMLNode
 @synthesize parentNode = _parentNode;
 @synthesize attributes = _attributes;
 @synthesize childNodes = _childNodes;
-@synthesize name = _name;
-@synthesize innerXML = _innerXML;
 
-- (NSArray*) childNodes {
+- (nonnull NSArray*) childNodes {
     if (!_childNodes) {
         _childNodes = [NSMutableArray new];
     }
     return _childNodes;
 }
 
-- (NSMutableDictionary*) attributes {
+- (nonnull NSMutableDictionary*) attributes {
     if (!_attributes) {
         _attributes = [NSMutableDictionary new];
     }
     return _attributes;
 }
 
-- (void) addChildNode:(RGXMLNode*)node {
+- (void) addChildNode:(nonnull RGXMLNode*)node {
     node->_parentNode = self;
-    [(id)self.childNodes addObject:node];
+    [(NSMutableArray*)self.childNodes addObject:node];
 }
 
-- (id) childrenNamed:(NSString*)name {
+- (nullable id) childrenNamed:(nullable NSString*)name {
     NSMutableArray* ret = [NSMutableArray new];
     for (RGXMLNode* child in self.childNodes) {
-        if ([child.name isEqualToString:name]) {
+        if ([child.name isEqual:name]) {
             [ret addObject:child];
         }
     }
-    return ret.count > 1 ? ret : [ret lastObject];
+    return ret.count > 1 ? ret : ret.lastObject;
 }
 
 @end
 
-NS_ASSUME_NONNULL_END
-#pragma clang diagnostic pop
+FILE_END

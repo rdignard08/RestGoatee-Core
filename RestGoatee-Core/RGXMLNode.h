@@ -21,9 +21,7 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu"
-NS_ASSUME_NONNULL_BEGIN
+FILE_START
 
 /**
  The `RGXMLNode` is the parse result of `NSXMLParser`.
@@ -33,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Set when `-addChildNode:` is called.  A weak reference to the enclosing node.
  */
-@property (nonatomic, weak, readonly) RGXMLNode* parentNode;
+@property (nonatomic, weak, nullable, readonly) RGXMLNode* parentNode;
 
 /**
  Attributes come from <object id="123" name="cool"> and will equal @{ "id" : "123", "name" : "cool" }.
@@ -42,12 +40,12 @@ NS_ASSUME_NONNULL_BEGIN
  
  You may mutate the collection.
  */
-@property (nonatomic, strong, readonly) NSMutableDictionary* attributes;
+@property (nonatomic, strong, null_resettable, readonly) NSMutableDictionary* attributes;
 
 /**
  The name of the tag.  <foobar>...</foobar> will have the value of `foobar` here.
  */
-@property (nonatomic, strong) NSString* name;
+@property (nonatomic, strong, nullable) NSString* name;
 
 /**
  The innerXML if any, including unwrapped CDATA. 
@@ -56,24 +54,23 @@ NS_ASSUME_NONNULL_BEGIN
  
  adjacent open and close tags will be the empty string; <object></object>
  */
-@property (nonatomic, strong) NSString* innerXML;
+@property (nonatomic, strong, nullable) NSString* innerXML;
 
 /**
  This property is of type `NSArray<RGXMLNode*>*`.  Containing any sub-nodes of this node.  Those sub-nodes have this node as the value of their `parentNode` property.
  */
-@property (nonatomic, strong, readonly) NSArray* childNodes;
+@property (nonatomic, strong, null_resettable, readonly) NSArray* childNodes;
 
 /**
- May return either `NSArray<RGXMLNode*>*` or `RGXMLNode*`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
+ May return either `NSArray<RGXMLNode*>*` or `nullable RGXMLNode*`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
  */
-- (id) childrenNamed:(NSString*)name;
+- (nullable id) childrenNamed:(nullable NSString*)name;
 
 /**
  Call this method to insert a new node into this object's `childNodes` property.
  */
-- (void) addChildNode:(RGXMLNode*)node;
+- (void) addChildNode:(nonnull RGXMLNode*)node;
 
 @end
 
-NS_ASSUME_NONNULL_END
-#pragma clang diagnostic pop
+FILE_END

@@ -24,12 +24,12 @@
 #import "RestGoatee-Core.h"
 #import "NSObject+RG_SharedImpl.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu"
-NS_ASSUME_NONNULL_BEGIN
+FILE_START
 
 @interface NSObject (RGForwardDeclarations)
+
 + (id) insertNewObjectForEntityForName:(NSString*)entityName inManagedObjectContext:(id)context;
+
 @end
 
 NSArray* rg_unpackArray(NSArray* json, id context) {
@@ -238,5 +238,4 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
 
 @end
 
-NS_ASSUME_NONNULL_END
-#pragma clang diagnostic pop
+FILE_END

@@ -23,9 +23,7 @@
 
 #import "RestGoatee-Core.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu"
-NS_ASSUME_NONNULL_BEGIN
+FILE_START
 
 #ifndef STRICT_KVC
     #define STRICT_KVC 0
@@ -73,5 +71,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
-#pragma clang diagnostic pop
+FILE_END

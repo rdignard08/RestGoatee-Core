@@ -26,9 +26,7 @@
 #import "NSObject+RG_Deserialization.h"
 #import "NSObject+RG_Serialization.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu"
-NS_ASSUME_NONNULL_BEGIN
+FILE_START
 
 /* for some reason I can't trust `NULL` or `nil` to be typed `void` */
 #define VOID_NOOP ((void)0)
@@ -45,20 +43,4 @@ NS_ASSUME_NONNULL_BEGIN
     #define RGLog(...) VOID_NOOP
 #endif
 
-#define DO_RISKY_BUSINESS \
-_Pragma("clang diagnostic push") \
-_Pragma("clang diagnostic ignored \"-Wgnu\"") \
-_Pragma("clang diagnostic ignored \"-Wobjc-designated-initializers\"") \
-_Pragma("clang diagnostic ignored \"-Wdeprecated-declarations\"") \
-_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"")
-
-#define END_RISKY_BUSINESS \
-_Pragma("clang diagnostic pop")
-
-#define RISKY_BUSINESS(statement) \
-DO_RISKY_BUSINESS \
-statement \
-END_RISKY_BUSINESS
-
-NS_ASSUME_NONNULL_END
-#pragma clang diagnostic pop
+FILE_END

@@ -24,9 +24,7 @@
 #import "RestGoatee-Core.h"
 #import "NSObject+RG_SharedImpl.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu"
-NS_ASSUME_NONNULL_BEGIN
+FILE_START
 
 /**
  This category is private, and methods defined therein are subject to change (moderately frequently).
@@ -148,5 +146,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
-#pragma clang diagnostic pop
+FILE_END

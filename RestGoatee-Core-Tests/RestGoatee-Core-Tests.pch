@@ -3,10 +3,9 @@
 #import <XCTest/XCTest.h>
 
 #define SPEC(className) \
-_Pragma("clang diagnostic push") \
-_Pragma("clang diagnostic ignored \"-Wgnu\"") \
+FILE_START \
 @interface className ## Spec : XCTestCase @end \
 @implementation className ## Spec
 
 #define SPEC_END @end \
-_Pragma("clang diagnostic pop")
+FILE_END

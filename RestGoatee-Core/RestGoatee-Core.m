@@ -23,9 +23,7 @@
 
 #import "RestGoatee-Core.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu"
-NS_ASSUME_NONNULL_BEGIN
+FILE_START
 
 void _RGLog(NSString* format, ...);
 
@@ -39,5 +37,4 @@ void _RGLog(NSString* format, ...) {
     va_end(vl);
 }
 
-NS_ASSUME_NONNULL_END
-#pragma clang diagnostic pop
+FILE_END

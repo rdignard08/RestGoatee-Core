@@ -1,2 +1,11 @@
 
+#define FILE_START \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Wgnu\"") \
+NS_ASSUME_NONNULL_BEGIN
+
+#define FILE_END \
+NS_ASSUME_NONNULL_END \
+_Pragma("clang diagnostic pop")
+
 #import <Foundation/Foundation.h>

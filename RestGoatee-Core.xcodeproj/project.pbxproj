@@ -120,6 +120,34 @@
 			name = ClassSpecs;
 			sourceTree = "<group>";
 		};
+		BE2009661BCB70D000A9E8A0 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BEAB13C01BBDB4960027300D /* RGXMLNode.h */,
+				BEAB13C11BBDB4960027300D /* RGXMLNode.m */,
+				BEAB13C41BBDB4960027300D /* RGXMLSerializer.h */,
+				BEAB13C51BBDB4960027300D /* RGXMLSerializer.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		BE2009671BCB70DA00A9E8A0 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				BEAB13B81BBDB4960027300D /* NSObject+RG_Deserialization.h */,
+				BEAB13B91BBDB4960027300D /* NSObject+RG_Deserialization.m */,
+				BEAB13BA1BBDB4960027300D /* NSObject+RG_KeyedSubscripting.h */,
+				BEAB13BB1BBDB4960027300D /* NSObject+RG_KeyedSubscripting.m */,
+				BEAB13BC1BBDB4960027300D /* NSObject+RG_Serialization.h */,
+				BEAB13BD1BBDB4960027300D /* NSObject+RG_Serialization.m */,
+				BEAB13BE1BBDB4960027300D /* NSObject+RG_SharedImpl.h */,
+				BEAB13BF1BBDB4960027300D /* NSObject+RG_SharedImpl.m */,
+				BEAB13C21BBDB4960027300D /* RGXMLNode+RGDataSourceProtocol.h */,
+				BEAB13C31BBDB4960027300D /* RGXMLNode+RGDataSourceProtocol.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		BEAB13CE1BBDB5370027300D /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,22 +179,10 @@
 		BEFFB8431BBDB15900EAF95D /* RestGoatee-Core */ = {
 			isa = PBXGroup;
 			children = (
+				BE2009671BCB70DA00A9E8A0 /* Categories */,
+				BE2009661BCB70D000A9E8A0 /* Classes */,
 				BEAB13B61BBDB4960027300D /* RestGoatee-Core.h */,
 				BEAB13B71BBDB4960027300D /* RestGoatee-Core.m */,
-				BEAB13B81BBDB4960027300D /* NSObject+RG_Deserialization.h */,
-				BEAB13B91BBDB4960027300D /* NSObject+RG_Deserialization.m */,
-				BEAB13BA1BBDB4960027300D /* NSObject+RG_KeyedSubscripting.h */,
-				BEAB13BB1BBDB4960027300D /* NSObject+RG_KeyedSubscripting.m */,
-				BEAB13BC1BBDB4960027300D /* NSObject+RG_Serialization.h */,
-				BEAB13BD1BBDB4960027300D /* NSObject+RG_Serialization.m */,
-				BEAB13BE1BBDB4960027300D /* NSObject+RG_SharedImpl.h */,
-				BEAB13BF1BBDB4960027300D /* NSObject+RG_SharedImpl.m */,
-				BEAB13C01BBDB4960027300D /* RGXMLNode.h */,
-				BEAB13C11BBDB4960027300D /* RGXMLNode.m */,
-				BEAB13C21BBDB4960027300D /* RGXMLNode+RGDataSourceProtocol.h */,
-				BEAB13C31BBDB4960027300D /* RGXMLNode+RGDataSourceProtocol.m */,
-				BEAB13C41BBDB4960027300D /* RGXMLSerializer.h */,
-				BEAB13C51BBDB4960027300D /* RGXMLSerializer.m */,
 			);
 			path = "RestGoatee-Core";
 			sourceTree = "<group>";
@@ -353,7 +369,6 @@
 				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
@@ -419,7 +434,6 @@
 				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;

@@ -25,9 +25,7 @@
 #import <objc/runtime.h>
 #import "RestGoatee-Core.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu"
-NS_ASSUME_NONNULL_BEGIN
+FILE_START
 
 /* Property Description Keys */
 NSString* const kRGPropertyAtomicType = @"atomicity";
@@ -329,5 +327,4 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
 
 @end
 
-NS_ASSUME_NONNULL_END
-#pragma clang diagnostic pop
+FILE_END

@@ -25,19 +25,11 @@
 #import "NSObject+RG_KeyedSubscripting.h"
 #import <objc/runtime.h>
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu"
-NS_ASSUME_NONNULL_BEGIN
-
-@interface RGXMLNode (_RGDataSourceProtocol)
-
-@property (nonatomic, strong, null_resettable) NSArray* keys;
-
-@end
+FILE_START
 
 @implementation RGXMLNode (_RGDataSourceProtocol)
 
-- (NSArray*) keys {
+- (nonnull NSArray*) keys {
     id ret = objc_getAssociatedObject(self, @selector(keys));
     if (!ret) {
         ret = [NSMutableArray new];
@@ -58,7 +50,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation RGXMLNode (RGDataSourceProtocol)
 
-- (NSUInteger) countByEnumeratingWithState:(NSFastEnumerationState*)state objects:(__unsafe_unretained id[])buffer count:(NSUInteger)len {
+- (nonnull NSArray*) allKeys {
+    return self.keys;
+}
+
+- (NSUInteger) countByEnumeratingWithState:(nonnull NSFastEnumerationState*)state objects:(__unsafe_unretained id[])buffer count:(NSUInteger)len {
     NSUInteger ret = [self.keys countByEnumeratingWithState:state objects:buffer count:len];
     if (!ret) {
         self.keys = nil;
@@ -66,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
     return ret;
 }
 
-- (id) valueForKeyPath:(NSString*)string {
+- (nullable id) valueForKeyPath:(nonnull NSString*)string {
     NSRange range = [string rangeOfString:@"."];
     if (range.location == NSNotFound) {
         return [self valueForKey:string];
@@ -75,11 +71,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 #pragma mark - private
-- (id) valueForKey:(NSString*)key {
+- (nullable id) valueForKey:(nonnull NSString*)key {
     return self.attributes[key] ?: [self childrenNamed:key] ?: self.innerXML;
 }
 
-- (void) setValue:(id)value forKey:(NSString*)key {
+- (void) setValue:(nullable id)value forKey:(nonnull NSString*)key {
     id children = [self childrenNamed:key];
     if (children) {
         [children setValue:value forKey:key];
@@ -90,5 +86,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
-#pragma clang diagnostic pop
+FILE_END

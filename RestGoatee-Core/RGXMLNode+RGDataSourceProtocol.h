@@ -23,9 +23,7 @@
 
 #import "RGXMLNode.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu"
-NS_ASSUME_NONNULL_BEGIN
+FILE_START
 
 /**
  These are the methods that a data source must implement in order to be consumable by the `+[NSObject objectFromDataSource:]` family of methods.
@@ -41,17 +39,22 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The data source must support `id value = dataSource[@"key"]`.
  */
-- (id) objectForKeyedSubscript:(id<NSCopying, NSObject>)key;
+- (nullable id) objectForKeyedSubscript:(id<NSCopying, NSObject>)key;
 
 /**
  The data source must support `dataSource[@"key"] = value`.
  */
-- (void) setObject:(id)object forKeyedSubscript:(id<NSCopying, NSObject>)key;
+- (void) setObject:(nullable id)object forKeyedSubscript:(nonnull id<NSCopying, NSObject>)key;
 
 /**
  The data source must support `id value = dataSource[@"foo.bar"]`.
  */
-- (id) valueForKeyPath:(NSString*)string;
+- (nullable id) valueForKeyPath:(NSString*)string;
+
+/**
+ Returns an array of the keys which are present in this data source (but NOT sub data sources).
+ */
+- (nonnull NSArray*) allKeys;
 
 @end
 
@@ -65,5 +68,4 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface RGXMLNode (RGDataSourceProtocol) <RGDataSourceProtocol> @end
 
-NS_ASSUME_NONNULL_END
-#pragma clang diagnostic pop
+FILE_END

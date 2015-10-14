@@ -28,8 +28,8 @@ FILE_START
 
 @interface RGXMLSerializer () <NSXMLParserDelegate>
 
-@property (nonatomic, weak, property_nullable) RGXMLNode* currentNode;
-@property (nonatomic, strong, property_null_resettable) NSMutableString* currentString;
+@property nullable_property(nonatomic, weak) RGXMLNode* currentNode;
+@property null_resettable_property(nonatomic, strong) NSMutableString* currentString;
 
 @end
 

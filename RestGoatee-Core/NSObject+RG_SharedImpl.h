@@ -313,12 +313,12 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
 /**
  This is a readonly property that describes the meta data of the given receiver's class.  It declares properties and instance variables in an object accessible manner.
  */
-@property (nonatomic, strong, readonly, property_nonnull) NSArray* __property_list__;
+@property nonnull_property(nonatomic, strong, readonly) NSArray* __property_list__;
 
 /**
  This function returns the output keys of the receiver for use when determining what state information is present in the instance.
  */
-@property (nonatomic, strong, readonly, property_nonnull) NSArray* rg_keys;
+@property nonnull_property(nonatomic, strong, readonly) NSArray* rg_keys;
 
 /**
  Returns a `Class` object which is the type of the property specified by `propertyName`; defaults to `NSNumber` if unknown.

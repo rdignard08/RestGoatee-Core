@@ -40,12 +40,12 @@ FILE_START
 /**
  Provide the `NSXMLParser` obtained from AFNetworking's `AFXMLParserResponseSerializer`.
  */
-@property (nonatomic, strong, property_nullable) NSXMLParser* parser;
+@property nullable_property(nonatomic, strong) NSXMLParser* parser;
 
 /**
  Triggers the parsing to execute when accessed the first time.
  */
-@property (nonatomic, strong, readonly, property_nonnull) RGXMLNode* rootNode;
+@property nonnull_property(nonatomic, strong, readonly) RGXMLNode* rootNode;
 
 @end
 

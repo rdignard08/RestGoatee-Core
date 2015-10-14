@@ -21,28 +21,28 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-/*
- For properties this sucks really badly. 
- A less hack way might be to wrap the property attributes into avar arg macro.
- It would insert the correct attribute when the feature is available.
- */
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+
 #if __has_feature(nullability)
+    #define nullable_property(...) (nullable, ## __VA_ARGS__)
+    #define nonnull_property(...) (nonnull, ## __VA_ARGS__)
+    #define null_resettable_property(...) (null_resettable, ## __VA_ARGS__)
     #define prefix_nullable nullable
     #define suffix_nullable __nullable
-    #define property_nullable nullable
     #define prefix_nonnull nonnull
     #define suffix_nonnull __nonnull
-    #define property_nonnull nonnull
-    #define property_null_resettable null_resettable
 #else
+    #define nullable_property(...) (__VA_ARGS__)
+    #define nonnull_property(...) (__VA_ARGS__)
+    #define null_resettable_property(...) (__VA_ARGS__)
     #define prefix_nullable
     #define suffix_nullable
-    #define property_nullable nonatomic
     #define prefix_nonnull
     #define suffix_nonnull
-    #define property_nonnull nonatomic
-    #define property_null_resettable nonatomic
 #endif
+
+#pragma clang diagnostic pop
 
 #import "RGDataSourceProtocol.h"
 #import "RGDeserializationDelegate.h"

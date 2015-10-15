@@ -206,6 +206,8 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
         if (!firstValue || [firstValue isKindOfClass:propertyType]) {
             self[key] = value;
         }
+    } else if ([propertyType isSubclassOfClass:[NSObject class]]) { /* if there is literally nothing else we know about the property */
+        self[key] = value;
     }
     
     self[key] ? VOID_NOOP : RGLog(@"Warning, initialization failed on property %@ on type %@", key, [self class]);

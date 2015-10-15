@@ -46,10 +46,10 @@ CATEGORY_SPEC(NSObject, RG_Deserialization)
     XCTAssert([object.valueProperty isEqual:@1]);
 }
 
-//- (void)testIdProperty {
-//    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ @"idProperty" : @"foobar" }];
-//    XCTAssert([object.idProperty isEqual:@"foobar"]);
-//}
+- (void)testIdProperty {
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ @"idProperty" : @"foobar" }];
+    XCTAssert([object.idProperty isEqual:@"foobar"]);
+}
 
 - (void)testClassProperty {
     RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ @"classProperty" : @"NSObject" }];

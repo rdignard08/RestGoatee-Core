@@ -127,7 +127,8 @@ NSString* rg_trimLeadingAndTrailingQuotes(NSString* str) {
 }
 
 Class rg_classForTypeString(NSString* str) {
-    if ([str isEqualToString:@"#"]) return objc_getMetaClass("NSObject");
+    if ([str isEqual:@"#"]) return objc_getMetaClass("NSObject");
+    if ([str isEqual:@"@"]) return [NSObject class];
     str = rg_trimLeadingAndTrailingQuotes(str);
     return NSClassFromString(str) ?: [NSNumber class];
 }

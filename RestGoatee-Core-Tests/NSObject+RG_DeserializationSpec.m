@@ -22,7 +22,48 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "NSObject+RG_Deserialization.h"
+#import "RGTestObject2.h"
 
 CATEGORY_SPEC(NSObject, RG_Deserialization)
+
+- (void)testStringProperty {
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ @"stringProperty" : @"foobar" }];
+    XCTAssert([object.stringProperty isEqual:@"foobar"]);
+}
+
+- (void)testNumberProperty {
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ @"numberProperty" : @1 }];
+    XCTAssert([object.numberProperty isEqual:@1]);
+}
+
+- (void)testDecimalProperty {
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ @"decimalProperty" : @"10.0" }];
+    XCTAssert([object.decimalProperty isEqual:[NSDecimalNumber decimalNumberWithString:@"10.0"]]);
+}
+
+- (void)testValueProperty {
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ @"valueProperty" : @1 }];
+    XCTAssert([object.valueProperty isEqual:@1]);
+}
+
+//- (void)testIdProperty {
+//    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ @"idProperty" : @"foobar" }];
+//    XCTAssert([object.idProperty isEqual:@"foobar"]);
+//}
+
+- (void)testClassProperty {
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ @"classProperty" : @"NSObject" }];
+    XCTAssert([object.classProperty isEqual:[NSObject class]]);
+}
+
+- (void)testArrayProperty {
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ @"arrayProperty" : @[ @"foo", @"bar" ] }];
+    XCTAssert([object.arrayProperty isEqual:(@[ @"foo", @"bar" ])]);
+}
+
+- (void)testDictionaryProperty {
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ @"dictionaryProperty" : @{ @"foo" : @"bar" } }];
+    XCTAssert([object.dictionaryProperty isEqual:(@{ @"foo" : @"bar" })]);
+}
 
 SPEC_END

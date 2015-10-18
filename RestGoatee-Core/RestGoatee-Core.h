@@ -58,6 +58,9 @@ FILE_START
 /* for some reason I can't trust `NULL` or `nil` to be typed `void` */
 #define VOID_NOOP ((void)0)
 
+/* enables a selector declarations to be used in place of an `NSString`, provides spell checking. */
+#define STRING_SEL(sel) NSStringFromSelector(@selector(sel))
+
 /**
  rg_swizzle is basic implementation of swizzling.  It does not clobber the super class if the method is not on the subclass.
  */

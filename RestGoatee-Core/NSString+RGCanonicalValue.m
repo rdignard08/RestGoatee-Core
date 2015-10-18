@@ -61,7 +61,7 @@
     [self.rg_canonicalLock lock];
     NSString* canonicalValue = objc_getAssociatedObject(self, _cmd);
     if (!canonicalValue) {
-        const NSUInteger inputLength = self.length;
+        const NSUInteger inputLength = [self lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
         NSUInteger i = 0, j = 0;
         char* outBuffer = malloc(inputLength);
         const char* inBuffer = self.UTF8String;

@@ -126,10 +126,8 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
     });
     
     /* first ask if there's a custom implementation */
-    if ([self respondsToSelector:@selector(transformValue:forProperty:inContext:)]) {
-        id changedValue = [(id)self transformValue:value forProperty:key inContext:context];
-        if (changedValue != value) {
-            self[key] = changedValue;
+    if ([self respondsToSelector:@selector(shouldTransformValue:forProperty:inContext:)]) {
+        if (![(id<RGDeserializationDelegate>)self shouldTransformValue:value forProperty:key inContext:context]) {
             return;
         }
     }

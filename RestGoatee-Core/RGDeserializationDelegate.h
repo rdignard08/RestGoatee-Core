@@ -42,13 +42,13 @@ FILE_START
 + (prefix_nullable NSString*) dateFormatForProperty:(prefix_nonnull NSString*)propertyName;
 
 /**
- @abstract implement this method to provide custom logic on a given property.  Return the original value if this method is implemented and the default is desired.
+ @abstract implement this method to provide custom logic on a given property.  Return the value `YES` if this method is implemented and the default is desired.
  
- If the deserialization desired is an `NSManagedObject` subclass you may use the context parameter for construction.
+ If the deserialization target is an `NSManagedObject` subclass you may use the context parameter for construction.
  
  This method tends to be necessary for deserializing arrays that lack a metadata key indicating the type of the object.
  */
-- (prefix_nullable id) transformValue:(prefix_nullable id)value forProperty:(prefix_nonnull NSString*)propertyName inContext:(prefix_nullable NSManagedObjectContext*)context;
+- (BOOL) shouldTransformValue:(prefix_nullable id)value forProperty:(prefix_nonnull NSString*)propertyName inContext:(prefix_nullable NSManagedObjectContext*)context;
 
 @end
 

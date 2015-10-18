@@ -22,6 +22,7 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RestGoatee-Core.h"
+#import <objc/runtime.h>
 
 FILE_START
 
@@ -33,8 +34,20 @@ void _RGLog(NSString* format, ...) {
     char* fileName = va_arg(vl, char*);
     long lineNumber = va_arg(vl, long);
     NSString* line = [[NSString alloc] initWithFormat:[NSString stringWithFormat:@"[%@:%@] %@", @(fileName), @(lineNumber), format ?: @""] arguments:vl];
-    fprintf(stderr, "%s\n", [line UTF8String]);
+    fprintf(stderr, "%s\n", line.UTF8String);
     va_end(vl);
+}
+
+void rg_swizzle(Class cls, SEL original, SEL replacement) {
+    IMP replacementImplementation = method_setImplementation(class_getInstanceMethod(cls, replacement), class_getMethodImplementation(cls, original));
+    // get the replacement IMP
+    // we assume swizzle is called on the class with the override_... selector, so we can safety force original onto replacement
+    // set the original IMP on the replacement selector
+    // try to add the replacement IMP directly to the class on original selector
+    // if it succeeds then we're all good (the original before was located on the superclass)
+    // if it doesn't then that means an IMP is already there so we have to overwrite it
+    if (!class_addMethod(cls, original, replacementImplementation, method_getTypeEncoding(class_getInstanceMethod(cls, replacement)))) { method_setImplementation(class_getInstanceMethod(cls, original), replacementImplementation);
+    }
 }
 
 FILE_END

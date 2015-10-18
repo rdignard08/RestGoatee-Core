@@ -59,6 +59,11 @@ FILE_START
 #define VOID_NOOP ((void)0)
 
 /**
+ rg_swizzle is basic implementation of swizzling.  It does not clobber the super class if the method is not on the subclass.
+ */
+void rg_swizzle(Class cls, SEL original, SEL replacement);
+
+/**
  The `RGLog` function is a debug only function (inactive in a live app).  It logs the file name & line number of the call site.
  */
 #ifdef DEBUG

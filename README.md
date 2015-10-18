@@ -4,7 +4,7 @@ RestGoatee-Core
 
 RestGoatee-Core is a framework which takes raw `NSDictionary` and `NSXMLParser` objects and convienently converts them to your own domain models.
 
-Supports: iOS 6.0+
+Supports: iOS 5.0+, requires ARC
 
 This library's aim is one of simplicity in the common case and extensibility in the general case:<br/>
 1) The act of translating a data source to a domain model is not the place for business logic or key translation.<br/>

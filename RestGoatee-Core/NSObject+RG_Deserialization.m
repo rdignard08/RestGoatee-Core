@@ -83,15 +83,15 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
         /* default behavior self.key = json[key] (each `key` is compared in canonical form) */
         if (overrides[key]) continue;
         [ret rg_initCanonically:key withValue:source[key] inContext:context];
-        [intializedProperties addObject:rg_canonicalForm(key)];
+        [intializedProperties addObject:key.canonicalValue];
     }
     for (NSString* key in overrides) { /* The developer provided an override keypath */
-        if ([intializedProperties containsObject:rg_canonicalForm(key)]) continue;
+        if ([intializedProperties containsObject:key.canonicalValue]) continue;
         id value = [source valueForKeyPath:key];
         if (!value) continue; // nil should not be pushed into the property
         @try {
             [ret rg_initProperty:overrides[key] withValue:value inContext:context];
-            [intializedProperties addObject:rg_canonicalForm(overrides[key])];
+            [intializedProperties addObject:key.canonicalValue];
         }
         @catch (NSException* e) { /* Should this fail the property is left alone */
             RGLog(@"initializing property %@ on type %@ failed: %@", overrides[key], [ret class], e);
@@ -101,9 +101,9 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
 }
 
 - (void) rg_initCanonically:(prefix_nonnull NSString*)key withValue:(prefix_nullable id)value inContext:(prefix_nullable id)context {
-    NSUInteger index = [self.__property_list__[kRGPropertyCanonicalName] indexOfObject:rg_canonicalForm(key)];
+    NSUInteger index = [self.__property_list__[kRGPropertyCanonicalName] indexOfObject:key.canonicalValue];
     if (index != NSNotFound) {
-        if (topClassDeclaringPropertyNamed([self class], rg_canonicalForm(key)) != [NSObject class]) {
+        if (topClassDeclaringPropertyNamed([self class], key.canonicalValue) != [NSObject class]) {
             @try {
                 [self rg_initProperty:self.__property_list__[index][kRGPropertyName] withValue:value inContext:context];
             } @catch (NSException* e) { /* Should this fail the property is left alone */
@@ -219,15 +219,15 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
     for (NSString* key in [object rg_keys]) {
         if (overrides[key]) continue;
         [self rg_initCanonically:key withValue:object[key] inContext:context];
-        [intializedProperties addObject:rg_canonicalForm(key)];
+        [intializedProperties addObject:key.canonicalValue];
     }
     for (NSString* key in overrides) { /* The developer provided an override keypath */
-        if ([intializedProperties containsObject:rg_canonicalForm(key)]) continue;
+        if ([intializedProperties containsObject:key.canonicalValue]) continue;
         id value = [object valueForKeyPath:key];
         if (!value && rg_isDataSourceClass([object class])) continue; // empty dictionary entry doesn't get pushed
         @try {
             [self rg_initProperty:overrides[key] withValue:value inContext:context];
-            [intializedProperties addObject:rg_canonicalForm(overrides[key])];
+            [intializedProperties addObject:[overrides[key] canonicalValue]];
         } @catch (NSException* e) { /* Should this fail the property is left alone */
             RGLog(@"initializing property %@ on type %@ failed: %@", overrides[key], [self class], e);
         }

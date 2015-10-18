@@ -245,10 +245,6 @@ void rg_calculateIvarSize(Class object, NSMutableArray/*NSMutableDictionary*/* p
  return the details about the backing ivar as an object.
  */
 NSMutableDictionary* rg_parseIvarStruct(struct objc_ivar* ivar);
-/**
- Returns the property name in as its canonical key.
- */
-NSString* const rg_canonicalForm(NSString* const input);
 
 /**
  Returns true if `Class cls = object;` is not a pointer type conversion.

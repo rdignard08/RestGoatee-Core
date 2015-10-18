@@ -68,29 +68,6 @@ NSArray* const rg_dateFormats() {
     return _sDateFormats;
 }
 
-NSString* const rg_canonicalForm(NSString* const input) {
-    NSString* output;
-    const size_t inputLength = input.length + 1; /* +1 for the nul terminator */
-    char* inBuffer, * outBuffer;
-    size_t i = 0, j = 0;
-    inBuffer = malloc(inputLength << 1);
-    outBuffer = inBuffer + inputLength;
-    [input getCString:inBuffer maxLength:inputLength encoding:NSUTF8StringEncoding];
-    for (; i != inputLength; i++) {
-        char c = inBuffer[i];
-        if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')) { /* a digit or lowercase character; no change */
-            outBuffer[j++] = c;
-        } else if (c >= 'A' && c <= 'Z') { /* an uppercase character; to lower */
-            outBuffer[j++] = c + 32; /* 'a' - 'A' == 32 */
-        }
-        /* unicodes, symbols, spaces, etc. are completely skipped */
-    }
-    outBuffer[j] = '\0';
-    output = [NSString stringWithUTF8String:outBuffer];
-    free(inBuffer);
-    return output;
-}
-
 BOOL rg_isClassObject(id object) {
     return object_getClass(object) != [NSObject class] && object_getClass(/* the meta-class */object_getClass(object)) == object_getClass([NSObject class]);
     /* if the class of the meta-class == NSObject's meta-class; object was itself a Class object */
@@ -143,7 +120,7 @@ NSMutableDictionary* rg_parseIvarStruct(Ivar ivar) {
     /* The default values for ivars are: assign (if primitive) strong (if object), protected */
     NSMutableDictionary* propertyDict = [@{
                                            kRGPropertyName : name,
-                                           kRGPropertyCanonicalName : rg_canonicalForm(name),
+                                           kRGPropertyCanonicalName : name.canonicalValue,
                                            kRGPropertyStorage : kRGPropertyAssign,
                                            kRGPropertyAccess : kRGIvarProtected,
                                            kRGPropertyBacking : name,
@@ -160,7 +137,7 @@ NSMutableDictionary* rg_parsePropertyStruct(objc_property_t property) {
     /* The default values for properties are: if object and ARC compiled: strong (we don't have to check for this, ARC will insert the retain attribute) else assign. atomic. readwrite. */
     NSMutableDictionary* propertyDict = [@{
                                            kRGPropertyName : name,
-                                           kRGPropertyCanonicalName : rg_canonicalForm(name),
+                                           kRGPropertyCanonicalName : name.canonicalValue,
                                            kRGPropertyStorage : kRGPropertyAssign,
                                            kRGPropertyAtomicType : kRGPropertyAtomic,
                                            kRGPropertyAccess : kRGPropertyReadwrite } mutableCopy];

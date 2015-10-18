@@ -9,4 +9,5 @@ _Pragma("clang assume_nonnull end") \
 _Pragma("clang diagnostic pop")
 
 #import <Foundation/Foundation.h>
+#import "NSString+RGCanonicalValue.h"
 #import "RestGoatee-Core.h"

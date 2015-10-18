@@ -69,6 +69,12 @@ CATEGORY_SPEC(NSObject, RG_Deserialization)
     XCTAssert(object.arrayProperty == nil);
 }
 
+- (void)testStringToDictionary {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(dictionaryProperty) withValue:@"abcs" inContext:nil];
+    XCTAssert(object.dictionaryProperty == nil);
+}
+
 #pragma mark - objectFromDataSource:
 - (void)testStringProperty {
     RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(stringProperty) : @"foobar" }];

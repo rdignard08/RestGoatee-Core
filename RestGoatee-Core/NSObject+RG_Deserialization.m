@@ -165,7 +165,8 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
         self[key] = NSClassFromString([value description]);
     } else if ([propertyType isSubclassOfClass:[NSDictionary class]]) { /* NSDictionary */
         self[key] = [[propertyType alloc] initWithDictionary:value];
-    } else if (rg_isCollectionObject(propertyType)) { /* NSArray, NSSet, or NSOrderedSet */
+    } else if (rg_isCollectionObject(propertyType) && ([value isKindOfClass:[NSArray class]] || [value isKindOfClass:[RGXMLNode class]])) { /* NSArray, NSSet, or NSOrderedSet */
+        if ([value isKindOfClass:[RGXMLNode class]]) value = [value childNodes];
         self[key] = [[propertyType alloc] initWithArray:value];
     } else if ([propertyType isSubclassOfClass:[NSDecimalNumber class]]) { /* NSDecimalNumber, subclasses must go first */
         if ([value isKindOfClass:[RGXMLNode class]]) value = [value innerXML];
@@ -175,6 +176,10 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
         if ([value isKindOfClass:[RGXMLNode class]]) value = [value innerXML];
         if ([value isKindOfClass:[NSString class]]) value = @([value doubleValue]);
         self[key] = value; /* Note: setValue: will unwrap the value if the destination is a primitive */
+    } else if ([propertyType isSubclassOfClass:[NSValue class]]) { /* NSValue */
+        if ([value isKindOfClass:[RGXMLNode class]]) value = [value innerXML];
+        if ([value isKindOfClass:[NSString class]]) value = @([value doubleValue]);
+        self[key] = value; /* This is an NSNumber, which is a subclass of NSValue hence it's a valid assignment */
     } else if ([propertyType isSubclassOfClass:[NSString class]] || [propertyType isSubclassOfClass:[NSURL class]]) { /* NSString, NSURL */
         if ([value isKindOfClass:[RGXMLNode class]]) value = [value innerXML];
         if ([value isKindOfClass:[NSArray class]]) value = [value componentsJoinedByString:@", "];
@@ -204,7 +209,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
         if (!firstValue || [firstValue isKindOfClass:propertyType]) {
             self[key] = value;
         }
-    } else if ([propertyType isSubclassOfClass:[NSObject class]]) { /* if there is literally nothing else we know about the property */
+    } else if ([propertyType isSubclassOfClass:[NSObject class]] && [value isKindOfClass:propertyType]) { /* if there is literally nothing else we know about the property */
         self[key] = value;
     }
     

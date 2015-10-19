@@ -58,7 +58,7 @@ CLASS_SPEC(RGDeserializationDelegate)
 
 - (void) testDateFormat {
     RGTestObject4* object = [RGTestObject4 objectFromDataSource:@{ STRING_SEL(dateProperty) : @"18/10/2015" }];
-    XCTAssert(object.dateProperty.timeIntervalSince1970 == 1445151600.0);
+    XCTAssert(object.dateProperty.timeIntervalSince1970 >= (1445151600.0 - 24 * 60 * 60) && object.dateProperty.timeIntervalSince1970 <= (1445151600.0 + 24 * 60 * 60));
 }
 
 - (void) testTransform {

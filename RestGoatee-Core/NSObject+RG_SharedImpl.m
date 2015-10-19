@@ -292,7 +292,7 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
 
 - (prefix_nonnull NSArray*) rg_keys {
     if ([self isKindOfClass:[NSDictionary class]]) {
-        return [(id)self allKeys];
+        return [(NSDictionary*)self allKeys];
     }
     if ([self isKindOfClass:[RGXMLNode class]]) {
         NSMutableArray* someKeys = [self.__property_list__[kRGPropertyName] mutableCopy];

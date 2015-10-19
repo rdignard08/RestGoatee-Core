@@ -101,12 +101,12 @@ FILE_START
         ret = [self description];
     } else if (rg_isCollectionObject([self class])) {
         ret = [NSMutableArray new];
-        for (id object in (id)self) {
+        for (id object in (id<NSFastEnumeration>)self) {
             [ret addObject:[object rg_dictionaryHelper:pointersSeen followWeak:followWeak]];
         }
     } else if (rg_isKeyedCollectionObject([self class])) {
         ret = [NSMutableDictionary new];
-        for (id key in (id)self) {
+        for (id key in (id<NSFastEnumeration>)self) {
             ret[key] = [self[key] rg_dictionaryHelper:pointersSeen followWeak:followWeak];
         }
         ret[kRGSerializationKey] = NSStringFromClass([self class]);

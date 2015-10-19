@@ -59,6 +59,14 @@ NSString* suffix_nonnull const kRGPropertyAccess = @"access";
 NSString* suffix_nonnull const kRGSerializationKey = @"__class";
 NSString* suffix_nonnull const kRGPropertyListProperty = @"__property_list__";
 
+/* storage for extern'd class references */
+Class suffix_nullable rg_sNSManagedObjectContext;
+Class suffix_nullable rg_sNSManagedObject;
+Class suffix_nullable rg_sNSManagedObjectModel;
+Class suffix_nullable rg_sNSPersistentStoreCoordinator;
+Class suffix_nullable rg_sNSEntityDescription;
+Class suffix_nullable rg_sNSFetchRequest;
+
 NSArray* const rg_dateFormats() {
     static dispatch_once_t onceToken;
     static NSArray* _sDateFormats;

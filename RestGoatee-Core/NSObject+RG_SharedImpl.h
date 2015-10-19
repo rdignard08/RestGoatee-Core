@@ -194,32 +194,32 @@ extern NSString* suffix_nonnull const kRGIvarPublic;
 /**
  Will be `[NSManagedObjectContext class]` or `nil` (if not linked/available).
  */
-Class suffix_nullable rg_sNSManagedObjectContext;
+extern Class suffix_nullable rg_sNSManagedObjectContext;
 
 /**
  Will be `[NSManagedObject class]` or `nil` (if not linked/available).
  */
-Class suffix_nullable rg_sNSManagedObject;
+extern Class suffix_nullable rg_sNSManagedObject;
 
 /**
  Will be `[NSManagedObjectModel class]` or `nil` (if not linked/available).
  */
-Class suffix_nullable rg_sNSManagedObjectModel;
+extern Class suffix_nullable rg_sNSManagedObjectModel;
 
 /**
  Will be `[NSPersistentStoreCoordinator class]` or `nil` (if not linked/available).
  */
-Class suffix_nullable rg_sNSPersistentStoreCoordinator;
+extern Class suffix_nullable rg_sNSPersistentStoreCoordinator;
 
 /**
  Will be `[NSEntityDescription class]` or `nil` (if not linked/available).
  */
-Class suffix_nullable rg_sNSEntityDescription;
+extern Class suffix_nullable rg_sNSEntityDescription;
 
 /**
  Will be `[NSFetchRequest class]` or `nil` (if not linked/available).
  */
-Class suffix_nullable rg_sNSFetchRequest;
+extern Class suffix_nullable rg_sNSFetchRequest;
 
 /**
  Returns the built-in date formats the library supports. Contains: ISO, `-[NSDate description]`.

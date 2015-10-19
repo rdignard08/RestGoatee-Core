@@ -63,6 +63,12 @@ CATEGORY_SPEC(NSObject, RG_Deserialization)
     XCTAssert([object.idProperty isEqual:@"abcd"]);
 }
 
+- (void) testStringToObject {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(objectProperty) withValue:@"abc" inContext:nil];
+    XCTAssert([object.objectProperty isEqual:@"abc"]);
+}
+
 - (void) testStringToClass {
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:STRING_SEL(classProperty) withValue:@"NSObject" inContext:nil];
@@ -116,6 +122,12 @@ CATEGORY_SPEC(NSObject, RG_Deserialization)
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:STRING_SEL(idProperty) withValue:[NSNull null] inContext:nil];
     XCTAssert(object.idProperty == nil);
+}
+
+- (void) testNullToObject {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(objectProperty) withValue:[NSNull null] inContext:nil];
+    XCTAssert(object.objectProperty == nil);
 }
 
 - (void) testNullToClass {
@@ -173,6 +185,12 @@ CATEGORY_SPEC(NSObject, RG_Deserialization)
     XCTAssert([object.idProperty isEqual:(@[ @"abc", @"def" ])]);
 }
 
+- (void) testArrayToObject {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(objectProperty) withValue:@[ @"abc", @"def" ] inContext:nil];
+    XCTAssert([object.objectProperty isEqual:(@[ @"abc", @"def" ])]);
+}
+
 - (void) testArrayToClass {
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:STRING_SEL(classProperty) withValue:@[ @"abc", @"def" ] inContext:nil];
@@ -226,6 +244,12 @@ CATEGORY_SPEC(NSObject, RG_Deserialization)
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:STRING_SEL(idProperty) withValue:@{ @"abc" : @"def" } inContext:nil];
     XCTAssert([object.idProperty isEqual:(@{ @"abc" : @"def" })]);
+}
+
+- (void) testDictionaryToObject {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(objectProperty) withValue:@{ @"abc" : @"def" } inContext:nil];
+    XCTAssert([object.objectProperty isEqual:(@{ @"abc" : @"def" })]);
 }
 
 - (void) testDictionaryToClass {
@@ -289,6 +313,12 @@ CATEGORY_SPEC(NSObject, RG_Deserialization)
     XCTAssert([object.idProperty isEqual:@12.12]);
 }
 
+- (void) testNumberToObject {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(objectProperty) withValue:@12.12 inContext:nil];
+    XCTAssert([object.objectProperty isEqual:@12.12]);
+}
+
 - (void) testNumberToClass {
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:STRING_SEL(classProperty) withValue:@12.12 inContext:nil];
@@ -344,6 +374,12 @@ CATEGORY_SPEC(NSObject, RG_Deserialization)
     XCTAssert(object.idProperty == nil);
 }
 
+- (void) testNilToObject {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(objectProperty) withValue:nil inContext:nil];
+    XCTAssert(object.objectProperty == nil);
+}
+
 - (void) testNilToClass {
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:STRING_SEL(classProperty) withValue:nil inContext:nil];
@@ -391,6 +427,11 @@ CATEGORY_SPEC(NSObject, RG_Deserialization)
 - (void) testIdProperty {
     RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(idProperty) : @"foobar" }];
     XCTAssert([object.idProperty isEqual:@"foobar"]);
+}
+
+- (void) testObjectProperty {
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(objectProperty) : @"123" }];
+    XCTAssert([object.objectProperty isEqual:@"123"]);
 }
 
 - (void) testClassProperty {

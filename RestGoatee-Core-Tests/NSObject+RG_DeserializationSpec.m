@@ -136,6 +136,67 @@ CATEGORY_SPEC(NSObject, RG_Deserialization)
     XCTAssert(object.dictionaryProperty == nil);
 }
 
+#pragma mark - rg_initProperty:withValue:inContext: with NSNumber
+- (void) testIntegerNumberToString {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(stringProperty) withValue:@123 inContext:nil];
+    XCTAssert([object.stringProperty isEqual:@"123"]);
+}
+
+- (void) testDoubleNumberToString {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(stringProperty) withValue:@12.12 inContext:nil];
+    XCTAssert([object.stringProperty isEqual:@"12.12"]);
+}
+
+- (void) testNumberToURL {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(urlProperty) withValue:@12.12 inContext:nil];
+    XCTAssert([object.urlProperty isEqual:[NSURL URLWithString:@"12.12"]]);
+}
+
+- (void) testNumberToNumber {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(numberProperty) withValue:@12.12 inContext:nil];
+    XCTAssert([object.numberProperty isEqual:@12.12]);
+}
+
+- (void) testNumberToDecimal {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(decimalProperty) withValue:@12.12 inContext:nil];
+    XCTAssert([object.decimalProperty isEqual:[NSDecimalNumber decimalNumberWithString:@"12.12"]]);
+}
+
+- (void) testNumberToValue {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(valueProperty) withValue:@12.12 inContext:nil];
+    XCTAssert([object.valueProperty isEqual:@12.12]);
+}
+
+- (void) testNumberToId {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(idProperty) withValue:@12.12 inContext:nil];
+    XCTAssert([object.idProperty isEqual:@12.12]);
+}
+
+- (void) testNumberToClass {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(classProperty) withValue:@12.12 inContext:nil];
+    XCTAssert(object.classProperty == nil);
+}
+
+- (void) testNumberToArray {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(arrayProperty) withValue:@12.12 inContext:nil];
+    XCTAssert(object.arrayProperty == nil);
+}
+
+- (void) testNumberToDictionary {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(dictionaryProperty) withValue:@12.12 inContext:nil];
+    XCTAssert(object.dictionaryProperty == nil);
+}
+
 #pragma mark - objectFromDataSource:
 - (void) testStringProperty {
     RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(stringProperty) : @"foobar" }];

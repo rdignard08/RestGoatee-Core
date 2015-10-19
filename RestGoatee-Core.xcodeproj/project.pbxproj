@@ -32,6 +32,8 @@
 		BEF4BE651BD4B4ED00ACDAF7 /* NSObject+RG_Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BD1BBDB4960027300D /* NSObject+RG_Serialization.m */; };
 		BEF4BE691BD4BEE100ACDAF7 /* RGDeserializationDelegateSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE681BD4BEE100ACDAF7 /* RGDeserializationDelegateSpec.m */; };
 		BEF4BE6B1BD4C54300ACDAF7 /* RGXMLNode+RGDataSourceProtocolSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE6A1BD4C54300ACDAF7 /* RGXMLNode+RGDataSourceProtocolSpec.m */; };
+		BEF4BE6D1BD58BFC00ACDAF7 /* NSObject+RG_SharedImplSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE6C1BD58BFC00ACDAF7 /* NSObject+RG_SharedImplSpec.m */; };
+		BEF4BE6E1BD58C3B00ACDAF7 /* NSObject+RG_SharedImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BF1BBDB4960027300D /* NSObject+RG_SharedImpl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,7 @@
 		BEF4BE631BD4B24A00ACDAF7 /* RGDataSourceProtocolSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGDataSourceProtocolSpec.m; sourceTree = "<group>"; };
 		BEF4BE681BD4BEE100ACDAF7 /* RGDeserializationDelegateSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGDeserializationDelegateSpec.m; sourceTree = "<group>"; };
 		BEF4BE6A1BD4C54300ACDAF7 /* RGXMLNode+RGDataSourceProtocolSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RGXMLNode+RGDataSourceProtocolSpec.m"; sourceTree = "<group>"; };
+		BEF4BE6C1BD58BFC00ACDAF7 /* NSObject+RG_SharedImplSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RG_SharedImplSpec.m"; sourceTree = "<group>"; };
 		BEFFB8411BBDB15900EAF95D /* libRestGoatee-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libRestGoatee-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -145,6 +148,7 @@
 			children = (
 				BE2009681BCC29A900A9E8A0 /* NSObject+RG_DeserializationSpec.m */,
 				BEF4BE5F1BD49D8000ACDAF7 /* NSObject+RG_KeyedSubscriptingSpec.m */,
+				BEF4BE6C1BD58BFC00ACDAF7 /* NSObject+RG_SharedImplSpec.m */,
 				BEF4BE6A1BD4C54300ACDAF7 /* RGXMLNode+RGDataSourceProtocolSpec.m */,
 				BEF4BE5D1BD346EA00ACDAF7 /* NSString+RGCanonicalValueSpec.m */,
 			);
@@ -342,6 +346,8 @@
 				BEF4BE651BD4B4ED00ACDAF7 /* NSObject+RG_Serialization.m in Sources */,
 				BE68CA6C1BCF65B100DFEC70 /* RGXMLNode+RGDataSourceProtocol.m in Sources */,
 				BE2009691BCC29A900A9E8A0 /* NSObject+RG_DeserializationSpec.m in Sources */,
+				BEF4BE6E1BD58C3B00ACDAF7 /* NSObject+RG_SharedImpl.m in Sources */,
+				BEF4BE6D1BD58BFC00ACDAF7 /* NSObject+RG_SharedImplSpec.m in Sources */,
 				BEF4BE601BD49D8000ACDAF7 /* NSObject+RG_KeyedSubscriptingSpec.m in Sources */,
 				BEF4BE641BD4B24A00ACDAF7 /* RGDataSourceProtocolSpec.m in Sources */,
 				BE68CA681BCF655700DFEC70 /* NSObject+RG_Deserialization.m in Sources */,

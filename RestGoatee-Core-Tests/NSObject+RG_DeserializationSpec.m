@@ -191,6 +191,61 @@ CATEGORY_SPEC(NSObject, RG_Deserialization)
     XCTAssert(object.dictionaryProperty == nil);
 }
 
+#pragma mark - rg_initProperty:withValue:inContext: with NSDictionary
+- (void) testDictionaryToString {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(stringProperty) withValue:@{ @"abc" : @"def" } inContext:nil];
+    XCTAssert(object.stringProperty == nil);
+}
+
+- (void) testDictionaryToURL {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(urlProperty) withValue:@{ @"abc" : @"def" } inContext:nil];
+    XCTAssert(object.urlProperty == nil);
+}
+
+- (void) testDictionaryToNumber {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(numberProperty) withValue:@{ @"abc" : @"def" } inContext:nil];
+    XCTAssert(object.numberProperty == nil);
+}
+
+- (void) testDictionaryToDecimal {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(decimalProperty) withValue:@{ @"abc" : @"def" } inContext:nil];
+    XCTAssert(object.decimalProperty == nil);
+}
+
+- (void) testDictionaryToValue {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(valueProperty) withValue:@{ @"abc" : @"def" } inContext:nil];
+    XCTAssert(object.valueProperty == nil);
+}
+
+- (void) testDictionaryToId {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(idProperty) withValue:@{ @"abc" : @"def" } inContext:nil];
+    XCTAssert([object.idProperty isEqual:(@{ @"abc" : @"def" })]);
+}
+
+- (void) testDictionaryToClass {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(classProperty) withValue:@{ @"abc" : @"def" } inContext:nil];
+    XCTAssert(object.classProperty == nil);
+}
+
+- (void) testDictionaryToArray {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(arrayProperty) withValue:@{ @"abc" : @"def" } inContext:nil];
+    XCTAssert(object.arrayProperty == nil);
+}
+
+- (void) testDictionaryToDictionary {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(dictionaryProperty) withValue:@{ @"abc" : @"def" } inContext:nil];
+    XCTAssert([object.dictionaryProperty isEqual:(@{ @"abc" : @"def" })]);
+}
+
 #pragma mark - rg_initProperty:withValue:inContext: with NSNumber
 - (void) testIntegerNumberToString {
     RGTestObject2* object = [RGTestObject2 new];

@@ -3,7 +3,7 @@
 
 @implementation RGTestObject1
 
-- (NSString*)description {
+- (NSString*) description {
     return [NSString stringWithFormat:@"%@ %@", [super description], [self dictionaryRepresentation]];
 }
 

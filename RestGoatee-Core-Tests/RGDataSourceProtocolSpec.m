@@ -55,7 +55,7 @@
 
 CLASS_SPEC(RGDataSourceProtocol)
 
-- (void)testDataSource {
+- (void) testDataSource {
     RGTestObject2* object = [RGTestObject2 objectFromDataSource:[RGTestObject3 new]];
     XCTAssert([object.stringProperty isEqual:@"abd"]);
     XCTAssert([object.idProperty isEqual:[NSObject class]]);

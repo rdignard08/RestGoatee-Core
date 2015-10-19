@@ -169,21 +169,30 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
     } else if (rg_isCollectionObject(propertyType) && ([value isKindOfClass:[NSArray class]] || [value isKindOfClass:[RGXMLNode class]])) { /* NSArray, NSSet, or NSOrderedSet */
         if ([value isKindOfClass:[RGXMLNode class]]) value = [value childNodes];
         self[key] = [[propertyType alloc] initWithArray:value];
-    } else if ([propertyType isSubclassOfClass:[NSDecimalNumber class]]) { /* NSDecimalNumber, subclasses must go first */
+    } else if ([propertyType isSubclassOfClass:[NSDecimalNumber class]] && ([value isKindOfClass:[NSNumber class]] ||
+                                                                            [value isKindOfClass:[NSString class]] ||
+                                                                            [value isKindOfClass:[RGXMLNode class]])) {
+        /* NSDecimalNumber, subclasses must go first */
         if ([value isKindOfClass:[RGXMLNode class]]) value = [value innerXML];
         if ([value isKindOfClass:[NSNumber class]]) value = [value stringValue];
         self[key] = [propertyType decimalNumberWithString:value];
-    } else if ([propertyType isSubclassOfClass:[NSNumber class]]) { /* NSNumber */
+    } else if ([propertyType isSubclassOfClass:[NSNumber class]] && ([value isKindOfClass:[NSNumber class]] ||
+                                                                     [value isKindOfClass:[NSString class]] ||
+                                                                     [value isKindOfClass:[RGXMLNode class]])) {
+        /* NSNumber */
         if ([value isKindOfClass:[RGXMLNode class]]) value = [value innerXML];
         if ([value isKindOfClass:[NSString class]]) value = @([value doubleValue]);
         self[key] = value; /* Note: setValue: will unwrap the value if the destination is a primitive */
-    } else if ([propertyType isSubclassOfClass:[NSValue class]]) { /* NSValue */
+    } else if ([propertyType isSubclassOfClass:[NSValue class]] && ([value isKindOfClass:[NSNumber class]] ||
+                                                                    [value isKindOfClass:[NSString class]] ||
+                                                                    [value isKindOfClass:[RGXMLNode class]])) {
+        /* NSValue */
         if ([value isKindOfClass:[RGXMLNode class]]) value = [value innerXML];
         if ([value isKindOfClass:[NSString class]]) value = @([value doubleValue]);
         self[key] = value; /* This is an NSNumber, which is a subclass of NSValue hence it's a valid assignment */
     } else if ([propertyType isSubclassOfClass:[NSString class]] || [propertyType isSubclassOfClass:[NSURL class]]) { /* NSString, NSURL */
         if ([value isKindOfClass:[RGXMLNode class]]) value = [value innerXML];
-        if ([value isKindOfClass:[NSArray class]]) value = [value componentsJoinedByString:@", "];
+        if ([value isKindOfClass:[NSArray class]]) value = [value componentsJoinedByString:@","];
         if ([value isKindOfClass:[NSNumber class]]) value = [value stringValue];
         self[key] = [[propertyType alloc] initWithString:value];
     } else if ([propertyType isSubclassOfClass:[NSDate class]]) { /* NSDate */
@@ -202,7 +211,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
         }
         
     /* At this point we've exhausted the supported foundation classes for the LHS... these handle sub-objects */
-    } else if (rg_isDataSourceClass([value class])) { /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
+    } else if (rg_isDataSourceClass([value class]) && !rg_isCollectionObject([value class])) { /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
         self[key] = [propertyType objectFromDataSource:value inContext:context];
     } else if ([value isKindOfClass:[NSArray class]]) { /* single entry arrays are converted to an inplace object */
         [(NSArray*)value count] > 1 ? RGLog(@"Warning, data loss on property %@ on type %@", key, [self class]) : VOID_NOOP;

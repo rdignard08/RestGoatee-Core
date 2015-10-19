@@ -58,7 +58,7 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
             [objects addObject:[self objectFromDataSource:object inContext:context]];
         }
     }
-    return source ? [objects copy] : nil;
+    return [objects copy];
 }
 
 + (prefix_nonnull instancetype) objectFromDataSource:(prefix_nullable id<RGDataSourceProtocol>)source {

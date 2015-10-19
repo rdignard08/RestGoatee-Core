@@ -31,6 +31,7 @@
 		BEF4BE641BD4B24A00ACDAF7 /* RGDataSourceProtocolSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE631BD4B24A00ACDAF7 /* RGDataSourceProtocolSpec.m */; };
 		BEF4BE651BD4B4ED00ACDAF7 /* NSObject+RG_Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BD1BBDB4960027300D /* NSObject+RG_Serialization.m */; };
 		BEF4BE691BD4BEE100ACDAF7 /* RGDeserializationDelegateSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE681BD4BEE100ACDAF7 /* RGDeserializationDelegateSpec.m */; };
+		BEF4BE6B1BD4C54300ACDAF7 /* RGXMLNode+RGDataSourceProtocolSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE6A1BD4C54300ACDAF7 /* RGXMLNode+RGDataSourceProtocolSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		BEF4BE611BD4A0B600ACDAF7 /* RGXMLSerializerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGXMLSerializerSpec.m; sourceTree = "<group>"; };
 		BEF4BE631BD4B24A00ACDAF7 /* RGDataSourceProtocolSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGDataSourceProtocolSpec.m; sourceTree = "<group>"; };
 		BEF4BE681BD4BEE100ACDAF7 /* RGDeserializationDelegateSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGDeserializationDelegateSpec.m; sourceTree = "<group>"; };
+		BEF4BE6A1BD4C54300ACDAF7 /* RGXMLNode+RGDataSourceProtocolSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RGXMLNode+RGDataSourceProtocolSpec.m"; sourceTree = "<group>"; };
 		BEFFB8411BBDB15900EAF95D /* libRestGoatee-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libRestGoatee-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -118,8 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				BE20096D1BCC2BE400A9E8A0 /* ProtocolSpecs */,
-				BE2009621BCA262500A9E8A0 /* ClassSpecs */,
 				BE2009611BCA25BC00A9E8A0 /* CategorySpecs */,
+				BE2009621BCA262500A9E8A0 /* ClassSpecs */,
 				BE2009561BCA252000A9E8A0 /* Supporting Files */,
 			);
 			path = "RestGoatee-Core-Tests";
@@ -143,6 +145,7 @@
 			children = (
 				BE2009681BCC29A900A9E8A0 /* NSObject+RG_DeserializationSpec.m */,
 				BEF4BE5F1BD49D8000ACDAF7 /* NSObject+RG_KeyedSubscriptingSpec.m */,
+				BEF4BE6A1BD4C54300ACDAF7 /* RGXMLNode+RGDataSourceProtocolSpec.m */,
 				BEF4BE5D1BD346EA00ACDAF7 /* NSString+RGCanonicalValueSpec.m */,
 			);
 			name = CategorySpecs;
@@ -344,6 +347,7 @@
 				BE68CA681BCF655700DFEC70 /* NSObject+RG_Deserialization.m in Sources */,
 				BEF4BE691BD4BEE100ACDAF7 /* RGDeserializationDelegateSpec.m in Sources */,
 				BE68CA671BCF631200DFEC70 /* RGTestObject1.m in Sources */,
+				BEF4BE6B1BD4C54300ACDAF7 /* RGXMLNode+RGDataSourceProtocolSpec.m in Sources */,
 				BEF4BE5E1BD346EA00ACDAF7 /* NSString+RGCanonicalValueSpec.m in Sources */,
 				BE68CA701BCF833D00DFEC70 /* NSString+RGCanonicalValue.m in Sources */,
 				BEF4BE621BD4A0B600ACDAF7 /* RGXMLSerializerSpec.m in Sources */,

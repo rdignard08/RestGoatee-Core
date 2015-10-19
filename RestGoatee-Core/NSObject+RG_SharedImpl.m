@@ -300,7 +300,8 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
 }
 
 - (BOOL) rg_isPrimitive:(prefix_nonnull NSString*)propertyName {
-    return !NSClassFromString([self rg_declarationForProperty:propertyName][kRGPropertyRawType]);
+    NSString* rawType = [self rg_declarationForProperty:propertyName][kRGPropertyRawType];
+    return !NSClassFromString(rawType) && ![rawType isEqual:@(@encode(id))] && ![rawType isEqual:@(@encode(Class))];
 }
 
 @end

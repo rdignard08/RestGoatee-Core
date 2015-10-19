@@ -24,6 +24,8 @@
 #import "NSString+RGCanonicalValue.h"
 #import <objc/runtime.h>
 
+FILE_START
+
 @implementation NSString (RGCanonicalValue)
 
 + (void) load {
@@ -31,27 +33,27 @@
     rg_swizzle(self, @selector(initWithCoder:), @selector(override_initWithCoder:));
 }
 
-- (instancetype) override_init {
+- (prefix_nonnull instancetype) override_init {
     NSString* ret = [self override_init];
     ret.rg_canonicalLock = [NSLock new];
     return ret;
 }
 
-- (instancetype) override_initWithCoder:(NSCoder*)coder {
+- (prefix_nonnull instancetype) override_initWithCoder:(prefix_nonnull NSCoder*)coder {
     NSString* ret = [self override_initWithCoder:coder];
     ret.rg_canonicalLock = [NSLock new];
     return ret;
 }
 
-- (NSLock*) rg_canonicalLock {
+- (prefix_nullable NSLock*) rg_canonicalLock {
     return objc_getAssociatedObject(self, @selector(rg_canonicalLock));
 }
 
-- (void) setRg_canonicalLock:(NSLock*)lock {
+- (void) setRg_canonicalLock:(prefix_nullable NSLock*)lock {
     objc_setAssociatedObject(self, @selector(rg_canonicalLock), lock, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSString*) canonicalValue {
+- (prefix_nonnull NSString*) canonicalValue {
     [self.rg_canonicalLock lock];
     NSString* canonicalValue = objc_getAssociatedObject(self, _cmd);
     if (!canonicalValue) {
@@ -75,3 +77,5 @@
 }
 
 @end
+
+FILE_END

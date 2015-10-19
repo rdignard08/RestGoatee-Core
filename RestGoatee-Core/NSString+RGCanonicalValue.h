@@ -21,6 +21,10 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+#import "RestGoatee-Core.h"
+
+FILE_START
+
 /**
  This category on NSString is optimize the handling of the canonical representation of the receiver.
  */
@@ -31,6 +35,8 @@
  
  The canonical representation of a string is the removal of all symbols, all uppercase characters to lowercase.  All others remain the same.
  */
-@property (nonatomic, strong, readonly) NSString* canonicalValue;
+@property nonnull_property(nonatomic, strong, readonly) NSString* canonicalValue;
 
 @end
+
+FILE_END

@@ -42,6 +42,12 @@
     #define suffix_nonnull
 #endif
 
+#if __has_feature(objc_generics)
+    #define GENERIC(class, type) class < type >
+#else
+    #define GENERIC(class, type) class
+#endif
+
 #pragma clang diagnostic pop
 
 #import "RGDataSourceProtocol.h"

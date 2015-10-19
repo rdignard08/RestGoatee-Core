@@ -227,11 +227,6 @@ extern Class suffix_nullable rg_sNSFetchRequest;
 NSArray* const rg_dateFormats(void);
 
 /**
- Taking in an array, will attempt to construct non dictionary / xml node objects.
- */
-NSArray* rg_unpackArray(NSArray* json, id context);
-
-/**
  modify the `__property_list__` declarations to include information from the backing instance variable.
  */
 void rg_parseIvarStructOntoPropertyDeclaration(struct objc_ivar* ivar, NSMutableDictionary* propertyData);

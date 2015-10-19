@@ -4,6 +4,7 @@
 @interface RGTestObject1 : NSObject
 
 @property (nonatomic, strong) NSString* stringProperty;
+@property (nonatomic, strong) NSURL* urlProperty;
 @property (nonatomic, strong) NSNumber* numberProperty;
 @property (nonatomic, strong) NSDecimalNumber* decimalProperty;
 @property (nonatomic, strong) NSValue* valueProperty;

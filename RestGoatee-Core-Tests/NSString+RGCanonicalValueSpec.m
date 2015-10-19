@@ -26,37 +26,37 @@
 
 CATEGORY_SPEC(NSString, RGCanonicalValue)
 
-- (void)testSpaces {
+- (void) testSpaces {
     XCTAssert([@"          ".canonicalValue isEqual:@""]);
 }
 
-- (void)testNumbers {
+- (void) testNumbers {
     XCTAssert([@"1234add1234".canonicalValue isEqual:@"1234add1234"]);
 }
 
-- (void)testCapitals {
+- (void) testCapitals {
     XCTAssert([@"ABCDE".canonicalValue isEqual:@"abcde"]);
 }
 
-- (void)testSymbols {
+- (void) testSymbols {
     XCTAssert([@"!@#$abcde&*!@#".canonicalValue isEqual:@"abcde"]);
 }
 
-- (void)testUnicode {
+- (void) testUnicode {
     NSString* str = @"abc💅bcd";
     XCTAssert([str.canonicalValue isEqual:@"abcbcd"]);
 }
 
-- (void)testShortString {
+- (void) testShortString {
     XCTAssert([@"".canonicalValue isEqual:@""]);
 }
 
-- (void)testLongString {
+- (void) testLongString {
     NSString* str = @"sjkdfslkhasajskhdl2746981237JAgkHKJSGFKJHSKJSFHKJAGSd jdksdhflk sdklfh lksdjf l!&#^*&!%$)(!)$*@&@&@&@$&@*$^JKgsdajdajsdhaskdahr";
     XCTAssert([str.canonicalValue isEqual:@"sjkdfslkhasajskhdl2746981237jagkhkjsgfkjhskjsfhkjagsdjdksdhflksdklfhlksdjfljkgsdajdajsdhaskdahr"]);
 }
 
-- (void)testSideEffects {
+- (void) testSideEffects { // tests that the output value is stored so it's not being recalculated
     NSString* str = @"abcde";
     [str canonicalValue];
     XCTAssert([objc_getAssociatedObject(str, @selector(canonicalValue)) isEqual:str]);

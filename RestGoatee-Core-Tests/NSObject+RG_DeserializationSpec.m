@@ -26,7 +26,7 @@
 
 CATEGORY_SPEC(NSObject, RG_Deserialization)
 
-#pragma mark - rg_initProperty:withValue:inContext:
+#pragma mark - rg_initProperty:withValue:inContext: with NSString
 - (void) testStringToString {
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:STRING_SEL(stringProperty) withValue:@"foobar" inContext:nil];
@@ -78,6 +78,61 @@ CATEGORY_SPEC(NSObject, RG_Deserialization)
 - (void) testStringToDictionary {
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:STRING_SEL(dictionaryProperty) withValue:@"abcs" inContext:nil];
+    XCTAssert(object.dictionaryProperty == nil);
+}
+
+#pragma mark - rg_initProperty:withValue:inContext: with NSNull
+- (void) testNullToString {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(stringProperty) withValue:[NSNull null] inContext:nil];
+    XCTAssert(object.stringProperty == nil);
+}
+
+- (void) testNullToURL {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(urlProperty) withValue:[NSNull null] inContext:nil];
+    XCTAssert(object.urlProperty == nil);
+}
+
+- (void) testNullToNumber {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(numberProperty) withValue:[NSNull null] inContext:nil];
+    XCTAssert(object.numberProperty == nil);
+}
+
+- (void) testNullToDecimal {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(decimalProperty) withValue:[NSNull null] inContext:nil];
+    XCTAssert(object.decimalProperty == nil);
+}
+
+- (void) testNullToValue {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(valueProperty) withValue:[NSNull null] inContext:nil];
+    XCTAssert(object.valueProperty == nil);
+}
+
+- (void) testNullToId {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(idProperty) withValue:[NSNull null] inContext:nil];
+    XCTAssert(object.idProperty == nil);
+}
+
+- (void) testNullToClass {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(classProperty) withValue:[NSNull null] inContext:nil];
+    XCTAssert(object.classProperty == nil);
+}
+
+- (void) testNullToArray {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(arrayProperty) withValue:[NSNull null] inContext:nil];
+    XCTAssert(object.arrayProperty == nil);
+}
+
+- (void) testNullToDictionary {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:STRING_SEL(dictionaryProperty) withValue:[NSNull null] inContext:nil];
     XCTAssert(object.dictionaryProperty == nil);
 }
 

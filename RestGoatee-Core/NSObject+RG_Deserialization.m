@@ -190,7 +190,11 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
         if ([value isKindOfClass:[RGXMLNode class]]) value = [value innerXML];
         if ([value isKindOfClass:[NSString class]]) value = @([value doubleValue]);
         self[key] = value; /* This is an NSNumber, which is a subclass of NSValue hence it's a valid assignment */
-    } else if ([propertyType isSubclassOfClass:[NSString class]] || [propertyType isSubclassOfClass:[NSURL class]]) { /* NSString, NSURL */
+    } else if (([propertyType isSubclassOfClass:[NSString class]] || [propertyType isSubclassOfClass:[NSURL class]]) && ([value isKindOfClass:[NSNumber class]] ||
+                                                                                                                         [value isKindOfClass:[NSString class]] ||
+                                                                                                                         [value isKindOfClass:[RGXMLNode class]] ||
+                                                                                                                         [value isKindOfClass:[NSArray class]])) {
+        /* NSString, NSURL */
         if ([value isKindOfClass:[RGXMLNode class]]) value = [value innerXML];
         if ([value isKindOfClass:[NSArray class]]) value = [value componentsJoinedByString:@","];
         if ([value isKindOfClass:[NSNumber class]]) value = [value stringValue];
@@ -211,7 +215,9 @@ NSArray* rg_unpackArray(NSArray* json, id context) {
         }
         
     /* At this point we've exhausted the supported foundation classes for the LHS... these handle sub-objects */
-    } else if (rg_isDataSourceClass([value class]) && !rg_isCollectionObject([value class])) { /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
+    } else if (!rg_isInlineObject(propertyType) && !rg_isCollectionObject(propertyType) && ([value isKindOfClass:[NSDictionary class]] ||
+                                                                                            [value isKindOfClass:[RGXMLNode class]])) {
+        /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
         self[key] = [propertyType objectFromDataSource:value inContext:context];
     } else if ([value isKindOfClass:[NSArray class]]) { /* single entry arrays are converted to an inplace object */
         [(NSArray*)value count] > 1 ? RGLog(@"Warning, data loss on property %@ on type %@", key, [self class]) : VOID_NOOP;

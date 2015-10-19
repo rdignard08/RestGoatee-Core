@@ -24,6 +24,12 @@
 #import "NSObject+RG_Deserialization.h"
 #import "RGTestObject2.h"
 
+@interface NSObject (_RGForwardDecl)
+
+- (void) rg_initProperty:(prefix_nonnull NSString*)key withValue:(prefix_nullable id)value inContext:(prefix_nullable id)context;
+
+@end
+
 CATEGORY_SPEC(NSObject, RG_Deserialization)
 
 #pragma mark - rg_initProperty:withValue:inContext: with NSString

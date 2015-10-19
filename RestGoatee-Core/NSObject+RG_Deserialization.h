@@ -66,14 +66,6 @@ FILE_START
  */
 - (prefix_nonnull instancetype) extendWith:(prefix_nullable NSObject<RGDataSourceProtocol>*)object inContext:(prefix_nullable NSManagedObjectContext*)context;
 
-/**
- This method can be considered at a high level to be performing `self.key = value`.  It inserts type coercion where appropriate, and optionally allows the object to override the default behavior at the property level.
- 
- JSON types when deserialized from NSData are: NSNull, NSNumber (number or boolean), NSString, NSArray, NSDictionary.
- RGXMLNode is odd, but it can be used as nil, NSString, NSDictionary, or NSArray where required.
- */
-- (void) rg_initProperty:(prefix_nonnull NSString*)key withValue:(prefix_nullable id)value inContext:(prefix_nullable id)context;
-
 @end
 
 FILE_END

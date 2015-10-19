@@ -27,6 +27,7 @@
 		BEAB13CD1BBDB4960027300D /* RGXMLSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13C51BBDB4960027300D /* RGXMLSerializer.m */; };
 		BEF4BE5E1BD346EA00ACDAF7 /* NSString+RGCanonicalValueSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE5D1BD346EA00ACDAF7 /* NSString+RGCanonicalValueSpec.m */; };
 		BEF4BE601BD49D8000ACDAF7 /* NSObject+RG_KeyedSubscriptingSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE5F1BD49D8000ACDAF7 /* NSObject+RG_KeyedSubscriptingSpec.m */; };
+		BEF4BE621BD4A0B600ACDAF7 /* RGXMLSerializerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE611BD4A0B600ACDAF7 /* RGXMLSerializerSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		BEAB13CF1BBDB5530027300D /* RestGoatee-Core.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RestGoatee-Core.pch"; sourceTree = "<group>"; };
 		BEF4BE5D1BD346EA00ACDAF7 /* NSString+RGCanonicalValueSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+RGCanonicalValueSpec.m"; sourceTree = "<group>"; };
 		BEF4BE5F1BD49D8000ACDAF7 /* NSObject+RG_KeyedSubscriptingSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RG_KeyedSubscriptingSpec.m"; sourceTree = "<group>"; };
+		BEF4BE611BD4A0B600ACDAF7 /* RGXMLSerializerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGXMLSerializerSpec.m; sourceTree = "<group>"; };
 		BEFFB8411BBDB15900EAF95D /* libRestGoatee-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libRestGoatee-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				BE2009641BCA27AE00A9E8A0 /* RGXMLNodeSpec.m */,
+				BEF4BE611BD4A0B600ACDAF7 /* RGXMLSerializerSpec.m */,
 			);
 			name = ClassSpecs;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				BE68CA671BCF631200DFEC70 /* RGTestObject1.m in Sources */,
 				BEF4BE5E1BD346EA00ACDAF7 /* NSString+RGCanonicalValueSpec.m in Sources */,
 				BE68CA701BCF833D00DFEC70 /* NSString+RGCanonicalValue.m in Sources */,
+				BEF4BE621BD4A0B600ACDAF7 /* RGXMLSerializerSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

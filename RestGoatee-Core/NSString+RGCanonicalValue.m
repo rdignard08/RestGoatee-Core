@@ -24,12 +24,6 @@
 #import "NSString+RGCanonicalValue.h"
 #import <objc/runtime.h>
 
-@interface NSString (_RGCanonicalValue)
-
-@property (nonatomic, strong) NSLock* rg_canonicalLock;
-
-@end
-
 @implementation NSString (RGCanonicalValue)
 
 + (void) load {

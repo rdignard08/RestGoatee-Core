@@ -30,6 +30,7 @@
 		BEF4BE621BD4A0B600ACDAF7 /* RGXMLSerializerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE611BD4A0B600ACDAF7 /* RGXMLSerializerSpec.m */; };
 		BEF4BE641BD4B24A00ACDAF7 /* RGDataSourceProtocolSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE631BD4B24A00ACDAF7 /* RGDataSourceProtocolSpec.m */; };
 		BEF4BE651BD4B4ED00ACDAF7 /* NSObject+RG_Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BD1BBDB4960027300D /* NSObject+RG_Serialization.m */; };
+		BEF4BE691BD4BEE100ACDAF7 /* RGDeserializationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE681BD4BEE100ACDAF7 /* RGDeserializationDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		BEF4BE5F1BD49D8000ACDAF7 /* NSObject+RG_KeyedSubscriptingSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RG_KeyedSubscriptingSpec.m"; sourceTree = "<group>"; };
 		BEF4BE611BD4A0B600ACDAF7 /* RGXMLSerializerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGXMLSerializerSpec.m; sourceTree = "<group>"; };
 		BEF4BE631BD4B24A00ACDAF7 /* RGDataSourceProtocolSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGDataSourceProtocolSpec.m; sourceTree = "<group>"; };
+		BEF4BE681BD4BEE100ACDAF7 /* RGDeserializationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGDeserializationDelegate.m; sourceTree = "<group>"; };
 		BEFFB8411BBDB15900EAF95D /* libRestGoatee-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libRestGoatee-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				BEF4BE631BD4B24A00ACDAF7 /* RGDataSourceProtocolSpec.m */,
+				BEF4BE681BD4BEE100ACDAF7 /* RGDeserializationDelegate.m */,
 			);
 			name = ProtocolSpecs;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				BEF4BE601BD49D8000ACDAF7 /* NSObject+RG_KeyedSubscriptingSpec.m in Sources */,
 				BEF4BE641BD4B24A00ACDAF7 /* RGDataSourceProtocolSpec.m in Sources */,
 				BE68CA681BCF655700DFEC70 /* NSObject+RG_Deserialization.m in Sources */,
+				BEF4BE691BD4BEE100ACDAF7 /* RGDeserializationDelegate.m in Sources */,
 				BE68CA671BCF631200DFEC70 /* RGTestObject1.m in Sources */,
 				BEF4BE5E1BD346EA00ACDAF7 /* NSString+RGCanonicalValueSpec.m in Sources */,
 				BE68CA701BCF833D00DFEC70 /* NSString+RGCanonicalValue.m in Sources */,

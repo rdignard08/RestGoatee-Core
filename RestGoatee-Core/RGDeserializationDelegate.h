@@ -26,7 +26,7 @@ FILE_START
 @class NSManagedObjectContext;
 
 /**
- Class objects which are passed to `RGAPIClient` methods may (but are not required) to conform to this protocol.  You may return non-standard data formats for use with `NSDataFormatter` and a dictionary of response keys which map to property names.
+ Domain model objects may (but are not required) to conform to this protocol.  You may return non-standard data formats for use with `NSDataFormatter` and a dictionary of response keys which map to property names.
  */
 @protocol RGDeserializationDelegate <NSObject>
 

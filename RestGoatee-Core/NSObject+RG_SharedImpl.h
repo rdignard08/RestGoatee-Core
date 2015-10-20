@@ -227,21 +227,6 @@ extern Class suffix_nullable rg_sNSFetchRequest;
 NSArray* const rg_dateFormats(void);
 
 /**
- modify the `__property_list__` declarations to include information from the backing instance variable.
- */
-void rg_parseIvarStructOntoPropertyDeclaration(struct objc_ivar* ivar, NSMutableDictionary* propertyData);
-
-/**
- modifies the `properties` param to have the ivar size available.
- */
-void rg_calculateIvarSize(Class object, NSMutableArray/*NSMutableDictionary*/* properties);
-
-/**
- return the details about the backing ivar as an object.
- */
-NSMutableDictionary* rg_parseIvarStruct(struct objc_ivar* ivar);
-
-/**
  Returns true if `Class cls = object;` is not a pointer type conversion.
  */
 BOOL rg_isClassObject(id object);

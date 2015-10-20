@@ -127,11 +127,11 @@ static Class rg_classForTypeString(NSString* str) {
     return NSClassFromString(str) ?: [NSNumber class];
 }
 
-void rg_parseIvarStructOntoPropertyDeclaration(struct objc_ivar* ivar, NSMutableDictionary* propertyData) {
+static void rg_parseIvarStructOntoPropertyDeclaration(struct objc_ivar* ivar, NSMutableDictionary* propertyData) {
     propertyData[kRGIvarOffset] = @(ivar_getOffset(ivar));
 }
 
-NSMutableDictionary* rg_parseIvarStruct(Ivar ivar) {
+static NSMutableDictionary* rg_parseIvarStruct(Ivar ivar) {
     NSString* name = [NSString stringWithUTF8String:ivar_getName(ivar)];
     
     /* The default values for ivars are: assign (if primitive) strong (if object), protected */
@@ -204,7 +204,7 @@ NSMutableDictionary* rg_parsePropertyStruct(objc_property_t property) {
     return propertyDict;
 }
 
-void rg_calculateIvarSize(Class object, NSMutableArray/*NSMutableDictionary*/* properties) {
+static void rg_calculateIvarSize(Class object, NSMutableArray/*NSMutableDictionary*/* properties) {
     NSArray* rawOffsets = properties[kRGIvarOffset];
     NSMutableArray* offsets = [NSMutableArray new];
     for (NSUInteger i = 0; i < rawOffsets.count; i++) {

@@ -33,7 +33,7 @@ FILE_START
 
 @end
 
-NSArray* rg_unpackArray(NSArray* json, id context) {
+static NSArray* rg_unpackArray(NSArray* json, id context) {
     NSMutableArray* ret = [NSMutableArray array];
     for (__strong id obj in json) {
         if (rg_isDataSourceClass([obj class])) {

@@ -282,11 +282,6 @@ Class rg_classForTypeString(NSString* str);
 NSDictionary* rg_parsePropertyStruct(struct objc_property* property);
 
 /**
- If the value of `str` has 2 '"' this function returns the contents between each '"'.
- */
-NSString* rg_trimLeadingAndTrailingQuotes(NSString* str);
-
-/**
  Return the class object which is responsible for providing the implementation of a given `self.propertyName` invocation.
  
  multiple classes may implement the same property, in this instance, only the top (i.e. the most subclass Class object) is returned.

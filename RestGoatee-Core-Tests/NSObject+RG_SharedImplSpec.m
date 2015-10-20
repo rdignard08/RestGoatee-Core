@@ -22,32 +22,8 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "NSObject+RG_SharedImpl.h"
+#import <objc/runtime.h>
 
-///**
-// Returns true if `Class cls = object;` is not a pointer type conversion.
-// */
-//BOOL rg_isClassObject(id object);
-//
-///**
-// Returns true if object has the same type as `NSObject`'s meta class.
-// */
-//BOOL rg_isMetaClassObject(id object);
-//
-///**
-// Returns true if the given type can be adequately represented by an `NSString`.
-// */
-//BOOL rg_isInlineObject(Class cls);
-//
-///**
-// Returns true if the given type can be adequately represented by an `NSArray`.
-// */
-//BOOL rg_isCollectionObject(Class cls);
-//
-///**
-// Returns true if the given type is a "key => value" type.  Thus it can be represented by an `NSDictionary`.
-// */
-//BOOL rg_isKeyedCollectionObject(Class cls);
-//
 ///**
 // Returns true if the given class conforms to `RGDataSourceProtocol`.  Necessary due to some bug.
 // */
@@ -149,6 +125,103 @@ CATEGORY_SPEC(NSObject, RG_SharedImpl)
         }
     }
     XCTAssert(date);
+}
+
+#pragma mark - rg_isClassObject
+- (void) testIsClassObject {
+    XCTAssert(rg_isClassObject([NSString class]) == YES);
+}
+
+- (void) testIsClassRegularObject {
+    XCTAssert(rg_isClassObject([NSObject new]) == NO);
+}
+
+- (void) testIsClassNSMetaClass {
+    XCTAssert(rg_isClassObject(object_getClass([NSObject class])) == YES);
+}
+
+- (void) testIsClassRegMetaClass {
+    XCTAssert(rg_isClassObject(object_getClass([NSString class])) == YES);
+}
+
+#pragma mark - rg_isMetaClassObject
+- (void) testIsMetaClassObject {
+    XCTAssert(rg_isMetaClassObject(object_getClass([NSString class])) == YES);
+}
+
+- (void) testIsMetaClassRegClass {
+    XCTAssert(rg_isMetaClassObject([NSObject class]) == NO);
+}
+
+#pragma mark - rg_isInlineObject
+- (void) testIsInlineNSObject {
+    XCTAssert(rg_isInlineObject([NSObject class]) == NO);
+}
+
+- (void) testIsInlineDate {
+    XCTAssert(rg_isInlineObject([NSDate class]) == YES);
+}
+
+- (void) testIsInlineString {
+    XCTAssert(rg_isInlineObject([NSString class]) == YES);
+}
+
+- (void) testIsInlineData {
+    XCTAssert(rg_isInlineObject([NSData class]) == YES);
+}
+
+- (void) testIsInlineNumber {
+    XCTAssert(rg_isInlineObject([NSNumber class]) == YES);
+}
+
+- (void) testIsInlineNull {
+    XCTAssert(rg_isInlineObject([NSNull class]) == YES);
+}
+
+- (void) testIsInlineValue {
+    XCTAssert(rg_isInlineObject([NSValue class]) == YES);
+}
+
+- (void) testIsInlineURL {
+    XCTAssert(rg_isInlineObject([NSURL class]) == YES);
+}
+
+- (void) testIsInlineArray {
+    XCTAssert(rg_isInlineObject([NSArray class]) == NO);
+}
+
+- (void) testIsInlineDictionary {
+    XCTAssert(rg_isInlineObject([NSDictionary class]) == NO);
+}
+
+#pragma mark - rg_isCollectionObject
+- (void) testIsCollectionSet {
+    XCTAssert(rg_isCollectionObject([NSSet class]) == YES);
+}
+
+- (void) testIsCollectionArray {
+    XCTAssert(rg_isCollectionObject([NSArray class]) == YES);
+}
+
+- (void) testIsCollectionOrderedSet {
+    XCTAssert(rg_isCollectionObject([NSOrderedSet class]) == YES);
+}
+
+- (void) testIsCollectionCountedSet {
+    XCTAssert(rg_isCollectionObject([NSCountedSet class]) == YES);
+}
+
+- (void) testIsCollectionDictionary {
+    XCTAssert(rg_isCollectionObject([NSDictionary class]) == NO);
+}
+
+#pragma mark - rg_isKeyedCollectionObject
+- (void) testIsKeyedCollectionDictionary {
+    XCTAssert(rg_isKeyedCollectionObject([NSDictionary class]) == YES);
+}
+
+- (void) testIsKeyedCollectionArray {
+    XCTAssert(rg_isKeyedCollectionObject([NSArray class]) == NO);
 }
 
 SPEC_END

@@ -22,18 +22,9 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "NSObject+RG_SharedImpl.h"
+#import "RGTestObject2.h"
 #import <objc/runtime.h>
 
-///**
-// Return the class object which is responsible for providing the implementation of a given `self.propertyName` invocation.
-// 
-// multiple classes may implement the same property, in this instance, only the top (i.e. the most subclass Class object) is returned.
-// 
-// @param currentClass is the object to test
-// @param propertyName is the name of the property
-// */
-//Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName);
-//
 ///**
 // This is a private category which contains all the of the methods used jointly by the categories `RG_Deserialization` and `RG_Serialization`.
 // */
@@ -202,6 +193,19 @@ CATEGORY_SPEC(NSObject, RG_SharedImpl)
 
 - (void) testIsKeyedCollectionArray {
     XCTAssert(rg_isKeyedCollectionObject([NSArray class]) == NO);
+}
+
+#pragma mark - topClassDeclaringPropertyNamed
+- (void) testTopClassIsClass {
+    XCTAssert(topClassDeclaringPropertyNamed([NSObject class], STRING_SEL(description)) == [NSObject class]);
+}
+
+- (void) testTopClassIsSuperClass {
+    XCTAssert(topClassDeclaringPropertyNamed([RGTestObject2 class], STRING_SEL(stringProperty)) == [RGTestObject1 class]);
+}
+
+- (void) testTopClassIsNotClass {
+    XCTAssert(topClassDeclaringPropertyNamed([RGTestObject1 class], STRING_SEL(objectProperty)) == Nil);
 }
 
 SPEC_END

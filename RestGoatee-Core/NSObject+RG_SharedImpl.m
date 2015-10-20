@@ -224,7 +224,7 @@ static void rg_calculateIvarSize(Class object, NSMutableArray/*NSMutableDictiona
 }
 
 Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName) {
-    const char* utf8Name = [propertyName UTF8String];
+    const char* utf8Name = propertyName.UTF8String;
     Class iteratorClass = currentClass, priorClass;
     while (YES) {
         if (!class_getProperty(iteratorClass, utf8Name) && !class_getInstanceVariable(iteratorClass, utf8Name)) return priorClass;

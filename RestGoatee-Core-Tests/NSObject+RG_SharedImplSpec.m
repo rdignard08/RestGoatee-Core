@@ -24,11 +24,6 @@
 #import "NSObject+RG_SharedImpl.h"
 
 ///**
-// return the details about the backing ivar as an object.
-// */
-//NSMutableDictionary* rg_parseIvarStruct(struct objc_ivar* ivar);
-//
-///**
 // Returns true if `Class cls = object;` is not a pointer type conversion.
 // */
 //BOOL rg_isClassObject(id object);
@@ -155,16 +150,5 @@ CATEGORY_SPEC(NSObject, RG_SharedImpl)
     }
     XCTAssert(date);
 }
-
-#pragma mark - rg_parseIvarStructOntoPropertyDeclaration
-- (void) testParseIvarToProperty {
-    // TODO
-}
-
-///**
-// modifies the `properties` param to have the ivar size available.
-// */
-//void rg_calculateIvarSize(Class object, NSMutableArray/*NSMutableDictionary*/* properties);
-//
 
 SPEC_END

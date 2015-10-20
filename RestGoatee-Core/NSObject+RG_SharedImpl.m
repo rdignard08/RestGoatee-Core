@@ -120,8 +120,8 @@ static NSString* rg_firstQuotedSubstring(NSString* str) {
     return ret.length ? ret : str; /* there should be 2 '"' on each end, the class is in the middle, if not, give up */
 }
 
-Class rg_classForTypeString(NSString* str) {
-    if ([str isEqual:@(@encode(Class))]) return objc_getMetaClass("NSObject");
+static Class rg_classForTypeString(NSString* str) {
+    if ([str isEqual:@(@encode(Class))]) return object_getClass([NSObject class]);
     if ([str isEqual:@(@encode(id))]) return [NSObject class];
     str = rg_firstQuotedSubstring(str);
     return NSClassFromString(str) ?: [NSNumber class];

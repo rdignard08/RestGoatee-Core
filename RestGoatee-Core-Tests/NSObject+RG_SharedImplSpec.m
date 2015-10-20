@@ -25,16 +25,6 @@
 #import <objc/runtime.h>
 
 ///**
-// Returns true if the given class conforms to `RGDataSourceProtocol`.  Necessary due to some bug.
-// */
-//BOOL rg_isDataSourceClass(Class cls);
-//
-///**
-// Returns a `Class` object (i.e. an Objective-C object type), from the given type string.
-// */
-//Class rg_classForTypeString(NSString* str);
-//
-///**
 // converts the raw property struct from the run-time system into an `NSDictionary`.
 // */
 //NSDictionary* rg_parsePropertyStruct(struct objc_property* property);

@@ -134,7 +134,7 @@ static NSArray* rg_unpackArray(NSArray* json, id context) {
     }
     
     /* Can't initialize the value of a property if the property doesn't exist */
-    if ([key isKindOfClass:[NSNull class]] || [key isEqual:kRGPropertyListProperty] || ![self rg_declarationForProperty:key]) {
+    if ([key isKindOfClass:[NSNull class]] || [key isEqual:kRGPropertyListProperty] || ![[self class] rg_declarationForProperty:key]) {
         return;
     }
     

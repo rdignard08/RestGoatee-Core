@@ -301,11 +301,6 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
  */
 + (prefix_nullable NSDictionary*) rg_declarationForProperty:(prefix_nonnull NSString*)propertyName;
 
-/**
- The instance equivalent of `+[NSObject rg_declarationForProperty:]`.  No behavioral differences.
- */
-- (prefix_nullable NSDictionary*) rg_declarationForProperty:(prefix_nonnull NSString*)propertyName;
-
 @end
 
 FILE_END

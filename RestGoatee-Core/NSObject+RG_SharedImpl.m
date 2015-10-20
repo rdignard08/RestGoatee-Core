@@ -291,10 +291,6 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
     return index == NSNotFound ? nil : [self __property_list__][index];
 }
 
-- (prefix_nullable NSDictionary*) rg_declarationForProperty:(prefix_nonnull NSString*)propertyName {
-    return [[self class] rg_declarationForProperty:propertyName];
-}
-
 - (prefix_nonnull NSArray*) __property_list__ {
     return [[self class] __property_list__];
 }
@@ -313,11 +309,11 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
 }
 
 - (prefix_nonnull Class) rg_classForProperty:(prefix_nonnull NSString*)propertyName {
-    return [self rg_declarationForProperty:propertyName][kRGPropertyClass];
+    return [[self class] rg_declarationForProperty:propertyName][kRGPropertyClass];
 }
 
 - (BOOL) rg_isPrimitive:(prefix_nonnull NSString*)propertyName {
-    NSString* rawType = [self rg_declarationForProperty:propertyName][kRGPropertyRawType];
+    NSString* rawType = [[self class] rg_declarationForProperty:propertyName][kRGPropertyRawType];
     return !NSClassFromString(rawType) && ![rawType isEqual:@(@encode(id))] && ![rawType isEqual:@(@encode(Class))];
 }
 

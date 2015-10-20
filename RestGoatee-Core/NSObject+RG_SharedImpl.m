@@ -102,19 +102,28 @@ BOOL rg_isDataSourceClass(Class cls) {
     return [cls instancesRespondToSelector:@selector(objectForKeyedSubscript:)] && [cls instancesRespondToSelector:@selector(setObject:forKeyedSubscript:)] && [cls instancesRespondToSelector:@selector(valueForKeyPath:)] && [cls instancesRespondToSelector:@selector(countByEnumeratingWithState:objects:count:)];
 }
 
-NSString* rg_trimLeadingAndTrailingQuotes(NSString* str) {
-    NSArray* substrs = [str componentsSeparatedByString:@"\""];
-    if (substrs.count != 3) {
-        substrs.count > 1 ? RGLog(@"Warning: Could not determine class name %@", str) : VOID_NOOP;
-        return str; /* there should be 2 '"' on each end, the class is in the middle, if not, give up */
+static NSString* rg_firstQuotedSubstring(NSString* str) {
+    const NSUInteger inputLength = [str lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    NSUInteger i = 0, j = 0;
+    char* outBuffer = malloc(inputLength);
+    const char* inBuffer = str.UTF8String;
+    BOOL foundFirst = NO;
+    for (; i != inputLength; i++) {
+        char c = inBuffer[i];
+        if (foundFirst) {
+            if (c == '"') break; else outBuffer[j++] = c;
+        } else if (c == '"') {
+            foundFirst = YES;
+        }
     }
-    return substrs[1];
+    NSString* ret = [[NSString alloc] initWithBytesNoCopy:outBuffer length:j encoding:NSUTF8StringEncoding freeWhenDone:YES];
+    return ret.length ? ret : str; /* there should be 2 '"' on each end, the class is in the middle, if not, give up */
 }
 
 Class rg_classForTypeString(NSString* str) {
     if ([str isEqual:@(@encode(Class))]) return objc_getMetaClass("NSObject");
     if ([str isEqual:@(@encode(id))]) return [NSObject class];
-    str = rg_trimLeadingAndTrailingQuotes(str);
+    str = rg_firstQuotedSubstring(str);
     return NSClassFromString(str) ?: [NSNumber class];
 }
 
@@ -136,7 +145,7 @@ NSMutableDictionary* rg_parseIvarStruct(Ivar ivar) {
                                            } mutableCopy];
     NSString* ivarType = [NSString stringWithUTF8String:ivar_getTypeEncoding(ivar)];
     propertyDict[kRGPropertyClass] = rg_classForTypeString(ivarType);
-    propertyDict[kRGPropertyRawType] = rg_trimLeadingAndTrailingQuotes(ivarType);
+    propertyDict[kRGPropertyRawType] = rg_firstQuotedSubstring(ivarType);
     return propertyDict;
 }
 
@@ -178,7 +187,7 @@ NSMutableDictionary* rg_parsePropertyStruct(objc_property_t property) {
                 break;
             case 'T':
             case 't': /* TODO: I have no fucking idea what 'old-style' typing looks like */
-                propertyDict[kRGPropertyRawType] = rg_trimLeadingAndTrailingQuotes(value);
+                propertyDict[kRGPropertyRawType] = rg_firstQuotedSubstring(value);
                 propertyDict[kRGPropertyClass] = rg_classForTypeString(value);
                 break;
             case 'R':

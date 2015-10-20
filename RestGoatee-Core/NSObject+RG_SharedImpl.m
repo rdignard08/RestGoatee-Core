@@ -83,7 +83,7 @@ BOOL rg_isClassObject(id object) {
 }
 
 BOOL rg_isMetaClassObject(id object) {
-    return rg_isClassObject(object) && object_getClass(object) == objc_getMetaClass("NSObject");
+    return rg_isClassObject(object) && class_isMetaClass(object);
 }
 
 BOOL rg_isInlineObject(Class cls) {

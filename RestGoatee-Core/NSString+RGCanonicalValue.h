@@ -35,7 +35,7 @@ FILE_START
  
  The canonical representation of a string is the removal of all symbols, all uppercase characters to lowercase.  All others remain the same.
  */
-@property nonnull_property(nonatomic, strong, readonly) NSString* canonicalValue;
+@property nonnull_property(atomic, strong, readonly) NSString* canonicalValue;
 
 @end
 

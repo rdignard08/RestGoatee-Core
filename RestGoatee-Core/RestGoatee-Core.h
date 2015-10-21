@@ -43,9 +43,9 @@
 #endif
 
 #if __has_feature(objc_generics)
-    #define GENERIC(class, type) class < type >
+    #define GENERIC(...) < __VA_ARGS__ >
 #else
-    #define GENERIC(class, type) class
+    #define GENERIC(...)
 #endif
 
 #pragma clang diagnostic pop

@@ -47,12 +47,12 @@ FILE_START
 /**
  @abstract creates and returns an array of objects of the type of the receiver.  Need only be something iteratable.
  */
-+ (prefix_nonnull NSArray*) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source inContext:(prefix_nullable NSManagedObjectContext*)context;
++ (prefix_nonnull NSArray GENERIC(id /* __kindof receiver */) *) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source inContext:(prefix_nullable NSManagedObjectContext*)context;
 
 /**
  @abstract creates and returns an array of objects of the type of the receiver.
  */
-+ (prefix_nonnull NSArray*) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source;
++ (prefix_nonnull NSArray GENERIC(id /* __kindof receiver */) *) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source;
 
 /**
  @abstract merges two objects into a single object.  The return value is not a new object, but rather is the receiver augmented with the values in `object`.

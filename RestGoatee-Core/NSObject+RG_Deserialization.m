@@ -33,8 +33,8 @@ FILE_START
 
 @end
 
-static NSArray* rg_unpackArray(NSArray* json, id context) {
-    NSMutableArray* ret = [NSMutableArray array];
+static NSArray GENERIC(id) * rg_unpackArray(NSArray* json, id context) {
+    NSMutableArray* ret = [NSMutableArray new];
     for (__strong id obj in json) {
         if (rg_isDataSourceClass([obj class])) {
             Class objectClass = NSClassFromString(obj[kRGSerializationKey]);
@@ -47,12 +47,12 @@ static NSArray* rg_unpackArray(NSArray* json, id context) {
 
 @implementation NSObject (RG_Deserialization)
 
-+ (prefix_nonnull NSArray*) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source {
++ (prefix_nonnull NSArray GENERIC(id) *) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source {
     return [self objectsFromArraySource:source inContext:nil];
 }
 
-+ (prefix_nonnull NSArray*) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source inContext:(prefix_nullable NSManagedObjectContext*)context {
-    NSMutableArray* objects = [NSMutableArray new];
++ (prefix_nonnull NSArray GENERIC(id) *) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source inContext:(prefix_nullable NSManagedObjectContext*)context {
+    NSMutableArray GENERIC(id) * objects = [NSMutableArray new];
     for (NSDictionary* object in source) {
         if (rg_isDataSourceClass([object class])) {
             [objects addObject:[self objectFromDataSource:object inContext:context]];
@@ -78,7 +78,7 @@ static NSArray* rg_unpackArray(NSArray* json, id context) {
     }
     Class returnType = [ret class];
     NSDictionary* overrides = [returnType respondsToSelector:@selector(overrideKeysForMapping)] ? [returnType overrideKeysForMapping] : nil;
-    NSMutableArray* intializedProperties = [NSMutableArray new];
+    NSMutableArray GENERIC(NSString*) * intializedProperties = [NSMutableArray new];
     for (NSString* key in source) {
         /* default behavior self.key = json[key] (each `key` is compared in canonical form) */
         if (overrides[key]) continue;
@@ -235,7 +235,7 @@ static NSArray* rg_unpackArray(NSArray* json, id context) {
 
 - (prefix_nonnull instancetype) extendWith:(prefix_nullable NSObject<RGDataSourceProtocol>*)object inContext:(prefix_nullable NSManagedObjectContext*)context {
     NSDictionary* overrides = [[self class] respondsToSelector:@selector(overrideKeysForMapping)] ? [[self class] overrideKeysForMapping] : nil;
-    NSMutableArray* intializedProperties = [NSMutableArray new];
+    NSMutableArray GENERIC(NSString*) * intializedProperties = [NSMutableArray new];
     for (NSString* key in [object rg_keys]) {
         if (overrides[key]) continue;
         [self rg_initCanonically:key withValue:object[key] inContext:context];

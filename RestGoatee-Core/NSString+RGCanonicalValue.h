@@ -34,8 +34,10 @@ FILE_START
  Returns the canonical representation of the string.  Cached where appropriate.
  
  The canonical representation of a string is the removal of all symbols, all uppercase characters to lowercase.  All others remain the same.
+ 
+ Assigning a non-`nil` value will override the behavior.  Assigning `nil` will invalidate the cached value and recalculate the value.  Do this if you're working with `NSMutableString`s.
  */
-@property nonnull_property(atomic, strong, readonly) NSString* canonicalValue;
+@property null_resettable_property(atomic, strong) NSString* canonicalValue;
 
 @end
 

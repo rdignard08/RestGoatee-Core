@@ -53,9 +53,15 @@ FILE_START
     objc_setAssociatedObject(self, @selector(rg_canonicalLock), lock, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (void) setCanonicalValue:(prefix_nullable NSString*)canonicalValue {
+    [self.rg_canonicalLock lock];
+    objc_setAssociatedObject(self, @selector(canonicalValue), canonicalValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [self.rg_canonicalLock unlock];
+}
+
 - (prefix_nonnull NSString*) canonicalValue {
     [self.rg_canonicalLock lock];
-    NSString* canonicalValue = objc_getAssociatedObject(self, _cmd);
+    NSString* canonicalValue = objc_getAssociatedObject(self, @selector(canonicalValue));
     if (!canonicalValue) {
         const NSUInteger inputLength = [self lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
         NSUInteger i = 0, j = 0;
@@ -70,7 +76,7 @@ FILE_START
             } /* unicodes, symbols, spaces, etc. are completely skipped */
         }
         canonicalValue = [[NSString alloc] initWithBytesNoCopy:outBuffer length:j encoding:NSUTF8StringEncoding freeWhenDone:YES];
-        objc_setAssociatedObject(self, _cmd, canonicalValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, @selector(canonicalValue), canonicalValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     [self.rg_canonicalLock unlock];
     return canonicalValue;

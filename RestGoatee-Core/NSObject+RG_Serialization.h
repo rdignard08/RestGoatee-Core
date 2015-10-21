@@ -37,8 +37,10 @@ FILE_START
 
 /**
  @abstract returns the recevier serialized to JSON.
+ 
+ @deprecated Use `NSKeyedArchiver` instead.
  */
-- (prefix_nonnull NSData*) JSONRepresentation;
+- (prefix_nonnull NSData*) JSONRepresentation __attribute__((deprecated));
 
 /**
  @abstract equivalent to `-dictionaryRepresentation` but the parser will not parse into objects which are `weak`, `assign`, or `unsafe_unretained` if the parameter `weakReferences` is `NO`.  The default is `YES`.

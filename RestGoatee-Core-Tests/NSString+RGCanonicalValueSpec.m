@@ -62,4 +62,12 @@ CATEGORY_SPEC(NSString, RGCanonicalValue)
     XCTAssert([objc_getAssociatedObject(str, @selector(canonicalValue)) isEqual:str]);
 }
 
+- (void) testMutableString {
+    NSMutableString* str = [NSMutableString stringWithString:@"ab---cde"];
+    XCTAssert([str.canonicalValue isEqual:@"abcde"]);
+    [str replaceCharactersInRange:NSMakeRange(str.length - 1, 1) withString:@""];
+    str.canonicalValue = nil;
+    XCTAssert([str.canonicalValue isEqual:@"abcd"]);
+}
+
 SPEC_END

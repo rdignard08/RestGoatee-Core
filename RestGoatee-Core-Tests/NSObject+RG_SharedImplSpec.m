@@ -158,17 +158,17 @@ CATEGORY_SPEC(NSObject, RG_SharedImpl)
     XCTAssert(rg_isKeyedCollectionObject([NSArray class]) == NO);
 }
 
-#pragma mark - topClassDeclaringPropertyNamed
+#pragma mark - rg_topClassDeclaringPropertyNamed
 - (void) testTopClassIsClass {
-    XCTAssert(topClassDeclaringPropertyNamed([NSObject class], STRING_SEL(description)) == [NSObject class]);
+    XCTAssert(rg_topClassDeclaringPropertyNamed([NSObject class], STRING_SEL(description)) == [NSObject class]);
 }
 
 - (void) testTopClassIsSuperClass {
-    XCTAssert(topClassDeclaringPropertyNamed([RGTestObject2 class], STRING_SEL(stringProperty)) == [RGTestObject1 class]);
+    XCTAssert(rg_topClassDeclaringPropertyNamed([RGTestObject2 class], STRING_SEL(stringProperty)) == [RGTestObject1 class]);
 }
 
 - (void) testTopClassIsNotClass {
-    XCTAssert(topClassDeclaringPropertyNamed([RGTestObject1 class], STRING_SEL(objectProperty)) == Nil);
+    XCTAssert(rg_topClassDeclaringPropertyNamed([RGTestObject1 class], STRING_SEL(objectProperty)) == Nil);
 }
 
 #pragma mark - rg_propertyList

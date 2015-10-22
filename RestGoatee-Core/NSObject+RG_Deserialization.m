@@ -103,7 +103,7 @@ static NSArray GENERIC(id) * rg_unpackArray(NSArray* json, id context) {
 - (void) rg_initCanonically:(prefix_nonnull NSString*)key withValue:(prefix_nullable id)value inContext:(prefix_nullable id)context {
     NSUInteger index = [[[self class] rg_propertyList][kRGPropertyCanonicalName] indexOfObject:key.canonicalValue];
     if (index != NSNotFound) {
-        if (topClassDeclaringPropertyNamed([self class], [[self class] rg_propertyList][index][kRGPropertyName]) != [NSObject class]) {
+        if (rg_topClassDeclaringPropertyNamed([self class], [[self class] rg_propertyList][index][kRGPropertyName]) != [NSObject class]) {
             @try {
                 [self rg_initProperty:[[self class] rg_propertyList][index][kRGPropertyName] withValue:value inContext:context];
             } @catch (NSException* e) { /* Should this fail the property is left alone */

@@ -269,7 +269,7 @@ NSDictionary* rg_parsePropertyStruct(struct objc_property* property);
  @param currentClass is the object to test
  @param propertyName is the name of the property
  */
-Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName);
+Class rg_topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName);
 
 /**
  This is a private category which contains all the of the methods used jointly by the categories `RG_Deserialization` and `RG_Serialization`.

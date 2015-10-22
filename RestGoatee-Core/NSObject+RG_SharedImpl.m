@@ -309,7 +309,7 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
 }
 
 - (prefix_nonnull Class) rg_classForProperty:(prefix_nonnull NSString*)propertyName {
-    return [[self class] rg_declarationForProperty:propertyName][kRGPropertyClass];
+    return [[self class] rg_declarationForProperty:propertyName][kRGPropertyClass] ?: [NSNumber class];
 }
 
 - (BOOL) rg_isPrimitive:(prefix_nonnull NSString*)propertyName {

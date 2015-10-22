@@ -5,5 +5,6 @@
 
 @property (nonatomic, strong) NSObject* objectProperty;
 @property (nonatomic, strong) NSDate* dateProperty;
+@property (nonatomic, assign) NSInteger intProperty;
 
 @end

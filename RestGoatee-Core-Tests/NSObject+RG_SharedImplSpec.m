@@ -26,16 +26,6 @@
 #import <objc/runtime.h>
 
 ///**
-// Returns a `Class` object which is the type of the property specified by `propertyName`; defaults to `NSNumber` if unknown.
-// */
-//- (prefix_nonnull Class) rg_classForProperty:(prefix_nonnull NSString*)propertyName;
-//
-///**
-// Returns `YES` if the type of the property is an object type (as known by `NSClassFromString()`).
-// */
-//- (BOOL) rg_isPrimitive:(prefix_nonnull NSString*)propertyName;
-//
-///**
 // Returns the metadata for the property specified by `propertyName`.
 // */
 //+ (prefix_nullable NSDictionary*) rg_declarationForProperty:(prefix_nonnull NSString*)propertyName;
@@ -229,6 +219,43 @@ CATEGORY_SPEC(NSObject, RG_SharedImpl)
 - (void) testRGKeysDictionary {
     NSDictionary* rgKeys = @{ @"abc" : @"def", @"123" : @"foobar" };
     XCTAssert([rgKeys.rg_keys isEqual:(@[ @"abc", @"123" ])]);
+}
+
+#pragma mark - rg_classForProperty:
+- (void) testRGClassForProperty {
+    RGTestObject2* object = [RGTestObject2 new];
+    XCTAssert([[object rg_classForProperty:STRING_SEL(stringProperty)] isEqual:[NSString class]]);
+}
+
+- (void) testRGClassForPropertyUnknown {
+    RGTestObject2* object = [RGTestObject2 new];
+    XCTAssert([[object rg_classForProperty:STRING_SEL(rg_classForProperty:)] isEqual:[NSNumber class]]);
+}
+
+#pragma mark - rg_isPrimitive:
+- (void) testIsPrimitiveString {
+    RGTestObject2* object = [RGTestObject2 new];
+    XCTAssert([object rg_isPrimitive:STRING_SEL(stringProperty)] == NO);
+}
+
+- (void) testIsPrimitiveId {
+    RGTestObject2* object = [RGTestObject2 new];
+    XCTAssert([object rg_isPrimitive:STRING_SEL(idProperty)] == NO);
+}
+
+- (void) testIsPrimitiveClass {
+    RGTestObject2* object = [RGTestObject2 new];
+    XCTAssert([object rg_isPrimitive:STRING_SEL(classProperty)] == NO);
+}
+
+- (void) testIsPrimitiveNumber {
+    RGTestObject2* object = [RGTestObject2 new];
+    XCTAssert([object rg_isPrimitive:STRING_SEL(numberProperty)] == NO);
+}
+
+- (void) testIsPrimitiveInt {
+    RGTestObject2* object = [RGTestObject2 new];
+    XCTAssert([object rg_isPrimitive:STRING_SEL(intProperty)] == YES);
 }
 
 SPEC_END

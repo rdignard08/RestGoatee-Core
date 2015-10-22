@@ -208,4 +208,20 @@ CATEGORY_SPEC(NSObject, RG_SharedImpl)
     XCTAssert(topClassDeclaringPropertyNamed([RGTestObject1 class], STRING_SEL(objectProperty)) == Nil);
 }
 
+#pragma mark - __property_list__
+- (void) testPropertyList {
+    NSArray* propertyList = [[RGTestObject2 class] __property_list__];
+    XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(stringProperty)] != NSNotFound);
+    XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(urlProperty)] != NSNotFound);
+    XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(numberProperty)] != NSNotFound);
+    XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(decimalProperty)] != NSNotFound);
+    XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(valueProperty)] != NSNotFound);
+    XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(idProperty)] != NSNotFound);
+    XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(classProperty)] != NSNotFound);
+    XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(arrayProperty)] != NSNotFound);
+    XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(dictionaryProperty)] != NSNotFound);
+    XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(objectProperty)] != NSNotFound);
+    XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(dateProperty)] != NSNotFound);
+}
+
 SPEC_END

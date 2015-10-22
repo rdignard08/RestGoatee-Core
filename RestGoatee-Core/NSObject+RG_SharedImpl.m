@@ -137,7 +137,7 @@ static NSMutableDictionary* rg_parseIvarStruct(Ivar ivar) {
     /* The default values for ivars are: assign (if primitive) strong (if object), protected */
     NSMutableDictionary* propertyDict = [@{
                                            kRGPropertyName : name,
-                                           kRGPropertyCanonicalName : name.canonicalValue,
+                                           kRGPropertyCanonicalName : name.rg_canonicalValue,
                                            kRGPropertyStorage : kRGPropertyAssign,
                                            kRGPropertyAccess : kRGIvarProtected,
                                            kRGPropertyBacking : name,
@@ -154,7 +154,7 @@ NSMutableDictionary* rg_parsePropertyStruct(objc_property_t property) {
     /* The default values for properties are: if object and ARC compiled: strong (we don't have to check for this, ARC will insert the retain attribute) else assign. atomic. readwrite. */
     NSMutableDictionary* propertyDict = [@{
                                            kRGPropertyName : name,
-                                           kRGPropertyCanonicalName : name.canonicalValue,
+                                           kRGPropertyCanonicalName : name.rg_canonicalValue,
                                            kRGPropertyStorage : kRGPropertyAssign,
                                            kRGPropertyAtomicType : kRGPropertyAtomic,
                                            kRGPropertyAccess : kRGPropertyReadwrite } mutableCopy];

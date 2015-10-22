@@ -27,47 +27,47 @@
 CATEGORY_SPEC(NSString, RGCanonicalValue)
 
 - (void) testSpaces {
-    XCTAssert([@"          ".canonicalValue isEqual:@""]);
+    XCTAssert([@"          ".rg_canonicalValue isEqual:@""]);
 }
 
 - (void) testNumbers {
-    XCTAssert([@"1234add1234".canonicalValue isEqual:@"1234add1234"]);
+    XCTAssert([@"1234add1234".rg_canonicalValue isEqual:@"1234add1234"]);
 }
 
 - (void) testCapitals {
-    XCTAssert([@"ABCDE".canonicalValue isEqual:@"abcde"]);
+    XCTAssert([@"ABCDE".rg_canonicalValue isEqual:@"abcde"]);
 }
 
 - (void) testSymbols {
-    XCTAssert([@"!@#$abcde&*!@#".canonicalValue isEqual:@"abcde"]);
+    XCTAssert([@"!@#$abcde&*!@#".rg_canonicalValue isEqual:@"abcde"]);
 }
 
 - (void) testUnicode {
     NSString* str = @"abc💅bcd";
-    XCTAssert([str.canonicalValue isEqual:@"abcbcd"]);
+    XCTAssert([str.rg_canonicalValue isEqual:@"abcbcd"]);
 }
 
 - (void) testShortString {
-    XCTAssert([@"".canonicalValue isEqual:@""]);
+    XCTAssert([@"".rg_canonicalValue isEqual:@""]);
 }
 
 - (void) testLongString {
     NSString* str = @"sjkdfslkhasajskhdl2746981237JAgkHKJSGFKJHSKJSFHKJAGSd jdksdhflk sdklfh lksdjf l!&#^*&!%$)(!)$*@&@&@&@$&@*$^JKgsdajdajsdhaskdahr";
-    XCTAssert([str.canonicalValue isEqual:@"sjkdfslkhasajskhdl2746981237jagkhkjsgfkjhskjsfhkjagsdjdksdhflksdklfhlksdjfljkgsdajdajsdhaskdahr"]);
+    XCTAssert([str.rg_canonicalValue isEqual:@"sjkdfslkhasajskhdl2746981237jagkhkjsgfkjhskjsfhkjagsdjdksdhflksdklfhlksdjfljkgsdajdajsdhaskdahr"]);
 }
 
 - (void) testSideEffects { // tests that the output value is stored so it's not being recalculated
     NSString* str = @"abcde";
-    [str canonicalValue];
-    XCTAssert([objc_getAssociatedObject(str, @selector(canonicalValue)) isEqual:str]);
+    [str rg_canonicalValue];
+    XCTAssert([objc_getAssociatedObject(str, @selector(rg_canonicalValue)) isEqual:str]);
 }
 
 - (void) testMutableString {
     NSMutableString* str = [NSMutableString stringWithString:@"ab---cde"];
-    XCTAssert([str.canonicalValue isEqual:@"abcde"]);
+    XCTAssert([str.rg_canonicalValue isEqual:@"abcde"]);
     [str replaceCharactersInRange:NSMakeRange(str.length - 1, 1) withString:@""];
-    str.canonicalValue = nil;
-    XCTAssert([str.canonicalValue isEqual:@"abcd"]);
+    str.rg_canonicalValue = nil;
+    XCTAssert([str.rg_canonicalValue isEqual:@"abcd"]);
 }
 
 SPEC_END

@@ -37,7 +37,7 @@ FILE_START
  
  Assigning a non-`nil` value will override the behavior.  Assigning `nil` will invalidate the cached value and recalculate the value.  Do this if you're working with `NSMutableString`s.
  */
-@property null_resettable_property(atomic, strong) NSString* canonicalValue;
+@property null_resettable_property(atomic, strong) NSString* rg_canonicalValue;
 
 @end
 

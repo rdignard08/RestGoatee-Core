@@ -25,6 +25,7 @@
 #import <objc/runtime.h>
 #import "RestGoatee-Core.h"
 #import "NSString+RGCanonicalValue.h"
+#import "NSObject+RGLocking.h"
 
 FILE_START
 
@@ -250,11 +251,11 @@ Class rg_topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyNa
 }
 
 + (prefix_nonnull NSArray*) rg_propertyList {
-    static dispatch_once_t onceToken;
-    static NSArray* rg_propertyList;
-    dispatch_once(&onceToken, ^{
-        NSMutableArray* propertyStructure = [NSMutableArray array];
-        NSMutableArray* stack = [NSMutableArray array];
+    [[self rg_classLock] lock];
+    NSArray* rg_propertyList = objc_getAssociatedObject(self, @selector(rg_propertyList));
+    if (!rg_propertyList) {
+        NSMutableArray* propertyStructure = [NSMutableArray new];
+        NSMutableArray* stack = [NSMutableArray new];
         uint32_t count;
         for (Class superClass = self; superClass; superClass = [superClass superclass]) {
             [stack insertObject:superClass atIndex:0]; /* we want superclass properties to be overwritten by subclass properties so append front */
@@ -284,7 +285,9 @@ Class rg_topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyNa
             propertyStructure[i] = [propertyStructure[i] copy];
         }
         rg_propertyList = [propertyStructure copy];
-    });
+        objc_setAssociatedObject(self, @selector(rg_propertyList), rg_propertyList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    [[self rg_classLock] unlock];
     return rg_propertyList;
 }
 

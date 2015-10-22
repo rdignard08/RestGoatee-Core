@@ -23,6 +23,7 @@
 
 #import "NSObject+RG_Deserialization.h"
 #import "RGTestObject2.h"
+#import "RestGoatee-Core.h"
 
 @interface RGTestObject4 : RGTestObject2 <RGDeserializationDelegate>
 

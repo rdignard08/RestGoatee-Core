@@ -22,6 +22,7 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RGXMLSerializer.h"
+#import "RestGoatee-Core.h"
 
 CLASS_SPEC(RGXMLSerializer)
 

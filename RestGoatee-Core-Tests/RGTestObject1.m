@@ -1,5 +1,6 @@
 
 #import "RGTestObject1.h"
+#import "RestGoatee-Core.h"
 
 @implementation RGTestObject1
 

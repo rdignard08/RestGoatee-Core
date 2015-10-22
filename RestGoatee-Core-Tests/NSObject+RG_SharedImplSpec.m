@@ -22,6 +22,7 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "NSObject+RG_SharedImpl.h"
+#import "RestGoatee-Core.h"
 #import "RGTestObject2.h"
 #import <objc/runtime.h>
 

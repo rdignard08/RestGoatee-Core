@@ -21,44 +21,7 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#define FILE_START \
-_Pragma("clang diagnostic push") \
-_Pragma("clang diagnostic ignored \"-Wgnu\"") \
-_Pragma("clang assume_nonnull begin")
-
-#define FILE_END \
-_Pragma("clang assume_nonnull end") \
-_Pragma("clang diagnostic pop")
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu"
-
-#if __has_feature(nullability)
-    #define nullable_property(...) (nullable, ## __VA_ARGS__)
-    #define nonnull_property(...) (nonnull, ## __VA_ARGS__)
-    #define null_resettable_property(...) (null_resettable, ## __VA_ARGS__)
-    #define prefix_nullable nullable
-    #define suffix_nullable __nullable
-    #define prefix_nonnull nonnull
-    #define suffix_nonnull __nonnull
-#else
-    #define nullable_property(...) (__VA_ARGS__)
-    #define nonnull_property(...) (__VA_ARGS__)
-    #define null_resettable_property(...) (__VA_ARGS__)
-    #define prefix_nullable
-    #define suffix_nullable
-    #define prefix_nonnull
-    #define suffix_nonnull
-#endif
-
-#if __has_feature(objc_generics)
-    #define GENERIC(...) < __VA_ARGS__ >
-#else
-    #define GENERIC(...)
-#endif
-
-#pragma clang diagnostic pop
-
+#import "RGDefines.h"
 #import "RGDataSourceProtocol.h"
 #import "RGDeserializationDelegate.h"
 #import "RGXMLNode.h"
@@ -70,14 +33,8 @@ _Pragma("clang diagnostic pop")
 
 FILE_START
 
-/* for some reason I can't trust `NULL` or `nil` to be typed `void` */
-#define VOID_NOOP ((void)0)
-
-/* enables a selector declarations to be used in place of an `NSString`, provides spell checking. */
-#define STRING_SEL(sel) NSStringFromSelector(@selector(sel))
-
 /**
- rg_swizzle is basic implementation of swizzling.  It does not clobber the super class if the method is not on the subclass.
+ rg_swizzle is a basic implementation of swizzling.  It does not clobber the super class if the method is not on the subclass.
  */
 void rg_swizzle(Class cls, SEL original, SEL replacement);
 

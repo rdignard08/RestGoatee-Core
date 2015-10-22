@@ -22,6 +22,7 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "NSObject+RG_Deserialization.h"
+#import "RGXMLNode+RGDataSourceProtocol.h"
 #import "RGTestObject2.h"
 
 @interface NSObject (_RGForwardDecl)

@@ -23,6 +23,7 @@
 
 #import "RGDataSourceProtocol.h"
 #import "RGTestObject2.h"
+#import "RestGoatee-Core.h"
 
 @interface RGTestObject3 : RGTestObject2 <RGDataSourceProtocol>
 

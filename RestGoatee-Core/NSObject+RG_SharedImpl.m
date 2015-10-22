@@ -291,21 +291,17 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
     return index == NSNotFound ? nil : [self __property_list__][index];
 }
 
-- (prefix_nonnull NSArray*) __property_list__ {
-    return [[self class] __property_list__];
-}
-
 - (prefix_nonnull NSArray*) rg_keys {
     if ([self isKindOfClass:[NSDictionary class]]) {
         return [(NSDictionary*)self allKeys];
     }
     if ([self isKindOfClass:[RGXMLNode class]]) {
-        NSMutableArray* someKeys = [self.__property_list__[kRGPropertyName] mutableCopy];
+        NSMutableArray* someKeys = [[[self class] __property_list__][kRGPropertyName] mutableCopy];
         [someKeys addObjectsFromArray:[[(RGXMLNode*)self attributes] allKeys]];
         [someKeys addObjectsFromArray:[(RGXMLNode*)self childNodes][@"name"]];
         return [someKeys copy];
     }
-    return self.__property_list__[kRGPropertyName];
+    return [[self class] __property_list__][kRGPropertyName];
 }
 
 - (prefix_nonnull Class) rg_classForProperty:(prefix_nonnull NSString*)propertyName {

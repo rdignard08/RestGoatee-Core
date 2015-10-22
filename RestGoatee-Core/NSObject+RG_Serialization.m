@@ -111,8 +111,8 @@ FILE_START
         }
         ret[kRGSerializationKey] = NSStringFromClass([self class]);
     } else {
-        ret = [[NSMutableDictionary alloc] initWithCapacity:self.__property_list__.count];
-        for (NSDictionary* property in self.__property_list__) {
+        ret = [[NSMutableDictionary alloc] initWithCapacity:[[self class] __property_list__].count];
+        for (NSDictionary* property in [[self class] __property_list__]) {
             NSString* propertyName = property[kRGPropertyName];
             if (followWeak || ![self rg_propertyIsWeak:propertyName]) {
                 if (![self rg_isPropertyToBeAvoided:propertyName] && ![propertyName isEqual:kRGPropertyListProperty]) {

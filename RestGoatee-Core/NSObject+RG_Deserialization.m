@@ -101,13 +101,13 @@ static NSArray GENERIC(id) * rg_unpackArray(NSArray* json, id context) {
 }
 
 - (void) rg_initCanonically:(prefix_nonnull NSString*)key withValue:(prefix_nullable id)value inContext:(prefix_nullable id)context {
-    NSUInteger index = [self.__property_list__[kRGPropertyCanonicalName] indexOfObject:key.canonicalValue];
+    NSUInteger index = [[[self class] __property_list__][kRGPropertyCanonicalName] indexOfObject:key.canonicalValue];
     if (index != NSNotFound) {
-        if (topClassDeclaringPropertyNamed([self class], self.__property_list__[index][kRGPropertyName]) != [NSObject class]) {
+        if (topClassDeclaringPropertyNamed([self class], [[self class] __property_list__][index][kRGPropertyName]) != [NSObject class]) {
             @try {
-                [self rg_initProperty:self.__property_list__[index][kRGPropertyName] withValue:value inContext:context];
+                [self rg_initProperty:[[self class] __property_list__][index][kRGPropertyName] withValue:value inContext:context];
             } @catch (NSException* e) { /* Should this fail the property is left alone */
-                RGLog(@"initializing property %@ on type %@ failed: %@", self.__property_list__[index][kRGPropertyName], [self class], e);
+                RGLog(@"initializing property %@ on type %@ failed: %@", [[self class] __property_list__][index][kRGPropertyName], [self class], e);
             }
         }
     }

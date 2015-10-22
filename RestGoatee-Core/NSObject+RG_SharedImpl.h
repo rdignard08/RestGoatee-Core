@@ -277,9 +277,9 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
 @interface NSObject (RG_SharedImpl)
 
 /**
- This is a readonly property that describes the meta data of the given receiver's class.  It declares properties and instance variables in an object accessible manner.
+ This is describes the meta data of the given class.  It declares properties and instance variables in an object-oriented manner.
  */
-@property nonnull_property(atomic, strong, readonly) NSArray* __property_list__;
++ (prefix_nonnull NSArray*) __property_list__;
 
 /**
  This function returns the output keys of the receiver for use when determining what state information is present in the instance.

@@ -21,6 +21,15 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+#define FILE_START \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Wgnu\"") \
+_Pragma("clang assume_nonnull begin")
+
+#define FILE_END \
+_Pragma("clang assume_nonnull end") \
+_Pragma("clang diagnostic pop")
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgnu"
 

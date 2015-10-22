@@ -205,7 +205,8 @@ NSMutableDictionary* rg_parsePropertyStruct(objc_property_t property) {
     return propertyDict;
 }
 
-static void rg_calculateIvarSize(Class object, NSMutableArray/*NSMutableDictionary*/* properties) {
+void rg_calculateIvarSize(Class, NSMutableArray*);
+void rg_calculateIvarSize(Class object, NSMutableArray/*NSMutableDictionary*/* properties) {
     NSArray* rawOffsets = properties[kRGIvarOffset];
     NSMutableArray* offsets = [NSMutableArray new];
     for (NSUInteger i = 0; i < rawOffsets.count; i++) {

@@ -57,7 +57,7 @@ NSString* suffix_nonnull const kRGPropertyCanonicalName = @"canonically";
 NSString* suffix_nonnull const kRGPropertyStorage = @"storage";
 NSString* suffix_nonnull const kRGPropertyAccess = @"access";
 NSString* suffix_nonnull const kRGSerializationKey = @"__class";
-NSString* suffix_nonnull const kRGPropertyListProperty = @"__property_list__";
+NSString* suffix_nonnull const kRGPropertyListProperty = @"rg_propertyList";
 
 /* storage for extern'd class references */
 Class suffix_nullable rg_sNSManagedObjectContext;
@@ -247,9 +247,9 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
     });
 }
 
-+ (prefix_nonnull NSArray*) __property_list__ {
++ (prefix_nonnull NSArray*) rg_propertyList {
     static dispatch_once_t onceToken;
-    static NSArray* __property_list__;
+    static NSArray* rg_propertyList;
     dispatch_once(&onceToken, ^{
         NSMutableArray* propertyStructure = [NSMutableArray array];
         NSMutableArray* stack = [NSMutableArray array];
@@ -281,14 +281,14 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
         for (NSUInteger i = 0; i < propertyStructure.count; i++) {
             propertyStructure[i] = [propertyStructure[i] copy];
         }
-        __property_list__ = [propertyStructure copy];
+        rg_propertyList = [propertyStructure copy];
     });
-    return __property_list__;
+    return rg_propertyList;
 }
 
 + (prefix_nullable NSDictionary*) rg_declarationForProperty:(prefix_nonnull NSString*)propertyName {
-    NSUInteger index = [[self __property_list__][kRGPropertyName] indexOfObject:propertyName];
-    return index == NSNotFound ? nil : [self __property_list__][index];
+    NSUInteger index = [[self rg_propertyList][kRGPropertyName] indexOfObject:propertyName];
+    return index == NSNotFound ? nil : [self rg_propertyList][index];
 }
 
 - (prefix_nonnull NSArray*) rg_keys {
@@ -296,12 +296,12 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
         return [(NSDictionary*)self allKeys];
     }
     if ([self isKindOfClass:[RGXMLNode class]]) {
-        NSMutableArray* someKeys = [[[self class] __property_list__][kRGPropertyName] mutableCopy];
+        NSMutableArray* someKeys = [[[self class] rg_propertyList][kRGPropertyName] mutableCopy];
         [someKeys addObjectsFromArray:[[(RGXMLNode*)self attributes] allKeys]];
         [someKeys addObjectsFromArray:[(RGXMLNode*)self childNodes][@"name"]];
         return [someKeys copy];
     }
-    return [[self class] __property_list__][kRGPropertyName];
+    return [[self class] rg_propertyList][kRGPropertyName];
 }
 
 - (prefix_nonnull Class) rg_classForProperty:(prefix_nonnull NSString*)propertyName {

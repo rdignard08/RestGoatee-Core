@@ -171,9 +171,9 @@ CATEGORY_SPEC(NSObject, RG_SharedImpl)
     XCTAssert(topClassDeclaringPropertyNamed([RGTestObject1 class], STRING_SEL(objectProperty)) == Nil);
 }
 
-#pragma mark - __property_list__
+#pragma mark - rg_propertyList
 - (void) testPropertyList {
-    NSArray* propertyList = [[RGTestObject2 class] __property_list__];
+    NSArray* propertyList = [[RGTestObject2 class] rg_propertyList];
     XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(stringProperty)] != NSNotFound);
     XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(urlProperty)] != NSNotFound);
     XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(numberProperty)] != NSNotFound);

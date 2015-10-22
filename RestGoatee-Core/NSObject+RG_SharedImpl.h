@@ -279,7 +279,7 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
 /**
  This is describes the meta data of the given class.  It declares properties and instance variables in an object-oriented manner.
  */
-+ (prefix_nonnull NSArray*) __property_list__;
++ (prefix_nonnull NSArray*) rg_propertyList;
 
 /**
  This function returns the output keys of the receiver for use when determining what state information is present in the instance.

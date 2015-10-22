@@ -24,6 +24,7 @@
 #import "NSObject+RG_SharedImpl.h"
 #import <objc/runtime.h>
 #import "RestGoatee-Core.h"
+#import "NSString+RGCanonicalValue.h"
 
 FILE_START
 

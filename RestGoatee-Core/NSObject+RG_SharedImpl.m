@@ -248,8 +248,9 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
 }
 
 + (prefix_nonnull NSArray*) __property_list__ {
-    id ret = objc_getAssociatedObject(self, (__bridge const void*)kRGPropertyListProperty);
-    if (!ret) {
+    static dispatch_once_t onceToken;
+    static NSArray* __property_list__;
+    dispatch_once(&onceToken, ^{
         NSMutableArray* propertyStructure = [NSMutableArray array];
         NSMutableArray* stack = [NSMutableArray array];
         uint32_t count;
@@ -280,10 +281,9 @@ Class topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName)
         for (NSUInteger i = 0; i < propertyStructure.count; i++) {
             propertyStructure[i] = [propertyStructure[i] copy];
         }
-        ret = [propertyStructure copy];
-        objc_setAssociatedObject(self, (__bridge const void*)kRGPropertyListProperty, ret, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    }
-    return ret;
+        __property_list__ = [propertyStructure copy];
+    });
+    return __property_list__;
 }
 
 + (prefix_nullable NSDictionary*) rg_declarationForProperty:(prefix_nonnull NSString*)propertyName {

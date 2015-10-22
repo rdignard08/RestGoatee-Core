@@ -25,18 +25,6 @@
 #import "RGTestObject2.h"
 #import <objc/runtime.h>
 
-///**
-// Returns the metadata for the property specified by `propertyName`.
-// */
-//+ (prefix_nullable NSDictionary*) rg_declarationForProperty:(prefix_nonnull NSString*)propertyName;
-//
-///**
-// The instance equivalent of `+[NSObject rg_declarationForProperty:]`.  No behavioral differences.
-// */
-//- (prefix_nullable NSDictionary*) rg_declarationForProperty:(prefix_nonnull NSString*)propertyName;
-//
-//@end
-
 CATEGORY_SPEC(NSObject, RG_SharedImpl)
 
 #pragma mark - rg_dateFormats
@@ -256,6 +244,17 @@ CATEGORY_SPEC(NSObject, RG_SharedImpl)
 - (void) testIsPrimitiveInt {
     RGTestObject2* object = [RGTestObject2 new];
     XCTAssert([object rg_isPrimitive:STRING_SEL(intProperty)] == YES);
+}
+
+#pragma mark - rg_declarationForProperty:
+- (void) testDeclarationExists {
+    RGTestObject2* object = [RGTestObject2 new];
+    XCTAssert([[object class] rg_declarationForProperty:STRING_SEL(stringProperty)] != nil);
+}
+
+- (void) testDeclarationDoesNotExist {
+    RGTestObject2* object = [RGTestObject2 new];
+    XCTAssert([[object class] rg_declarationForProperty:STRING_SEL(rg_declarationForProperty:)] == nil);
 }
 
 SPEC_END

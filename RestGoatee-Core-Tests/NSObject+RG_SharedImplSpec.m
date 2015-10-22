@@ -26,21 +26,6 @@
 #import <objc/runtime.h>
 
 ///**
-// This is a private category which contains all the of the methods used jointly by the categories `RG_Deserialization` and `RG_Serialization`.
-// */
-//@interface NSObject (RG_SharedImpl)
-//
-///**
-// This is a readonly property that describes the meta data of the given receiver's class.  It declares properties and instance variables in an object accessible manner.
-// */
-//@property nonnull_property(nonatomic, strong, readonly) NSArray* __property_list__;
-//
-///**
-// This function returns the output keys of the receiver for use when determining what state information is present in the instance.
-// */
-//@property nonnull_property(nonatomic, strong, readonly) NSArray* rg_keys;
-//
-///**
 // Returns a `Class` object which is the type of the property specified by `propertyName`; defaults to `NSNumber` if unknown.
 // */
 //- (prefix_nonnull Class) rg_classForProperty:(prefix_nonnull NSString*)propertyName;
@@ -222,6 +207,28 @@ CATEGORY_SPEC(NSObject, RG_SharedImpl)
     XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(dictionaryProperty)] != NSNotFound);
     XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(objectProperty)] != NSNotFound);
     XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(dateProperty)] != NSNotFound);
+}
+
+#pragma mark - rg_keys
+- (void) testRGKeysObject {
+    RGTestObject2* object = [RGTestObject2 new];
+    NSArray* rgKeys = object.rg_keys;
+    XCTAssert([rgKeys indexOfObject:STRING_SEL(stringProperty)] != NSNotFound);
+    XCTAssert([rgKeys indexOfObject:STRING_SEL(urlProperty)] != NSNotFound);
+    XCTAssert([rgKeys indexOfObject:STRING_SEL(numberProperty)] != NSNotFound);
+    XCTAssert([rgKeys indexOfObject:STRING_SEL(decimalProperty)] != NSNotFound);
+    XCTAssert([rgKeys indexOfObject:STRING_SEL(valueProperty)] != NSNotFound);
+    XCTAssert([rgKeys indexOfObject:STRING_SEL(idProperty)] != NSNotFound);
+    XCTAssert([rgKeys indexOfObject:STRING_SEL(classProperty)] != NSNotFound);
+    XCTAssert([rgKeys indexOfObject:STRING_SEL(arrayProperty)] != NSNotFound);
+    XCTAssert([rgKeys indexOfObject:STRING_SEL(dictionaryProperty)] != NSNotFound);
+    XCTAssert([rgKeys indexOfObject:STRING_SEL(objectProperty)] != NSNotFound);
+    XCTAssert([rgKeys indexOfObject:STRING_SEL(dateProperty)] != NSNotFound);
+}
+
+- (void) testRGKeysDictionary {
+    NSDictionary* rgKeys = @{ @"abc" : @"def", @"123" : @"foobar" };
+    XCTAssert([rgKeys.rg_keys isEqual:(@[ @"abc", @"123" ])]);
 }
 
 SPEC_END

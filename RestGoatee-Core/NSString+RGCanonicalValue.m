@@ -29,18 +29,18 @@ FILE_START
 @implementation NSString (RGCanonicalValue)
 
 + (void) load {
-    rg_swizzle(self, @selector(init), @selector(override_init));
-    rg_swizzle(self, @selector(initWithCoder:), @selector(override_initWithCoder:));
+    rg_swizzle(self, @selector(init), @selector(rg_override_init));
+    rg_swizzle(self, @selector(initWithCoder:), @selector(rg_override_initWithCoder:));
 }
 
-- (prefix_nonnull instancetype) override_init {
-    NSString* ret = [self override_init];
+- (prefix_nonnull instancetype) rg_override_init {
+    NSString* ret = [self rg_override_init];
     ret.rg_canonicalLock = [NSLock new];
     return ret;
 }
 
-- (prefix_nonnull instancetype) override_initWithCoder:(prefix_nonnull NSCoder*)coder {
-    NSString* ret = [self override_initWithCoder:coder];
+- (prefix_nonnull instancetype) rg_override_initWithCoder:(prefix_nonnull NSCoder*)coder {
+    NSString* ret = [self rg_override_initWithCoder:coder];
     ret.rg_canonicalLock = [NSLock new];
     return ret;
 }

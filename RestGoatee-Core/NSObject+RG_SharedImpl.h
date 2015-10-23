@@ -194,32 +194,32 @@ FOUNDATION_EXPORT NSString* suffix_nonnull const kRGIvarPublic;
 /* These classes are used to dynamically link into coredata if present. */
 
 /**
- Will be `[NSManagedObjectContext class]` or `nil` (if not linked/available).
+ Will be `[NSManagedObjectContext class]` or `Nil` (if not linked/available).
  */
 FOUNDATION_EXPORT Class suffix_nullable rg_sNSManagedObjectContext;
 
 /**
- Will be `[NSManagedObject class]` or `nil` (if not linked/available).
+ Will be `[NSManagedObject class]` or `Nil` (if not linked/available).
  */
 FOUNDATION_EXPORT Class suffix_nullable rg_sNSManagedObject;
 
 /**
- Will be `[NSManagedObjectModel class]` or `nil` (if not linked/available).
+ Will be `[NSManagedObjectModel class]` or `Nil` (if not linked/available).
  */
 FOUNDATION_EXPORT Class suffix_nullable rg_sNSManagedObjectModel;
 
 /**
- Will be `[NSPersistentStoreCoordinator class]` or `nil` (if not linked/available).
+ Will be `[NSPersistentStoreCoordinator class]` or `Nil` (if not linked/available).
  */
 FOUNDATION_EXPORT Class suffix_nullable rg_sNSPersistentStoreCoordinator;
 
 /**
- Will be `[NSEntityDescription class]` or `nil` (if not linked/available).
+ Will be `[NSEntityDescription class]` or `Nil` (if not linked/available).
  */
 FOUNDATION_EXPORT Class suffix_nullable rg_sNSEntityDescription;
 
 /**
- Will be `[NSFetchRequest class]` or `nil` (if not linked/available).
+ Will be `[NSFetchRequest class]` or `Nil` (if not linked/available).
  */
 FOUNDATION_EXPORT Class suffix_nullable rg_sNSFetchRequest;
 

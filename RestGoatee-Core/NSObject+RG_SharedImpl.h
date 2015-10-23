@@ -281,7 +281,7 @@ Class rg_topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyNa
 /**
  This is describes the meta data of the given class.  It declares properties and instance variables in an object-oriented manner.
  */
-+ (prefix_nonnull NSArray*) rg_propertyList;
++ (prefix_nonnull NSMutableArray GENERIC(NSMutableDictionary*) *) rg_propertyList;
 
 /**
  This function returns the output keys of the receiver for use when determining what state information is present in the instance.

@@ -250,9 +250,9 @@ Class rg_topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyNa
     });
 }
 
-+ (prefix_nonnull NSArray*) rg_propertyList {
++ (prefix_nonnull NSMutableArray GENERIC(NSMutableDictionary*) *) rg_propertyList {
     [[self rg_classLock] lock];
-    NSArray* rg_propertyList = objc_getAssociatedObject(self, @selector(rg_propertyList));
+    NSMutableArray* rg_propertyList = objc_getAssociatedObject(self, @selector(rg_propertyList));
     if (!rg_propertyList) {
         NSMutableArray* propertyStructure = [NSMutableArray new];
         NSMutableArray* stack = [NSMutableArray new];
@@ -281,10 +281,7 @@ Class rg_topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyNa
             free(ivars);
         }
         /* rg_calculateIvarSize(self, propertyStructure); //*/
-        for (NSUInteger i = 0; i < propertyStructure.count; i++) {
-            propertyStructure[i] = [propertyStructure[i] copy];
-        }
-        rg_propertyList = [propertyStructure copy];
+        rg_propertyList = propertyStructure;
         objc_setAssociatedObject(self, @selector(rg_propertyList), rg_propertyList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     [[self rg_classLock] unlock];
@@ -304,7 +301,7 @@ Class rg_topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyNa
         NSMutableArray* someKeys = [[[self class] rg_propertyList][kRGPropertyName] mutableCopy];
         [someKeys addObjectsFromArray:[[(RGXMLNode*)self attributes] allKeys]];
         [someKeys addObjectsFromArray:[(RGXMLNode*)self childNodes][@"name"]];
-        return [someKeys copy];
+        return someKeys;
     }
     return [[self class] rg_propertyList][kRGPropertyName];
 }

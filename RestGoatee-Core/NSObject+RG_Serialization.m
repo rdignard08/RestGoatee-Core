@@ -124,7 +124,7 @@ FILE_START
             ret[kRGSerializationKey] = NSStringFromClass([self class]);
         }
     }
-    return [ret copy];
+    return ret;
 }
 
 @end

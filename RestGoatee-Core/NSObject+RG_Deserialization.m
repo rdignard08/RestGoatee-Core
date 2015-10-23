@@ -43,7 +43,7 @@ static NSArray GENERIC(id) * rg_unpackArray(NSArray* json, id context) {
         }
         [ret addObject:obj];
     }
-    return [ret copy];
+    return ret;
 }
 
 @implementation NSObject (RG_Deserialization)

@@ -417,6 +417,7 @@
 				INFOPLIST_FILE = "RestGoatee-Core-Tests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LLVM_LTO = NO;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -576,6 +577,8 @@
 		BEFFB8561BBDB15900EAF95D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LLVM_LTO = NO;
+				OTHER_CFLAGS = "-O0";
 				OTHER_LDFLAGS = "-load_all";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -587,6 +590,8 @@
 			buildSettings = {
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "NS_BLOCK_ASSERTIONS=1";
+				LLVM_LTO = YES;
+				OTHER_CFLAGS = "-O0";
 				OTHER_LDFLAGS = "-load_all";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

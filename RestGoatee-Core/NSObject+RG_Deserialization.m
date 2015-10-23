@@ -63,16 +63,14 @@ static NSArray GENERIC(id) * rg_unpackArray(NSArray* json, id context) {
 }
 
 + (prefix_nonnull instancetype) objectFromDataSource:(prefix_nullable id<RGDataSourceProtocol>)source {
-    if ([self isSubclassOfClass:rg_sNSManagedObject]) {
-        [NSException raise:NSGenericException format:@"Managed object subclasses must be initialized within a managed object context.  Use +objectFromJSON:inContext:"];
-    }
+    NSAssert(![self isSubclassOfClass:rg_sNSManagedObject], @"Managed object subclasses must be initialized within a managed object context.  Use +objectFromJSON:inContext:");
     return [self objectFromDataSource:source inContext:nil];
 }
 
 + (prefix_nonnull instancetype) objectFromDataSource:(prefix_nullable id<RGDataSourceProtocol>)source inContext:(prefix_nullable NSManagedObjectContext*)context {
     NSObject<RGDeserializationDelegate>* ret;
     if ([self isSubclassOfClass:rg_sNSManagedObject]) {
-        context ? VOID_NOOP : [NSException raise:NSGenericException format:@"A subclass of NSManagedObject must be created within a valid NSManagedObjectContext."];
+        NSAssert(context, @"A subclass of NSManagedObject must be created within a valid NSManagedObjectContext.");
         ret = [rg_sNSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:context];
     } else {
         ret = [self new];

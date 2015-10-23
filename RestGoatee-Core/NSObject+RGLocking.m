@@ -38,11 +38,7 @@
 
 + (NSLock*) rg_classLock {
     NSLock* ret = objc_getAssociatedObject(self, @selector(rg_classLock));
-#ifdef DEBUG
-    if (!ret) {
-        [NSException raise:NSGenericException format:@"Class %@ implemented +initialize but did not call through to super, and then attempt to obtain the class lock", self];
-    }
-#endif
+    NSAssert(ret, @"Class %@ implemented +initialize but did not call through to super, and then attempted to obtain the class lock", self);
     return ret;
 }
 

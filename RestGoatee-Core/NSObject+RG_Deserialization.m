@@ -48,18 +48,18 @@ static NSArray GENERIC(id) * rg_unpackArray(NSArray* json, id context) {
 
 @implementation NSObject (RG_Deserialization)
 
-+ (prefix_nonnull NSArray GENERIC(id) *) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source {
++ (prefix_nonnull NSMutableArray GENERIC(id) *) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source {
     return [self objectsFromArraySource:source inContext:nil];
 }
 
-+ (prefix_nonnull NSArray GENERIC(id) *) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source inContext:(prefix_nullable NSManagedObjectContext*)context {
++ (prefix_nonnull NSMutableArray GENERIC(id) *) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source inContext:(prefix_nullable NSManagedObjectContext*)context {
     NSMutableArray GENERIC(id) * objects = [NSMutableArray new];
     for (NSDictionary* object in source) {
         if (rg_isDataSourceClass([object class])) {
             [objects addObject:[self objectFromDataSource:object inContext:context]];
         }
     }
-    return [objects copy];
+    return objects;
 }
 
 + (prefix_nonnull instancetype) objectFromDataSource:(prefix_nullable id<RGDataSourceProtocol>)source {

@@ -42,11 +42,6 @@ FILE_START
 - (prefix_nullable id) objectForKeyedSubscript:(prefix_nonnull id<NSCopying, NSObject>)key;
 
 /**
- The data source must support `dataSource[@"key"] = value`.
- */
-- (void) setObject:(prefix_nullable id)object forKeyedSubscript:(prefix_nonnull id<NSCopying, NSObject>)key;
-
-/**
  The data source must support `id value = dataSource[@"foo.bar"]`.
  */
 - (prefix_nullable id) valueForKeyPath:(prefix_nonnull NSString*)string;

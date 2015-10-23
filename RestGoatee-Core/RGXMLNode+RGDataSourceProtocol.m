@@ -75,15 +75,6 @@ FILE_START
     return self.attributes[key] ?: [self childrenNamed:key] ?: self.innerXML;
 }
 
-- (void) setValue:(prefix_nullable id)value forKey:(prefix_nonnull NSString*)key {
-    id children = [self childrenNamed:key];
-    if (children) {
-        [children setValue:value forKey:key];
-    } else {
-        self.attributes[key] = value;
-    }
-}
-
 @end
 
 FILE_END

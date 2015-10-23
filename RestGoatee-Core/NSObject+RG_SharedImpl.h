@@ -47,99 +47,99 @@ struct objc_ivar;
 /**
  The key associated with the name of one of the class's properties.
  */
-extern NSString* suffix_nonnull const kRGPropertyName;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyName;
 
 /**
  The key associated with the canonical name of one of the class's properties.
  
  canonical names are used to match disparate keys to the same meta key. This is to say that the keys "fooBar" and "foo_bar" share the same meta/canonical key and will be resolved to the same entry.
  */
-extern NSString* suffix_nonnull const kRGPropertyCanonicalName;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyCanonicalName;
 
 /**
  The key associated with a property's storage qualifier (i.e. `assign`, `weak`, `strong`, `copy`, `unsafe_unretained`).
  */
-extern NSString* suffix_nonnull const kRGPropertyStorage;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyStorage;
 
 /**
  The key associated with a property's atomic nature (i.e. `atomic`, `nonatomic`).
  */
-extern NSString* suffix_nonnull const kRGPropertyAtomicType;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyAtomicType;
 
 /**
  The key associated with a property's public declaration (i.e. `readonly`, `readwrite`).
  */
-extern NSString* suffix_nonnull const kRGPropertyAccess;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyAccess;
 
 /**
  The key associated with a property's backing instance variable (if any).  Pass through properties will appear to have no backing state for example.
  */
-extern NSString* suffix_nonnull const kRGPropertyBacking;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyBacking;
 
 /**
  The key associated with a property's getter method (if non-standard; for example on `fooBar`: `isFooBar`).
  */
-extern NSString* suffix_nonnull const kRGPropertyGetter;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyGetter;
 
 /**
  The key associated with a property's setter method (if non-standard; for example on `fooBar`: `setIsFooBar`).
  */
-extern NSString* suffix_nonnull const kRGPropertySetter;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertySetter;
 
 /**
  This value on the key `kRGPropertyAccess` indicates the property is `readwrite`.
  */
-extern NSString* suffix_nonnull const kRGPropertyReadwrite;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyReadwrite;
 
 /**
  This value on the key `kRGPropertyAccess` indicates the property is `readonly`.
  */
-extern NSString* suffix_nonnull const kRGPropertyReadonly;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyReadonly;
 
 /**
  This value on the key `kRGPropertyStorage` indicates the property is `assign`.
  */
-extern NSString* suffix_nonnull const kRGPropertyAssign;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyAssign;
 
 /**
  This value on the key `kRGPropertyStorage` indicates the property is `strong`.
  */
-extern NSString* suffix_nonnull const kRGPropertyStrong;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyStrong;
 
 /**
  This value on the key `kRGPropertyStorage` indicates the property is `copy`.
  */
-extern NSString* suffix_nonnull const kRGPropertyCopy;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyCopy;
 
 /**
  This value on the key `kRGPropertyStorage` indicates the property is `weak`.
  */
-extern NSString* suffix_nonnull const kRGPropertyWeak;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyWeak;
 
 /**
  The key associated with the class type of this property.
  */
-extern NSString* suffix_nonnull const kRGPropertyClass;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyClass;
 
 /**
  The key associated with the general type of this property.  Represents structs, pointers, primitives, etc.
  */
-extern NSString* suffix_nonnull const kRGPropertyRawType;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyRawType;
 
 /**
  This value on the key `kRGPropertyBacking` indicates the property was declared `@dynamic`.  Mutually exclusive with the presence of a backing instance variable.
  */
-extern NSString* suffix_nonnull const kRGPropertyDynamic;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyDynamic;
 
 /**
  This value on the key `kRGPropertyAtomicType` indicates the property is `atomic`.
  */
-extern NSString* suffix_nonnull const kRGPropertyAtomic;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyAtomic;
 
 /**
  This value on the key `kRGPropertyAtomicType` indicates the property is `nonatomic`.
  */
-extern NSString* suffix_nonnull const kRGPropertyNonatomic;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyNonatomic;
 
 /**
  This key is inserted into `NSDictionary*` instances which are serialized by this library.  It facilitates easier reconversion back to the original type.  Usage:
@@ -151,12 +151,12 @@ extern NSString* suffix_nonnull const kRGPropertyNonatomic;
  id originalObject = [NSClassFromString(serialized[kRGSerializationKey]) objectFromDataSource:serialized];
  ```
  */
-extern NSString* suffix_nonnull const kRGSerializationKey;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGSerializationKey;
 
 /**
  This key indicates the class meta data that the library uses for all other operations.
  */
-extern NSString* suffix_nonnull const kRGPropertyListProperty;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGPropertyListProperty;
 
 /* Ivar Description Keys */
 
@@ -169,59 +169,59 @@ extern NSString* suffix_nonnull const kRGPropertyListProperty;
  
  Granted you shouldn't do this. The run-time supports it, so it's not my place to artificially limit.
  */
-extern NSString* suffix_nonnull const kRGIvarOffset;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGIvarOffset;
 
 /**
  This key indicates the byte size of the given instance variable.
  */
-extern NSString* suffix_nonnull const kRGIvarSize;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGIvarSize;
 
 /**
  This instance variable was marked `@private`.
  */
-extern NSString* suffix_nonnull const kRGIvarPrivate;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGIvarPrivate;
 
 /**
  This instance variable was marked `@protected`.
  */
-extern NSString* suffix_nonnull const kRGIvarProtected;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGIvarProtected;
 
 /**
  This instance variable was marked `@public`.
  */
-extern NSString* suffix_nonnull const kRGIvarPublic;
+FOUNDATION_EXPORT NSString* suffix_nonnull const kRGIvarPublic;
 
 /* These classes are used to dynamically link into coredata if present. */
 
 /**
  Will be `[NSManagedObjectContext class]` or `nil` (if not linked/available).
  */
-extern Class suffix_nullable rg_sNSManagedObjectContext;
+FOUNDATION_EXPORT Class suffix_nullable rg_sNSManagedObjectContext;
 
 /**
  Will be `[NSManagedObject class]` or `nil` (if not linked/available).
  */
-extern Class suffix_nullable rg_sNSManagedObject;
+FOUNDATION_EXPORT Class suffix_nullable rg_sNSManagedObject;
 
 /**
  Will be `[NSManagedObjectModel class]` or `nil` (if not linked/available).
  */
-extern Class suffix_nullable rg_sNSManagedObjectModel;
+FOUNDATION_EXPORT Class suffix_nullable rg_sNSManagedObjectModel;
 
 /**
  Will be `[NSPersistentStoreCoordinator class]` or `nil` (if not linked/available).
  */
-extern Class suffix_nullable rg_sNSPersistentStoreCoordinator;
+FOUNDATION_EXPORT Class suffix_nullable rg_sNSPersistentStoreCoordinator;
 
 /**
  Will be `[NSEntityDescription class]` or `nil` (if not linked/available).
  */
-extern Class suffix_nullable rg_sNSEntityDescription;
+FOUNDATION_EXPORT Class suffix_nullable rg_sNSEntityDescription;
 
 /**
  Will be `[NSFetchRequest class]` or `nil` (if not linked/available).
  */
-extern Class suffix_nullable rg_sNSFetchRequest;
+FOUNDATION_EXPORT Class suffix_nullable rg_sNSFetchRequest;
 
 /**
  Returns the built-in date formats the library supports. Contains: ISO, `-[NSDate description]`.

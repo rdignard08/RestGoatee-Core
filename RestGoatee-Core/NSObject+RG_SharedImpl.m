@@ -97,7 +97,7 @@ BOOL rg_isCollectionObject(Class cls) {
 }
 
 BOOL rg_isKeyedCollectionObject(Class cls) {
-    return [cls isSubclassOfClass:[NSDictionary class]];
+    return [cls isSubclassOfClass:[NSDictionary class]] || [cls isSubclassOfClass:[RGXMLNode class]];
 }
 
 BOOL rg_isDataSourceClass(Class cls) {

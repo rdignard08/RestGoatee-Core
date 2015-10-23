@@ -69,9 +69,9 @@ Class suffix_nullable rg_sNSPersistentStoreCoordinator;
 Class suffix_nullable rg_sNSEntityDescription;
 Class suffix_nullable rg_sNSFetchRequest;
 
-NSArray* const rg_dateFormats() {
+NSArray GENERIC(NSString*) * const rg_dateFormats() {
     static dispatch_once_t onceToken;
-    static NSArray* _sDateFormats;
+    static NSArray GENERIC(NSString*) * _sDateFormats;
     dispatch_once(&onceToken, ^{
         _sDateFormats = @[ @"yyyy-MM-dd'T'HH:mm:ssZZZZZ", @"yyyy-MM-dd HH:mm:ss ZZZZZ", @"yyyy-MM-dd'T'HH:mm:ssz", @"yyyy-MM-dd" ];
     });

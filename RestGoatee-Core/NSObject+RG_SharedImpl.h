@@ -226,7 +226,7 @@ FOUNDATION_EXPORT Class suffix_nullable rg_sNSFetchRequest;
 /**
  Returns the built-in date formats the library supports. Contains: ISO, `-[NSDate description]`.
  */
-NSArray* const rg_dateFormats(void);
+NSArray GENERIC(NSString*) * const rg_dateFormats(void);
 
 /**
  Returns true if `Class cls = object;` is not a pointer type conversion.

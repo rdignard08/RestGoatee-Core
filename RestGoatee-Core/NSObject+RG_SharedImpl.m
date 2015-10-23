@@ -241,12 +241,12 @@ Class rg_topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyNa
 + (void) load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        rg_sNSManagedObjectContext = NSClassFromString(@"NSManagedObjectContext");
-        rg_sNSManagedObject = NSClassFromString(@"NSManagedObject");
-        rg_sNSManagedObjectModel = NSClassFromString(@"NSManagedObjectModel");
-        rg_sNSPersistentStoreCoordinator = NSClassFromString(@"NSPersistentStoreCoordinator");
-        rg_sNSEntityDescription = NSClassFromString(@"NSEntityDescription");
-        rg_sNSFetchRequest = NSClassFromString(@"NSFetchRequest");
+        rg_sNSManagedObjectContext = objc_getClass("NSManagedObjectContext");
+        rg_sNSManagedObject = objc_getClass("NSManagedObject");
+        rg_sNSManagedObjectModel = objc_getClass("NSManagedObjectModel");
+        rg_sNSPersistentStoreCoordinator = objc_getClass("NSPersistentStoreCoordinator");
+        rg_sNSEntityDescription = objc_getClass("NSEntityDescription");
+        rg_sNSFetchRequest = objc_getClass("NSFetchRequest");
     });
 }
 

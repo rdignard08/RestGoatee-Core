@@ -206,26 +206,6 @@ NSMutableDictionary* suffix_nonnull rg_parsePropertyStruct(objc_property_t suffi
     return propertyDict;
 }
 
-void rg_calculateIvarSize(Class suffix_nullable, NSMutableArray* suffix_nullable);
-void __attribute__((unused)) rg_calculateIvarSize(Class suffix_nullable object, NSMutableArray/*NSMutableDictionary*/* suffix_nullable properties) {
-    NSArray* rawOffsets = properties[kRGIvarOffset];
-    NSMutableArray* offsets = [NSMutableArray new];
-    for (NSUInteger i = 0; i < rawOffsets.count; i++) {
-        NSNumber* offset = rawOffsets[i];
-        if (![offset isKindOfClass:[NSNull class]]) {
-            [offsets addObject:@{ @"o" : offset, @"i" : @(i) }];
-        }
-    }
-    [offsets sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        return [(NSNumber*)obj1[@"o"] compare:obj2[@"o"]];
-    }];
-    for (NSUInteger i = 0; i < offsets.count; i++) {
-        NSDictionary* obj = offsets[i];
-        NSNumber* nextOffset = (i == (offsets.count - 1)) ? @(class_getInstanceSize(object)) : offsets[i+1][@"o"];
-        properties[[obj[@"i"] unsignedIntegerValue]][kRGIvarSize] = @([nextOffset unsignedIntegerValue] - [obj[@"o"] unsignedIntegerValue]);
-    }
-}
-
 Class suffix_nonnull rg_topClassDeclaringPropertyNamed(Class suffix_nullable currentClass, NSString* suffix_nullable propertyName) {
     const char* utf8Name = propertyName.UTF8String;
     Class iteratorClass = currentClass, priorClass;
@@ -280,7 +260,6 @@ Class suffix_nonnull rg_topClassDeclaringPropertyNamed(Class suffix_nullable cur
             }
             free(ivars);
         }
-        /* rg_calculateIvarSize(self, propertyStructure); //*/
         rg_propertyList = propertyStructure;
         objc_setAssociatedObject(self, @selector(rg_propertyList), rg_propertyList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }

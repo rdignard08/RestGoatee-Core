@@ -577,6 +577,7 @@
 		BEFFB8561BBDB15900EAF95D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LLVM_LTO = NO;
 				OTHER_CFLAGS = "-O0";
 				OTHER_LDFLAGS = "-load_all";
@@ -590,6 +591,7 @@
 			buildSettings = {
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "NS_BLOCK_ASSERTIONS=1";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LLVM_LTO = YES;
 				OTHER_CFLAGS = "-O0";
 				OTHER_LDFLAGS = "-load_all";

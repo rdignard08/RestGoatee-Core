@@ -34,27 +34,27 @@ _Pragma("clang diagnostic pop")
 #pragma clang diagnostic ignored "-Wgnu"
 
 #if __has_feature(nullability)
-#define nullable_property(...) (nullable, ## __VA_ARGS__)
-#define nonnull_property(...) (nonnull, ## __VA_ARGS__)
-#define null_resettable_property(...) (null_resettable, ## __VA_ARGS__)
-#define prefix_nullable nullable
-#define suffix_nullable __nullable
-#define prefix_nonnull nonnull
-#define suffix_nonnull __nonnull
+    #define nullable_property(...) (nullable, ## __VA_ARGS__)
+    #define nonnull_property(...) (nonnull, ## __VA_ARGS__)
+    #define null_resettable_property(...) (null_resettable, ## __VA_ARGS__)
+    #define prefix_nullable nullable
+    #define suffix_nullable __nullable
+    #define prefix_nonnull nonnull
+    #define suffix_nonnull __nonnull
 #else
-#define nullable_property(...) (__VA_ARGS__)
-#define nonnull_property(...) (__VA_ARGS__)
-#define null_resettable_property(...) (__VA_ARGS__)
-#define prefix_nullable
-#define suffix_nullable
-#define prefix_nonnull
-#define suffix_nonnull
+    #define nullable_property(...) (__VA_ARGS__)
+    #define nonnull_property(...) (__VA_ARGS__)
+    #define null_resettable_property(...) (__VA_ARGS__)
+    #define prefix_nullable
+    #define suffix_nullable
+    #define prefix_nonnull
+    #define suffix_nonnull
 #endif
 
 #if __has_feature(objc_generics)
-#define GENERIC(...) < __VA_ARGS__ >
+    #define GENERIC(...) < __VA_ARGS__ >
 #else
-#define GENERIC(...)
+    #define GENERIC(...)
 #endif
 
 #pragma clang diagnostic pop

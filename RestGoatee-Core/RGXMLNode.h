@@ -42,7 +42,7 @@ FILE_START
  
  You may mutate the collection.
  */
-@property null_resettable_property(nonatomic, strong) NSMutableDictionary* attributes;
+@property null_resettable_property(nonatomic, strong) NSMutableDictionary GENERIC(NSString*, NSString*) * attributes;
 
 /**
  The name of the tag.  <foobar>...</foobar> will have the value of `foobar` here.
@@ -59,9 +59,9 @@ FILE_START
 @property nullable_property(nonatomic, strong) NSString* innerXML;
 
 /**
- This property is of type `NSArray<RGXMLNode*>*`.  Containing any sub-nodes of this node.  Those sub-nodes have this node as the value of their `parentNode` property.
+ This property contains any sub-nodes of this node.  Those sub-nodes have this node as the value of their `parentNode` property.
  */
-@property null_resettable_property(nonatomic, strong, readonly) NSArray* childNodes;
+@property null_resettable_property(nonatomic, strong, readonly) NSArray GENERIC(RGXMLNode*) * childNodes;
 
 /**
  May return either `NSArray<RGXMLNode*>*` or `prefix_nullable RGXMLNode*`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.

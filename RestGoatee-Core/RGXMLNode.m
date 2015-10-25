@@ -30,14 +30,14 @@ FILE_START
 @synthesize attributes = _attributes;
 @synthesize childNodes = _childNodes;
 
-- (prefix_nonnull NSArray*) childNodes {
+- (prefix_nonnull NSArray GENERIC(RGXMLNode*) *) childNodes {
     if (!_childNodes) {
         _childNodes = [NSMutableArray new];
     }
     return _childNodes;
 }
 
-- (prefix_nonnull NSMutableDictionary*) attributes {
+- (prefix_nonnull NSMutableDictionary GENERIC(NSString*, NSString*) *) attributes {
     if (!_attributes) {
         _attributes = [NSMutableDictionary new];
     }

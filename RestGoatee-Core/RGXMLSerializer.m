@@ -69,7 +69,7 @@ FILE_START
 }
 
 #pragma mark - NSXMLParserDelegate
-- (void) parser:(__unused NSXMLParser*)p didStartElement:(NSString*)element namespaceURI:(__unused NSString*)n qualifiedName:(__unused NSString*)q attributes:(NSDictionary*)attributes {
+- (void) parser:(__unused id)p didStartElement:(prefix_nullable NSString*)element namespaceURI:(__unused id)n qualifiedName:(__unused id)q attributes:(prefix_nullable NSDictionary*)attributes {
     RGXMLNode* node = [RGXMLNode new];
     node.name = element;
     [node.attributes addEntriesFromDictionary:attributes];
@@ -78,18 +78,18 @@ FILE_START
     self.currentNode = node;
 }
 
-- (void) parser:(__unused NSXMLParser*)p foundCharacters:(NSString*)string {
+- (void) parser:(__unused id)p foundCharacters:(prefix_nonnull NSString*)string {
     [self.currentString appendString:string];
 }
 
-- (void) parser:(__unused NSXMLParser*)p didEndElement:(__unused NSString*)e namespaceURI:(__unused NSString*)n qualifiedName:(__unused NSString*)q {
+- (void) parser:(__unused id)p didEndElement:(__unused id)e namespaceURI:(__unused id)n qualifiedName:(__unused id)q {
     __strong RGXMLNode* strongNode = self.currentNode;
     strongNode.innerXML = self->_currentString;
     self->_currentString = nil;
     self.currentNode = strongNode.parentNode; /* move up the parse tree */
 }
 
-- (void) parser:(__unused NSXMLParser*)p foundCDATA:(NSData*)CDATABlock {
+- (void) parser:(__unused id)p foundCDATA:(prefix_nullable NSData*)CDATABlock {
     [self.currentString appendString:[[NSString alloc] initWithData:CDATABlock encoding:NSUTF8StringEncoding]];
 }
 

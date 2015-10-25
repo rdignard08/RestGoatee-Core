@@ -28,9 +28,7 @@ FILE_START
 @class NSManagedObjectContext;
 
 /**
- This category provides generalized constructors for all objects from a response object (these may be `NSDictionary*` from JSON or `NSXMLParser*` from XML).
- 
- You usually do not need to use these methods directly, since calls through the `RGAPIClient` will call the appropriate family of methods from this category.
+ This category provides generalized constructors for all domain model objects from a data source (these may be `NSDictionary*` from JSON or `NSXMLParser*` from XML or any custom `RGDataSourceProtocol`).
  */
 @interface NSObject (RG_Deserialization)
 

@@ -151,7 +151,7 @@ static NSMutableDictionary* suffix_nonnull rg_parseIvarStruct(Ivar suffix_nonnul
     return propertyDict;
 }
 
-NSMutableDictionary* suffix_nonnull rg_parsePropertyStruct(objc_property_t suffix_nonnull property) {
+static NSMutableDictionary* suffix_nonnull rg_parsePropertyStruct(objc_property_t suffix_nonnull property) {
     NSString* name = [NSString stringWithUTF8String:property_getName(property)];
     /* The default values for properties are: if object and ARC compiled: strong (we don't have to check for this, ARC will insert the retain attribute) else assign. atomic. readwrite. */
     NSMutableDictionary* propertyDict = [@{

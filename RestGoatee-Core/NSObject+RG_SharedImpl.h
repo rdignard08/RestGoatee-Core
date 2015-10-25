@@ -259,11 +259,6 @@ BOOL rg_isKeyedCollectionObject(Class suffix_nullable cls) __attribute__((pure))
 BOOL rg_isDataSourceClass(Class suffix_nullable cls) __attribute__((pure));
 
 /**
- converts the raw property struct from the run-time system into an `NSDictionary`.
- */
-NSDictionary* suffix_nullable rg_parsePropertyStruct(struct objc_property* suffix_nonnull property) __attribute__((pure));
-
-/**
  Return the class object which is responsible for providing the implementation of a given `self.propertyName` invocation.
  
  multiple classes may implement the same property, in this instance, only the top (i.e. the most subclass Class object) is returned.

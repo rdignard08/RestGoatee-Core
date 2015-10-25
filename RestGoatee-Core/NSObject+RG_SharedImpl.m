@@ -69,7 +69,7 @@ Class suffix_nullable rg_sNSPersistentStoreCoordinator;
 Class suffix_nullable rg_sNSEntityDescription;
 Class suffix_nullable rg_sNSFetchRequest;
 
-NSArray GENERIC(NSString*) * const rg_dateFormats() {
+NSArray GENERIC(NSString*) * suffix_nonnull __attribute__((pure)) rg_dateFormats(void) {
     static dispatch_once_t onceToken;
     static NSArray GENERIC(NSString*) * _sDateFormats;
     dispatch_once(&onceToken, ^{
@@ -78,33 +78,33 @@ NSArray GENERIC(NSString*) * const rg_dateFormats() {
     return _sDateFormats;
 }
 
-BOOL rg_isClassObject(id object) {
+BOOL __attribute__((pure)) rg_isClassObject(id suffix_nullable object) {
     return object_getClass(object) != [NSObject class] && object_getClass(/* the meta-class */object_getClass(object)) == object_getClass([NSObject class]);
     /* if the class of the meta-class == NSObject's meta-class; object was itself a Class object */
     /* object_getClass * object_getClass * <plain_nsobject> should not return true */
 }
 
-BOOL rg_isMetaClassObject(id object) {
+BOOL __attribute__((pure)) rg_isMetaClassObject(id suffix_nullable object) {
     return rg_isClassObject(object) && class_isMetaClass(object);
 }
 
-BOOL rg_isInlineObject(Class cls) {
+BOOL __attribute__((pure)) rg_isInlineObject(Class suffix_nullable cls) {
     return [cls isSubclassOfClass:[NSDate class]] || [cls isSubclassOfClass:[NSString class]] || [cls isSubclassOfClass:[NSData class]] || [cls isSubclassOfClass:[NSNull class]] || [cls isSubclassOfClass:[NSValue class]] || [cls isSubclassOfClass:[NSURL class]];
 }
 
-BOOL rg_isCollectionObject(Class cls) {
+BOOL __attribute__((pure)) rg_isCollectionObject(Class suffix_nullable cls) {
     return [cls isSubclassOfClass:[NSSet class]] || [cls isSubclassOfClass:[NSArray class]] || [cls isSubclassOfClass:[NSOrderedSet class]];
 }
 
-BOOL rg_isKeyedCollectionObject(Class cls) {
+BOOL __attribute__((pure)) rg_isKeyedCollectionObject(Class suffix_nullable cls) {
     return [cls isSubclassOfClass:[NSDictionary class]] || [cls isSubclassOfClass:[RGXMLNode class]];
 }
 
-BOOL rg_isDataSourceClass(Class cls) {
+BOOL __attribute__((pure)) rg_isDataSourceClass(Class suffix_nullable cls) {
     return [cls instancesRespondToSelector:@selector(objectForKeyedSubscript:)] && [cls instancesRespondToSelector:@selector(setObject:forKeyedSubscript:)] && [cls instancesRespondToSelector:@selector(valueForKeyPath:)] && [cls instancesRespondToSelector:@selector(countByEnumeratingWithState:objects:count:)];
 }
 
-static NSString* rg_firstQuotedSubstring(NSString* str) {
+static NSString* suffix_nonnull __attribute__((pure)) rg_firstQuotedSubstring(NSString* suffix_nullable str) {
     const NSUInteger inputLength = [str lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     NSUInteger i = 0, j = 0;
     char* outBuffer = malloc(inputLength);
@@ -122,18 +122,18 @@ static NSString* rg_firstQuotedSubstring(NSString* str) {
     return ret.length ? ret : str; /* there should be 2 '"' on each end, the class is in the middle, if not, give up */
 }
 
-static Class rg_classForTypeString(NSString* str) {
+static Class suffix_nonnull __attribute__((pure)) rg_classForTypeString(NSString* suffix_nullable str) {
     if ([str isEqual:@(@encode(Class))]) return object_getClass([NSObject class]);
     if ([str isEqual:@(@encode(id))]) return [NSObject class];
     str = rg_firstQuotedSubstring(str);
     return NSClassFromString(str) ?: [NSNumber class];
 }
 
-static void rg_parseIvarStructOntoPropertyDeclaration(struct objc_ivar* ivar, NSMutableDictionary* propertyData) {
+static void rg_parseIvarStructOntoPropertyDeclaration(Ivar suffix_nullable ivar, NSMutableDictionary* suffix_nullable propertyData) {
     propertyData[kRGIvarOffset] = @(ivar_getOffset(ivar));
 }
 
-static NSMutableDictionary* rg_parseIvarStruct(Ivar ivar) {
+static NSMutableDictionary* suffix_nonnull rg_parseIvarStruct(Ivar suffix_nonnull ivar) {
     NSString* name = [NSString stringWithUTF8String:ivar_getName(ivar)];
     
     /* The default values for ivars are: assign (if primitive) strong (if object), protected */
@@ -151,7 +151,7 @@ static NSMutableDictionary* rg_parseIvarStruct(Ivar ivar) {
     return propertyDict;
 }
 
-NSMutableDictionary* rg_parsePropertyStruct(objc_property_t property) {
+NSMutableDictionary* suffix_nonnull rg_parsePropertyStruct(objc_property_t suffix_nonnull property) {
     NSString* name = [NSString stringWithUTF8String:property_getName(property)];
     /* The default values for properties are: if object and ARC compiled: strong (we don't have to check for this, ARC will insert the retain attribute) else assign. atomic. readwrite. */
     NSMutableDictionary* propertyDict = [@{
@@ -206,8 +206,8 @@ NSMutableDictionary* rg_parsePropertyStruct(objc_property_t property) {
     return propertyDict;
 }
 
-void rg_calculateIvarSize(Class, NSMutableArray*);
-void rg_calculateIvarSize(Class object, NSMutableArray/*NSMutableDictionary*/* properties) {
+void rg_calculateIvarSize(Class suffix_nullable, NSMutableArray* suffix_nullable);
+void __attribute__((unused)) rg_calculateIvarSize(Class suffix_nullable object, NSMutableArray/*NSMutableDictionary*/* suffix_nullable properties) {
     NSArray* rawOffsets = properties[kRGIvarOffset];
     NSMutableArray* offsets = [NSMutableArray new];
     for (NSUInteger i = 0; i < rawOffsets.count; i++) {
@@ -226,7 +226,7 @@ void rg_calculateIvarSize(Class object, NSMutableArray/*NSMutableDictionary*/* p
     }
 }
 
-Class rg_topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName) {
+Class suffix_nonnull rg_topClassDeclaringPropertyNamed(Class suffix_nullable currentClass, NSString* suffix_nullable propertyName) {
     const char* utf8Name = propertyName.UTF8String;
     Class iteratorClass = currentClass, priorClass;
     while (YES) {

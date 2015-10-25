@@ -35,7 +35,7 @@ struct objc_property;
  */
 struct objc_ivar;
 
-/* Some notes on property attributes, declaration modifiers '
+/* Some notes on property attributes, declaration modifiers
     assign is exactly the same unsafe_unretained 
     retain is exactly the same as strong
     __block implies strong
@@ -226,42 +226,42 @@ FOUNDATION_EXPORT Class suffix_nullable rg_sNSFetchRequest;
 /**
  Returns the built-in date formats the library supports. Contains: ISO, `-[NSDate description]`.
  */
-NSArray GENERIC(NSString*) * const rg_dateFormats(void);
+NSArray GENERIC(NSString*) * suffix_nullable rg_dateFormats(void) __attribute__((pure));
 
 /**
  Returns true if `Class cls = object;` is not a pointer type conversion.
  */
-BOOL rg_isClassObject(id object);
+BOOL rg_isClassObject(id suffix_nullable object) __attribute__((pure));
 
 /**
  Returns true if object has the same type as `NSObject`'s meta class.
  */
-BOOL rg_isMetaClassObject(id object);
+BOOL rg_isMetaClassObject(id suffix_nullable object) __attribute__((pure));
 
 /**
  Returns true if the given type can be adequately represented by an `NSString`.
  */
-BOOL rg_isInlineObject(Class cls);
+BOOL rg_isInlineObject(Class suffix_nullable cls) __attribute__((pure));
 
 /**
  Returns true if the given type can be adequately represented by an `NSArray`.
  */
-BOOL rg_isCollectionObject(Class cls);
+BOOL rg_isCollectionObject(Class suffix_nullable cls) __attribute__((pure));
 
 /**
  Returns true if the given type is a "key => value" type.  Thus it can be represented by an `NSDictionary`.
  */
-BOOL rg_isKeyedCollectionObject(Class cls);
+BOOL rg_isKeyedCollectionObject(Class suffix_nullable cls) __attribute__((pure));
 
 /**
  Returns true if the given class conforms to `RGDataSourceProtocol`.  Necessary due to some bug.
  */
-BOOL rg_isDataSourceClass(Class cls);
+BOOL rg_isDataSourceClass(Class suffix_nullable cls) __attribute__((pure));
 
 /**
  converts the raw property struct from the run-time system into an `NSDictionary`.
  */
-NSDictionary* rg_parsePropertyStruct(struct objc_property* property);
+NSDictionary* suffix_nullable rg_parsePropertyStruct(struct objc_property* suffix_nonnull property) __attribute__((pure));
 
 /**
  Return the class object which is responsible for providing the implementation of a given `self.propertyName` invocation.
@@ -271,7 +271,7 @@ NSDictionary* rg_parsePropertyStruct(struct objc_property* property);
  @param currentClass is the object to test
  @param propertyName is the name of the property
  */
-Class rg_topClassDeclaringPropertyNamed(Class currentClass, NSString* propertyName);
+Class suffix_nullable rg_topClassDeclaringPropertyNamed(Class suffix_nullable currentClass, NSString* suffix_nullable propertyName) __attribute__((pure));
 
 /**
  This is a private category which contains all the of the methods used jointly by the categories `RG_Deserialization` and `RG_Serialization`.

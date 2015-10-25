@@ -34,7 +34,7 @@ FILE_START
 
 @end
 
-static NSArray GENERIC(id) * rg_unpackArray(NSArray* json, id context) {
+static NSArray GENERIC(id) * suffix_nonnull rg_unpackArray(NSArray* suffix_nullable json, id suffix_nullable context) {
     NSMutableArray* ret = [NSMutableArray new];
     for (__strong id obj in json) {
         if (rg_isDataSourceClass([obj class])) {

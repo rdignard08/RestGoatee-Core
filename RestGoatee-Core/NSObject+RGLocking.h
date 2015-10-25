@@ -21,6 +21,10 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+#import "RestGoatee-Core.h"
+
+FILE_START
+
 /**
  NSObject+RGLocking is a generic implementation to provide a lock at the class level.  Wherever one might write `@synchronized (cls) { ... }` this should be considered a sufficient replacement.
  */
@@ -31,6 +35,8 @@
  
  @warning if your class (or a superclass thereof) implements `+initialize` you MUST call `+[super initialize]` or an exception will be raised.
  */
-+ (NSLock*) rg_classLock;
++ (prefix_nonnull NSLock*) rg_classLock;
 
 @end
+
+FILE_END

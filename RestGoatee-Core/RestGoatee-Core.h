@@ -36,15 +36,15 @@ FILE_START
 /**
  rg_swizzle is a basic implementation of swizzling.  It does not clobber the super class if the method is not on the subclass.
  */
-void rg_swizzle(Class cls, SEL original, SEL replacement);
+void rg_swizzle(Class suffix_nullable cls, SEL suffix_nullable original, SEL suffix_nullable replacement) __attribute__((cold));
 
 /**
  The `RGLog` function is a debug only function (inactive in a live app).  It logs the file name & line number of the call site.
  */
+void _RGLog(NSString* suffix_nullable format, ...) __attribute__((cold));
 #ifdef DEBUG
     #define __SOURCE_FILE__ ({char* c = strrchr(__FILE__, '/'); c ? c + 1 : __FILE__;})
     #define RGLog(format, ...) _RGLog(format, __SOURCE_FILE__, (long)__LINE__, ##__VA_ARGS__)
-    void _RGLog(NSString* format, ...);
 #else
     /* we define out with `VOID_NOOP` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */
     #define RGLog(...) VOID_NOOP

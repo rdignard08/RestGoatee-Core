@@ -25,6 +25,8 @@
 #import "RestGoatee-Core.h"
 #import <objc/runtime.h>
 
+FILE_START
+
 @implementation NSObject (RGLocking)
 
 + (void) load {
@@ -36,10 +38,12 @@
     objc_setAssociatedObject(self, @selector(rg_classLock), [NSLock new], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-+ (NSLock*) rg_classLock {
++ (prefix_nonnull NSLock*) rg_classLock {
     NSLock* ret = objc_getAssociatedObject(self, @selector(rg_classLock));
     NSAssert(ret, @"Class %@ implemented +initialize but did not call through to super, and then attempted to obtain the class lock", self);
     return ret;
 }
 
 @end
+
+FILE_END

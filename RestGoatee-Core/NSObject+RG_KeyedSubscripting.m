@@ -61,7 +61,7 @@ FILE_START
 @implementation NSMutableDictionary (RG_KeyedSubscripting)
 
 /* fuck you apple */
-- (void) setObject:(prefix_nullable id)obj forKeyedSubscript:(id<NSCopying, NSObject>)key {
+- (void) setObject:(prefix_nullable id)obj forKeyedSubscript:(prefix_nonnull id<NSCopying, NSObject>)key {
     if (obj) {
         [self setObject:obj forKey:key];
     } else {

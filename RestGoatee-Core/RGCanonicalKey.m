@@ -58,6 +58,10 @@ FILE_START
     return self.rg_baseKey.hash;
 }
 
+- (NSString*) debugDescription {
+    return [NSString stringWithFormat:@"<%@: %p> %@ %@", [self class], (void*)self, self.rg_baseKey, self.rg_canonicalKey];
+}
+
 #pragma mark - NSCopying
 - (PREFIX_NONNULL instancetype) copyWithZone:(PREFIX_NULLABLE __unused NSZone*)zone {
     return [[RGCanonicalKey alloc] initWithKey:self.rg_baseKey withCanonicalName:self.rg_canonicalKey];

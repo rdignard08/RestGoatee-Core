@@ -22,6 +22,7 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RGDefines.h"
+#import "RGCanonicalKey.h"
 #import <objc/runtime.h>
 
 FILE_START
@@ -268,6 +269,11 @@ Class SUFFIX_NULLABLE rg_topClassDeclaringPropertyNamed(Class SUFFIX_NULLABLE cu
  This is describes the meta data of the given class.  It declares properties and instance variables in an object-oriented manner.
  */
 + (PREFIX_NONNULL NSMutableArray GENERIC(NSMutableDictionary*) *) rg_propertyList;
+
+/**
+ This describes the properties and ivars of a given class.  The keys are those used by KVC.  The value of the key is a dictionary whose keys describe that particular property / ivar.
+ */
++ (PREFIX_NONNULL NSMutableDictionary GENERIC(RGCanonicalKey*, NSMutableDictionary GENERIC(NSString*, id) *) *) rg_canonicalPropertyList;
 
 /**
  Returns a `Class` object which is the type of the property specified by `propertyName`; defaults to `NSNumber` if unknown.

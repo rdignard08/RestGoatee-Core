@@ -25,6 +25,8 @@
 
 FILE_START
 
+FOUNDATION_EXPORT NSString* SUFFIX_NONNULL const kRGInnerXMLKey;
+
 /**
  The `RGXMLNode` is the parse result of `NSXMLParser`.
  */
@@ -64,7 +66,14 @@ FILE_START
 @property NULL_RESETTABLE_PROPERTY(nonatomic, strong, readonly) NSArray GENERIC(RGXMLNode*) * childNodes;
 
 /**
- May return either `NSArray<RGXMLNode*>*` or `PREFIX_NULLABLE RGXMLNode*`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
+ Returns the receiver and all of its children as a dictionary representation.  The `innerXML` of the node is returned on the key `kRGInnerXMLKey`.
+ 
+ @warning raises an exception if there exists a child without a name.
+ */
+- (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation;
+
+/**
+ May return either `NSMutableArray<RGXMLNode*>*` or `PREFIX_NULLABLE RGXMLNode*`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
  */
 - (PREFIX_NULLABLE id) childrenNamed:(PREFIX_NULLABLE NSString*)name;
 

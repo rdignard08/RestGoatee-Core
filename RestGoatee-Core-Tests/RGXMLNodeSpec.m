@@ -99,6 +99,15 @@ static RGXMLNode* childNode4;
     XCTAssert(childNode2.childNodes.count == 0);
 }
 
+- (void) testDictionaryRepresentation {
+    NSDictionary* representation = [parentNode dictionaryRepresentation];
+    XCTAssert([representation[@"child1"] isKindOfClass:[NSArray class]]);
+    XCTAssert([representation[@"child2"] isEqual:(@{ kRGInnerXMLKey : @"some data" })]);
+    XCTAssert([[childNode1 dictionaryRepresentation][@"attribute"] isEqual:@"value"]);
+    XCTAssert([[childNode3 dictionaryRepresentation][@"child4"] isEqual:(@{})]);
+    XCTAssert([[childNode4 dictionaryRepresentation] isEqual:(@{})]);
+}
+
 - (void) testChildrenNamed {
     XCTAssert([[parentNode childrenNamed:@"child1"] isEqual:(@[ childNode1, childNode3 ])]);
     XCTAssert([parentNode childrenNamed:@"child2"] == childNode2);

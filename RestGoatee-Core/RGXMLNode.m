@@ -23,6 +23,8 @@
 
 #import "RGXMLNode.h"
 
+NSString* SUFFIX_NONNULL const kRGInnerXMLKey = @"__innerXML__";
+
 FILE_START
 
 @implementation RGXMLNode
@@ -47,6 +49,33 @@ FILE_START
 - (void) addChildNode:(PREFIX_NONNULL RGXMLNode*)node {
     node->_parentNode = self;
     [(NSMutableArray*)self.childNodes addObject:node];
+}
+
+- (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation {
+    NSMutableDictionary* ret = [self.attributes mutableCopy];
+    ret[kRGInnerXMLKey] = self.innerXML; /* if nil, uses NSObject+RG_KeyedSubscripting */
+    NSMutableArray* handledNames = [NSMutableArray new];
+    for (RGXMLNode* childNode in self.childNodes) {
+        NSAssert(childNode.name, @"%@ name: %@ has a child without a name", self, self.name);
+        if (![handledNames containsObject:childNode.name]) {
+            [handledNames addObject:childNode.name];
+            id children = [self childrenNamed:childNode.name];
+            if ([children isKindOfClass:[NSArray class]]) {
+                NSMutableArray* replacementContainer = [NSMutableArray new];
+                for (RGXMLNode* node in children) {
+                    [replacementContainer addObject:[node dictionaryRepresentation]];
+                }
+                ret[childNode.name] = replacementContainer;
+            } else if ([children isKindOfClass:[RGXMLNode class]]) {
+                NSMutableDictionary* value = [(RGXMLNode*)children attributes];
+                [value addEntriesFromDictionary:[(RGXMLNode*)children dictionaryRepresentation]];
+                ret[childNode.name] = value;
+            } else {
+                ret[childNode.name] = [NSNull null];
+            }
+        }
+    }
+    return ret;
 }
 
 - (PREFIX_NULLABLE id) childrenNamed:(PREFIX_NULLABLE NSString*)name {

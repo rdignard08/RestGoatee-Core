@@ -25,7 +25,6 @@
 #import <objc/runtime.h>
 #import "RestGoatee-Core.h"
 #import "NSString+RGCanonicalValue.h"
-#import "NSObject+RGLocking.h"
 
 FILE_START
 
@@ -231,7 +230,7 @@ Class suffix_nonnull rg_topClassDeclaringPropertyNamed(Class suffix_nullable cur
 }
 
 + (prefix_nonnull NSMutableArray GENERIC(NSMutableDictionary*) *) rg_propertyList {
-    [[self rg_classLock] lock];
+    @synchronized (self) {
     NSMutableArray* rg_propertyList = objc_getAssociatedObject(self, @selector(rg_propertyList));
     if (!rg_propertyList) {
         NSMutableArray* propertyStructure = [NSMutableArray new];
@@ -263,8 +262,8 @@ Class suffix_nonnull rg_topClassDeclaringPropertyNamed(Class suffix_nullable cur
         rg_propertyList = propertyStructure;
         objc_setAssociatedObject(self, @selector(rg_propertyList), rg_propertyList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
-    [[self rg_classLock] unlock];
     return rg_propertyList;
+    }
 }
 
 + (prefix_nullable NSDictionary*) rg_declarationForProperty:(prefix_nonnull NSString*)propertyName {

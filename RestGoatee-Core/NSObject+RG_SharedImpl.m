@@ -231,23 +231,17 @@ Class suffix_nonnull rg_topClassDeclaringPropertyNamed(Class suffix_nullable cur
 
 + (prefix_nonnull NSMutableArray GENERIC(NSMutableDictionary*) *) rg_propertyList {
     @synchronized (self) {
-    NSMutableArray* rg_propertyList = objc_getAssociatedObject(self, @selector(rg_propertyList));
-    if (!rg_propertyList) {
-        NSMutableArray* propertyStructure = [NSMutableArray new];
-        NSMutableArray* stack = [NSMutableArray new];
-        uint32_t count;
-        for (Class superClass = self; superClass; superClass = [superClass superclass]) {
-            [stack insertObject:superClass atIndex:0]; /* we want superclass properties to be overwritten by subclass properties so append front */
-        }
-        for (Class cls in stack) {
-            objc_property_t* properties = class_copyPropertyList(cls, &count);
+        NSMutableArray* rg_propertyList = objc_getAssociatedObject(self, @selector(rg_propertyList));
+        if (!rg_propertyList) {
+            NSMutableArray* propertyStructure = [NSMutableArray new];
+            [propertyStructure addObjectsFromArray:[[self superclass] rg_propertyList]];
+            uint32_t count;
+            objc_property_t* properties = class_copyPropertyList(self, &count);
             for (uint32_t i = 0; i < count; i++) {
                 [propertyStructure addObject:rg_parsePropertyStruct(properties[i])];
             }
             free(properties);
-        }
-        for (Class cls in stack) {
-            Ivar* ivars = class_copyIvarList(cls, &count);
+            Ivar* ivars = class_copyIvarList(self, &count);
             for (uint32_t i = 0; i < count; i++) {
                 NSString* ivarName = [NSString stringWithUTF8String:ivar_getName(ivars[i])];
                 NSUInteger ivarIndex = [propertyStructure[kRGPropertyBacking] indexOfObject:ivarName];
@@ -258,10 +252,9 @@ Class suffix_nonnull rg_topClassDeclaringPropertyNamed(Class suffix_nullable cur
                 }
             }
             free(ivars);
+            rg_propertyList = propertyStructure;
+            objc_setAssociatedObject(self, @selector(rg_propertyList), rg_propertyList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         }
-        rg_propertyList = propertyStructure;
-        objc_setAssociatedObject(self, @selector(rg_propertyList), rg_propertyList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    }
     return rg_propertyList;
     }
 }

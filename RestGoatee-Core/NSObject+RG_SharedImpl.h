@@ -279,11 +279,6 @@ Class suffix_nullable rg_topClassDeclaringPropertyNamed(Class suffix_nullable cu
 + (prefix_nonnull NSMutableArray GENERIC(NSMutableDictionary*) *) rg_propertyList;
 
 /**
- This function returns the output keys of the receiver for use when determining what state information is present in the instance.
- */
-@property nonnull_property(nonatomic, strong, readonly) NSArray* rg_keys;
-
-/**
  Returns a `Class` object which is the type of the property specified by `propertyName`; defaults to `NSNumber` if unknown.
  */
 - (prefix_nonnull Class) rg_classForProperty:(prefix_nonnull NSString*)propertyName;

@@ -264,19 +264,6 @@ Class suffix_nonnull rg_topClassDeclaringPropertyNamed(Class suffix_nullable cur
     return index == NSNotFound ? nil : [self rg_propertyList][index];
 }
 
-- (prefix_nonnull NSArray*) rg_keys {
-    if ([self isKindOfClass:[NSDictionary class]]) {
-        return [(NSDictionary*)self allKeys];
-    }
-    if ([self isKindOfClass:[RGXMLNode class]]) {
-        NSMutableArray* someKeys = [[[self class] rg_propertyList][kRGPropertyName] mutableCopy];
-        [someKeys addObjectsFromArray:[[(RGXMLNode*)self attributes] allKeys]];
-        [someKeys addObjectsFromArray:[(RGXMLNode*)self childNodes][@"name"]];
-        return someKeys;
-    }
-    return [[self class] rg_propertyList][kRGPropertyName];
-}
-
 - (prefix_nonnull Class) rg_classForProperty:(prefix_nonnull NSString*)propertyName {
     return [[self class] rg_declarationForProperty:propertyName][kRGPropertyClass] ?: [NSNumber class];
 }

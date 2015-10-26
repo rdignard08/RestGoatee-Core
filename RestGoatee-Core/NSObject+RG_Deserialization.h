@@ -54,15 +54,15 @@ FILE_START
 
 /**
  @abstract merges two objects into a single object.  The return value is not a new object, but rather is the receiver augmented with the values in `object`.
- @param object Can be of type NSDictionary, RGXMLNode, or a user defined type conforming to `RGDataSourceProtocol`.
- @return the receiving object extended with `object`; any conflicts will take `object`'s value as precedent.
+ @param object Can be of type `NSDictionary`, `RGXMLNode`, or a user defined type conforming to `RGDataSourceProtocol`.
+ @return the receiving object extended with `source`; any conflicts will take `source`'s value as precedent.
  */
-- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE NSObject<RGDataSourceProtocol>*)object;
+- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE NSObject<RGDataSourceProtocol>*)source;
 
 /**
- Same as `-extendWith:` but since there may be sub objects which are `NSManagedObject` subclasses, it may be necessary to provide an `NSManagedObjectContext` to contain them.
+ Same as `-[NSObject extendWith:]` but since there may be sub objects which are `NSManagedObject` subclasses, it may be necessary to provide an `NSManagedObjectContext` to contain them.
  */
-- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE NSObject<RGDataSourceProtocol>*)object inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
+- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE NSObject<RGDataSourceProtocol>*)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 @end
 

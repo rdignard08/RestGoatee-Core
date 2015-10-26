@@ -291,7 +291,7 @@ Class SUFFIX_NULLABLE rg_topClassDeclaringPropertyNamed(Class SUFFIX_NULLABLE cu
 /**
  Returns the metadata for the property specified by `propertyName`.
  */
-+ (PREFIX_NULLABLE NSDictionary*) rg_declarationForProperty:(PREFIX_NONNULL NSString*)propertyName;
++ (PREFIX_NULLABLE NSMutableDictionary*) rg_declarationForProperty:(PREFIX_NONNULL NSString*)propertyName;
 
 @end
 

@@ -259,7 +259,7 @@ Class SUFFIX_NONNULL rg_topClassDeclaringPropertyNamed(Class SUFFIX_NULLABLE cur
     }
 }
 
-+ (PREFIX_NULLABLE NSDictionary*) rg_declarationForProperty:(PREFIX_NONNULL NSString*)propertyName {
++ (PREFIX_NULLABLE NSMutableDictionary*) rg_declarationForProperty:(PREFIX_NONNULL NSString*)propertyName {
     NSUInteger index = [[self rg_propertyList][kRGPropertyName] indexOfObject:propertyName];
     return index == NSNotFound ? nil : [self rg_propertyList][index];
 }

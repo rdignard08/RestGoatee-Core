@@ -33,19 +33,19 @@ FILE_START
 /**
  @abstract returns the receiver represented as a dictionary with its property names as keys and the values are the values of that property.  By default the parser will follow weak references.
  */
-- (PREFIX_NONNULL NSDictionary*) dictionaryRepresentation;
+- (PREFIX_NONNULL id) dictionaryRepresentation;
 
 /**
- @abstract returns the recevier serialized to JSON.
+ @abstract returns the recevier serialized to JSON.  Returns `nil` if the object is not valid JSON.
  
  @deprecated Use `NSKeyedArchiver` instead.
  */
-- (PREFIX_NONNULL NSData*) JSONRepresentation __attribute__((deprecated));
+- (PREFIX_NULLABLE NSData*) JSONRepresentation __attribute__((deprecated));
 
 /**
  @abstract equivalent to `-dictionaryRepresentation` but the parser will not parse into objects which are `weak`, `assign`, or `unsafe_unretained` if the parameter `weakReferences` is `NO`.  The default is `YES`.
  */
-- (PREFIX_NONNULL NSDictionary*) dictionaryRepresentationShouldFollowWeakReferences:(BOOL)weakReferences;
+- (PREFIX_NONNULL id) dictionaryRepresentationShouldFollowWeakReferences:(BOOL)weakReferences;
 
 @end
 

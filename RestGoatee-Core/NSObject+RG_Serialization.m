@@ -131,17 +131,21 @@ FILE_START
 
 @implementation NSObject (RG_SerializationPublic)
 
-- (PREFIX_NONNULL NSDictionary*) dictionaryRepresentationShouldFollowWeakReferences:(BOOL)weakReferences {
+- (PREFIX_NONNULL id) dictionaryRepresentationShouldFollowWeakReferences:(BOOL)weakReferences {
     NSMutableArray* pointersSeen = [NSMutableArray new];
     return [self rg_dictionaryHelper:pointersSeen followWeak:weakReferences];
 }
 
-- (PREFIX_NONNULL NSDictionary*) dictionaryRepresentation {
+- (PREFIX_NONNULL id) dictionaryRepresentation {
     return [self dictionaryRepresentationShouldFollowWeakReferences:YES];
 }
 
-- (PREFIX_NONNULL NSData*) JSONRepresentation {
-    return [NSJSONSerialization dataWithJSONObject:[self dictionaryRepresentation] options:(NSJSONWritingOptions)0 error:nil];
+- (PREFIX_NULLABLE NSData*) JSONRepresentation {
+    id object = [self dictionaryRepresentation];
+    if ([NSJSONSerialization isValidJSONObject:object]) {
+        return [NSJSONSerialization dataWithJSONObject:object options:(NSJSONWritingOptions)0 error:nil];
+    }
+    return nil;
 }
 
 @end

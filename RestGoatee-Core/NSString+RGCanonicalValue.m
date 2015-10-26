@@ -28,58 +28,34 @@ FILE_START
 
 @implementation NSString (RGCanonicalValue)
 
-+ (void) load {
-    rg_swizzle(self, @selector(init), @selector(rg_override_init));
-    rg_swizzle(self, @selector(initWithCoder:), @selector(rg_override_initWithCoder:));
-}
-
-- (prefix_nonnull instancetype) rg_override_init {
-    NSString* ret = [self rg_override_init];
-    ret.rg_canonicalLock = [NSLock new];
-    return ret;
-}
-
-- (prefix_nonnull instancetype) rg_override_initWithCoder:(prefix_nonnull NSCoder*)coder {
-    NSString* ret = [self rg_override_initWithCoder:coder];
-    ret.rg_canonicalLock = [NSLock new];
-    return ret;
-}
-
-- (prefix_nullable NSLock*) rg_canonicalLock {
-    return objc_getAssociatedObject(self, @selector(rg_canonicalLock));
-}
-
-- (void) setRg_canonicalLock:(prefix_nullable NSLock*)lock {
-    objc_setAssociatedObject(self, @selector(rg_canonicalLock), lock, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
 - (void) setRg_canonicalValue:(prefix_nullable NSString*)canonicalValue {
-    [self.rg_canonicalLock lock];
-    objc_setAssociatedObject(self, @selector(rg_canonicalValue), canonicalValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    [self.rg_canonicalLock unlock];
+    @synchronized (self) {
+        objc_setAssociatedObject(self, @selector(rg_canonicalValue), canonicalValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
 }
 
 - (prefix_nonnull NSString*) rg_canonicalValue {
-    [self.rg_canonicalLock lock];
-    NSString* canonicalValue = objc_getAssociatedObject(self, @selector(rg_canonicalValue));
-    if (!canonicalValue) {
-        const NSUInteger inputLength = [self lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-        NSUInteger i = 0, j = 0;
-        char* outBuffer = malloc(inputLength);
-        const char* inBuffer = self.UTF8String;
-        for (; i != inputLength; i++) {
-            char c = inBuffer[i];
-            if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')) { /* a digit or lowercase character; no change */
-                outBuffer[j++] = c;
-            } else if (c >= 'A' && c <= 'Z') { /* an uppercase character; to lower */
-                outBuffer[j++] = c + (const int)('a' - 'A'); /* 'a' - 'A' == 32 */
-            } /* unicodes, symbols, spaces, etc. are completely skipped */
+    @synchronized (self) {
+        NSString* canonicalValue = objc_getAssociatedObject(self, @selector(rg_canonicalValue));
+        if (!canonicalValue) {
+            NSString* immutableCopy = [self copy];
+            const NSUInteger inputLength = [immutableCopy lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+            NSUInteger i = 0, j = 0;
+            char* outBuffer = malloc(inputLength);
+            const char* inBuffer = immutableCopy.UTF8String;
+            for (; i != inputLength; i++) {
+                char c = inBuffer[i];
+                if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')) { /* a digit or lowercase character; no change */
+                    outBuffer[j++] = c;
+                } else if (c >= 'A' && c <= 'Z') { /* an uppercase character; to lower */
+                    outBuffer[j++] = c + (const int)('a' - 'A'); /* 'a' - 'A' == 32 */
+                } /* unicodes, symbols, spaces, etc. are completely skipped */
+            }
+            canonicalValue = [[NSString alloc] initWithBytesNoCopy:outBuffer length:j encoding:NSUTF8StringEncoding freeWhenDone:YES];
+            objc_setAssociatedObject(self, @selector(rg_canonicalValue), canonicalValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         }
-        canonicalValue = [[NSString alloc] initWithBytesNoCopy:outBuffer length:j encoding:NSUTF8StringEncoding freeWhenDone:YES];
-        objc_setAssociatedObject(self, @selector(rg_canonicalValue), canonicalValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        return canonicalValue;
     }
-    [self.rg_canonicalLock unlock];
-    return canonicalValue;
 }
 
 @end

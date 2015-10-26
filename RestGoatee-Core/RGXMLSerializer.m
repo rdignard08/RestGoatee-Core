@@ -28,21 +28,21 @@ FILE_START
 
 @interface RGXMLSerializer () <NSXMLParserDelegate>
 
-@property nullable_property(nonatomic, weak) RGXMLNode* currentNode;
-@property null_resettable_property(nonatomic, strong) NSMutableString* currentString;
+@property NULLABLE_PROPERTY(nonatomic, weak) RGXMLNode* currentNode;
+@property NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableString* currentString;
 
 @end
 
 @implementation RGXMLSerializer
 @synthesize rootNode = _rootNode;
 
-- (prefix_nonnull instancetype) initWithParser:(prefix_nullable NSXMLParser*)parser {
+- (PREFIX_NONNULL instancetype) initWithParser:(PREFIX_NULLABLE NSXMLParser*)parser {
     self = [super init];
     self.parser = parser;
     return self;
 }
 
-- (prefix_nonnull RGXMLNode*) rootNode {
+- (PREFIX_NONNULL RGXMLNode*) rootNode {
     if (!_rootNode) {
         _rootNode = [RGXMLNode new];
         _currentNode = _rootNode;
@@ -53,14 +53,14 @@ FILE_START
     return _rootNode;
 }
 
-- (prefix_nonnull NSMutableString*) currentString {
+- (PREFIX_NONNULL NSMutableString*) currentString {
     if (!_currentString) {
         _currentString = [NSMutableString new];
     }
     return _currentString;
 }
 
-- (void) setParser:(prefix_nullable NSXMLParser*)parser {
+- (void) setParser:(PREFIX_NULLABLE NSXMLParser*)parser {
     if (_parser != parser) {
         _rootNode = nil;
         _parser = parser;
@@ -69,7 +69,7 @@ FILE_START
 }
 
 #pragma mark - NSXMLParserDelegate
-- (void) parser:(__unused id)p didStartElement:(prefix_nullable NSString*)element namespaceURI:(__unused id)n qualifiedName:(__unused id)q attributes:(prefix_nullable NSDictionary*)attributes {
+- (void) parser:(__unused id)p didStartElement:(PREFIX_NULLABLE NSString*)element namespaceURI:(__unused id)n qualifiedName:(__unused id)q attributes:(PREFIX_NULLABLE NSDictionary*)attributes {
     RGXMLNode* node = [RGXMLNode new];
     node.name = element;
     [node.attributes addEntriesFromDictionary:attributes];
@@ -78,7 +78,7 @@ FILE_START
     self.currentNode = node;
 }
 
-- (void) parser:(__unused id)p foundCharacters:(prefix_nonnull NSString*)string {
+- (void) parser:(__unused id)p foundCharacters:(PREFIX_NONNULL NSString*)string {
     [self.currentString appendString:string];
 }
 
@@ -89,7 +89,7 @@ FILE_START
     self.currentNode = strongNode.parentNode; /* move up the parse tree */
 }
 
-- (void) parser:(__unused id)p foundCDATA:(prefix_nullable NSData*)CDATABlock {
+- (void) parser:(__unused id)p foundCDATA:(PREFIX_NULLABLE NSData*)CDATABlock {
     [self.currentString appendString:[[NSString alloc] initWithData:CDATABlock encoding:NSUTF8StringEncoding]];
 }
 

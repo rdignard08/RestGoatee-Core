@@ -37,17 +37,17 @@ FILE_START
 /**
  Designated initializer.
  */
-- (prefix_nonnull instancetype) initWithParser:(prefix_nullable NSXMLParser*)parser;
+- (PREFIX_NONNULL instancetype) initWithParser:(PREFIX_NULLABLE NSXMLParser*)parser;
 
 /**
  Provide the `NSXMLParser` obtained from AFNetworking's `AFXMLParserResponseSerializer`.
  */
-@property nullable_property(nonatomic, strong) NSXMLParser* parser;
+@property NULLABLE_PROPERTY(nonatomic, strong) NSXMLParser* parser;
 
 /**
  Triggers the parsing to execute when accessed the first time.
  */
-@property nonnull_property(nonatomic, strong, readonly) RGXMLNode* rootNode;
+@property NONNULL_PROPERTY(nonatomic, strong, readonly) RGXMLNode* rootNode;
 
 @end
 

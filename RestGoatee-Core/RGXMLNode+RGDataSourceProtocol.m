@@ -29,7 +29,7 @@ FILE_START
 
 @implementation RGXMLNode (_RGDataSourceProtocol)
 
-- (prefix_nonnull NSArray*) keys {
+- (PREFIX_NONNULL NSArray*) keys {
     id ret = objc_getAssociatedObject(self, @selector(keys));
     if (!ret) {
         ret = [NSMutableArray new];
@@ -42,7 +42,7 @@ FILE_START
     return ret;
 }
 
-- (void) setKeys:(prefix_nullable NSArray*)keys {
+- (void) setKeys:(PREFIX_NULLABLE NSArray*)keys {
     objc_setAssociatedObject(self, @selector(keys), keys, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -50,11 +50,11 @@ FILE_START
 
 @implementation RGXMLNode (RGDataSourceProtocol)
 
-- (prefix_nonnull NSArray*) allKeys {
+- (PREFIX_NONNULL NSArray*) allKeys {
     return self.keys;
 }
 
-- (NSUInteger) countByEnumeratingWithState:(prefix_nonnull NSFastEnumerationState*)state objects:(__unsafe_unretained id[])buffer count:(NSUInteger)len {
+- (NSUInteger) countByEnumeratingWithState:(PREFIX_NONNULL NSFastEnumerationState*)state objects:(__unsafe_unretained id[])buffer count:(NSUInteger)len {
     NSUInteger ret = [self.keys countByEnumeratingWithState:state objects:buffer count:len];
     if (!ret) {
         self.keys = nil;
@@ -62,7 +62,7 @@ FILE_START
     return ret;
 }
 
-- (prefix_nullable id) valueForKeyPath:(prefix_nonnull NSString*)string {
+- (PREFIX_NULLABLE id) valueForKeyPath:(PREFIX_NONNULL NSString*)string {
     NSRange range = [string rangeOfString:@"."];
     if (range.location == NSNotFound) {
         return [self valueForKey:string];
@@ -71,7 +71,7 @@ FILE_START
 }
 
 #pragma mark - private
-- (prefix_nullable id) valueForKey:(prefix_nonnull NSString*)key {
+- (PREFIX_NULLABLE id) valueForKey:(PREFIX_NONNULL NSString*)key {
     return self.attributes[key] ?: [self childrenNamed:key] ?: self.innerXML;
 }
 

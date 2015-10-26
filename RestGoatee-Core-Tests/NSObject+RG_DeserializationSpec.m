@@ -27,7 +27,7 @@
 
 @interface NSObject (_RGForwardDecl)
 
-- (void) rg_initProperty:(prefix_nonnull NSString*)key withValue:(prefix_nullable id)value inContext:(prefix_nullable id)context;
+- (void) rg_initProperty:(PREFIX_NONNULL NSString*)key withValue:(PREFIX_NULLABLE id)value inContext:(PREFIX_NULLABLE id)context;
 
 @end
 

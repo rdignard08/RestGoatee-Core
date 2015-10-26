@@ -29,46 +29,46 @@
 FILE_START
 
 /* Property Description Keys */
-NSString* suffix_nonnull const kRGPropertyAtomicType = @"atomicity";
-NSString* suffix_nonnull const kRGPropertyBacking = @"ivar";
-NSString* suffix_nonnull const kRGPropertyGetter = @"getter";
-NSString* suffix_nonnull const kRGPropertySetter = @"setter";
-NSString* suffix_nonnull const kRGPropertyReadwrite = @"readwrite";
-NSString* suffix_nonnull const kRGPropertyReadonly = @"readonly";
-NSString* suffix_nonnull const kRGPropertyAssign = @"assign";
-NSString* suffix_nonnull const kRGPropertyStrong = @"retain";
-NSString* suffix_nonnull const kRGPropertyCopy = @"copy";
-NSString* suffix_nonnull const kRGPropertyWeak = @"weak";
-NSString* suffix_nonnull const kRGPropertyClass = @"type";
-NSString* suffix_nonnull const kRGPropertyRawType = @"raw_type";
-NSString* suffix_nonnull const kRGPropertyDynamic = @"__dynamic__";
-NSString* suffix_nonnull const kRGPropertyAtomic = @"atomic";
-NSString* suffix_nonnull const kRGPropertyNonatomic = @"nonatomic";
+NSString* SUFFIX_NONNULL const kRGPropertyAtomicType = @"atomicity";
+NSString* SUFFIX_NONNULL const kRGPropertyBacking = @"ivar";
+NSString* SUFFIX_NONNULL const kRGPropertyGetter = @"getter";
+NSString* SUFFIX_NONNULL const kRGPropertySetter = @"setter";
+NSString* SUFFIX_NONNULL const kRGPropertyReadwrite = @"readwrite";
+NSString* SUFFIX_NONNULL const kRGPropertyReadonly = @"readonly";
+NSString* SUFFIX_NONNULL const kRGPropertyAssign = @"assign";
+NSString* SUFFIX_NONNULL const kRGPropertyStrong = @"retain";
+NSString* SUFFIX_NONNULL const kRGPropertyCopy = @"copy";
+NSString* SUFFIX_NONNULL const kRGPropertyWeak = @"weak";
+NSString* SUFFIX_NONNULL const kRGPropertyClass = @"type";
+NSString* SUFFIX_NONNULL const kRGPropertyRawType = @"raw_type";
+NSString* SUFFIX_NONNULL const kRGPropertyDynamic = @"__dynamic__";
+NSString* SUFFIX_NONNULL const kRGPropertyAtomic = @"atomic";
+NSString* SUFFIX_NONNULL const kRGPropertyNonatomic = @"nonatomic";
 
 /* Ivar Description Keys */
-NSString* suffix_nonnull const kRGIvarOffset = @"ivar_offset";
-NSString* suffix_nonnull const kRGIvarSize = @"ivar_size";
-NSString* suffix_nonnull const kRGIvarPrivate = @"private";
-NSString* suffix_nonnull const kRGIvarProtected = @"protected";
-NSString* suffix_nonnull const kRGIvarPublic = @"public";
+NSString* SUFFIX_NONNULL const kRGIvarOffset = @"ivar_offset";
+NSString* SUFFIX_NONNULL const kRGIvarSize = @"ivar_size";
+NSString* SUFFIX_NONNULL const kRGIvarPrivate = @"private";
+NSString* SUFFIX_NONNULL const kRGIvarProtected = @"protected";
+NSString* SUFFIX_NONNULL const kRGIvarPublic = @"public";
 
 /* Keys shared between properties and ivars */
-NSString* suffix_nonnull const kRGPropertyName = @"name";
-NSString* suffix_nonnull const kRGPropertyCanonicalName = @"canonically";
-NSString* suffix_nonnull const kRGPropertyStorage = @"storage";
-NSString* suffix_nonnull const kRGPropertyAccess = @"access";
-NSString* suffix_nonnull const kRGSerializationKey = @"__class";
-NSString* suffix_nonnull const kRGPropertyListProperty = @"rg_propertyList";
+NSString* SUFFIX_NONNULL const kRGPropertyName = @"name";
+NSString* SUFFIX_NONNULL const kRGPropertyCanonicalName = @"canonically";
+NSString* SUFFIX_NONNULL const kRGPropertyStorage = @"storage";
+NSString* SUFFIX_NONNULL const kRGPropertyAccess = @"access";
+NSString* SUFFIX_NONNULL const kRGSerializationKey = @"__class";
+NSString* SUFFIX_NONNULL const kRGPropertyListProperty = @"rg_propertyList";
 
 /* storage for extern'd class references */
-Class suffix_nullable rg_sNSManagedObjectContext;
-Class suffix_nullable rg_sNSManagedObject;
-Class suffix_nullable rg_sNSManagedObjectModel;
-Class suffix_nullable rg_sNSPersistentStoreCoordinator;
-Class suffix_nullable rg_sNSEntityDescription;
-Class suffix_nullable rg_sNSFetchRequest;
+Class SUFFIX_NULLABLE rg_sNSManagedObjectContext;
+Class SUFFIX_NULLABLE rg_sNSManagedObject;
+Class SUFFIX_NULLABLE rg_sNSManagedObjectModel;
+Class SUFFIX_NULLABLE rg_sNSPersistentStoreCoordinator;
+Class SUFFIX_NULLABLE rg_sNSEntityDescription;
+Class SUFFIX_NULLABLE rg_sNSFetchRequest;
 
-NSArray GENERIC(NSString*) * suffix_nonnull __attribute__((pure)) rg_dateFormats(void) {
+NSArray GENERIC(NSString*) * SUFFIX_NONNULL __attribute__((pure)) rg_dateFormats(void) {
     static dispatch_once_t onceToken;
     static NSArray GENERIC(NSString*) * _sDateFormats;
     dispatch_once(&onceToken, ^{
@@ -77,33 +77,33 @@ NSArray GENERIC(NSString*) * suffix_nonnull __attribute__((pure)) rg_dateFormats
     return _sDateFormats;
 }
 
-BOOL __attribute__((pure)) rg_isClassObject(id suffix_nullable object) {
+BOOL __attribute__((pure)) rg_isClassObject(id SUFFIX_NULLABLE object) {
     return object_getClass(object) != [NSObject class] && object_getClass(/* the meta-class */object_getClass(object)) == object_getClass([NSObject class]);
     /* if the class of the meta-class == NSObject's meta-class; object was itself a Class object */
     /* object_getClass * object_getClass * <plain_nsobject> should not return true */
 }
 
-BOOL __attribute__((pure)) rg_isMetaClassObject(id suffix_nullable object) {
+BOOL __attribute__((pure)) rg_isMetaClassObject(id SUFFIX_NULLABLE object) {
     return rg_isClassObject(object) && class_isMetaClass(object);
 }
 
-BOOL __attribute__((pure)) rg_isInlineObject(Class suffix_nullable cls) {
+BOOL __attribute__((pure)) rg_isInlineObject(Class SUFFIX_NULLABLE cls) {
     return [cls isSubclassOfClass:[NSDate class]] || [cls isSubclassOfClass:[NSString class]] || [cls isSubclassOfClass:[NSData class]] || [cls isSubclassOfClass:[NSNull class]] || [cls isSubclassOfClass:[NSValue class]] || [cls isSubclassOfClass:[NSURL class]];
 }
 
-BOOL __attribute__((pure)) rg_isCollectionObject(Class suffix_nullable cls) {
+BOOL __attribute__((pure)) rg_isCollectionObject(Class SUFFIX_NULLABLE cls) {
     return [cls isSubclassOfClass:[NSSet class]] || [cls isSubclassOfClass:[NSArray class]] || [cls isSubclassOfClass:[NSOrderedSet class]];
 }
 
-BOOL __attribute__((pure)) rg_isKeyedCollectionObject(Class suffix_nullable cls) {
+BOOL __attribute__((pure)) rg_isKeyedCollectionObject(Class SUFFIX_NULLABLE cls) {
     return [cls isSubclassOfClass:[NSDictionary class]] || [cls isSubclassOfClass:[RGXMLNode class]];
 }
 
-BOOL __attribute__((pure)) rg_isDataSourceClass(Class suffix_nullable cls) {
+BOOL __attribute__((pure)) rg_isDataSourceClass(Class SUFFIX_NULLABLE cls) {
     return [cls instancesRespondToSelector:@selector(objectForKeyedSubscript:)] && [cls instancesRespondToSelector:@selector(setObject:forKeyedSubscript:)] && [cls instancesRespondToSelector:@selector(valueForKeyPath:)] && [cls instancesRespondToSelector:@selector(countByEnumeratingWithState:objects:count:)];
 }
 
-static NSString* suffix_nonnull __attribute__((pure)) rg_firstQuotedSubstring(NSString* suffix_nullable str) {
+static NSString* SUFFIX_NONNULL __attribute__((pure)) rg_firstQuotedSubstring(NSString* SUFFIX_NULLABLE str) {
     const NSUInteger inputLength = [str lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     NSUInteger i = 0, j = 0;
     char* outBuffer = malloc(inputLength);
@@ -121,18 +121,18 @@ static NSString* suffix_nonnull __attribute__((pure)) rg_firstQuotedSubstring(NS
     return ret.length ? ret : str; /* there should be 2 '"' on each end, the class is in the middle, if not, give up */
 }
 
-static Class suffix_nonnull __attribute__((pure)) rg_classForTypeString(NSString* suffix_nullable str) {
+static Class SUFFIX_NONNULL __attribute__((pure)) rg_classForTypeString(NSString* SUFFIX_NULLABLE str) {
     if ([str isEqual:@(@encode(Class))]) return object_getClass([NSObject class]);
     if ([str isEqual:@(@encode(id))]) return [NSObject class];
     str = rg_firstQuotedSubstring(str);
     return NSClassFromString(str) ?: [NSNumber class];
 }
 
-static void rg_parseIvarStructOntoPropertyDeclaration(Ivar suffix_nullable ivar, NSMutableDictionary* suffix_nullable propertyData) {
+static void rg_parseIvarStructOntoPropertyDeclaration(Ivar SUFFIX_NULLABLE ivar, NSMutableDictionary* SUFFIX_NULLABLE propertyData) {
     propertyData[kRGIvarOffset] = @(ivar_getOffset(ivar));
 }
 
-static NSMutableDictionary* suffix_nonnull rg_parseIvarStruct(Ivar suffix_nonnull ivar) {
+static NSMutableDictionary* SUFFIX_NONNULL rg_parseIvarStruct(Ivar SUFFIX_NONNULL ivar) {
     NSString* name = [NSString stringWithUTF8String:ivar_getName(ivar)];
     
     /* The default values for ivars are: assign (if primitive) strong (if object), protected */
@@ -150,7 +150,7 @@ static NSMutableDictionary* suffix_nonnull rg_parseIvarStruct(Ivar suffix_nonnul
     return propertyDict;
 }
 
-static NSMutableDictionary* suffix_nonnull rg_parsePropertyStruct(objc_property_t suffix_nonnull property) {
+static NSMutableDictionary* SUFFIX_NONNULL rg_parsePropertyStruct(objc_property_t SUFFIX_NONNULL property) {
     NSString* name = [NSString stringWithUTF8String:property_getName(property)];
     /* The default values for properties are: if object and ARC compiled: strong (we don't have to check for this, ARC will insert the retain attribute) else assign. atomic. readwrite. */
     NSMutableDictionary* propertyDict = [@{
@@ -205,7 +205,7 @@ static NSMutableDictionary* suffix_nonnull rg_parsePropertyStruct(objc_property_
     return propertyDict;
 }
 
-Class suffix_nonnull rg_topClassDeclaringPropertyNamed(Class suffix_nullable currentClass, NSString* suffix_nullable propertyName) {
+Class SUFFIX_NONNULL rg_topClassDeclaringPropertyNamed(Class SUFFIX_NULLABLE currentClass, NSString* SUFFIX_NULLABLE propertyName) {
     const char* utf8Name = propertyName.UTF8String;
     Class iteratorClass = currentClass, priorClass;
     while (YES) {
@@ -229,7 +229,7 @@ Class suffix_nonnull rg_topClassDeclaringPropertyNamed(Class suffix_nullable cur
     });
 }
 
-+ (prefix_nonnull NSMutableArray GENERIC(NSMutableDictionary*) *) rg_propertyList {
++ (PREFIX_NONNULL NSMutableArray GENERIC(NSMutableDictionary*) *) rg_propertyList {
     @synchronized (self) {
         NSMutableArray* rg_propertyList = objc_getAssociatedObject(self, @selector(rg_propertyList));
         if (!rg_propertyList) {
@@ -259,16 +259,16 @@ Class suffix_nonnull rg_topClassDeclaringPropertyNamed(Class suffix_nullable cur
     }
 }
 
-+ (prefix_nullable NSDictionary*) rg_declarationForProperty:(prefix_nonnull NSString*)propertyName {
++ (PREFIX_NULLABLE NSDictionary*) rg_declarationForProperty:(PREFIX_NONNULL NSString*)propertyName {
     NSUInteger index = [[self rg_propertyList][kRGPropertyName] indexOfObject:propertyName];
     return index == NSNotFound ? nil : [self rg_propertyList][index];
 }
 
-- (prefix_nonnull Class) rg_classForProperty:(prefix_nonnull NSString*)propertyName {
+- (PREFIX_NONNULL Class) rg_classForProperty:(PREFIX_NONNULL NSString*)propertyName {
     return [[self class] rg_declarationForProperty:propertyName][kRGPropertyClass] ?: [NSNumber class];
 }
 
-- (BOOL) rg_isPrimitive:(prefix_nonnull NSString*)propertyName {
+- (BOOL) rg_isPrimitive:(PREFIX_NONNULL NSString*)propertyName {
     NSString* rawType = [[self class] rg_declarationForProperty:propertyName][kRGPropertyRawType];
     return !NSClassFromString(rawType) && ![rawType isEqual:@(@encode(id))] && ![rawType isEqual:@(@encode(Class))];
 }

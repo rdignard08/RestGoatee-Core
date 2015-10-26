@@ -31,15 +31,15 @@
 
 @implementation RGTestObject4
 
-+ (prefix_nullable NSDictionary*) overrideKeysForMapping {
++ (PREFIX_NULLABLE NSDictionary*) overrideKeysForMapping {
     return @{ STRING_SEL(stringProperty) : STRING_SEL(numberProperty) };
 }
 
-+ (prefix_nullable NSString*) dateFormatForProperty:(prefix_nonnull NSString* __unused)propertyName {
++ (PREFIX_NULLABLE NSString*) dateFormatForProperty:(PREFIX_NONNULL NSString* __unused)propertyName {
     return @"dd/MM/yyyy";
 }
 
-- (BOOL) shouldTransformValue:(prefix_nullable __unused id)value forProperty:(prefix_nonnull NSString*)propertyName inContext:(prefix_nullable __unused NSManagedObjectContext*)context {
+- (BOOL) shouldTransformValue:(PREFIX_NULLABLE __unused id)value forProperty:(PREFIX_NONNULL NSString*)propertyName inContext:(PREFIX_NULLABLE __unused NSManagedObjectContext*)context {
     if ([propertyName isEqual:STRING_SEL(idProperty)]) {
         self.idProperty = @"foobaz";
         return NO;

@@ -34,21 +34,21 @@ _Pragma("clang diagnostic pop")
 #pragma clang diagnostic ignored "-Wgnu"
 
 #if __has_feature(nullability)
-    #define nullable_property(...) (nullable, ## __VA_ARGS__)
-    #define nonnull_property(...) (nonnull, ## __VA_ARGS__)
-    #define null_resettable_property(...) (null_resettable, ## __VA_ARGS__)
-    #define prefix_nullable nullable
-    #define suffix_nullable __nullable
-    #define prefix_nonnull nonnull
-    #define suffix_nonnull __nonnull
+    #define NULLABLE_PROPERTY(...) (nullable, ## __VA_ARGS__)
+    #define NONNULL_PROPERTY(...) (nonnull, ## __VA_ARGS__)
+    #define NULL_RESETTABLE_PROPERTY(...) (null_resettable, ## __VA_ARGS__)
+    #define PREFIX_NULLABLE nullable
+    #define SUFFIX_NULLABLE __nullable
+    #define PREFIX_NONNULL nonnull
+    #define SUFFIX_NONNULL __nonnull
 #else
-    #define nullable_property(...) (__VA_ARGS__)
-    #define nonnull_property(...) (__VA_ARGS__)
-    #define null_resettable_property(...) (__VA_ARGS__)
-    #define prefix_nullable
-    #define suffix_nullable
-    #define prefix_nonnull
-    #define suffix_nonnull
+    #define NULLABLE_PROPERTY(...) (__VA_ARGS__)
+    #define NONNULL_PROPERTY(...) (__VA_ARGS__)
+    #define NULL_RESETTABLE_PROPERTY(...) (__VA_ARGS__)
+    #define PREFIX_NULLABLE
+    #define SUFFIX_NULLABLE
+    #define PREFIX_NONNULL
+    #define SUFFIX_NONNULL
 #endif
 
 #if __has_feature(objc_generics)

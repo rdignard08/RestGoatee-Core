@@ -33,7 +33,7 @@ FILE_START
 /**
  Set when `-addChildNode:` is called.  A weak reference to the enclosing node.
  */
-@property nullable_property(nonatomic, weak, readonly) RGXMLNode* parentNode;
+@property NULLABLE_PROPERTY(nonatomic, weak, readonly) RGXMLNode* parentNode;
 
 /**
  Attributes come from <object id="123" name="cool"> and will equal @{ "id" : "123", "name" : "cool" }.
@@ -42,12 +42,12 @@ FILE_START
  
  You may mutate the collection.
  */
-@property null_resettable_property(nonatomic, strong) NSMutableDictionary GENERIC(NSString*, NSString*) * attributes;
+@property NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableDictionary GENERIC(NSString*, NSString*) * attributes;
 
 /**
  The name of the tag.  <foobar>...</foobar> will have the value of `foobar` here.
  */
-@property nullable_property(nonatomic, strong) NSString* name;
+@property NULLABLE_PROPERTY(nonatomic, strong) NSString* name;
 
 /**
  The innerXML if any, including unwrapped CDATA. 
@@ -56,22 +56,22 @@ FILE_START
  
  adjacent open and close tags will be the empty string; <object></object>
  */
-@property nullable_property(nonatomic, strong) NSString* innerXML;
+@property NULLABLE_PROPERTY(nonatomic, strong) NSString* innerXML;
 
 /**
  This property contains any sub-nodes of this node.  Those sub-nodes have this node as the value of their `parentNode` property.
  */
-@property null_resettable_property(nonatomic, strong, readonly) NSArray GENERIC(RGXMLNode*) * childNodes;
+@property NULL_RESETTABLE_PROPERTY(nonatomic, strong, readonly) NSArray GENERIC(RGXMLNode*) * childNodes;
 
 /**
- May return either `NSArray<RGXMLNode*>*` or `prefix_nullable RGXMLNode*`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
+ May return either `NSArray<RGXMLNode*>*` or `PREFIX_NULLABLE RGXMLNode*`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
  */
-- (prefix_nullable id) childrenNamed:(prefix_nullable NSString*)name;
+- (PREFIX_NULLABLE id) childrenNamed:(PREFIX_NULLABLE NSString*)name;
 
 /**
  Call this method to insert a new node into this object's `childNodes` property.
  */
-- (void) addChildNode:(prefix_nonnull RGXMLNode*)node;
+- (void) addChildNode:(PREFIX_NONNULL RGXMLNode*)node;
 
 @end
 

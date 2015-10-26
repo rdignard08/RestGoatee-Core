@@ -28,13 +28,13 @@ FILE_START
 
 @implementation NSString (RGCanonicalValue)
 
-- (void) setRg_canonicalValue:(prefix_nullable NSString*)canonicalValue {
+- (void) setRg_canonicalValue:(PREFIX_NULLABLE NSString*)canonicalValue {
     @synchronized (self) {
         objc_setAssociatedObject(self, @selector(rg_canonicalValue), canonicalValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
 }
 
-- (prefix_nonnull NSString*) rg_canonicalValue {
+- (PREFIX_NONNULL NSString*) rg_canonicalValue {
     @synchronized (self) {
         NSString* canonicalValue = objc_getAssociatedObject(self, @selector(rg_canonicalValue));
         if (!canonicalValue) {

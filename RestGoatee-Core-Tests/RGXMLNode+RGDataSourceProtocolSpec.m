@@ -23,22 +23,22 @@
 
 #import "RGXMLNode+RGDataSourceProtocol.h"
 
-//- (prefix_nullable id) objectForKeyedSubscript:(prefix_nonnull id<NSCopying, NSObject>)key;
+//- (PREFIX_NULLABLE id) objectForKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key;
 //
 ///**
 // The data source must support `dataSource[@"key"] = value`.
 // */
-//- (void) setObject:(prefix_nullable id)object forKeyedSubscript:(prefix_nonnull id<NSCopying, NSObject>)key;
+//- (void) setObject:(PREFIX_NULLABLE id)object forKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key;
 //
 ///**
 // The data source must support `id value = dataSource[@"foo.bar"]`.
 // */
-//- (prefix_nullable id) valueForKeyPath:(prefix_nonnull NSString*)string;
+//- (PREFIX_NULLABLE id) valueForKeyPath:(PREFIX_NONNULL NSString*)string;
 //
 ///**
 // Returns an array of the keys which are present in this data source (but NOT sub data sources).
 // */
-//- (prefix_nonnull NSArray*) allKeys;
+//- (PREFIX_NONNULL NSArray*) allKeys;
 
 CATEGORY_SPEC(RGXMLNode, RGDataSourceProtocol)
 

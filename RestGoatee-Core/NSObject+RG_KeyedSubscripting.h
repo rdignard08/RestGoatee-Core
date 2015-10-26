@@ -40,12 +40,12 @@ FILE_START
 /**
  @abstract returns the property or instance variable of the name given by `key`.
  */
-- (prefix_nullable id) objectForKeyedSubscript:(prefix_nonnull id<NSCopying, NSObject>)key;
+- (PREFIX_NULLABLE id) objectForKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key;
 
 /**
  @abstract set the value of the particular property or instance variable specified by `key`.
  */
-- (void) setObject:(prefix_nullable id)obj forKeyedSubscript:(prefix_nonnull id<NSCopying, NSObject>)key;
+- (void) setObject:(PREFIX_NULLABLE id)obj forKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key;
 
 @end
 

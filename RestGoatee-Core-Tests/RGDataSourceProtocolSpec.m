@@ -31,7 +31,7 @@
 
 @implementation RGTestObject3
 
-- (prefix_nullable id) valueForKeyPath:(prefix_nonnull NSString*)string {
+- (PREFIX_NULLABLE id) valueForKeyPath:(PREFIX_NONNULL NSString*)string {
     if ([string isEqual:@"stringProperty"]) {
         return @"abd";
     } else if ([string isEqual:@"idProperty"]) {
@@ -40,15 +40,15 @@
     return nil;
 }
 
-- (prefix_nonnull NSArray*) allKeys {
+- (PREFIX_NONNULL NSArray*) allKeys {
     return @[ @"stringProperty", @"idProperty" ];
 }
 
-- (NSUInteger) countByEnumeratingWithState:(prefix_nonnull NSFastEnumerationState*)state objects:(__unsafe_unretained id[])buffer count:(NSUInteger)len {
+- (NSUInteger) countByEnumeratingWithState:(PREFIX_NONNULL NSFastEnumerationState*)state objects:(__unsafe_unretained id[])buffer count:(NSUInteger)len {
     return [self.allKeys countByEnumeratingWithState:state objects:buffer count:len];
 }
 
-- (prefix_nullable id) valueForKey:(prefix_nonnull NSString*)key {
+- (PREFIX_NULLABLE id) valueForKey:(PREFIX_NONNULL NSString*)key {
     return [self valueForKeyPath:key];
 }
 

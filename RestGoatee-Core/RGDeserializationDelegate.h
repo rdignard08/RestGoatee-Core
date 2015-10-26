@@ -34,12 +34,12 @@ FILE_START
 /**
  @abstract Provide any overrides for default mapping behavior here.  The returned dictionary should have keys and values of type NSString and should be read left-to-right JSON source to target key.  Any unspecified key(s) will use the default behavior for mapping.  Can return `nil` (say you're overriding a class that implements this).
  */
-+ (prefix_nullable NSDictionary*) overrideKeysForMapping;
++ (PREFIX_NULLABLE NSDictionary*) overrideKeysForMapping;
 
 /**
  @abstract Provide a custom date format for use with the given property `propertyName`.  See documentation for NSDate for proper formats.  Can return `nil` (say you're overriding a class that implements this).
  */
-+ (prefix_nullable NSString*) dateFormatForProperty:(prefix_nonnull NSString*)propertyName;
++ (PREFIX_NULLABLE NSString*) dateFormatForProperty:(PREFIX_NONNULL NSString*)propertyName;
 
 /**
  @abstract implement this method to provide custom logic on a given property.  Return the value `YES` if this method is implemented and the default is desired.
@@ -48,7 +48,7 @@ FILE_START
  
  This method tends to be necessary for deserializing arrays that lack a metadata key indicating the type of the object.
  */
-- (BOOL) shouldTransformValue:(prefix_nullable id)value forProperty:(prefix_nonnull NSString*)propertyName inContext:(prefix_nullable NSManagedObjectContext*)context;
+- (BOOL) shouldTransformValue:(PREFIX_NULLABLE id)value forProperty:(PREFIX_NONNULL NSString*)propertyName inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 @end
 

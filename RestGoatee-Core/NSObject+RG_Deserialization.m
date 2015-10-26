@@ -30,11 +30,11 @@ FILE_START
 
 @interface NSObject (RGForwardDeclarations)
 
-+ (prefix_nonnull id) insertNewObjectForEntityForName:(prefix_nonnull NSString*)entityName inManagedObjectContext:(prefix_nonnull id)context;
++ (PREFIX_NONNULL id) insertNewObjectForEntityForName:(PREFIX_NONNULL NSString*)entityName inManagedObjectContext:(PREFIX_NONNULL id)context;
 
 @end
 
-static NSArray GENERIC(id) * suffix_nonnull rg_unpackArray(NSArray* suffix_nullable json, id suffix_nullable context) {
+static NSArray GENERIC(id) * SUFFIX_NONNULL rg_unpackArray(NSArray* SUFFIX_NULLABLE json, id SUFFIX_NULLABLE context) {
     NSMutableArray* ret = [NSMutableArray new];
     for (__strong id obj in json) {
         if (rg_isDataSourceClass([obj class])) {
@@ -48,11 +48,11 @@ static NSArray GENERIC(id) * suffix_nonnull rg_unpackArray(NSArray* suffix_nulla
 
 @implementation NSObject (RG_Deserialization)
 
-+ (prefix_nonnull NSMutableArray GENERIC(id) *) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source {
++ (PREFIX_NONNULL NSMutableArray GENERIC(id) *) objectsFromArraySource:(PREFIX_NULLABLE id<NSFastEnumeration>)source {
     return [self objectsFromArraySource:source inContext:nil];
 }
 
-+ (prefix_nonnull NSMutableArray GENERIC(id) *) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source inContext:(prefix_nullable NSManagedObjectContext*)context {
++ (PREFIX_NONNULL NSMutableArray GENERIC(id) *) objectsFromArraySource:(PREFIX_NULLABLE id<NSFastEnumeration>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context {
     NSMutableArray GENERIC(id) * objects = [NSMutableArray new];
     for (NSDictionary* object in source) {
         if (rg_isDataSourceClass([object class])) {
@@ -62,12 +62,12 @@ static NSArray GENERIC(id) * suffix_nonnull rg_unpackArray(NSArray* suffix_nulla
     return objects;
 }
 
-+ (prefix_nonnull instancetype) objectFromDataSource:(prefix_nullable id<RGDataSourceProtocol>)source {
++ (PREFIX_NONNULL instancetype) objectFromDataSource:(PREFIX_NULLABLE id<RGDataSourceProtocol>)source {
     NSAssert(![self isSubclassOfClass:rg_sNSManagedObject], @"Managed object subclasses must be initialized within a managed object context.  Use +objectFromJSON:inContext:");
     return [self objectFromDataSource:source inContext:nil];
 }
 
-+ (prefix_nonnull instancetype) objectFromDataSource:(prefix_nullable id<RGDataSourceProtocol>)source inContext:(prefix_nullable NSManagedObjectContext*)context {
++ (PREFIX_NONNULL instancetype) objectFromDataSource:(PREFIX_NULLABLE id<RGDataSourceProtocol>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context {
     NSObject<RGDeserializationDelegate>* ret;
     if ([self isSubclassOfClass:rg_sNSManagedObject]) {
         NSAssert(context, @"A subclass of NSManagedObject must be created within a valid NSManagedObjectContext.");
@@ -78,7 +78,7 @@ static NSArray GENERIC(id) * suffix_nonnull rg_unpackArray(NSArray* suffix_nulla
     return [ret extendWith:source inContext:context];
 }
 
-- (void) rg_initCanonically:(prefix_nonnull NSString*)key withValue:(prefix_nullable id)value inContext:(prefix_nullable id)context {
+- (void) rg_initCanonically:(PREFIX_NONNULL NSString*)key withValue:(PREFIX_NULLABLE id)value inContext:(PREFIX_NULLABLE id)context {
     NSUInteger index = [[[self class] rg_propertyList][kRGPropertyCanonicalName] indexOfObject:key.rg_canonicalValue];
     if (index != NSNotFound) {
         if (rg_topClassDeclaringPropertyNamed([self class], [[self class] rg_propertyList][index][kRGPropertyName]) != [NSObject class]) {
@@ -97,7 +97,7 @@ static NSArray GENERIC(id) * suffix_nonnull rg_unpackArray(NSArray* suffix_nulla
  JSON types when deserialized from NSData are: NSNull, NSNumber (number or boolean), NSString, NSArray, NSDictionary.
  RGXMLNode is odd, but it can be used as nil, NSString, NSDictionary, or NSArray where required.
  */
-- (void) rg_initProperty:(prefix_nonnull NSString*)key withValue:(prefix_nullable id)value inContext:(prefix_nullable id)context {
+- (void) rg_initProperty:(PREFIX_NONNULL NSString*)key withValue:(PREFIX_NULLABLE id)value inContext:(PREFIX_NULLABLE id)context {
     static NSDateFormatter* dateFormatter;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -211,7 +211,7 @@ static NSArray GENERIC(id) * suffix_nonnull rg_unpackArray(NSArray* suffix_nulla
     self[key] ? VOID_NOOP : RGLog(@"Warning, initialization failed on property %@ on type %@", key, [self class]);
 }
 
-- (prefix_nonnull instancetype) extendWith:(prefix_nullable NSObject<RGDataSourceProtocol>*)source inContext:(prefix_nullable NSManagedObjectContext*)context {
+- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE NSObject<RGDataSourceProtocol>*)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context {
     NSDictionary* overrides = [[self class] respondsToSelector:@selector(overrideKeysForMapping)] ? [[self class] overrideKeysForMapping] : nil;
     NSMutableArray GENERIC(NSString*) * intializedProperties = [NSMutableArray new];
     for (NSString* key in source) {
@@ -233,7 +233,7 @@ static NSArray GENERIC(id) * suffix_nonnull rg_unpackArray(NSArray* suffix_nulla
     return self;
 }
 
-- (prefix_nonnull instancetype) extendWith:(prefix_nullable NSObject<RGDataSourceProtocol>*)object {
+- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE NSObject<RGDataSourceProtocol>*)object {
     return [self extendWith:object inContext:nil];
 }
 

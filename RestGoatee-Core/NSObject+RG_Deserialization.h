@@ -35,34 +35,34 @@ FILE_START
 /**
  @abstract subclasses of `NSManagedObject` must use this method since they cannot be initialized without a context.
  */
-+ (prefix_nonnull instancetype) objectFromDataSource:(prefix_nullable id<RGDataSourceProtocol>)source inContext:(prefix_nullable NSManagedObjectContext*)context;
++ (PREFIX_NONNULL instancetype) objectFromDataSource:(PREFIX_NULLABLE id<RGDataSourceProtocol>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 /**
  @abstract the receiver (the Class object) which receives this method will attempt to initialize an instance of this class with properties assigned from a data source.
  */
-+ (prefix_nonnull instancetype) objectFromDataSource:(prefix_nullable id<RGDataSourceProtocol>)source;
++ (PREFIX_NONNULL instancetype) objectFromDataSource:(PREFIX_NULLABLE id<RGDataSourceProtocol>)source;
 
 /**
  @abstract creates and returns an array of objects of the type of the receiver.  Need only be something iteratable.
  */
-+ (prefix_nonnull NSMutableArray GENERIC(id /* __kindof receiver */) *) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source inContext:(prefix_nullable NSManagedObjectContext*)context;
++ (PREFIX_NONNULL NSMutableArray GENERIC(id /* __kindof receiver */) *) objectsFromArraySource:(PREFIX_NULLABLE id<NSFastEnumeration>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 /**
  @abstract creates and returns an array of objects of the type of the receiver. The return value is mutable, and you can mutate it to your heart's content.
  */
-+ (prefix_nonnull NSMutableArray GENERIC(id /* __kindof receiver */) *) objectsFromArraySource:(prefix_nullable id<NSFastEnumeration>)source;
++ (PREFIX_NONNULL NSMutableArray GENERIC(id /* __kindof receiver */) *) objectsFromArraySource:(PREFIX_NULLABLE id<NSFastEnumeration>)source;
 
 /**
  @abstract merges two objects into a single object.  The return value is not a new object, but rather is the receiver augmented with the values in `object`.
  @param object Can be of type NSDictionary, RGXMLNode, or a user defined type conforming to `RGDataSourceProtocol`.
  @return the receiving object extended with `object`; any conflicts will take `object`'s value as precedent.
  */
-- (prefix_nonnull instancetype) extendWith:(prefix_nullable NSObject<RGDataSourceProtocol>*)object;
+- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE NSObject<RGDataSourceProtocol>*)object;
 
 /**
  Same as `-extendWith:` but since there may be sub objects which are `NSManagedObject` subclasses, it may be necessary to provide an `NSManagedObjectContext` to contain them.
  */
-- (prefix_nonnull instancetype) extendWith:(prefix_nullable NSObject<RGDataSourceProtocol>*)object inContext:(prefix_nullable NSManagedObjectContext*)context;
+- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE NSObject<RGDataSourceProtocol>*)object inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 @end
 

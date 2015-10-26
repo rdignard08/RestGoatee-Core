@@ -31,7 +31,7 @@ FILE_START
 
 @implementation NSObject (RG_KeyedSubscripting)
 
-- (prefix_nullable id) objectForKeyedSubscript:(prefix_nonnull id<NSCopying, NSObject>)key {
+- (PREFIX_NULLABLE id) objectForKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key {
 #if !(STRICT_KVC)
     @try {
 #endif
@@ -44,7 +44,7 @@ FILE_START
 #endif
 }
 
-- (void) setObject:(prefix_nullable id)obj forKeyedSubscript:(prefix_nonnull id<NSCopying, NSObject>)key {
+- (void) setObject:(PREFIX_NULLABLE id)obj forKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key {
 #if !(STRICT_KVC)
     @try {
 #endif
@@ -61,7 +61,7 @@ FILE_START
 @implementation NSMutableDictionary (RG_KeyedSubscripting)
 
 /* fuck you apple */
-- (void) setObject:(prefix_nullable id)obj forKeyedSubscript:(prefix_nonnull id<NSCopying, NSObject>)key {
+- (void) setObject:(PREFIX_NULLABLE id)obj forKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key {
     if (obj) {
         [self setObject:obj forKey:key];
     } else {

@@ -30,26 +30,26 @@ FILE_START
 @synthesize attributes = _attributes;
 @synthesize childNodes = _childNodes;
 
-- (prefix_nonnull NSArray GENERIC(RGXMLNode*) *) childNodes {
+- (PREFIX_NONNULL NSArray GENERIC(RGXMLNode*) *) childNodes {
     if (!_childNodes) {
         _childNodes = [NSMutableArray new];
     }
     return _childNodes;
 }
 
-- (prefix_nonnull NSMutableDictionary GENERIC(NSString*, NSString*) *) attributes {
+- (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, NSString*) *) attributes {
     if (!_attributes) {
         _attributes = [NSMutableDictionary new];
     }
     return _attributes;
 }
 
-- (void) addChildNode:(prefix_nonnull RGXMLNode*)node {
+- (void) addChildNode:(PREFIX_NONNULL RGXMLNode*)node {
     node->_parentNode = self;
     [(NSMutableArray*)self.childNodes addObject:node];
 }
 
-- (prefix_nullable id) childrenNamed:(prefix_nullable NSString*)name {
+- (PREFIX_NULLABLE id) childrenNamed:(PREFIX_NULLABLE NSString*)name {
     NSMutableArray* ret = [NSMutableArray new];
     for (RGXMLNode* child in self.childNodes) {
         if ([child.name isEqual:name]) {

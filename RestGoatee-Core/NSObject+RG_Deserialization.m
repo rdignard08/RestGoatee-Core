@@ -75,28 +75,7 @@ static NSArray GENERIC(id) * suffix_nonnull rg_unpackArray(NSArray* suffix_nulla
     } else {
         ret = [self new];
     }
-    Class returnType = [ret class];
-    NSDictionary* overrides = [returnType respondsToSelector:@selector(overrideKeysForMapping)] ? [returnType overrideKeysForMapping] : nil;
-    NSMutableArray GENERIC(NSString*) * intializedProperties = [NSMutableArray new];
-    for (NSString* key in source) {
-        /* default behavior self.key = json[key] (each `key` is compared in canonical form) */
-        if (overrides[key]) continue;
-        [ret rg_initCanonically:key withValue:source[key] inContext:context];
-        [intializedProperties addObject:key.rg_canonicalValue];
-    }
-    for (NSString* key in overrides) { /* The developer provided an override keypath */
-        if ([intializedProperties containsObject:key.rg_canonicalValue]) continue;
-        id value = [source valueForKeyPath:key];
-        if (!value) continue; // nil should not be pushed into the property
-        @try {
-            [ret rg_initProperty:overrides[key] withValue:value inContext:context];
-            [intializedProperties addObject:key.rg_canonicalValue];
-        }
-        @catch (NSException* e) { /* Should this fail the property is left alone */
-            RGLog(@"initializing property %@ on type %@ failed: %@", overrides[key], [ret class], e);
-        }
-    }
-    return ret;
+    return [ret extendWith:source inContext:context];
 }
 
 - (void) rg_initCanonically:(prefix_nonnull NSString*)key withValue:(prefix_nullable id)value inContext:(prefix_nullable id)context {
@@ -232,18 +211,18 @@ static NSArray GENERIC(id) * suffix_nonnull rg_unpackArray(NSArray* suffix_nulla
     self[key] ? VOID_NOOP : RGLog(@"Warning, initialization failed on property %@ on type %@", key, [self class]);
 }
 
-- (prefix_nonnull instancetype) extendWith:(prefix_nullable NSObject<RGDataSourceProtocol>*)object inContext:(prefix_nullable NSManagedObjectContext*)context {
+- (prefix_nonnull instancetype) extendWith:(prefix_nullable NSObject<RGDataSourceProtocol>*)source inContext:(prefix_nullable NSManagedObjectContext*)context {
     NSDictionary* overrides = [[self class] respondsToSelector:@selector(overrideKeysForMapping)] ? [[self class] overrideKeysForMapping] : nil;
     NSMutableArray GENERIC(NSString*) * intializedProperties = [NSMutableArray new];
-    for (NSString* key in [object rg_keys]) {
+    for (NSString* key in source) {
         if (overrides[key]) continue;
-        [self rg_initCanonically:key withValue:object[key] inContext:context];
+        [self rg_initCanonically:key withValue:source[key] inContext:context];
         [intializedProperties addObject:key.rg_canonicalValue];
     }
     for (NSString* key in overrides) { /* The developer provided an override keypath */
         if ([intializedProperties containsObject:key.rg_canonicalValue]) continue;
-        id value = [object valueForKeyPath:key];
-        if (!value && rg_isDataSourceClass([object class])) continue; // empty dictionary entry doesn't get pushed
+        id value = [source valueForKeyPath:key];
+        if (!value) continue; // empty dictionary entry doesn't get pushed
         @try {
             [self rg_initProperty:overrides[key] withValue:value inContext:context];
             [intializedProperties addObject:[overrides[key] rg_canonicalValue]];

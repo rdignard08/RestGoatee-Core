@@ -22,18 +22,9 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RGDefines.h"
+#import <objc/runtime.h>
 
 FILE_START
-
-/**
- forward declaration from <objc/runtime.h>
- */
-struct objc_property;
-
-/**
- forward declaration from <objc/runtime.h>
- */
-struct objc_ivar;
 
 /* Some notes on property attributes, declaration modifiers
     assign is exactly the same unsafe_unretained 

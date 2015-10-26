@@ -169,7 +169,7 @@ static NSArray GENERIC(id) * SUFFIX_NONNULL rg_unpackArray(NSArray* SUFFIX_NULLA
     if (rg_isMetaClassObject(propertyType)) { /* the property's type is Meta-class so its a reference to Class */
         self[key] = NSClassFromString([value description]);
     } else if ([propertyType isSubclassOfClass:[NSDictionary class]] && ([value isKindOfClass:[NSDictionary class]] || [value isKindOfClass:[RGXMLNode class]])) { /* NSDictionary */
-        if ([value isKindOfClass:[RGXMLNode class]]) @throw @"Sorry this hasn't been implemented yet"; // TODO
+        if ([value isKindOfClass:[RGXMLNode class]]) value = [(RGXMLNode*)value dictionaryRepresentation];
         self[key] = [[propertyType alloc] initWithDictionary:value];
     } else if (rg_isCollectionObject(propertyType) && ([value isKindOfClass:[NSArray class]] || [value isKindOfClass:[RGXMLNode class]])) { /* NSArray, NSSet, or NSOrderedSet */
         if ([value isKindOfClass:[RGXMLNode class]]) value = [value childNodes];

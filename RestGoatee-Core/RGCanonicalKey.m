@@ -24,6 +24,8 @@
 #import "RGCanonicalKey.h"
 #import "NSString+RGCanonicalValue.h"
 
+FILE_START
+
 @interface RGCanonicalKey ()
 
 @property NULLABLE_PROPERTY(nonatomic, strong) NSString* rg_baseKey;
@@ -62,3 +64,5 @@
 }
 
 @end
+
+FILE_END

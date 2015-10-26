@@ -188,28 +188,6 @@ CATEGORY_SPEC(NSObject, RG_SharedImpl)
     XCTAssert([propertyList[kRGPropertyName] indexOfObject:STRING_SEL(dateProperty)] != NSNotFound);
 }
 
-#pragma mark - rg_keys
-- (void) testRGKeysObject {
-    RGTestObject2* object = [RGTestObject2 new];
-    NSArray* rgKeys = object.rg_keys;
-    XCTAssert([rgKeys indexOfObject:STRING_SEL(stringProperty)] != NSNotFound);
-    XCTAssert([rgKeys indexOfObject:STRING_SEL(urlProperty)] != NSNotFound);
-    XCTAssert([rgKeys indexOfObject:STRING_SEL(numberProperty)] != NSNotFound);
-    XCTAssert([rgKeys indexOfObject:STRING_SEL(decimalProperty)] != NSNotFound);
-    XCTAssert([rgKeys indexOfObject:STRING_SEL(valueProperty)] != NSNotFound);
-    XCTAssert([rgKeys indexOfObject:STRING_SEL(idProperty)] != NSNotFound);
-    XCTAssert([rgKeys indexOfObject:STRING_SEL(classProperty)] != NSNotFound);
-    XCTAssert([rgKeys indexOfObject:STRING_SEL(arrayProperty)] != NSNotFound);
-    XCTAssert([rgKeys indexOfObject:STRING_SEL(dictionaryProperty)] != NSNotFound);
-    XCTAssert([rgKeys indexOfObject:STRING_SEL(objectProperty)] != NSNotFound);
-    XCTAssert([rgKeys indexOfObject:STRING_SEL(dateProperty)] != NSNotFound);
-}
-
-- (void) testRGKeysDictionary {
-    NSDictionary* rgKeys = @{ @"abc" : @"def", @"123" : @"foobar" };
-    XCTAssert([rgKeys.rg_keys isEqual:(@[ @"abc", @"123" ])]);
-}
-
 #pragma mark - rg_classForProperty:
 - (void) testRGClassForProperty {
     RGTestObject2* object = [RGTestObject2 new];

@@ -167,6 +167,7 @@ static NSArray GENERIC(id) * SUFFIX_NONNULL rg_unpackArray(NSArray* SUFFIX_NULLA
     /* Otherwise... this mess */
     
     if (rg_isMetaClassObject(propertyType)) { /* the property's type is Meta-class so its a reference to Class */
+        if ([value isKindOfClass:[RGXMLNode class]]) value = [value innerXML];
         self[key] = NSClassFromString([value description]);
     } else if ([propertyType isSubclassOfClass:[NSDictionary class]] && ([value isKindOfClass:[NSDictionary class]] || [value isKindOfClass:[RGXMLNode class]])) { /* NSDictionary */
         if ([value isKindOfClass:[RGXMLNode class]]) value = [(RGXMLNode*)value dictionaryRepresentation];

@@ -405,6 +405,89 @@ CATEGORY_SPEC(NSObject, RG_Deserialization)
     XCTAssert(object.dictionaryProperty == nil);
 }
 
+#pragma mark - rg_initProperty:withValue:inContext: with RGXMLNode
+- (void) testNodeToString {
+    RGTestObject2* object = [RGTestObject2 new];
+    RGXMLNode* node = [RGXMLNode new];
+    node.innerXML = @"a string";
+    [object rg_initProperty:STRING_SEL(stringProperty) withValue:node inContext:nil];
+    XCTAssert([object.stringProperty isEqual:@"a string"]);
+}
+
+- (void) testNodeToURL {
+    RGTestObject2* object = [RGTestObject2 new];
+    RGXMLNode* node = [RGXMLNode new];
+    node.innerXML = @"http://google.com";
+    [object rg_initProperty:STRING_SEL(urlProperty) withValue:node inContext:nil];
+    XCTAssert([object.urlProperty isEqual:[NSURL URLWithString:@"http://google.com"]]);
+}
+
+- (void) testNodeToNumber {
+    RGTestObject2* object = [RGTestObject2 new];
+    RGXMLNode* node = [RGXMLNode new];
+    node.innerXML = @"2";
+    [object rg_initProperty:STRING_SEL(numberProperty) withValue:node inContext:nil];
+    XCTAssert([object.numberProperty isEqual:@2]);
+}
+
+- (void) testNodeToDecimal {
+    RGTestObject2* object = [RGTestObject2 new];
+    RGXMLNode* node = [RGXMLNode new];
+    node.innerXML = @"2.00";
+    [object rg_initProperty:STRING_SEL(decimalProperty) withValue:node inContext:nil];
+    XCTAssert([object.decimalProperty isEqual:[NSDecimalNumber decimalNumberWithString:@"2.00"]]);
+}
+
+- (void) testNodeToValue {
+    RGTestObject2* object = [RGTestObject2 new];
+    RGXMLNode* node = [RGXMLNode new];
+    node.innerXML = @"2";
+    [object rg_initProperty:STRING_SEL(valueProperty) withValue:node inContext:nil];
+    XCTAssert([object.valueProperty isEqual:@2]);
+}
+
+- (void) testNodeToId {
+    RGTestObject2* object = [RGTestObject2 new];
+    RGXMLNode* node = [RGXMLNode new];
+    [object rg_initProperty:STRING_SEL(idProperty) withValue:node inContext:nil];
+    XCTAssert(object.idProperty == node);
+}
+
+- (void) testNodeToObject {
+    RGTestObject2* object = [RGTestObject2 new];
+    RGXMLNode* node = [RGXMLNode new];
+    [object rg_initProperty:STRING_SEL(objectProperty) withValue:node inContext:nil];
+    XCTAssert(object.objectProperty == node);
+}
+
+- (void) testNodeToClass {
+    RGTestObject2* object = [RGTestObject2 new];
+    RGXMLNode* node = [RGXMLNode new];
+    node.innerXML = @"NSObject";
+    [object rg_initProperty:STRING_SEL(classProperty) withValue:node inContext:nil];
+    XCTAssert(object.classProperty == [NSObject class]);
+}
+
+- (void) testNodeToArray {
+    RGTestObject2* object = [RGTestObject2 new];
+    RGXMLNode* node = [RGXMLNode new];
+    [object rg_initProperty:STRING_SEL(arrayProperty) withValue:node inContext:nil];
+    XCTAssert([object.arrayProperty isEqual:(@[])]);
+}
+
+- (void) testNodeToDictionary {
+    RGTestObject2* object = [RGTestObject2 new];
+    RGXMLNode* node = [RGXMLNode new];
+    node.name = @"name1";
+    node.attributes[@"name2"] = @"value2";
+    node.innerXML = @"value1";
+    RGXMLNode* childNode = [RGXMLNode new];
+    childNode.name = @"child";
+    [node addChildNode:childNode];
+    [object rg_initProperty:STRING_SEL(dictionaryProperty) withValue:node inContext:nil];
+    XCTAssert([object.dictionaryProperty isEqual:(@{ kRGInnerXMLKey : @"value1", @"child" : @{}, @"name2" : @"value2" })]);
+}
+
 #pragma mark - objectFromDataSource:
 - (void) testStringProperty {
     RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(stringProperty) : @"foobar" }];

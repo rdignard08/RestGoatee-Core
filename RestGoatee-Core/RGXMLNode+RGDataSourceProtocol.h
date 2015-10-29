@@ -22,18 +22,18 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RGXMLNode.h"
-#import "RGDataSourceProtocol.h"
+#import "RGDataSource.h"
 
 FILE_START
 
 /**
  `NSDictionary` already declares and implements all of these methods.  This allows us to pass an `NSDictionary*` where ever a variable is typed `id<RGDataSourceProtocol>`.
  */
-@interface NSDictionary (RGDataSourceProtocol) <RGDataSourceProtocol> @end
+@interface NSDictionary (RGDataSourceProtocol) <RGDataSource> @end
 
 /*
  `RGXMLNode` does not provide these method implicitly.  They are implemented in the category `RGXMLNode+RGDataSourceProtocol`.
  */
-@interface RGXMLNode (RGDataSourceProtocol) <RGDataSourceProtocol> @end
+@interface RGXMLNode (RGDataSourceProtocol) <RGDataSource> @end
 
 FILE_END

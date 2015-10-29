@@ -21,10 +21,11 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "RGDataSourceProtocol.h"
+#import "RGDefines.h"
 
 FILE_START
 
+@protocol RGDataSource;
 @class NSManagedObjectContext;
 
 /**
@@ -33,36 +34,24 @@ FILE_START
 @interface NSObject (RG_Deserialization)
 
 /**
- @abstract subclasses of `NSManagedObject` must use this method since they cannot be initialized without a context.
+ The receiver (the `Class` object) of this method will attempt to initialize an instance of itself with properties assigned from an `RGDataSource`.
+ Subclasses (or the properties thereof) typed `NSManagedObject` must provide a context all others may safely pass `nil`.
+ 
  */
-+ (PREFIX_NONNULL instancetype) objectFromDataSource:(PREFIX_NULLABLE id<RGDataSourceProtocol>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
++ (PREFIX_NONNULL instancetype) objectFromDataSource:(PREFIX_NULLABLE id<RGDataSource>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 /**
- @abstract the receiver (the Class object) which receives this method will attempt to initialize an instance of this class with properties assigned from a data source.
- */
-+ (PREFIX_NONNULL instancetype) objectFromDataSource:(PREFIX_NULLABLE id<RGDataSourceProtocol>)source;
-
-/**
- @abstract creates and returns an array of objects of the type of the receiver.  Need only be something iteratable.
+ Creates and returns an array of objects of the type of the receiver.  The method iterates over the provided collection and calls `+objectFromDataSource:inContext:` on each one.  The return value is mutable, and you can mutate it to your heart's content.
  */
 + (PREFIX_NONNULL NSMutableArray GENERIC(id /* __kindof receiver */) *) objectsFromArraySource:(PREFIX_NULLABLE id<NSFastEnumeration>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 /**
- @abstract creates and returns an array of objects of the type of the receiver. The return value is mutable, and you can mutate it to your heart's content.
- */
-+ (PREFIX_NONNULL NSMutableArray GENERIC(id /* __kindof receiver */) *) objectsFromArraySource:(PREFIX_NULLABLE id<NSFastEnumeration>)source;
-
-/**
  @abstract merges two objects into a single object.  The return value is not a new object, but rather is the receiver augmented with the values in `object`.
- @param object Can be of type `NSDictionary`, `RGXMLNode`, or a user defined type conforming to `RGDataSourceProtocol`.
+ @param object Can be of type `NSDictionary`, `RGXMLNode`, or a user defined type conforming to `RGDataSource`.
+ @param context Since there may be sub objects which are `NSManagedObject` subclasses, it may be necessary to provide an `NSManagedObjectContext` to contain them.
  @return the receiving object extended with `source`; any conflicts will take `source`'s value as precedent.
  */
-- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE NSObject<RGDataSourceProtocol>*)source;
-
-/**
- Same as `-[NSObject extendWith:]` but since there may be sub objects which are `NSManagedObject` subclasses, it may be necessary to provide an `NSManagedObjectContext` to contain them.
- */
-- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE NSObject<RGDataSourceProtocol>*)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
+- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE id<RGDataSource>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 @end
 

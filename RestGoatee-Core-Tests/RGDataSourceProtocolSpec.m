@@ -21,11 +21,11 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "RGDataSourceProtocol.h"
+#import "RGDataSource.h"
 #import "RGTestObject2.h"
 #import "RestGoatee-Core.h"
 
-@interface RGTestObject3 : RGTestObject2 <RGDataSourceProtocol>
+@interface RGTestObject3 : RGTestObject2 <RGDataSource>
 
 @end
 
@@ -57,7 +57,7 @@
 CLASS_SPEC(RGDataSourceProtocol)
 
 - (void) testDataSource {
-    RGTestObject2* object = [RGTestObject2 objectFromDataSource:[RGTestObject3 new]];
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:[RGTestObject3 new] inContext:nil];
     XCTAssert([object.stringProperty isEqual:@"abd"]);
     XCTAssert([object.idProperty isEqual:[NSObject class]]);
 }

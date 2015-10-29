@@ -490,52 +490,52 @@ CATEGORY_SPEC(NSObject, RG_Deserialization)
 
 #pragma mark - objectFromDataSource:
 - (void) testStringProperty {
-    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(stringProperty) : @"foobar" }];
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(stringProperty) : @"foobar" } inContext:nil];
     XCTAssert([object.stringProperty isEqual:@"foobar"]);
 }
 
 - (void) testURLProperty {
-    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(urlProperty) : @"http://google.com" }];
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(urlProperty) : @"http://google.com" } inContext:nil];
     XCTAssert([object.urlProperty isEqual:[NSURL URLWithString:@"http://google.com"]]);
 }
 
 - (void) testNumberProperty {
-    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(numberProperty) : @1 }];
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(numberProperty) : @1 } inContext:nil];
     XCTAssert([object.numberProperty isEqual:@1]);
 }
 
 - (void) testDecimalProperty {
-    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(decimalProperty) : @"10.0" }];
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(decimalProperty) : @"10.0" } inContext:nil];
     XCTAssert([object.decimalProperty isEqual:[NSDecimalNumber decimalNumberWithString:@"10.0"]]);
 }
 
 - (void) testValueProperty {
-    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(valueProperty) : @1 }];
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(valueProperty) : @1 } inContext:nil];
     XCTAssert([object.valueProperty isEqual:@1]);
 }
 
 - (void) testIdProperty {
-    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(idProperty) : @"foobar" }];
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(idProperty) : @"foobar" } inContext:nil];
     XCTAssert([object.idProperty isEqual:@"foobar"]);
 }
 
 - (void) testObjectProperty {
-    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(objectProperty) : @"123" }];
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(objectProperty) : @"123" } inContext:nil];
     XCTAssert([object.objectProperty isEqual:@"123"]);
 }
 
 - (void) testClassProperty {
-    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(classProperty) : @"NSObject" }];
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(classProperty) : @"NSObject" } inContext:nil ];
     XCTAssert([object.classProperty isEqual:[NSObject class]]);
 }
 
 - (void) testArrayProperty {
-    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(arrayProperty) : @[ @"foo", @"bar" ] }];
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(arrayProperty) : @[ @"foo", @"bar" ] } inContext:nil];
     XCTAssert([object.arrayProperty isEqual:(@[ @"foo", @"bar" ])]);
 }
 
 - (void) testDictionaryProperty {
-    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(dictionaryProperty) : @{ @"foo" : @"bar" } }];
+    RGTestObject2* object = [RGTestObject2 objectFromDataSource:@{ STRING_SEL(dictionaryProperty) : @{ @"foo" : @"bar" } } inContext:nil];
     XCTAssert([object.dictionaryProperty isEqual:(@{ @"foo" : @"bar" })]);
 }
 

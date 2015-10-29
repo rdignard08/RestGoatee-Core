@@ -33,17 +33,19 @@ FILE_START
  textField[@"text"] = @"foo bar"; // equivalent to `textField.text = @"foo bar";`
  NSString* theText = textField[@"text"]; // equivalent to `NSString* theText = textField.text;`
  
- Obviously the advantage now is you can use non constant strings for property access.  Use it wisely.
+ Obviously the advantage now is you can use non-constant strings for property access.  Use it wisely.
+ 
+ If you `#define STRICT_KVC 1` before this file is compiled, an exception will be raised when accessing non-existent properties.
  */
 @interface NSObject (RG_KeyedSubscripting)
 
 /**
- @abstract returns the property or instance variable of the name given by `key`.
+ @abstract returns the value of property or instance variable of the name given by `key`.
  */
 - (PREFIX_NULLABLE id) objectForKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key;
 
 /**
- @abstract set the value of the particular property or instance variable specified by `key`.
+ @abstract set the value of the property or instance variable specified by `key`.
  */
 - (void) setObject:(PREFIX_NULLABLE id)obj forKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key;
 

@@ -28,7 +28,7 @@ FILE_START
 /**
  Domain model objects may (but are not required) to conform to this protocol.  You may return non-standard data formats for use with `NSDataFormatter` and a dictionary of response keys which map to property names.
  */
-@protocol RGDeserializationDelegate <NSObject>
+@protocol RGDeserializable <NSObject>
 
 @optional
 /**
@@ -40,6 +40,11 @@ FILE_START
  @abstract Provide a custom date format for use with the given property `propertyName`.  See documentation for NSDate for proper formats.  Can return `nil` (say you're overriding a class that implements this).
  */
 + (PREFIX_NULLABLE NSString*) dateFormatForProperty:(PREFIX_NONNULL NSString*)propertyName;
+
+/**
+ Return the desired type to construct for the given property.  If `Nil` is returned (or this method is not implemented) the default behavior is used, which takes the declared type of the property.
+ */
++ (PREFIX_NULLABLE Class) classForPropertyNamed:(NSString*)propertyName;
 
 /**
  @abstract implement this method to provide custom logic on a given property.  Return the value `YES` if this method is implemented and the default is desired.

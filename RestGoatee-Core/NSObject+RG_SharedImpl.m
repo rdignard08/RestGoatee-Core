@@ -258,42 +258,6 @@ Class SUFFIX_NONNULL rg_topClassDeclaringPropertyNamed(Class SUFFIX_NULLABLE cur
     }
 }
 
-+ (PREFIX_NONNULL NSMutableDictionary GENERIC(RGCanonicalKey*, NSMutableDictionary GENERIC(NSString*, id) *) *) rg_canonicalPropertyList {
-    @synchronized (self) {
-        NSMutableDictionary* rg_canonicalPropertyList = objc_getAssociatedObject(self, @selector(rg_canonicalPropertyList));
-        if (!rg_canonicalPropertyList) {
-            rg_canonicalPropertyList = [NSMutableDictionary new];
-            [rg_canonicalPropertyList addEntriesFromDictionary:[[self superclass] rg_canonicalPropertyList]];
-            uint32_t count;
-            objc_property_t* properties = class_copyPropertyList(self, &count);
-            for (uint32_t i = 0; i < count; i++) {
-                NSMutableDictionary* property = rg_parsePropertyStruct(properties[i]);
-                RGCanonicalKey* key = [[RGCanonicalKey alloc] initWithKey:property[kRGPropertyName] withCanonicalName:property[kRGPropertyCanonicalName]];
-                rg_canonicalPropertyList[key] = property;
-            }
-            free(properties);
-            Ivar* ivars = class_copyIvarList(self, &count);
-            for (uint32_t i = 0; i < count; i++) {
-                NSString* ivarName = [NSString stringWithUTF8String:ivar_getName(ivars[i])];
-                if ([ivarName isEqual:@"_urlProperty"]) {
-                    NSLog(@"%@", ivarName);
-                }
-                NSMutableDictionary* propertyDecl = rg_canonicalPropertyList[ivarName];
-                if (propertyDecl) {
-                    rg_parseIvarStructOntoPropertyDeclaration(ivars[i], propertyDecl);
-                } else {
-                    propertyDecl = rg_parseIvarStruct(ivars[i]);
-                    RGCanonicalKey* key = [[RGCanonicalKey alloc] initWithKey:propertyDecl[kRGPropertyName] withCanonicalName:propertyDecl[kRGPropertyCanonicalName]];
-                    rg_canonicalPropertyList[key] = propertyDecl;
-                }
-            }
-            free(ivars);
-            objc_setAssociatedObject(self, @selector(rg_canonicalPropertyList), rg_canonicalPropertyList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        }
-        return rg_canonicalPropertyList;
-    }
-}
-
 + (PREFIX_NULLABLE NSMutableDictionary*) rg_declarationForProperty:(PREFIX_NONNULL NSString*)propertyName {
     NSUInteger index = [[self rg_propertyList][kRGPropertyName] indexOfObject:propertyName];
     return index == NSNotFound ? nil : [self rg_propertyList][index];

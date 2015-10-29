@@ -32,14 +32,9 @@ FILE_START
  
  must be able to `for X in id<RGDataSourceProtocol>`
  */
-@protocol RGDataSourceProtocol <NSObject, NSFastEnumeration>
+@protocol RGDataSource <NSObject, NSFastEnumeration>
 
 @required
-
-/**
- The data source must support `id value = dataSource[@"key"]`.
- */
-- (PREFIX_NULLABLE id) objectForKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key;
 
 /**
  The data source must support `id value = dataSource[@"foo.bar"]`.

@@ -1,4 +1,4 @@
-/* Copyright (c) 6/25/14, Ryan Dignard
+/* Copyright (c) 10/29/15, Ryan Dignard
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -21,20 +21,8 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "RestGoatee-Core.h"
+#import "RGDefines.h"
 
 FILE_START
-
-/**
- `RGCanonicalKey` is used as a dictionary key which can resolve both literal and canonical strings.
- */
-@interface RGCanonicalKey : NSObject <NSCopying>
-
-/**
- This is the designated initializer for this class.  The keys are immutable for thread-safety.
- */
-- (PREFIX_NONNULL instancetype) initWithKey:(PREFIX_NULLABLE NSString*)baseKey withCanonicalName:(PREFIX_NULLABLE NSString*)canonicalKey NS_DESIGNATED_INITIALIZER;
-
-@end
 
 FILE_END

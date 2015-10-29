@@ -23,7 +23,6 @@
 
 #import "RestGoatee-Core.h"
 #import "NSObject+RG_SharedImpl.h"
-#import "RGDeserializationDelegate.h"
 #import "NSString+RGCanonicalValue.h"
 
 FILE_START
@@ -34,23 +33,7 @@ FILE_START
 
 @end
 
-static NSArray GENERIC(id) * SUFFIX_NONNULL rg_unpackArray(NSArray* SUFFIX_NULLABLE json, id SUFFIX_NULLABLE context) {
-    NSMutableArray* ret = [NSMutableArray new];
-    for (__strong id obj in json) {
-        if (rg_isDataSourceClass([obj class])) {
-            Class objectClass = NSClassFromString(obj[kRGSerializationKey]);
-            obj = rg_isDataSourceClass(objectClass) || !objectClass ? obj : [objectClass objectFromDataSource:obj inContext:context];
-        }
-        [ret addObject:obj];
-    }
-    return ret;
-}
-
 @implementation NSObject (RG_Deserialization)
-
-+ (PREFIX_NONNULL NSMutableArray GENERIC(id) *) objectsFromArraySource:(PREFIX_NULLABLE id<NSFastEnumeration>)source {
-    return [self objectsFromArraySource:source inContext:nil];
-}
 
 + (PREFIX_NONNULL NSMutableArray GENERIC(id) *) objectsFromArraySource:(PREFIX_NULLABLE id<NSFastEnumeration>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context {
     NSMutableArray GENERIC(id) * objects = [NSMutableArray new];
@@ -62,13 +45,8 @@ static NSArray GENERIC(id) * SUFFIX_NONNULL rg_unpackArray(NSArray* SUFFIX_NULLA
     return objects;
 }
 
-+ (PREFIX_NONNULL instancetype) objectFromDataSource:(PREFIX_NULLABLE id<RGDataSourceProtocol>)source {
-    NSAssert(![self isSubclassOfClass:rg_sNSManagedObject], @"Managed object subclasses must be initialized within a managed object context.  Use +objectFromJSON:inContext:");
-    return [self objectFromDataSource:source inContext:nil];
-}
-
-+ (PREFIX_NONNULL instancetype) objectFromDataSource:(PREFIX_NULLABLE id<RGDataSourceProtocol>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context {
-    NSObject<RGDeserializationDelegate>* ret;
++ (PREFIX_NONNULL instancetype) objectFromDataSource:(PREFIX_NULLABLE id<RGDataSource>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context {
+    NSObject<RGDeserializable>* ret;
     if ([self isSubclassOfClass:rg_sNSManagedObject]) {
         NSAssert(context, @"A subclass of NSManagedObject must be created within a valid NSManagedObjectContext.");
         ret = [rg_sNSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:context];
@@ -78,11 +56,7 @@ static NSArray GENERIC(id) * SUFFIX_NONNULL rg_unpackArray(NSArray* SUFFIX_NULLA
     return [ret extendWith:source inContext:context];
 }
 
-- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE NSObject<RGDataSourceProtocol>*)object {
-    return [self extendWith:object inContext:nil];
-}
-
-- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE NSObject<RGDataSourceProtocol>*)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context {
+- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE id<RGDataSource>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context {
     NSDictionary* overrides = [[self class] respondsToSelector:@selector(overrideKeysForMapping)] ? [[self class] overrideKeysForMapping] : nil;
     NSMutableArray GENERIC(NSString*) * intializedProperties = [NSMutableArray new];
     for (NSString* key in source) {
@@ -132,7 +106,7 @@ static NSArray GENERIC(id) * SUFFIX_NONNULL rg_unpackArray(NSArray* SUFFIX_NULLA
     
     /* first ask if there's a custom implementation */
     if ([self respondsToSelector:@selector(shouldTransformValue:forProperty:inContext:)]) {
-        if (![(id<RGDeserializationDelegate>)self shouldTransformValue:value forProperty:key inContext:context]) {
+        if (![(id<RGDeserializable>)self shouldTransformValue:value forProperty:key inContext:context]) {
             return;
         }
     }
@@ -150,7 +124,15 @@ static NSArray GENERIC(id) * SUFFIX_NONNULL rg_unpackArray(NSArray* SUFFIX_NULLA
     Class propertyType = [self rg_classForProperty:key];
     
     if ([value isKindOfClass:[NSArray class]]) { /* If the array we're given contains objects which we can create, create those too */
-        value = rg_unpackArray(value, context);
+        NSMutableArray* ret = [NSMutableArray new];
+        for (__strong id obj in value) {
+            if (rg_isDataSourceClass([obj class])) {
+                Class objectClass = NSClassFromString(obj[kRGSerializationKey]);
+                obj = rg_isDataSourceClass(objectClass) || !objectClass ? obj : [objectClass objectFromDataSource:obj inContext:context];
+            }
+            [ret addObject:obj];
+        }
+        value = ret;
     }
     
     id mutableVersion = [value respondsToSelector:@selector(mutableCopyWithZone:)] ? [value mutableCopy] : nil;

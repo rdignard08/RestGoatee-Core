@@ -21,11 +21,19 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+/* preprocessor */
 #import "RGDefines.h"
-#import "RGDataSourceProtocol.h"
-#import "RGDeserializationDelegate.h"
+
+/* protocols */
+#import "RGDataSource.h"
+#import "RGDeserializable.h"
+#import "RGSerializable.h"
+
+/* classes */
 #import "RGXMLNode.h"
 #import "RGXMLSerializer.h"
+
+/* categories */
 #import "RGXMLNode+RGDataSourceProtocol.h"
 #import "NSObject+RG_KeyedSubscripting.h"
 #import "NSObject+RG_Deserialization.h"

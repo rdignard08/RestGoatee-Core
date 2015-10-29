@@ -35,7 +35,7 @@ FILE_START
 #if !(STRICT_KVC)
     @try {
 #endif
-        return [self valueForKey:key.description];
+        return [self valueForKeyPath:key.description];
 #if !(STRICT_KVC)
     } @catch (NSException* e) {
         RGLog(@"Unknown property %@ on type %@: %@", key.description, [self class], e);
@@ -48,7 +48,7 @@ FILE_START
 #if !(STRICT_KVC)
     @try {
 #endif
-        [self setValue:obj forKey:key.description]; /* This is _intentionally_ not -setObject: */
+        [self setValue:obj forKeyPath:key.description];
 #if !(STRICT_KVC)
     } @catch (NSException* e) {
         RGLog(@"Unknown property %@ on type %@: %@", key.description, [self class], e);

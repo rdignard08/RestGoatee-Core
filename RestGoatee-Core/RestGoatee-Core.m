@@ -26,7 +26,7 @@
 
 FILE_START
 
-void __attribute__((cold)) _RGLog(NSString* SUFFIX_NULLABLE format, ...) {
+void __attribute__((cold)) rg_log(NSString* SUFFIX_NULLABLE format, ...) {
     va_list vl;
     va_start(vl, format);
     char* fileName = va_arg(vl, char*);

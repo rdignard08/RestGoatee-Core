@@ -79,7 +79,7 @@ FILE_START
  JSON types when deserialized from NSData are: NSNull, NSNumber (number or boolean), NSString, NSArray, NSDictionary.
  RGXMLNode is odd, but it can be used as nil, NSString, NSDictionary, or NSArray where required.
  */
-- (void) rg_initProperty:(PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(PREFIX_NULLABLE id)value inContext:(PREFIX_NULLABLE id)context {
+- (void) rg_initProperty:(PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(PREFIX_NONNULL id)value inContext:(PREFIX_NULLABLE id)context {
     
     NSString* key = property.name;
     Class propertyType = property.type;

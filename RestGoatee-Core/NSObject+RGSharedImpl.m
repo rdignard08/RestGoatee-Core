@@ -63,8 +63,9 @@ NSArray GENERIC(NSString*) * SUFFIX_NONNULL __attribute__((pure)) rg_dateFormats
         NSMutableDictionary* rg_canonicalPropertyList = [NSMutableDictionary new];
         [rg_propertyList addEntriesFromDictionary:[[self superclass] rg_propertyList]];
         [rg_canonicalPropertyList addEntriesFromDictionary:[[self superclass] rg_canonicalPropertyList]];
-        objc_property_t* properties = class_copyPropertyList(self, NULL);
-        for (uint32_t i = 0; properties + i && properties[i]; i++) {
+        unsigned int count;
+        objc_property_t* properties = class_copyPropertyList(self, &count);
+        for (uint32_t i = 0; i < count; i++) {
             RGPropertyDeclaration* declaration = [[RGPropertyDeclaration alloc] initWithProperty:properties[i]];
             rg_propertyList[declaration.name] = declaration;
             rg_canonicalPropertyList[declaration.canonicalName] = declaration;

@@ -23,7 +23,6 @@
 
 #import "RestGoatee-Core.h"
 #import "NSObject+RG_SharedImpl.h"
-#import "NSString+RGCanonicalValue.h"
 
 FILE_START
 
@@ -58,37 +57,20 @@ FILE_START
 
 - (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE id<RGDataSource>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context {
     NSDictionary* overrides = [[self class] respondsToSelector:@selector(overrideKeysForMapping)] ? [[self class] overrideKeysForMapping] : nil;
-    NSMutableArray GENERIC(NSString*) * intializedProperties = [NSMutableArray new];
+    NSDictionary* properties = [[self class] rg_propertyList];
+    NSDictionary* canonicalProperties = [[self class] rg_canonicalPropertyList];
+    /* for each piece of data I have; check if there's an override: initialize literally; otherwise initialize canonically */
     for (NSString* key in source) {
-        if (overrides[key]) continue;
-        [self rg_initCanonically:key withValue:source[key] inContext:context];
-        [intializedProperties addObject:key.rg_canonicalValue];
-    }
-    for (NSString* key in overrides) { /* The developer provided an override keypath */
-        if ([intializedProperties containsObject:key.rg_canonicalValue]) continue;
-        id value = [source valueForKeyPath:key];
-        if (!value) continue; // empty dictionary entry doesn't get pushed
-        @try {
-            [self rg_initProperty:overrides[key] withValue:value inContext:context];
-            [intializedProperties addObject:[overrides[key] rg_canonicalValue]];
-        } @catch (NSException* e) { /* Should this fail the property is left alone */
-            RGLog(@"initializing property %@ on type %@ failed: %@", overrides[key], [self class], e);
+        id value = source[key];
+        NSAssert(value, @"This should always be true but I'm not 100%% on that");
+        NSString* overrideDest = overrides[key];
+        if (overrideDest) {
+            [self rg_initProperty:properties[overrideDest] withValue:value inContext:context];
+        } else {
+            [self rg_initProperty:canonicalProperties[rg_canonicalForm(key.UTF8String)] withValue:value inContext:context];
         }
     }
     return self;
-}
-
-- (void) rg_initCanonically:(PREFIX_NONNULL NSString*)key withValue:(PREFIX_NULLABLE id)value inContext:(PREFIX_NULLABLE id)context {
-    NSUInteger index = [[[self class] rg_propertyList][kRGPropertyCanonicalName] indexOfObject:key.rg_canonicalValue];
-    if (index != NSNotFound) {
-        if (rg_topClassDeclaringPropertyNamed([self class], [[self class] rg_propertyList][index][kRGPropertyName]) != [NSObject class]) {
-            @try {
-                [self rg_initProperty:[[self class] rg_propertyList][index][kRGPropertyName] withValue:value inContext:context];
-            } @catch (NSException* e) { /* Should this fail the property is left alone */
-                RGLog(@"initializing property %@ on type %@ failed: %@", [[self class] rg_propertyList][index][kRGPropertyName], [self class], e);
-            }
-        }
-    }
 }
 
 /**
@@ -97,12 +79,10 @@ FILE_START
  JSON types when deserialized from NSData are: NSNull, NSNumber (number or boolean), NSString, NSArray, NSDictionary.
  RGXMLNode is odd, but it can be used as nil, NSString, NSDictionary, or NSArray where required.
  */
-- (void) rg_initProperty:(PREFIX_NONNULL NSString*)key withValue:(PREFIX_NULLABLE id)value inContext:(PREFIX_NULLABLE id)context {
-    static NSDateFormatter* dateFormatter;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        dateFormatter = [NSDateFormatter new];
-    });
+- (void) rg_initProperty:(PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(PREFIX_NULLABLE id)value inContext:(PREFIX_NULLABLE id)context {
+    
+    NSString* key = property.name;
+    Class propertyType = property.type;
     
     /* first ask if there's a custom implementation */
     if ([self respondsToSelector:@selector(shouldTransformValue:forProperty:inContext:)]) {
@@ -111,17 +91,11 @@ FILE_START
         }
     }
     
-    /* Can't initialize the value of a property if the property doesn't exist */
-    if ([key isKindOfClass:[NSNull class]] || [key isEqual:kRGPropertyListProperty] || ![[self class] rg_declarationForProperty:key]) {
-        return;
-    }
-    
+    /* null and non-existent set the property to 0 - possible optimization since init already does this */
     if (!value || [value isKindOfClass:[NSNull class]]) {
-        self[key] = [self rg_isPrimitive:key] ? @0 : nil;
+        self[key] = property.isPrimitive ? @0 : nil;
         return;
     }
-    
-    Class propertyType = [self rg_classForProperty:key];
     
     if ([value isKindOfClass:[NSArray class]]) { /* If the array we're given contains objects which we can create, create those too */
         NSMutableArray* ret = [NSMutableArray new];
@@ -190,6 +164,7 @@ FILE_START
     } else if ([propertyType isSubclassOfClass:[NSDate class]]) { /* NSDate */
         if ([value isKindOfClass:[RGXMLNode class]]) value = [value innerXML];
         NSString* dateFormat = [[self class] respondsToSelector:@selector(dateFormatForProperty:)] ? [[self class] dateFormatForProperty:key] : nil;
+        NSDateFormatter* dateFormatter = [NSDateFormatter new];
         if (dateFormat) {
             dateFormatter.dateFormat = dateFormat;
             self[key] = [dateFormatter dateFromString:value];

@@ -86,7 +86,7 @@ BOOL __attribute__((pure)) rg_isDataSourceClass(Class SUFFIX_NULLABLE cls) {
     });
 }
 
-+ (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, NSMutableDictionary GENERIC(NSString*, NSString*) *) *) rg_propertyList {
++ (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, RGVariableDeclaration*) *) rg_propertyList {
     NSMutableDictionary* rg_propertyList = objc_getAssociatedObject(self, @selector(rg_propertyList));
     if (!rg_propertyList) {
         rg_propertyList = [NSMutableDictionary new];

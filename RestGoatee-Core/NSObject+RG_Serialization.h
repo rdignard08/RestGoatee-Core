@@ -28,24 +28,12 @@ FILE_START
  
  Methods here can turn typical (i.e. non-cyclically strong) objects into JSON (specifically a JSON composed solely only of arrays, dictionaries, strings, and null; `true`, `false`, and numerics are written out as strings).
  */
-@interface NSObject (RG_SerializationPublic)
+@interface NSObject (RG_Serialization)
 
-///**
-// @abstract returns the receiver represented as a dictionary with its property names as keys and the values are the values of that property.  By default the parser will follow weak references.
-// */
-//- (PREFIX_NONNULL id) dictionaryRepresentation;
-//
-///**
-// @abstract returns the recevier serialized to JSON.  Returns `nil` if the object is not valid JSON.
-// 
-// @deprecated Use `NSKeyedArchiver` instead.
-// */
-//- (PREFIX_NULLABLE NSData*) JSONRepresentation __attribute__((deprecated));
-//
-///**
-// @abstract equivalent to `-dictionaryRepresentation` but the parser will not parse into objects which are `weak`, `assign`, or `unsafe_unretained` if the parameter `weakReferences` is `NO`.  The default is `YES`.
-// */
-//- (PREFIX_NONNULL id) dictionaryRepresentationShouldFollowWeakReferences:(BOOL)weakReferences;
+/**
+ @abstract returns the receiver represented as a dictionary with its property names as keys and the values are the values of that property.  It is highly recommended that any class which you want to be serializable implement `RGSerializable`.
+ */
+- (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation;
 
 @end
 

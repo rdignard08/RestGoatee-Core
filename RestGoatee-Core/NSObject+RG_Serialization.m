@@ -26,128 +26,16 @@
 
 FILE_START
 
-/**
- This category is private, and methods defined therein are subject to change (moderately frequently).
- */
-@implementation NSObject (RG_SerializationPrivate)
+@implementation NSObject (RG_Serialization)
 
-/** Certain classes are too difficult to serialize in a straight-forward manner, so we skip the properties on those classes.  Pretty much any class with cyclical references is gonna suck. */
-//+ (PREFIX_NONNULL NSArray*) rg_propertyListsToSkip {
-//    static NSArray* _classes;
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        _classes = @[
-//                     [NSObject class],
-//                     rg_sNSManagedObject ?: [NSNull class],
-//                     rg_sNSManagedObjectContext ?: [NSNull class],
-//                     rg_sNSManagedObjectModel ?: [NSNull class],
-//                     rg_sNSPersistentStoreCoordinator ?: [NSNull class],
-//                     ];
-//    });
-//    return _classes;
-//}
-//
-///**
-// Is this property bad for serialization?
-// */
-//+ (BOOL) rg_isPropertyToBeAvoided:(PREFIX_NONNULL NSString*)propertyName {
-//    for (Class cls in [self rg_propertyListsToSkip]) {
-//        if ([self isSubclassOfClass:cls] && [cls rg_declarationForProperty:propertyName]) {
-//            return YES;
-//        }
-//    }
-//    return NO;
-//}
-//
-///**
-// Is this property bad for serialization?
-// */
-//- (BOOL) rg_isPropertyToBeAvoided:(PREFIX_NONNULL NSString*)propertyName {
-//    return [[self class] rg_isPropertyToBeAvoided:propertyName];
-//}
-//
-///**
-// Is this property a weak/assign object?
-// */
-//+ (BOOL) rg_propertyIsWeak:(PREFIX_NONNULL NSString*)propertyName {
-//    NSDictionary* declaration;
-//    if ((declaration = [self rg_declarationForProperty:propertyName])) {
-//        if (NSClassFromString(declaration[kRGPropertyRawType])) { /* primitives are assign, but we still want them */
-//            if (declaration[kRGPropertyStorage] == kRGPropertyWeak || declaration[kRGPropertyStorage] == kRGPropertyAssign) {
-//                return YES;
-//            }
-//        }
-//    }
-//    return NO;
-//}
-//
-///**
-// Is this property a weak/assign object?
-// */
-//- (BOOL) rg_propertyIsWeak:(PREFIX_NONNULL NSString*)propertyName {
-//    return [[self class] rg_propertyIsWeak:propertyName];
-//}
-//
-///**
-// This is called recursively to build up the response.
-// */
-//- (PREFIX_NONNULL id) rg_dictionaryHelper:(PREFIX_NONNULL NSMutableArray*)pointersSeen followWeak:(BOOL)followWeak {
-//    if ([pointersSeen indexOfObject:self] != NSNotFound) return [NSNull null];
-//    /* [pointersSeen addObject:self]; // disable DAG for now */
-//    id ret;
-//    if ([[self class] isSubclassOfClass:[NSNull class]]) {
-//        ret = self;
-//    } else if (rg_isInlineObject([self class]) || rg_isClassObject(self)) { /* classes can be stored as strings too */
-//        ret = [self description];
-//    } else if (rg_isCollectionObject([self class])) {
-//        ret = [NSMutableArray new];
-//        for (id object in (id<NSFastEnumeration>)self) {
-//            [ret addObject:[object rg_dictionaryHelper:pointersSeen followWeak:followWeak]];
-//        }
-//    } else if (rg_isKeyedCollectionObject([self class])) {
-//        ret = [NSMutableDictionary new];
-//        for (id key in (id<NSFastEnumeration>)self) {
-//            ret[key] = [self[key] rg_dictionaryHelper:pointersSeen followWeak:followWeak];
-//        }
-//        ret[kRGSerializationKey] = NSStringFromClass([self class]);
-//    } else {
-//        ret = [NSMutableDictionary new];
-//        for (NSDictionary* property in [[self class] rg_propertyList]) {
-//            NSString* propertyName = property[kRGPropertyName];
-//            if (followWeak || ![self rg_propertyIsWeak:propertyName]) {
-//                if (![self rg_isPropertyToBeAvoided:propertyName] && ![propertyName isEqual:kRGPropertyListProperty]) {
-//                    ret[propertyName] = [(self[propertyName] ?: [NSNull null]) rg_dictionaryHelper:pointersSeen followWeak:followWeak];
-//                }
-//            }
-//        }
-//        if (![[self class] isSubclassOfClass:[NSDictionary class]]) { /* only include the class key if the object _wasn't_ a dictionary */
-//            ret[kRGSerializationKey] = NSStringFromClass([self class]);
-//        }
-//    }
-//    return ret;
-//}
-//
-//@end
-//
-//@implementation NSObject (RG_SerializationPublic)
-//
-//- (PREFIX_NONNULL id) dictionaryRepresentationShouldFollowWeakReferences:(BOOL)weakReferences {
-//    NSMutableArray* pointersSeen = [NSMutableArray new];
-//    return [self rg_dictionaryHelper:pointersSeen followWeak:weakReferences];
-//}
-//
-//- (PREFIX_NONNULL id) dictionaryRepresentation {
-//    return [self dictionaryRepresentationShouldFollowWeakReferences:YES];
-//}
-//
-//- (PREFIX_NULLABLE NSData*) JSONRepresentation {
-//    id object = [self dictionaryRepresentation];
-//    if ([NSJSONSerialization isValidJSONObject:object]) {
-//        return [NSJSONSerialization dataWithJSONObject:object options:(NSJSONWritingOptions)0 error:nil];
-//    }
-//    return nil;
-//}
-//
+- (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation {
+    NSMutableDictionary* ret = [NSMutableDictionary new];
+    for (NSString* propertyName in [[self class] rg_propertyList]) {
+        ret[propertyName] = [self[propertyName] description];
+    }
+    return ret;
+}
+
 @end
 
 FILE_END

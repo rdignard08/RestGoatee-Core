@@ -187,7 +187,9 @@ FILE_START
         /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
         [self setValue:[propertyType objectFromDataSource:value inContext:context] forKey:key];
     } else if ([value isKindOfClass:[NSArray class]]) { /* single entry arrays are converted to an inplace object */
+#ifdef DEBUG
         [(NSArray*)value count] > 1 ? RGLog(@"Warning, data loss on property %@ on type %@", key, [self class]) : VOID_NOOP;
+#endif
         id firstValue = [value firstObject];
         if (!firstValue || [firstValue isKindOfClass:propertyType]) {
             [self setValue:value forKey:key];

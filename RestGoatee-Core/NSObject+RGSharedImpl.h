@@ -102,24 +102,24 @@ BOOL rg_isCollectionObject(Class SUFFIX_NULLABLE cls) __attribute__((pure));
 BOOL rg_isKeyedCollectionObject(Class SUFFIX_NULLABLE cls) __attribute__((pure));
 
 /**
- Returns true if the given class conforms to `RGDataSourceProtocol`.  Necessary due to some bug.
+ Returns true if the given class conforms to `RGDataSource`.  Necessary due to some bug.
  */
 BOOL rg_isDataSourceClass(Class SUFFIX_NULLABLE cls) __attribute__((pure));
 
 /**
- This is a private category which contains all the of the methods used jointly by the categories `RG_Deserialization` and `RG_Serialization`.
+ This is a private category which contains all the of the methods used jointly by the categories `RGDeserialization` and `RGSerialization`.
  */
 @interface NSObject (RGSharedImpl)
 
 /**
  This is describes the meta data of the given class.  It declares the properties in an object-oriented manner.  The keys are the names of the properties keyed to their declaration.
  */
-+ (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, RGVariableDeclaration*) *) rg_propertyList;
++ (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, RGPropertyDeclaration*) *) rg_propertyList;
 
 /**
- This describes the meta data of the class.  The keys are the canonical representation of the property name mapped to an `RGVariableDeclaration` object.
+ This describes the meta data of the class.  The keys are the canonical representation of the property name mapped to an `RGPropertyDeclaration` object.
  */
-+ (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, RGVariableDeclaration*) *) rg_canonicalPropertyList;
++ (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, RGPropertyDeclaration*) *) rg_canonicalPropertyList;
 
 @end
 

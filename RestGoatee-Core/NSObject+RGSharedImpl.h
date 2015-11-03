@@ -41,6 +41,16 @@ FILE_START
  */
 FOUNDATION_EXPORT NSString* SUFFIX_NONNULL const kRGSerializationKey;
 
+/**
+ Will be `objc_getClass("NSObject")` i.e. `[NSObject class]`.
+ */
+FOUNDATION_EXPORT Class SUFFIX_NONNULL rg_NSObjectClass;
+
+/**
+ Will be `objc_getMetaClass("NSObject")`.
+ */
+FOUNDATION_EXPORT Class SUFFIX_NONNULL rg_NSObjectMetaClass;
+
 /* These classes are used to dynamically link into coredata if present. */
 
 /**
@@ -79,34 +89,45 @@ FOUNDATION_EXPORT Class SUFFIX_NULLABLE rg_sNSFetchRequest;
 NSArray GENERIC(NSString*) * SUFFIX_NULLABLE rg_dateFormats(void) __attribute__((pure));
 
 /**
- Returns true if `Class cls = object;` is not a pointer type conversion.
+ Returns `YES` if `Class cls = object;` is not a pointer type conversion.
  */
-BOOL rg_isClassObject(id SUFFIX_NULLABLE object) __attribute__((pure));
+BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isClassObject(id SUFFIX_NULLABLE object) {
+    /* if the class of the meta-class == NSObject's meta-class; object was itself a Class object */
+    /* object_getClass * object_getClass * <plain_nsobject> should not return true */
+    Class currentType = object_getClass(object);
+    return currentType != rg_NSObjectClass && object_getClass(currentType) == rg_NSObjectMetaClass;
+}
 
 /**
- Returns true if object has the same type as `NSObject`'s meta class.
+ Returns `YES` if object has the same type as `NSObject`'s meta class.
  */
-BOOL rg_isMetaClassObject(id SUFFIX_NULLABLE object) __attribute__((pure));
+BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isMetaClassObject(id SUFFIX_NULLABLE object) {
+    return rg_isClassObject(object) && class_isMetaClass(object);
+}
 
 /**
- Returns true if the given type can be adequately represented by an `NSString`.
+ Returns `YES` if the given type can be adequately represented by an `NSString`.
  */
-BOOL rg_isInlineObject(Class SUFFIX_NULLABLE cls) __attribute__((pure));
+BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isInlineObject(Class SUFFIX_NULLABLE cls) {
+    return [cls isSubclassOfClass:[NSDate class]] || [cls isSubclassOfClass:[NSString class]] || [cls isSubclassOfClass:[NSData class]] || [cls isSubclassOfClass:[NSNull class]] || [cls isSubclassOfClass:[NSValue class]] || [cls isSubclassOfClass:[NSURL class]];
+}
 
 /**
- Returns true if the given type can be adequately represented by an `NSArray`.
+ Returns `YES` if the given type can be adequately represented by an `NSArray`.
  */
-BOOL rg_isCollectionObject(Class SUFFIX_NULLABLE cls) __attribute__((pure));
+BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isCollectionObject(Class SUFFIX_NULLABLE cls) {
+    return [cls isSubclassOfClass:[NSSet class]] || [cls isSubclassOfClass:[NSArray class]] || [cls isSubclassOfClass:[NSOrderedSet class]];
+}
 
 /**
- Returns true if the given type is a "key => value" type.  Thus it can be represented by an `NSDictionary`.
+ Returns `YES` if the given type is a "key => value" type.  Thus it can be represented by an `NSDictionary`.
  */
 BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isKeyedCollectionObject(Class SUFFIX_NULLABLE cls) {
     return [cls isSubclassOfClass:[NSDictionary class]] || [cls isSubclassOfClass:[RGXMLNode class]];
 }
 
 /**
- Returns true if the given class conforms to `RGDataSource`.  Necessary due to some bug.
+ Returns `YES` if the given class conforms to `RGDataSource`.  Necessary due to some bug.
  */
 BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isDataSourceClass(Class SUFFIX_NULLABLE cls) {
     return [cls conformsToProtocol:@protocol(RGDataSource)] || [cls isSubclassOfClass:[NSDictionary class]]; /* 2nd clause due to a bug */

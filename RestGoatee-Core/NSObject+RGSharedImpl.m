@@ -30,6 +30,8 @@ FILE_START
 NSString* SUFFIX_NONNULL const kRGSerializationKey = @"__class";
 
 /* storage for extern'd class references */
+Class SUFFIX_NONNULL rg_NSObjectClass;
+Class SUFFIX_NONNULL rg_NSObjectMetaClass;
 Class SUFFIX_NULLABLE rg_sNSManagedObjectContext;
 Class SUFFIX_NULLABLE rg_sNSManagedObject;
 Class SUFFIX_NULLABLE rg_sNSManagedObjectModel;
@@ -46,29 +48,13 @@ NSArray GENERIC(NSString*) * SUFFIX_NONNULL __attribute__((pure)) rg_dateFormats
     return _sDateFormats;
 }
 
-BOOL __attribute__((pure)) rg_isClassObject(id SUFFIX_NULLABLE object) {
-    return object_getClass(object) != [NSObject class] && object_getClass(/* the meta-class */object_getClass(object)) == object_getClass([NSObject class]);
-    /* if the class of the meta-class == NSObject's meta-class; object was itself a Class object */
-    /* object_getClass * object_getClass * <plain_nsobject> should not return true */
-}
-
-BOOL __attribute__((pure)) rg_isMetaClassObject(id SUFFIX_NULLABLE object) {
-    return rg_isClassObject(object) && class_isMetaClass(object);
-}
-
-BOOL __attribute__((pure)) rg_isInlineObject(Class SUFFIX_NULLABLE cls) {
-    return [cls isSubclassOfClass:[NSDate class]] || [cls isSubclassOfClass:[NSString class]] || [cls isSubclassOfClass:[NSData class]] || [cls isSubclassOfClass:[NSNull class]] || [cls isSubclassOfClass:[NSValue class]] || [cls isSubclassOfClass:[NSURL class]];
-}
-
-BOOL __attribute__((pure)) rg_isCollectionObject(Class SUFFIX_NULLABLE cls) {
-    return [cls isSubclassOfClass:[NSSet class]] || [cls isSubclassOfClass:[NSArray class]] || [cls isSubclassOfClass:[NSOrderedSet class]];
-}
-
 @implementation NSObject (RGSharedImpl)
 
 + (void) load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        rg_NSObjectClass = objc_getClass("NSObject");
+        rg_NSObjectMetaClass = objc_getMetaClass("NSObject");
         rg_sNSManagedObjectContext = objc_getClass("NSManagedObjectContext");
         rg_sNSManagedObject = objc_getClass("NSManagedObject");
         rg_sNSManagedObjectModel = objc_getClass("NSManagedObjectModel");

@@ -26,6 +26,7 @@
 FILE_START
 
 @protocol RGSerializable <NSObject>
+
 @optional
 
 @end

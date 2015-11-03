@@ -32,24 +32,22 @@ FILE_START
 
 @optional
 /**
- @abstract Provide any overrides for default mapping behavior here.  The returned dictionary should have keys and values of type NSString and should be read left-to-right JSON source to target key.  Any unspecified key(s) will use the default behavior for mapping.  Can return `nil` (say you're overriding a class that implements this).
+ @abstract Provide any overrides for default mapping behavior here.  Any unspecified key(s) will use the default behavior for mapping.
+ @return a dictionary with keys and values of type `NSString` which is read left-to-right: JSON source to target property name.  Can return `nil` (say you're overriding a class that implements this).
  */
 + (PREFIX_NULLABLE NSDictionary*) overrideKeysForMapping;
 
 /**
- @abstract Provide a custom date format for use with the given property `propertyName`.  See documentation for NSDate for proper formats.  Can return `nil` (say you're overriding a class that implements this).
+ @abstract Provide a custom date format for use with the given property `propertyName`.  See documentation of `NSDate` for proper formats.
+ @param propertyName The name of the property being set.
+ @return a date format string to be used for the given property.  Can return `nil` (say you're overriding a class that implements this).
  */
 + (PREFIX_NULLABLE NSString*) dateFormatForProperty:(PREFIX_NONNULL NSString*)propertyName;
 
 /**
- Return the desired type to construct for the given property.  If `Nil` is returned (or this method is not implemented) the default behavior is used, which takes the declared type of the property.
- */
-+ (PREFIX_NULLABLE Class) classForPropertyNamed:(NSString*)propertyName;
-
-/**
  @abstract implement this method to provide custom logic on a given property.  Return the value `YES` if this method is implemented and the default is desired.
  
- If the deserialization target is an `NSManagedObject` subclass you may use the context parameter for construction.
+ If the deserialization target is an `NSManagedObject` subclass you may use the parameter `context` for construction.
  
  This method tends to be necessary for deserializing arrays that lack a metadata key indicating the type of the object.
  */

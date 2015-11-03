@@ -27,10 +27,27 @@ NSString* SUFFIX_NONNULL const kRGInnerXMLKey = @"__innerXML__";
 
 FILE_START
 
+@interface RGXMLNode ()
+
+@property NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableArray* keys;
+
+@end
+
 @implementation RGXMLNode
 @synthesize parentNode = _parentNode;
 @synthesize attributes = _attributes;
 @synthesize childNodes = _childNodes;
+
+#pragma mark - Properties
+- (PREFIX_NONNULL NSMutableArray*) keys {
+    if (!_keys) {
+        _keys = [self.attributes.allKeys mutableCopy];
+        for (RGXMLNode* child in self.childNodes) {
+            [_keys addObject:child.name];
+        }
+    }
+    return _keys;
+}
 
 - (PREFIX_NONNULL NSArray GENERIC(RGXMLNode*) *) childNodes {
     if (!_childNodes) {
@@ -46,6 +63,7 @@ FILE_START
     return _attributes;
 }
 
+#pragma mark - Public Methods
 - (void) addChildNode:(PREFIX_NONNULL RGXMLNode*)node {
     node->_parentNode = self;
     [(NSMutableArray*)self.childNodes addObject:node];
@@ -86,6 +104,31 @@ FILE_START
         }
     }
     return ret.count > 1 ? ret : ret.lastObject;
+}
+
+#pragma mark - RGDataSource
+- (PREFIX_NONNULL NSArray*) allKeys {
+    return self.keys;
+}
+
+- (NSUInteger) countByEnumeratingWithState:(PREFIX_NONNULL NSFastEnumerationState*)state objects:(__unsafe_unretained id[])buffer count:(NSUInteger)len {
+    NSUInteger ret = [self.keys countByEnumeratingWithState:state objects:buffer count:len];
+    if (!ret) {
+        self.keys = nil;
+    }
+    return ret;
+}
+
+- (PREFIX_NULLABLE id) valueForKeyPath:(PREFIX_NONNULL NSString*)string {
+    NSRange range = [string rangeOfString:@"."];
+    if (range.location == NSNotFound) {
+        return [self valueForKey:string];
+    }
+    return [[self childrenNamed:[string substringToIndex:range.location]] valueForKeyPath:[string substringFromIndex:range.location + 1]];
+}
+
+- (PREFIX_NULLABLE id) valueForKey:(PREFIX_NONNULL NSString*)key {
+    return self.attributes[key] ?: [self childrenNamed:key] ?: self.innerXML;
 }
 
 @end

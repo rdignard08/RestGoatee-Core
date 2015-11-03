@@ -29,25 +29,29 @@ FILE_START
 @class NSManagedObjectContext;
 
 /**
- This category provides generalized constructors for all domain model objects from a data source (these may be `NSDictionary*` from JSON or `NSXMLParser*` from XML or any custom `RGDataSourceProtocol`).
+ This category provides generalized constructors for all domain model objects from a data source (these may be `NSDictionary*` from JSON or `NSXMLParser*` from XML or any custom class conforming to `RGDataSource`).
  */
 @interface NSObject (RG_Deserialization)
 
 /**
- The receiver (the `Class` object) of this method will attempt to initialize an instance of itself with properties assigned from an `RGDataSource`.
- Subclasses (or the properties thereof) typed `NSManagedObject` must provide a context all others may safely pass `nil`.
- 
- */
-+ (PREFIX_NONNULL instancetype) objectFromDataSource:(PREFIX_NULLABLE id<RGDataSource>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
-
-/**
- Creates and returns an array of objects of the type of the receiver.  The method iterates over the provided collection and calls `+objectFromDataSource:inContext:` on each one.  The return value is mutable, and you can mutate it to your heart's content.
+ @abstract Construct an array of objects which is formed by invoking `+objectFromDataSource:inContext:` on the receiver with each input in the source.
+ @param source Must be an iterable data source (i.e. `NSArray`, `NSSet`, `NSOrderedSet`, etc.).  For each entry, a new object is constructed.
+ @param context Subclasses (or the properties thereof) typed `NSManagedObject` must provide a context all others may safely pass `nil`.
+ @return an array of objects of the type of the receiver.  The return value is mutable, and you can mutate it to your heart's content.
  */
 + (PREFIX_NONNULL NSMutableArray GENERIC(id /* __kindof receiver */) *) objectsFromArraySource:(PREFIX_NULLABLE id<NSFastEnumeration>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 /**
- @abstract merges two objects into a single object.  The return value is not a new object, but rather is the receiver augmented with the values in `object`.
- @param object Can be of type `NSDictionary`, `RGXMLNode`, or a user defined type conforming to `RGDataSource`.
+ @abstract The receiver (the `Class` object) of this method will attempt to initialize an instance of itself with properties assigned from an `RGDataSource`.
+ @param source For each key in the source, the key is interpreted to a property name, and the value on that key is coerced and assigned to the property.
+ @param context Subclasses (or the properties thereof) typed `NSManagedObject` must provide a context all others may safely pass `nil`.
+ @return an instance of the receiver; constructed with the values provided by `source`.
+ */
++ (PREFIX_NONNULL instancetype) objectFromDataSource:(PREFIX_NULLABLE id<RGDataSource>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
+
+/**
+ @abstract merges a data source into an existing object.  The return value is not a new object, but rather is the receiver augmented with the values in `object`.  Wherever they conflict, `source` takes precedence.
+ @param object Can be of type `NSDictionary`, `RGXMLNode`, or any class conforming to `RGDataSource`.
  @param context Since there may be sub objects which are `NSManagedObject` subclasses, it may be necessary to provide an `NSManagedObjectContext` to contain them.
  @return the receiving object extended with `source`; any conflicts will take `source`'s value as precedent.
  */

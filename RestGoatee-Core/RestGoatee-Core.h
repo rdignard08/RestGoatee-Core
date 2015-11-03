@@ -34,7 +34,7 @@
 #import "RGXMLSerializer.h"
 
 /* categories */
-#import "RGXMLNode+RGDataSourceProtocol.h"
+#import "NSDictionary+RGDataSource.h"
 #import "NSObject+RG_KeyedSubscripting.h"
 #import "NSObject+RG_Deserialization.h"
 #import "NSObject+RG_Serialization.h"

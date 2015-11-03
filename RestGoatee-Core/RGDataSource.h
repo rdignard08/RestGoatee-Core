@@ -44,7 +44,7 @@ FILE_START
 /**
  Returns an array of the keys which are present in this data source (but NOT sub data sources).
  */
-- (PREFIX_NONNULL NSArray*) allKeys;
+- (PREFIX_NONNULL NSArray GENERIC(NSString*) *) allKeys;
 
 @end
 

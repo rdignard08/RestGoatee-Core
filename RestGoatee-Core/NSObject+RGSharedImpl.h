@@ -109,7 +109,7 @@ BOOL rg_isDataSourceClass(Class SUFFIX_NULLABLE cls) __attribute__((pure));
 /**
  This is a private category which contains all the of the methods used jointly by the categories `RG_Deserialization` and `RG_Serialization`.
  */
-@interface NSObject (RG_SharedImpl)
+@interface NSObject (RGSharedImpl)
 
 /**
  This is describes the meta data of the given class.  It declares the properties in an object-oriented manner.  The keys are the names of the properties keyed to their declaration.

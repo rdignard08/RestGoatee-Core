@@ -21,7 +21,7 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "NSObject+RG_KeyedSubscripting.h"
+#import "NSObject+RGKeyedSubscripting.h"
 #import "RGTestObject2.h"
 
 CATEGORY_SPEC(NSObject, RG_KeyedSubscripting)

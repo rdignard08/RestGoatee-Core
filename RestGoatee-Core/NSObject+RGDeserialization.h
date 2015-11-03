@@ -31,7 +31,7 @@ FILE_START
 /**
  This category provides generalized constructors for all domain model objects from a data source (these may be `NSDictionary*` from JSON or `NSXMLParser*` from XML or any custom class conforming to `RGDataSource`).
  */
-@interface NSObject (RG_Deserialization)
+@interface NSObject (RGDeserialization)
 
 /**
  @abstract Construct an array of objects which is formed by invoking `+objectFromDataSource:inContext:` on the receiver with each input in the source.

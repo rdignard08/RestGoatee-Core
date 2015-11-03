@@ -21,19 +21,20 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+#import "RestGoatee-Core.h"
+#import "NSObject+RGSharedImpl.h"
+
 FILE_START
 
-/**
- This category can be used for the latter half of the serialization => deserialization => serialization process.
- 
- Methods here can turn typical (i.e. non-cyclically strong) objects into JSON (specifically a JSON composed solely only of arrays, dictionaries, strings, and null; `true`, `false`, and numerics are written out as strings).
- */
-@interface NSObject (RG_Serialization)
+@implementation NSObject (RGSerialization)
 
-/**
- @abstract returns the receiver represented as a dictionary with its property names as keys and the values are the values of that property.  It is highly recommended that any class which you want to be serializable implement `RGSerializable`.
- */
-- (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation;
+- (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation {
+    NSMutableDictionary* ret = [NSMutableDictionary new];
+    for (NSString* propertyName in [[self class] rg_propertyList]) {
+        ret[propertyName] = [self[propertyName] description];
+    }
+    return ret;
+}
 
 @end
 

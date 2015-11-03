@@ -21,7 +21,7 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "NSObject+RG_SharedImpl.h"
+#import "NSObject+RGSharedImpl.h"
 #import "RestGoatee-Core.h"
 #import "RGPropertyDeclaration.h"
 
@@ -72,7 +72,7 @@ BOOL __attribute__((pure)) rg_isDataSourceClass(Class SUFFIX_NULLABLE cls) {
     return ([cls conformsToProtocol:@protocol(RGDataSource)]) || ([cls instancesRespondToSelector:@selector(objectForKeyedSubscript:)] && [cls instancesRespondToSelector:@selector(setObject:forKeyedSubscript:)] && [cls instancesRespondToSelector:@selector(valueForKeyPath:)] && [cls instancesRespondToSelector:@selector(countByEnumeratingWithState:objects:count:)]);
 }
 
-@implementation NSObject (RG_SharedImpl)
+@implementation NSObject (RGSharedImpl)
 
 + (void) load {
     static dispatch_once_t onceToken;

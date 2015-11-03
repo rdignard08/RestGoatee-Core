@@ -21,20 +21,33 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "RestGoatee-Core.h"
-#import "NSObject+RG_SharedImpl.h"
+#import "RGDefines.h"
 
 FILE_START
 
-@implementation NSObject (RG_Serialization)
+/**
+ Provides a default behavior of key based subscripting to all `NSObject` subclasses.
+ 
+ @example This is valid syntax:
+ UITextField* textField = [UITextField new];
+ textField[@"text"] = @"foo bar"; // equivalent to `textField.text = @"foo bar";`
+ NSString* theText = textField[@"text"]; // equivalent to `NSString* theText = textField.text;`
+ 
+ Obviously the advantage now is you can use non-constant strings for property access.  Use it wisely.
+ 
+ If you `#define STRICT_KVC 1` before this file is compiled, an exception will be raised when accessing non-existent properties.
+ */
+@interface NSObject (RGKeyedSubscripting)
 
-- (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation {
-    NSMutableDictionary* ret = [NSMutableDictionary new];
-    for (NSString* propertyName in [[self class] rg_propertyList]) {
-        ret[propertyName] = [self[propertyName] description];
-    }
-    return ret;
-}
+/**
+ @abstract returns the value of property or instance variable of the name given by `key`.
+ */
+- (PREFIX_NULLABLE id) objectForKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key;
+
+/**
+ @abstract set the value of the property or instance variable specified by `key`.
+ */
+- (void) setObject:(PREFIX_NULLABLE id)obj forKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key;
 
 @end
 

@@ -22,7 +22,7 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RestGoatee-Core.h"
-#import "NSObject+RG_SharedImpl.h"
+#import "NSObject+RGSharedImpl.h"
 
 FILE_START
 
@@ -32,7 +32,7 @@ FILE_START
 
 @end
 
-@implementation NSObject (RG_Deserialization)
+@implementation NSObject (RGDeserialization)
 
 + (PREFIX_NONNULL NSMutableArray GENERIC(id) *) objectsFromArraySource:(PREFIX_NULLABLE id<NSFastEnumeration>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context {
     NSMutableArray GENERIC(id) * objects = [NSMutableArray new];

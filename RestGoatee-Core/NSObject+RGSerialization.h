@@ -21,33 +21,19 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "RGDefines.h"
-
 FILE_START
 
 /**
- Provides a default behavior of key based subscripting to all `NSObject` subclasses.
+ This category can be used for the latter half of the serialization => deserialization => serialization process.
  
- @example This is valid syntax:
- UITextField* textField = [UITextField new];
- textField[@"text"] = @"foo bar"; // equivalent to `textField.text = @"foo bar";`
- NSString* theText = textField[@"text"]; // equivalent to `NSString* theText = textField.text;`
- 
- Obviously the advantage now is you can use non-constant strings for property access.  Use it wisely.
- 
- If you `#define STRICT_KVC 1` before this file is compiled, an exception will be raised when accessing non-existent properties.
+ Methods here can turn typical (i.e. non-cyclically strong) objects into JSON (specifically a JSON composed solely only of arrays, dictionaries, strings, and null; `true`, `false`, and numerics are written out as strings).
  */
-@interface NSObject (RG_KeyedSubscripting)
+@interface NSObject (RGSerialization)
 
 /**
- @abstract returns the value of property or instance variable of the name given by `key`.
+ @abstract returns the receiver represented as a dictionary with its property names as keys and the values are the values of that property.  It is highly recommended that any class which you want to be serializable implement `RGSerializable`.
  */
-- (PREFIX_NULLABLE id) objectForKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key;
-
-/**
- @abstract set the value of the property or instance variable specified by `key`.
- */
-- (void) setObject:(PREFIX_NULLABLE id)obj forKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key;
+- (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation;
 
 @end
 

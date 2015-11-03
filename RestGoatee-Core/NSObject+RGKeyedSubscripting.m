@@ -29,7 +29,7 @@ FILE_START
     #define STRICT_KVC 0
 #endif
 
-@implementation NSObject (RG_KeyedSubscripting)
+@implementation NSObject (RGKeyedSubscripting)
 
 - (PREFIX_NULLABLE id) objectForKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key {
 #if !(STRICT_KVC)

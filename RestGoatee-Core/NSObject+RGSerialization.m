@@ -31,7 +31,7 @@ FILE_START
 - (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation {
     NSMutableDictionary* ret = [NSMutableDictionary new];
     for (NSString* propertyName in [[self class] rg_propertyList]) {
-        ret[propertyName] = [self[propertyName] description];
+        ret[propertyName] = [[self valueForKey:propertyName] description];
     }
     return ret;
 }

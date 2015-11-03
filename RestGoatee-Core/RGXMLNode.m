@@ -71,7 +71,9 @@ FILE_START
 
 - (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation {
     NSMutableDictionary* ret = [self.attributes mutableCopy];
-    ret[kRGInnerXMLKey] = self.innerXML; /* if nil, uses NSObject+RG_KeyedSubscripting */
+    if (self.innerXML) {
+        ret[kRGInnerXMLKey] = self.innerXML;
+    }
     NSMutableArray* handledNames = [NSMutableArray new];
     for (RGXMLNode* childNode in self.childNodes) {
         NSAssert(childNode.name, @"%@ name: %@ has a child without a name", self, self.name);

@@ -35,7 +35,6 @@
 
 /* categories */
 #import "NSDictionary+RGDataSource.h"
-#import "NSObject+RGKeyedSubscripting.h"
 #import "NSObject+RGDeserialization.h"
 #import "NSObject+RGSerialization.h"
 

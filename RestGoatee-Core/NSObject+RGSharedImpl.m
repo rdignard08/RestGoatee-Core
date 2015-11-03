@@ -32,11 +32,8 @@ NSString* SUFFIX_NONNULL const kRGSerializationKey = @"__class";
 /* storage for extern'd class references */
 Class SUFFIX_NONNULL rg_NSObjectClass;
 Class SUFFIX_NONNULL rg_NSObjectMetaClass;
-Class SUFFIX_NULLABLE rg_NSManagedObjectContext;
 Class SUFFIX_NULLABLE rg_NSManagedObject;
-Class SUFFIX_NULLABLE rg_NSManagedObjectModel;
 Class SUFFIX_NULLABLE rg_NSEntityDescription;
-Class SUFFIX_NULLABLE rg_NSFetchRequest;
 
 NSArray GENERIC(NSString*) * SUFFIX_NONNULL __attribute__((pure)) rg_dateFormats(void) {
     static dispatch_once_t onceToken;
@@ -54,11 +51,8 @@ NSArray GENERIC(NSString*) * SUFFIX_NONNULL __attribute__((pure)) rg_dateFormats
     dispatch_once(&onceToken, ^{
         rg_NSObjectClass = objc_getClass("NSObject");
         rg_NSObjectMetaClass = objc_getMetaClass("NSObject");
-        rg_NSManagedObjectContext = objc_getClass("NSManagedObjectContext");
         rg_NSManagedObject = objc_getClass("NSManagedObject");
-        rg_NSManagedObjectModel = objc_getClass("NSManagedObjectModel");
         rg_NSEntityDescription = objc_getClass("NSEntityDescription");
-        rg_NSFetchRequest = objc_getClass("NSFetchRequest");
     });
 }
 

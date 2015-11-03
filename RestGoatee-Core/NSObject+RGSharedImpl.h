@@ -54,29 +54,14 @@ FOUNDATION_EXPORT Class SUFFIX_NONNULL rg_NSObjectMetaClass;
 /* These classes are used to dynamically link into coredata if present. */
 
 /**
- Will be `[NSManagedObjectContext class]` or `Nil` (if not linked/available).
- */
-FOUNDATION_EXPORT Class SUFFIX_NULLABLE rg_NSManagedObjectContext;
-
-/**
  Will be `[NSManagedObject class]` or `Nil` (if not linked/available).
  */
 FOUNDATION_EXPORT Class SUFFIX_NULLABLE rg_NSManagedObject;
 
 /**
- Will be `[NSManagedObjectModel class]` or `Nil` (if not linked/available).
- */
-FOUNDATION_EXPORT Class SUFFIX_NULLABLE rg_NSManagedObjectModel;
-
-/**
  Will be `[NSEntityDescription class]` or `Nil` (if not linked/available).
  */
 FOUNDATION_EXPORT Class SUFFIX_NULLABLE rg_NSEntityDescription;
-
-/**
- Will be `[NSFetchRequest class]` or `Nil` (if not linked/available).
- */
-FOUNDATION_EXPORT Class SUFFIX_NULLABLE rg_NSFetchRequest;
 
 /**
  Returns the built-in date formats the library supports. Contains: ISO, `-[NSDate description]`.

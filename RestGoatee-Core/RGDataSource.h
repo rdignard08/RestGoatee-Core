@@ -26,18 +26,18 @@
 FILE_START
 
 /**
- These are the methods that a data source must implement in order to be consumable by the `+[NSObject objectFromDataSource:]` family of methods.
+ These are the methods that a data source must implement in order to be consumable by the `+[NSObject objectFromDataSource:inContext:]` family of methods.
  
- Currently NSDictionary and RGXMLNode (the parsed output from NSXMLParser) are supported implicitly.
+ Currently `NSDictionary` and `RGXMLNode` (the parsed output from `NSXMLParser`) are supported implicitly.
  
- must be able to `for X in id<RGDataSourceProtocol>`
+ must be able to `for X in id<RGDataSource>`
  */
 @protocol RGDataSource <NSObject, NSFastEnumeration>
 
 @required
 
 /**
- The data source must support `id value = dataSource[@"foo.bar"]`.
+ The data source must support `id value = [dataSource valueForKeyPath:@"foo.bar"]`.
  */
 - (PREFIX_NULLABLE id) valueForKeyPath:(PREFIX_NONNULL NSString*)string;
 

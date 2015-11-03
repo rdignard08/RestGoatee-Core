@@ -22,7 +22,9 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RGDefines.h"
+#import "RGXMLNode.h"
 #import "RGPropertyDeclaration.h"
+#import "RGDataSource.h"
 #import <objc/runtime.h>
 
 FILE_START
@@ -99,12 +101,16 @@ BOOL rg_isCollectionObject(Class SUFFIX_NULLABLE cls) __attribute__((pure));
 /**
  Returns true if the given type is a "key => value" type.  Thus it can be represented by an `NSDictionary`.
  */
-BOOL rg_isKeyedCollectionObject(Class SUFFIX_NULLABLE cls) __attribute__((pure));
+BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isKeyedCollectionObject(Class SUFFIX_NULLABLE cls) {
+    return [cls isSubclassOfClass:[NSDictionary class]] || [cls isSubclassOfClass:[RGXMLNode class]];
+}
 
 /**
  Returns true if the given class conforms to `RGDataSource`.  Necessary due to some bug.
  */
-BOOL rg_isDataSourceClass(Class SUFFIX_NULLABLE cls) __attribute__((pure));
+BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isDataSourceClass(Class SUFFIX_NULLABLE cls) {
+    return [cls conformsToProtocol:@protocol(RGDataSource)] || [cls isSubclassOfClass:[NSDictionary class]]; /* 2nd clause due to a bug */
+}
 
 /**
  This is a private category which contains all the of the methods used jointly by the categories `RGDeserialization` and `RGSerialization`.

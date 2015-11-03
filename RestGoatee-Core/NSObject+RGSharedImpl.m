@@ -64,14 +64,6 @@ BOOL __attribute__((pure)) rg_isCollectionObject(Class SUFFIX_NULLABLE cls) {
     return [cls isSubclassOfClass:[NSSet class]] || [cls isSubclassOfClass:[NSArray class]] || [cls isSubclassOfClass:[NSOrderedSet class]];
 }
 
-BOOL __attribute__((pure)) rg_isKeyedCollectionObject(Class SUFFIX_NULLABLE cls) {
-    return [cls isSubclassOfClass:[NSDictionary class]] || [cls isSubclassOfClass:[RGXMLNode class]];
-}
-
-BOOL __attribute__((pure)) rg_isDataSourceClass(Class SUFFIX_NULLABLE cls) {
-    return [cls conformsToProtocol:@protocol(RGDataSource)] || [cls isSubclassOfClass:[NSDictionary class]]; /* 2nd clause due to a bug */
-}
-
 @implementation NSObject (RGSharedImpl)
 
 + (void) load {

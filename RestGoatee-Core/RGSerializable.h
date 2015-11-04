@@ -29,6 +29,11 @@ FILE_START
 
 @optional
 
+/**
+ 
+ */
+- (PREFIX_NULLABLE NSArray GENERIC(NSString*) *) serializedKeys;
+
 @end
 
 FILE_END

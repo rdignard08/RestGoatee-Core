@@ -29,7 +29,7 @@ FILE_START
 @class NSManagedObjectContext;
 
 /**
- This category provides generalized constructors for all domain model objects from a data source (these may be `NSDictionary*` from JSON or `NSXMLParser*` from XML or any custom class conforming to `RGDataSource`).
+ This category provides generalized constructors for all domain model objects from a data source (these may be `NSDictionary` from JSON or `NSXMLParser` from XML or any custom class conforming to `RGDataSource`).
  */
 @interface NSObject (RGDeserialization)
 

@@ -35,7 +35,7 @@ FILE_START
  @abstract Provide any overrides for default mapping behavior here.  Any unspecified key(s) will use the default behavior for mapping.
  @return a dictionary with keys and values of type `NSString` which is read left-to-right: JSON source to target property name.  Can return `nil` (say you're overriding a class that implements this).
  */
-+ (PREFIX_NULLABLE NSDictionary*) overrideKeysForMapping;
++ (PREFIX_NULLABLE NSDictionary GENERIC(NSString*, NSString*) *) overrideKeysForMapping;
 
 /**
  @abstract Provide a custom date format for use with the given property `propertyName`.  See documentation of `NSDate` for proper formats.

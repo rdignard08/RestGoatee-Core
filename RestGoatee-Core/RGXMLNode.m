@@ -27,10 +27,27 @@ NSString* SUFFIX_NONNULL const kRGInnerXMLKey = @"__innerXML__";
 
 FILE_START
 
+@interface RGXMLNode ()
+
+@property NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableArray GENERIC(NSString*) * keys;
+
+@end
+
 @implementation RGXMLNode
 @synthesize parentNode = _parentNode;
 @synthesize attributes = _attributes;
 @synthesize childNodes = _childNodes;
+
+#pragma mark - Properties
+- (PREFIX_NONNULL NSMutableArray GENERIC(NSString*) *) keys {
+    if (!_keys) {
+        _keys = [self.attributes.allKeys mutableCopy];
+        for (RGXMLNode* child in self.childNodes) {
+            [_keys addObject:child.name];
+        }
+    }
+    return _keys;
+}
 
 - (PREFIX_NONNULL NSArray GENERIC(RGXMLNode*) *) childNodes {
     if (!_childNodes) {
@@ -46,28 +63,31 @@ FILE_START
     return _attributes;
 }
 
+#pragma mark - Public Methods
 - (void) addChildNode:(PREFIX_NONNULL RGXMLNode*)node {
     node->_parentNode = self;
     [(NSMutableArray*)self.childNodes addObject:node];
 }
 
 - (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation {
-    NSMutableDictionary* ret = [self.attributes mutableCopy];
-    ret[kRGInnerXMLKey] = self.innerXML; /* if nil, uses NSObject+RG_KeyedSubscripting */
-    NSMutableArray* handledNames = [NSMutableArray new];
+    NSMutableDictionary GENERIC(NSString*, id) * ret = [self.attributes mutableCopy];
+    if (self.innerXML) {
+        ret[kRGInnerXMLKey] = self.innerXML;
+    }
+    NSMutableArray GENERIC(NSString*) * handledNames = [NSMutableArray new];
     for (RGXMLNode* childNode in self.childNodes) {
         NSAssert(childNode.name, @"%@ name: %@ has a child without a name", self, self.name);
         if (![handledNames containsObject:childNode.name]) {
             [handledNames addObject:childNode.name];
             id children = [self childrenNamed:childNode.name];
             if ([children isKindOfClass:[NSArray class]]) {
-                NSMutableArray* replacementContainer = [NSMutableArray new];
+                NSMutableArray GENERIC(NSDictionary GENERIC(NSString*, id) *) * replacementContainer = [NSMutableArray new];
                 for (RGXMLNode* node in children) {
                     [replacementContainer addObject:[node dictionaryRepresentation]];
                 }
                 ret[childNode.name] = replacementContainer;
             } else if ([children isKindOfClass:[RGXMLNode class]]) {
-                NSMutableDictionary* value = [(RGXMLNode*)children attributes];
+                NSMutableDictionary GENERIC(NSString*, NSString*) * value = [(RGXMLNode*)children attributes];
                 [value addEntriesFromDictionary:[(RGXMLNode*)children dictionaryRepresentation]];
                 ret[childNode.name] = value;
             } else {
@@ -79,13 +99,38 @@ FILE_START
 }
 
 - (PREFIX_NULLABLE id) childrenNamed:(PREFIX_NULLABLE NSString*)name {
-    NSMutableArray* ret = [NSMutableArray new];
+    NSMutableArray GENERIC(RGXMLNode*) * ret = [NSMutableArray new];
     for (RGXMLNode* child in self.childNodes) {
         if ([child.name isEqual:name]) {
             [ret addObject:child];
         }
     }
     return ret.count > 1 ? ret : ret.lastObject;
+}
+
+#pragma mark - RGDataSource
+- (PREFIX_NONNULL NSArray GENERIC(NSString*) *) allKeys {
+    return self.keys;
+}
+
+- (NSUInteger) countByEnumeratingWithState:(PREFIX_NONNULL NSFastEnumerationState*)state objects:(__unsafe_unretained id[])buffer count:(NSUInteger)len {
+    NSUInteger ret = [self.keys countByEnumeratingWithState:state objects:buffer count:len];
+    if (!ret) {
+        self.keys = nil;
+    }
+    return ret;
+}
+
+- (PREFIX_NULLABLE id) valueForKeyPath:(PREFIX_NONNULL NSString*)string {
+    NSRange range = [string rangeOfString:@"."];
+    if (range.location == NSNotFound) {
+        return [self valueForKey:string];
+    }
+    return [[self childrenNamed:[string substringToIndex:range.location]] valueForKeyPath:[string substringFromIndex:range.location + 1]];
+}
+
+- (PREFIX_NULLABLE id) valueForKey:(PREFIX_NONNULL NSString*)key {
+    return self.attributes[key] ?: [self childrenNamed:key] ?: self.innerXML;
 }
 
 @end

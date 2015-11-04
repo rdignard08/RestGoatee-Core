@@ -1,4 +1,4 @@
-/* Copyright (c) 6/25/14, Ryan Dignard
+/* Copyright (c) 2/5/15, Ryan Dignard
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -21,19 +21,19 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "RestGoatee-Core.h"
-
 FILE_START
 
 /**
- `RGCanonicalKey` is used as a dictionary key which can resolve both literal and canonical strings.
+ This category can be used for the latter half of the serialization => deserialization => serialization process.
+ 
+ Methods here can turn typical (i.e. non-cyclically strong) objects into JSON (specifically a JSON composed solely only of arrays, dictionaries, strings, and null; `true`, `false`, and numerics are written out as strings).
  */
-@interface RGCanonicalKey : NSObject <NSCopying>
+@interface NSObject (RGSerialization)
 
 /**
- This is the designated initializer for this class.  The keys are immutable for thread-safety.
+ @abstract returns the receiver represented as a dictionary with its property names as keys and the values are the values of that property.  It is highly recommended that any class which you want to be serializable implement `RGSerializable`.
  */
-- (PREFIX_NONNULL instancetype) initWithKey:(PREFIX_NULLABLE NSString*)baseKey withCanonicalName:(PREFIX_NULLABLE NSString*)canonicalKey NS_DESIGNATED_INITIALIZER;
+- (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation;
 
 @end
 

@@ -1,4 +1,4 @@
-/* Copyright (c) 10/18/15, Ryan Dignard
+/* Copyright (c) 2/5/15, Ryan Dignard
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -21,33 +21,15 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "RGXMLNode+RGDataSourceProtocol.h"
+#import "RGDataSource.h"
 
-//- (PREFIX_NULLABLE id) objectForKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key;
-//
-///**
-// The data source must support `dataSource[@"key"] = value`.
-// */
-//- (void) setObject:(PREFIX_NULLABLE id)object forKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key;
-//
-///**
-// The data source must support `id value = dataSource[@"foo.bar"]`.
-// */
-//- (PREFIX_NULLABLE id) valueForKeyPath:(PREFIX_NONNULL NSString*)string;
-//
-///**
-// Returns an array of the keys which are present in this data source (but NOT sub data sources).
-// */
-//- (PREFIX_NONNULL NSArray*) allKeys;
+FILE_START
 
-CATEGORY_SPEC(RGXMLNode, RGDataSourceProtocol)
+/**
+ `NSDictionary` already declares and implements all the methods of `RGDataSource`.  This allows us to pass an `NSDictionary` where ever a variable is typed `id<RGDataSource>`.
+ */
+@interface NSDictionary (RGDataSource) <RGDataSource>
 
-- (void) setUp {
-    [super setUp];
-}
+@end
 
-- (void) testObjectForKey {
-    
-}
-
-SPEC_END
+FILE_END

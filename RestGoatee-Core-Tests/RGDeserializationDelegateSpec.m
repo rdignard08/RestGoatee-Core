@@ -21,11 +21,11 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "NSObject+RG_Deserialization.h"
+#import "NSObject+RGDeserialization.h"
 #import "RGTestObject2.h"
 #import "RestGoatee-Core.h"
 
-@interface RGTestObject4 : RGTestObject2 <RGDeserializationDelegate>
+@interface RGTestObject4 : RGTestObject2 <RGDeserializable>
 
 @end
 
@@ -52,18 +52,18 @@
 CLASS_SPEC(RGDeserializationDelegate)
 
 - (void) testOverrides {
-    RGTestObject4* object = [RGTestObject4 objectFromDataSource:@{ STRING_SEL(stringProperty) : @"123" }];
+    RGTestObject4* object = [RGTestObject4 objectFromDataSource:@{ STRING_SEL(stringProperty) : @"123" } inContext:nil];
     XCTAssert([object.numberProperty isEqual:@123]);
     XCTAssert(object.stringProperty == nil);
 }
 
 - (void) testDateFormat {
-    RGTestObject4* object = [RGTestObject4 objectFromDataSource:@{ STRING_SEL(dateProperty) : @"18/10/2015" }];
+    RGTestObject4* object = [RGTestObject4 objectFromDataSource:@{ STRING_SEL(dateProperty) : @"18/10/2015" } inContext:nil];
     XCTAssert(object.dateProperty.timeIntervalSince1970 >= (1445151600.0 - 24 * 60 * 60) && object.dateProperty.timeIntervalSince1970 <= (1445151600.0 + 24 * 60 * 60));
 }
 
 - (void) testTransform {
-    RGTestObject4* object = [RGTestObject4 objectFromDataSource:@{ STRING_SEL(idProperty) : @"foobar" }];
+    RGTestObject4* object = [RGTestObject4 objectFromDataSource:@{ STRING_SEL(idProperty) : @"foobar" } inContext:nil];
     XCTAssert([object.idProperty isEqual:@"foobaz"]);
 }
 

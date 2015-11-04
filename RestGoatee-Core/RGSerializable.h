@@ -1,4 +1,4 @@
-/* Copyright (c) 2/5/15, Ryan Dignard
+/* Copyright (c) 10/29/15, Ryan Dignard
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -21,53 +21,22 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "RestGoatee-Core.h"
+#import "RGDefines.h"
 
 FILE_START
 
-#ifndef STRICT_KVC
-    #define STRICT_KVC 0
-#endif
+/**
+ This protocol should be implemented if an object is to be safely serialized.  The default behavior is to iterate over all properties, which will very likely lead to cycles (and thus very hard to track down crashes).
+ */
+@protocol RGSerializable <NSObject>
 
-@implementation NSObject (RG_KeyedSubscripting)
+@optional
 
-- (PREFIX_NULLABLE id) objectForKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key {
-#if !(STRICT_KVC)
-    @try {
-#endif
-        return [self valueForKey:key.description];
-#if !(STRICT_KVC)
-    } @catch (NSException* e) {
-        RGLog(@"Unknown property %@ on type %@: %@", key.description, [self class], e);
-        return nil;
-    }
-#endif
-}
-
-- (void) setObject:(PREFIX_NULLABLE id)obj forKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key {
-#if !(STRICT_KVC)
-    @try {
-#endif
-        [self setValue:obj forKey:key.description]; /* This is _intentionally_ not -setObject: */
-#if !(STRICT_KVC)
-    } @catch (NSException* e) {
-        RGLog(@"Unknown property %@ on type %@: %@", key.description, [self class], e);
-    }
-#endif
-}
-
-@end
-
-@implementation NSMutableDictionary (RG_KeyedSubscripting)
-
-/* fuck you apple */
-- (void) setObject:(PREFIX_NULLABLE id)obj forKeyedSubscript:(PREFIX_NONNULL id<NSCopying, NSObject>)key {
-    if (obj) {
-        [self setObject:obj forKey:key];
-    } else {
-        [self removeObjectForKey:key];
-    }
-}
+/**
+ @abstract Implement this method to limit the properties which are considered for serializing.
+ @return a list of property names which completely describes the receiver's state.
+ */
++ (PREFIX_NULLABLE NSArray GENERIC(NSString*) *) serializableKeys;
 
 @end
 

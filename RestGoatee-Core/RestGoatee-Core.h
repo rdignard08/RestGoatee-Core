@@ -21,15 +21,22 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+/* preprocessor */
 #import "RGDefines.h"
-#import "RGDataSourceProtocol.h"
-#import "RGDeserializationDelegate.h"
+
+/* protocols */
+#import "RGDataSource.h"
+#import "RGDeserializable.h"
+#import "RGSerializable.h"
+
+/* classes */
 #import "RGXMLNode.h"
 #import "RGXMLSerializer.h"
-#import "RGXMLNode+RGDataSourceProtocol.h"
-#import "NSObject+RG_KeyedSubscripting.h"
-#import "NSObject+RG_Deserialization.h"
-#import "NSObject+RG_Serialization.h"
+
+/* categories */
+#import "NSDictionary+RGDataSource.h"
+#import "NSObject+RGDeserialization.h"
+#import "NSObject+RGSerialization.h"
 
 FILE_START
 
@@ -39,12 +46,12 @@ FILE_START
 void rg_swizzle(Class SUFFIX_NULLABLE cls, SEL SUFFIX_NULLABLE original, SEL SUFFIX_NULLABLE replacement) __attribute__((cold));
 
 /**
- The `RGLog` function is a debug only function (inactive in a live app).  It logs the file name & line number of the call site.
+ The `rg_log` function is a debug only function (inactive in a live app).  It logs the file name & line number of the call site.
  */
-void _RGLog(NSString* SUFFIX_NULLABLE format, ...) __attribute__((cold));
+void rg_log(NSString* SUFFIX_NULLABLE format, ...) __attribute__((cold));
 #ifdef DEBUG
     #define __SOURCE_FILE__ ({char* c = strrchr(__FILE__, '/'); c ? c + 1 : __FILE__;})
-    #define RGLog(format, ...) _RGLog(format, __SOURCE_FILE__, (long)__LINE__, ##__VA_ARGS__)
+    #define RGLog(format, ...) rg_log(format, __SOURCE_FILE__, (long)__LINE__, ##__VA_ARGS__)
 #else
     /* we define out with `VOID_NOOP` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */
     #define RGLog(...) VOID_NOOP

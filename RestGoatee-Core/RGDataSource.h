@@ -1,4 +1,4 @@
-/* Copyright (c) 2/5/15, Ryan Dignard
+/* Copyright (c) 10/12/15, Ryan Dignard
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -21,31 +21,30 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+#import "RGDefines.h"
+
 FILE_START
 
 /**
- This category can be used for the latter half of the serialization => deserialization => serialization process.
+ These are the methods that a data source must implement in order to be consumable by the `+[NSObject objectFromDataSource:inContext:]` family of methods.
  
- Methods here can turn typical (i.e. non-cyclically strong) objects into JSON (specifically a JSON composed solely only of arrays, dictionaries, strings, and null; `true`, `false`, and numerics are written out as strings).
- */
-@interface NSObject (RG_SerializationPublic)
-
-/**
- @abstract returns the receiver represented as a dictionary with its property names as keys and the values are the values of that property.  By default the parser will follow weak references.
- */
-- (PREFIX_NONNULL id) dictionaryRepresentation;
-
-/**
- @abstract returns the recevier serialized to JSON.  Returns `nil` if the object is not valid JSON.
+ Currently `NSDictionary` and `RGXMLNode` (the parsed output from `NSXMLParser`) are supported implicitly.
  
- @deprecated Use `NSKeyedArchiver` instead.
+ must be able to `for X in id<RGDataSource>`
  */
-- (PREFIX_NULLABLE NSData*) JSONRepresentation __attribute__((deprecated));
+@protocol RGDataSource <NSObject, NSFastEnumeration>
+
+@required
 
 /**
- @abstract equivalent to `-dictionaryRepresentation` but the parser will not parse into objects which are `weak`, `assign`, or `unsafe_unretained` if the parameter `weakReferences` is `NO`.  The default is `YES`.
+ The data source must support `id value = [dataSource valueForKeyPath:@"foo.bar"]`.
  */
-- (PREFIX_NONNULL id) dictionaryRepresentationShouldFollowWeakReferences:(BOOL)weakReferences;
+- (PREFIX_NULLABLE id) valueForKeyPath:(PREFIX_NONNULL NSString*)string;
+
+/**
+ Returns an array of the keys which are present in this data source (but NOT sub data sources).
+ */
+- (PREFIX_NONNULL NSArray GENERIC(NSString*) *) allKeys;
 
 @end
 

@@ -29,9 +29,35 @@ FILE_START
 @implementation NSObject (RGSerialization)
 
 - (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation {
-    NSMutableDictionary* ret = [NSMutableDictionary new];
-    for (NSString* propertyName in [[self class] rg_propertyList]) {
-        ret[propertyName] = [[self valueForKey:propertyName] description];
+#ifdef DEBUG /* enabled when debugging so you can find your logic errors while building */
+    if ([NSThread callStackSymbols].count > 1000) {
+        [NSException raise:NSGenericException format:@"Too deep, probably have a cycle"];
+    }
+#endif
+    id ret;
+    if ([[self class] isSubclassOfClass:[NSNull class]]) {
+        ret = self;
+    } else if (rg_isInlineObject([self class]) || rg_isClassObject(self)) { /* classes can be stored as strings too */
+        ret = [self description];
+    } else if (rg_isCollectionObject([self class])) {
+        ret = [NSMutableArray new];
+        for (id object in (id<NSFastEnumeration>)self) {
+            [ret addObject:[(NSObject*)object dictionaryRepresentation]];
+        }
+    } else if (rg_isKeyedCollectionObject([self class])) {
+        ret = [NSMutableDictionary new];
+        for (id key in (id<NSFastEnumeration>)self) {
+            ret[key] = [(NSObject*)[self valueForKey:key] dictionaryRepresentation];
+        }
+        ret[kRGSerializationKey] = NSStringFromClass([self class]);
+    } else {
+        ret = [NSMutableDictionary new];
+        NSArray* keys = [[self class] respondsToSelector:@selector(serializableKeys)] ? [[self class] serializableKeys] : [[self class] rg_propertyList].allKeys;
+        for (NSString* propertyName in keys) {
+            if ([rg_NSManagedObject instancesRespondToSelector:NSSelectorFromString(propertyName)] || [NSObject instancesRespondToSelector:NSSelectorFromString(propertyName)]) continue;
+            ret[propertyName] = [(NSObject*)([self valueForKey:propertyName] ?: [NSNull null]) dictionaryRepresentation];
+        }
+        ret[kRGSerializationKey] = NSStringFromClass([self class]);
     }
     return ret;
 }

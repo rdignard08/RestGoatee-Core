@@ -75,7 +75,7 @@ FOUNDATION_EXPORT NSString* SUFFIX_NONNULL const kRGInnerXMLKey;
 - (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation;
 
 /**
- May return either `NSMutableArray<RGXMLNode*>*` or `PREFIX_NULLABLE RGXMLNode*`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
+ May return either `NSMutableArray<RGXMLNode*>` or `PREFIX_NULLABLE RGXMLNode`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
  */
 - (PREFIX_NULLABLE id) childrenNamed:(PREFIX_NULLABLE NSString*)name;
 

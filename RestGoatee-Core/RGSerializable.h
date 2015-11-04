@@ -25,14 +25,18 @@
 
 FILE_START
 
+/**
+ This protocol should be implemented if an object is to be safely serialized.  The default behavior is to iterate over all properties, which will very likely lead to cycles (and thus very hard to track down crashes).
+ */
 @protocol RGSerializable <NSObject>
 
 @optional
 
 /**
- 
+ @abstract Implement this method to limit the properties which are considered for serializing.
+ @return a list of property names which completely describes the receiver's state.
  */
-- (PREFIX_NULLABLE NSArray GENERIC(NSString*) *) serializedKeys;
+- (PREFIX_NULLABLE NSArray GENERIC(NSString*) *) serializableKeys;
 
 @end
 

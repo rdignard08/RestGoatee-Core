@@ -36,7 +36,7 @@ FILE_START
 
 + (PREFIX_NONNULL NSMutableArray GENERIC(id) *) objectsFromArraySource:(PREFIX_NULLABLE id<NSFastEnumeration>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context {
     NSMutableArray GENERIC(id) * objects = [NSMutableArray new];
-    for (NSDictionary* object in source) {
+    for (id<RGDataSource> object in source) {
         if (rg_isDataSourceClass([object class])) {
             [objects addObject:[self objectFromDataSource:object inContext:context]];
         }
@@ -98,7 +98,7 @@ FILE_START
     }
     
     if ([value isKindOfClass:[NSArray class]]) { /* If the array we're given contains objects which we can create, create those too */
-        NSMutableArray* ret = [NSMutableArray new];
+        NSMutableArray GENERIC(id) * ret = [NSMutableArray new];
         for (__strong id obj in value) {
             if (rg_isDataSourceClass([obj class])) {
                 Class objectClass = NSClassFromString(obj[kRGSerializationKey]);

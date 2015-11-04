@@ -29,7 +29,7 @@ FILE_START
 
 @interface RGXMLNode ()
 
-@property NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableArray* keys;
+@property NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableArray GENERIC(NSString*) * keys;
 
 @end
 
@@ -39,7 +39,7 @@ FILE_START
 @synthesize childNodes = _childNodes;
 
 #pragma mark - Properties
-- (PREFIX_NONNULL NSMutableArray*) keys {
+- (PREFIX_NONNULL NSMutableArray GENERIC(NSString*) *) keys {
     if (!_keys) {
         _keys = [self.attributes.allKeys mutableCopy];
         for (RGXMLNode* child in self.childNodes) {
@@ -70,24 +70,24 @@ FILE_START
 }
 
 - (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation {
-    NSMutableDictionary* ret = [self.attributes mutableCopy];
+    NSMutableDictionary GENERIC(NSString*, id) * ret = [self.attributes mutableCopy];
     if (self.innerXML) {
         ret[kRGInnerXMLKey] = self.innerXML;
     }
-    NSMutableArray* handledNames = [NSMutableArray new];
+    NSMutableArray GENERIC(NSString*) * handledNames = [NSMutableArray new];
     for (RGXMLNode* childNode in self.childNodes) {
         NSAssert(childNode.name, @"%@ name: %@ has a child without a name", self, self.name);
         if (![handledNames containsObject:childNode.name]) {
             [handledNames addObject:childNode.name];
             id children = [self childrenNamed:childNode.name];
             if ([children isKindOfClass:[NSArray class]]) {
-                NSMutableArray* replacementContainer = [NSMutableArray new];
+                NSMutableArray GENERIC(NSDictionary GENERIC(NSString*, id) *) * replacementContainer = [NSMutableArray new];
                 for (RGXMLNode* node in children) {
                     [replacementContainer addObject:[node dictionaryRepresentation]];
                 }
                 ret[childNode.name] = replacementContainer;
             } else if ([children isKindOfClass:[RGXMLNode class]]) {
-                NSMutableDictionary* value = [(RGXMLNode*)children attributes];
+                NSMutableDictionary GENERIC(NSString*, NSString*) * value = [(RGXMLNode*)children attributes];
                 [value addEntriesFromDictionary:[(RGXMLNode*)children dictionaryRepresentation]];
                 ret[childNode.name] = value;
             } else {
@@ -99,7 +99,7 @@ FILE_START
 }
 
 - (PREFIX_NULLABLE id) childrenNamed:(PREFIX_NULLABLE NSString*)name {
-    NSMutableArray* ret = [NSMutableArray new];
+    NSMutableArray GENERIC(RGXMLNode*) * ret = [NSMutableArray new];
     for (RGXMLNode* child in self.childNodes) {
         if ([child.name isEqual:name]) {
             [ret addObject:child];
@@ -109,7 +109,7 @@ FILE_START
 }
 
 #pragma mark - RGDataSource
-- (PREFIX_NONNULL NSArray*) allKeys {
+- (PREFIX_NONNULL NSArray GENERIC(NSString*) *) allKeys {
     return self.keys;
 }
 

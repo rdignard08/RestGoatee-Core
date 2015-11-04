@@ -46,9 +46,15 @@ FILE_START
     if (!_rootNode) {
         _rootNode = [RGXMLNode new];
         _currentNode = _rootNode;
-        if (![self.parser parse]) {
+#ifdef DEBUG
+        BOOL parsed =
+#endif
+        [self.parser parse];
+#ifdef DEBUG
+        if (!parsed) {
             RGLog(@"Warning, XML parsing failed");
         }
+#endif
     }
     return _rootNode;
 }

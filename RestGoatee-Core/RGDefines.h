@@ -21,46 +21,58 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#define FILE_START \
-_Pragma("clang diagnostic push") \
-_Pragma("clang diagnostic ignored \"-Wgnu\"") \
-_Pragma("clang assume_nonnull begin")
+#ifndef FILE_START
+    #define FILE_START \
+    _Pragma("clang diagnostic push") \
+    _Pragma("clang diagnostic ignored \"-Wgnu\"") \
+    _Pragma("clang assume_nonnull begin")
+#endif
 
-#define FILE_END \
-_Pragma("clang assume_nonnull end") \
-_Pragma("clang diagnostic pop")
+#ifndef FILE_END
+    #define FILE_END \
+    _Pragma("clang assume_nonnull end") \
+    _Pragma("clang diagnostic pop")
+#endif
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgnu"
 
-#if __has_feature(nullability)
-    #define NULLABLE_PROPERTY(...) (nullable, ## __VA_ARGS__)
-    #define NONNULL_PROPERTY(...) (nonnull, ## __VA_ARGS__)
-    #define NULL_RESETTABLE_PROPERTY(...) (null_resettable, ## __VA_ARGS__)
-    #define PREFIX_NULLABLE nullable
-    #define SUFFIX_NULLABLE __nullable
-    #define PREFIX_NONNULL nonnull
-    #define SUFFIX_NONNULL __nonnull
-#else
-    #define NULLABLE_PROPERTY(...) (__VA_ARGS__)
-    #define NONNULL_PROPERTY(...) (__VA_ARGS__)
-    #define NULL_RESETTABLE_PROPERTY(...) (__VA_ARGS__)
-    #define PREFIX_NULLABLE
-    #define SUFFIX_NULLABLE
-    #define PREFIX_NONNULL
-    #define SUFFIX_NONNULL
+#ifndef NULLABLE_PROPERTY
+    #if __has_feature(nullability)
+        #define NULLABLE_PROPERTY(...) (nullable, ## __VA_ARGS__)
+        #define NONNULL_PROPERTY(...) (nonnull, ## __VA_ARGS__)
+        #define NULL_RESETTABLE_PROPERTY(...) (null_resettable, ## __VA_ARGS__)
+        #define PREFIX_NULLABLE nullable
+        #define SUFFIX_NULLABLE __nullable
+        #define PREFIX_NONNULL nonnull
+        #define SUFFIX_NONNULL __nonnull
+    #else
+        #define NULLABLE_PROPERTY(...) (__VA_ARGS__)
+        #define NONNULL_PROPERTY(...) (__VA_ARGS__)
+        #define NULL_RESETTABLE_PROPERTY(...) (__VA_ARGS__)
+        #define PREFIX_NULLABLE
+        #define SUFFIX_NULLABLE
+        #define PREFIX_NONNULL
+        #define SUFFIX_NONNULL
+    #endif
 #endif
 
-#if __has_feature(objc_generics)
-    #define GENERIC(...) < __VA_ARGS__ >
-#else
-    #define GENERIC(...)
+#ifndef GENERIC
+    #if __has_feature(objc_generics)
+        #define GENERIC(...) < __VA_ARGS__ >
+    #else
+        #define GENERIC(...)
+    #endif
 #endif
 
 #pragma clang diagnostic pop
 
 /* `NULL` and `nil` are typed `void*` and I need it to be typed `void` */
-#define VOID_NOOP ((void)0)
+#ifndef VOID_NOOP
+    #define VOID_NOOP ((void)0)
+#endif
 
 /* enables a selector declarations to be used in place of an `NSString`, provides spell checking. */
-#define STRING_SEL(sel) NSStringFromSelector(@selector(sel))
+#ifndef STRING_SEL
+    #define STRING_SEL(sel) NSStringFromSelector(@selector(sel))
+#endif

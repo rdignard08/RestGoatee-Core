@@ -46,15 +46,23 @@ FILE_START
 void rg_swizzle(Class SUFFIX_NULLABLE cls, SEL SUFFIX_NULLABLE original, SEL SUFFIX_NULLABLE replacement) __attribute__((cold));
 
 /**
- The `rg_log` function is a debug only function (inactive in a live app).  It logs the file name & line number of the call site.
+ The `rg_log` function is the backing debug function of `RGLog`.  It logs the file name & line number of the call site.
  */
 void rg_log(NSString* SUFFIX_NULLABLE format, ...) __attribute__((cold));
-#ifdef DEBUG
-    #define __SOURCE_FILE__ ({char* c = strrchr(__FILE__, '/'); c ? c + 1 : __FILE__;})
-    #define RGLog(format, ...) rg_log(format, __SOURCE_FILE__, (long)__LINE__, ##__VA_ARGS__)
-#else
-    /* we define out with `VOID_NOOP` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */
-    #define RGLog(...) VOID_NOOP
+#ifndef RGLog
+    #ifdef DEBUG
+        #ifdef __cplusplus
+            extern "C" {
+        #endif
+            extern char* strrchr(const char* string, int character);
+        #ifdef __cplusplus
+            }
+        #endif
+        #define RGLog(format, ...) rg_log(format, ({char* c = strrchr(__FILE__, '/'); c ? c + 1 : __FILE__;}), (long)__LINE__, ##__VA_ARGS__)
+    #else
+        /* we define out with `VOID_NOOP` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */
+        #define RGLog(...) VOID_NOOP
+    #endif
 #endif
 
 FILE_END

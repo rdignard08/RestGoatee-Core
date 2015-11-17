@@ -26,7 +26,7 @@ RG_FILE_START
 /**
  This category can be used for the latter half of the serialization => deserialization => serialization process.
  
- Methods here can turn typical (i.e. non-cyclically strong) objects into JSON (specifically a JSON composed solely only of arrays, dictionaries, strings, and null; `true`, `false`, and numerics are written out as strings).
+ The method here can turn typical (i.e. non-cyclically strong) objects into JSON (specifically a JSON composed solely only of arrays, dictionaries, strings, and null; `true`, `false`, and numeric types are written out as strings).
  */
 @interface NSObject (RGSerialization)
 

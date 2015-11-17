@@ -29,37 +29,44 @@ RG_FILE_START
 @implementation NSObject (RGSerialization)
 
 - (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation {
+    NSMutableDictionary* ret = [self rg_dictionaryHelper];
+    NSAssert([ret isKindOfClass:[NSDictionary class]], @"Called `dictionaryRepresentation` on an object whose correct representation is not a dictionary");
+    return ret;
+}
+
+- (RG_PREFIX_NONNULL id) rg_dictionaryHelper {
 #ifdef DEBUG /* enabled when debugging so you can find your logic errors while building */
     if ([NSThread callStackSymbols].count > 1000) {
         [NSException raise:NSGenericException format:@"Too deep, probably have a cycle"];
     }
 #endif
-    id ret;
     if ([[self class] isSubclassOfClass:[NSNull class]]) {
-        ret = self;
+        return self;
     } else if (rg_isInlineObject([self class]) || rg_isClassObject(self)) { /* classes can be stored as strings too */
-        ret = [self description];
+        return self.description;
     } else if (rg_isCollectionObject([self class])) {
-        ret = [NSMutableArray new];
-        for (id object in (id<NSFastEnumeration>)self) {
-            [ret addObject:[(NSObject*)object dictionaryRepresentation]];
+        NSMutableArray* ret = [NSMutableArray new];
+        for (NSObject* object in (id<NSFastEnumeration>)self) {
+            [ret addObject:[object dictionaryRepresentation]];
         }
-    } else if (rg_isKeyedCollectionObject([self class])) {
-        ret = [NSMutableDictionary new];
-        for (id key in (id<NSFastEnumeration>)self) {
+        return ret;
+    } else if (rg_isKeyedCollectionObject([self class])) { /* a dictionary / RGXMLNode */
+        NSMutableDictionary* ret = [NSMutableDictionary new];
+        for (NSString* key in (id<NSFastEnumeration>)self) {
             ret[key] = [(NSObject*)[self valueForKey:key] dictionaryRepresentation];
         }
         ret[kRGSerializationKey] = NSStringFromClass([self class]);
-    } else {
-        ret = [NSMutableDictionary new];
+        return ret;
+    } else { /* any old schleb object */
+        NSMutableDictionary* ret = [NSMutableDictionary new];
         NSArray* keys = [[self class] respondsToSelector:@selector(serializableKeys)] ? [[self class] serializableKeys] : [[self class] rg_propertyList].allKeys;
         for (NSString* propertyName in keys) {
             if ([rg_NSManagedObject instancesRespondToSelector:NSSelectorFromString(propertyName)] || [NSObject instancesRespondToSelector:NSSelectorFromString(propertyName)]) continue;
             ret[propertyName] = [(NSObject*)([self valueForKey:propertyName] ?: [NSNull null]) dictionaryRepresentation];
         }
         ret[kRGSerializationKey] = NSStringFromClass([self class]);
+        return ret;
     }
-    return ret;
 }
 
 @end

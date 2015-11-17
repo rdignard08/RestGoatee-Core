@@ -28,14 +28,14 @@ RG_FILE_START
 
 @interface NSObject (RGForwardDeclarations)
 
-+ (PREFIX_NONNULL id) insertNewObjectForEntityForName:(PREFIX_NONNULL NSString*)entityName inManagedObjectContext:(PREFIX_NONNULL id)context;
++ (RG_PREFIX_NONNULL id) insertNewObjectForEntityForName:(RG_PREFIX_NONNULL NSString*)entityName inManagedObjectContext:(RG_PREFIX_NONNULL id)context;
 
 @end
 
 @implementation NSObject (RGDeserialization)
 
-+ (PREFIX_NONNULL NSMutableArray GENERIC(id) *) objectsFromArraySource:(PREFIX_NULLABLE id<NSFastEnumeration>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context {
-    NSMutableArray GENERIC(id) * objects = [NSMutableArray new];
++ (RG_PREFIX_NONNULL NSMutableArray RG_GENERIC(id) *) objectsFromArraySource:(RG_PREFIX_NULLABLE id<NSFastEnumeration>)source inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context {
+    NSMutableArray RG_GENERIC(id) * objects = [NSMutableArray new];
     for (id<RGDataSource> object in source) {
         if (rg_isDataSourceClass([object class])) {
             [objects addObject:[self objectFromDataSource:object inContext:context]];
@@ -44,7 +44,7 @@ RG_FILE_START
     return objects;
 }
 
-+ (PREFIX_NONNULL instancetype) objectFromDataSource:(PREFIX_NULLABLE id<RGDataSource>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context {
++ (RG_PREFIX_NONNULL instancetype) objectFromDataSource:(RG_PREFIX_NULLABLE id<RGDataSource>)source inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context {
     NSObject<RGDeserializable>* ret;
     if ([self isSubclassOfClass:rg_NSManagedObject]) {
         NSAssert(context, @"A subclass of NSManagedObject must be created within a valid NSManagedObjectContext.");
@@ -55,7 +55,7 @@ RG_FILE_START
     return [ret extendWith:source inContext:context];
 }
 
-- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE id<RGDataSource>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context {
+- (RG_PREFIX_NONNULL instancetype) extendWith:(RG_PREFIX_NULLABLE id<RGDataSource>)source inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context {
     NSDictionary* overrides = [[self class] respondsToSelector:@selector(overrideKeysForMapping)] ? [[self class] overrideKeysForMapping] : nil;
     NSDictionary* properties = [[self class] rg_propertyList];
     NSDictionary* canonicalProperties = [[self class] rg_canonicalPropertyList];
@@ -79,7 +79,7 @@ RG_FILE_START
  JSON types when deserialized from NSData are: NSNull, NSNumber (number or boolean), NSString, NSArray, NSDictionary.
  RGXMLNode is odd, but it can be used as nil, NSString, NSDictionary, or NSArray where required.
  */
-- (void) rg_initProperty:(PREFIX_NULLABLE RGPropertyDeclaration*)property withValue:(PREFIX_NONNULL id)value inContext:(PREFIX_NULLABLE id)context {
+- (void) rg_initProperty:(RG_PREFIX_NULLABLE RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value inContext:(RG_PREFIX_NULLABLE id)context {
     
     /* can't initialize a property that doesn't exist */
     if (!property) return;
@@ -101,7 +101,7 @@ RG_FILE_START
     }
     
     if ([value isKindOfClass:[NSArray class]]) { /* If the array we're given contains objects which we can create, create those too */
-        NSMutableArray GENERIC(id) * ret = [NSMutableArray new];
+        NSMutableArray RG_GENERIC(id) * ret = [NSMutableArray new];
         for (__strong id obj in value) {
             if (rg_isDataSourceClass([obj class])) {
                 Class objectClass = NSClassFromString(obj[kRGSerializationKey]);
@@ -191,7 +191,7 @@ RG_FILE_START
         [self setValue:[propertyType objectFromDataSource:value inContext:context] forKey:key];
     } else if ([value isKindOfClass:[NSArray class]]) { /* single entry arrays are converted to an inplace object */
 #ifdef DEBUG
-        [(NSArray*)value count] > 1 ? RGLog(@"Warning, data loss on property %@ on type %@", key, [self class]) : VOID_NOOP;
+        [(NSArray*)value count] > 1 ? RGLog(@"Warning, data loss on property %@ on type %@", key, [self class]) : RG_VOID_NOOP;
 #endif
         id firstValue = [value firstObject];
         if (!firstValue || [firstValue isKindOfClass:propertyType]) {
@@ -202,7 +202,7 @@ RG_FILE_START
     }
     
 #ifdef DEBUG
-    [self valueForKey:key] ? VOID_NOOP : RGLog(@"Warning, initialization failed on property %@ on type %@", key, [self class]);
+    [self valueForKey:key] ? RG_VOID_NOOP : RGLog(@"Warning, initialization failed on property %@ on type %@", key, [self class]);
 #endif
 }
 

@@ -36,7 +36,7 @@ RG_FILE_START
  @abstract Implement this method to limit the properties which are considered for serializing.
  @return a list of property names which completely describes the receiver's state.
  */
-+ (PREFIX_NULLABLE NSArray GENERIC(NSString*) *) serializableKeys;
++ (RG_PREFIX_NULLABLE NSArray RG_GENERIC(NSString*) *) serializableKeys;
 
 @end
 

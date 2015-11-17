@@ -31,16 +31,16 @@
 
 @implementation RGTestObject4
 
-+ (PREFIX_NULLABLE NSDictionary*) overrideKeysForMapping {
-    return @{ STRING_SEL(stringProperty) : STRING_SEL(numberProperty) };
++ (RG_PREFIX_NULLABLE NSDictionary*) overrideKeysForMapping {
+    return @{ RG_STRING_SEL(stringProperty) : RG_STRING_SEL(numberProperty) };
 }
 
-+ (PREFIX_NULLABLE NSString*) dateFormatForProperty:(PREFIX_NONNULL NSString* __unused)propertyName {
++ (RG_PREFIX_NULLABLE NSString*) dateFormatForProperty:(RG_PREFIX_NONNULL NSString* __unused)propertyName {
     return @"dd/MM/yyyy";
 }
 
-- (BOOL) shouldTransformValue:(PREFIX_NULLABLE __unused id)value forProperty:(PREFIX_NONNULL NSString*)propertyName inContext:(PREFIX_NULLABLE __unused NSManagedObjectContext*)context {
-    if ([propertyName isEqual:STRING_SEL(idProperty)]) {
+- (BOOL) shouldTransformValue:(RG_PREFIX_NULLABLE __unused id)value forProperty:(RG_PREFIX_NONNULL NSString*)propertyName inContext:(RG_PREFIX_NULLABLE __unused NSManagedObjectContext*)context {
+    if ([propertyName isEqual:RG_STRING_SEL(idProperty)]) {
         self.idProperty = @"foobaz";
         return NO;
     }
@@ -52,18 +52,18 @@
 CLASS_SPEC(RGDeserializationDelegate)
 
 - (void) testOverrides {
-    RGTestObject4* object = [RGTestObject4 objectFromDataSource:@{ STRING_SEL(stringProperty) : @"123" } inContext:nil];
+    RGTestObject4* object = [RGTestObject4 objectFromDataSource:@{ RG_STRING_SEL(stringProperty) : @"123" } inContext:nil];
     XCTAssert([object.numberProperty isEqual:@123]);
     XCTAssert(object.stringProperty == nil);
 }
 
 - (void) testDateFormat {
-    RGTestObject4* object = [RGTestObject4 objectFromDataSource:@{ STRING_SEL(dateProperty) : @"18/10/2015" } inContext:nil];
+    RGTestObject4* object = [RGTestObject4 objectFromDataSource:@{ RG_STRING_SEL(dateProperty) : @"18/10/2015" } inContext:nil];
     XCTAssert(object.dateProperty.timeIntervalSince1970 >= (1445151600.0 - 24 * 60 * 60) && object.dateProperty.timeIntervalSince1970 <= (1445151600.0 + 24 * 60 * 60));
 }
 
 - (void) testTransform {
-    RGTestObject4* object = [RGTestObject4 objectFromDataSource:@{ STRING_SEL(idProperty) : @"foobar" } inContext:nil];
+    RGTestObject4* object = [RGTestObject4 objectFromDataSource:@{ RG_STRING_SEL(idProperty) : @"foobar" } inContext:nil];
     XCTAssert([object.idProperty isEqual:@"foobaz"]);
 }
 

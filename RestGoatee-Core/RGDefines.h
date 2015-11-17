@@ -37,42 +37,42 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgnu"
 
-#ifndef NULLABLE_PROPERTY
+#ifndef RG_NULLABLE_PROPERTY
     #if __has_feature(nullability)
-        #define NULLABLE_PROPERTY(...) (nullable, ## __VA_ARGS__)
-        #define NONNULL_PROPERTY(...) (nonnull, ## __VA_ARGS__)
-        #define NULL_RESETTABLE_PROPERTY(...) (null_resettable, ## __VA_ARGS__)
-        #define PREFIX_NULLABLE nullable
-        #define SUFFIX_NULLABLE __nullable
-        #define PREFIX_NONNULL nonnull
-        #define SUFFIX_NONNULL __nonnull
+        #define RG_NULLABLE_PROPERTY(...) (nullable, ## __VA_ARGS__)
+        #define RG_NONNULL_PROPERTY(...) (nonnull, ## __VA_ARGS__)
+        #define RG_NULL_RESETTABLE_PROPERTY(...) (null_resettable, ## __VA_ARGS__)
+        #define RG_PREFIX_NULLABLE nullable
+        #define RG_SUFFIX_NULLABLE __nullable
+        #define RG_PREFIX_NONNULL nonnull
+        #define RG_SUFFIX_NONNULL __nonnull
     #else
-        #define NULLABLE_PROPERTY(...) (__VA_ARGS__)
-        #define NONNULL_PROPERTY(...) (__VA_ARGS__)
-        #define NULL_RESETTABLE_PROPERTY(...) (__VA_ARGS__)
-        #define PREFIX_NULLABLE
-        #define SUFFIX_NULLABLE
-        #define PREFIX_NONNULL
-        #define SUFFIX_NONNULL
+        #define RG_NULLABLE_PROPERTY(...) (__VA_ARGS__)
+        #define RG_NONNULL_PROPERTY(...) (__VA_ARGS__)
+        #define RG_NULL_RESETTABLE_PROPERTY(...) (__VA_ARGS__)
+        #define RG_PREFIX_NULLABLE
+        #define RG_SUFFIX_NULLABLE
+        #define RG_PREFIX_NONNULL
+        #define RG_SUFFIX_NONNULL
     #endif
 #endif
 
-#ifndef GENERIC
+#ifndef RG_GENERIC
     #if __has_feature(objc_generics)
-        #define GENERIC(...) < __VA_ARGS__ >
+        #define RG_GENERIC(...) < __VA_ARGS__ >
     #else
-        #define GENERIC(...)
+        #define RG_GENERIC(...)
     #endif
 #endif
 
 #pragma clang diagnostic pop
 
 /* `NULL` and `nil` are typed `void*` and I need it to be typed `void` */
-#ifndef VOID_NOOP
-    #define VOID_NOOP ((void)0)
+#ifndef RG_VOID_NOOP
+    #define RG_VOID_NOOP ((void)0)
 #endif
 
 /* enables a selector declarations to be used in place of an `NSString`, provides spell checking. */
-#ifndef STRING_SEL
-    #define STRING_SEL(sel) NSStringFromSelector(@selector(sel))
+#ifndef RG_STRING_SEL
+    #define RG_STRING_SEL(sel) NSStringFromSelector(@selector(sel))
 #endif

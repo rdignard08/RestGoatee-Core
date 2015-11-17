@@ -23,13 +23,13 @@
 
 #import "RGXMLNode.h"
 
-NSString* SUFFIX_NONNULL const kRGInnerXMLKey = @"__innerXML__";
+NSString* RG_SUFFIX_NONNULL const kRGInnerXMLKey = @"__innerXML__";
 
 RG_FILE_START
 
 @interface RGXMLNode ()
 
-@property NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableArray GENERIC(NSString*) * keys;
+@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableArray RG_GENERIC(NSString*) * keys;
 
 @end
 
@@ -39,7 +39,7 @@ RG_FILE_START
 @synthesize childNodes = _childNodes;
 
 #pragma mark - Properties
-- (PREFIX_NONNULL NSMutableArray GENERIC(NSString*) *) keys {
+- (RG_PREFIX_NONNULL NSMutableArray RG_GENERIC(NSString*) *) keys {
     if (!_keys) {
         _keys = [self.attributes.allKeys mutableCopy];
         for (RGXMLNode* child in self.childNodes) {
@@ -49,14 +49,14 @@ RG_FILE_START
     return _keys;
 }
 
-- (PREFIX_NONNULL NSArray GENERIC(RGXMLNode*) *) childNodes {
+- (RG_PREFIX_NONNULL NSArray RG_GENERIC(RGXMLNode*) *) childNodes {
     if (!_childNodes) {
         _childNodes = [NSMutableArray new];
     }
     return _childNodes;
 }
 
-- (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, NSString*) *) attributes {
+- (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, NSString*) *) attributes {
     if (!_attributes) {
         _attributes = [NSMutableDictionary new];
     }
@@ -64,30 +64,30 @@ RG_FILE_START
 }
 
 #pragma mark - Public Methods
-- (void) addChildNode:(PREFIX_NONNULL RGXMLNode*)node {
+- (void) addChildNode:(RG_PREFIX_NONNULL RGXMLNode*)node {
     node->_parentNode = self;
     [(NSMutableArray*)self.childNodes addObject:node];
 }
 
-- (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation {
-    NSMutableDictionary GENERIC(NSString*, id) * ret = [self.attributes mutableCopy];
+- (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation {
+    NSMutableDictionary RG_GENERIC(NSString*, id) * ret = [self.attributes mutableCopy];
     if (self.innerXML) {
         ret[kRGInnerXMLKey] = self.innerXML;
     }
-    NSMutableArray GENERIC(NSString*) * handledNames = [NSMutableArray new];
+    NSMutableArray RG_GENERIC(NSString*) * handledNames = [NSMutableArray new];
     for (RGXMLNode* childNode in self.childNodes) {
         NSAssert(childNode.name, @"%@ name: %@ has a child without a name", self, self.name);
         if (![handledNames containsObject:childNode.name]) {
             [handledNames addObject:childNode.name];
             id children = [self childrenNamed:childNode.name];
             if ([children isKindOfClass:[NSArray class]]) {
-                NSMutableArray GENERIC(NSDictionary GENERIC(NSString*, id) *) * replacementContainer = [NSMutableArray new];
+                NSMutableArray RG_GENERIC(NSDictionary RG_GENERIC(NSString*, id) *) * replacementContainer = [NSMutableArray new];
                 for (RGXMLNode* node in children) {
                     [replacementContainer addObject:[node dictionaryRepresentation]];
                 }
                 ret[childNode.name] = replacementContainer;
             } else if ([children isKindOfClass:[RGXMLNode class]]) {
-                NSMutableDictionary GENERIC(NSString*, NSString*) * value = [(RGXMLNode*)children attributes];
+                NSMutableDictionary RG_GENERIC(NSString*, NSString*) * value = [(RGXMLNode*)children attributes];
                 [value addEntriesFromDictionary:[(RGXMLNode*)children dictionaryRepresentation]];
                 ret[childNode.name] = value;
             } else {
@@ -98,8 +98,8 @@ RG_FILE_START
     return ret;
 }
 
-- (PREFIX_NULLABLE id) childrenNamed:(PREFIX_NULLABLE NSString*)name {
-    NSMutableArray GENERIC(RGXMLNode*) * ret = [NSMutableArray new];
+- (RG_PREFIX_NULLABLE id) childrenNamed:(RG_PREFIX_NULLABLE NSString*)name {
+    NSMutableArray RG_GENERIC(RGXMLNode*) * ret = [NSMutableArray new];
     for (RGXMLNode* child in self.childNodes) {
         if ([child.name isEqual:name]) {
             [ret addObject:child];
@@ -109,11 +109,11 @@ RG_FILE_START
 }
 
 #pragma mark - RGDataSource
-- (PREFIX_NONNULL NSArray GENERIC(NSString*) *) allKeys {
+- (RG_PREFIX_NONNULL NSArray RG_GENERIC(NSString*) *) allKeys {
     return self.keys;
 }
 
-- (NSUInteger) countByEnumeratingWithState:(PREFIX_NONNULL NSFastEnumerationState*)state objects:(__unsafe_unretained id[])buffer count:(NSUInteger)len {
+- (NSUInteger) countByEnumeratingWithState:(RG_PREFIX_NONNULL NSFastEnumerationState*)state objects:(__unsafe_unretained id[])buffer count:(NSUInteger)len {
     NSUInteger ret = [self.keys countByEnumeratingWithState:state objects:buffer count:len];
     if (!ret) {
         self.keys = nil;
@@ -121,7 +121,7 @@ RG_FILE_START
     return ret;
 }
 
-- (PREFIX_NULLABLE id) valueForKeyPath:(PREFIX_NONNULL NSString*)string {
+- (RG_PREFIX_NULLABLE id) valueForKeyPath:(RG_PREFIX_NONNULL NSString*)string {
     NSRange range = [string rangeOfString:@"."];
     if (range.location == NSNotFound) {
         return [self valueForKey:string];
@@ -129,7 +129,7 @@ RG_FILE_START
     return [[self childrenNamed:[string substringToIndex:range.location]] valueForKeyPath:[string substringFromIndex:range.location + 1]];
 }
 
-- (PREFIX_NULLABLE id) valueForKey:(PREFIX_NONNULL NSString*)key {
+- (RG_PREFIX_NULLABLE id) valueForKey:(RG_PREFIX_NONNULL NSString*)key {
     return self.attributes[key] ?: [self childrenNamed:key] ?: self.innerXML;
 }
 

@@ -23,7 +23,7 @@ NSString* const rg_canonicalForm(const char* const utfName) {
 @synthesize canonicalName = _canonicalName;
 @synthesize storageSemantics = _storageSemantics;
 
-- (PREFIX_NONNULL instancetype) initWithProperty:(objc_property_t)property {
+- (RG_PREFIX_NONNULL instancetype) initWithProperty:(objc_property_t)property {
     self = [super init];
     if (self) {
         const char* utfName = property_getName(property);
@@ -81,7 +81,7 @@ NSString* const rg_canonicalForm(const char* const utfName) {
     return self;
 }
 
-- (PREFIX_NONNULL NSString*) description {
+- (RG_PREFIX_NONNULL NSString*) description {
     return [NSString stringWithFormat:@"%@\nname: %@\ncanonicalName: %@\ntype: %@\nstorageSemantics: %@\nisPrimitive: %@\n readOnly: %@", super.description, self.name, self.canonicalName, self.type, @(self.storageSemantics), @(self.isPrimitive), @(self.readOnly)];
 }
 

@@ -39,12 +39,12 @@ RG_FILE_START
 /**
  The data source must support `id value = [dataSource valueForKeyPath:@"foo.bar"]`.
  */
-- (PREFIX_NULLABLE id) valueForKeyPath:(PREFIX_NONNULL NSString*)string;
+- (RG_PREFIX_NULLABLE id) valueForKeyPath:(RG_PREFIX_NONNULL NSString*)string;
 
 /**
  Returns an array of the keys which are present in this data source (but NOT sub data sources).
  */
-- (PREFIX_NONNULL NSArray GENERIC(NSString*) *) allKeys;
+- (RG_PREFIX_NONNULL NSArray RG_GENERIC(NSString*) *) allKeys;
 
 @end
 

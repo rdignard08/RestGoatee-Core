@@ -27,7 +27,7 @@
 
 RG_FILE_START
 
-FOUNDATION_EXPORT NSString* SUFFIX_NONNULL const kRGInnerXMLKey;
+FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGInnerXMLKey;
 
 /**
  The `RGXMLNode` is the parse result of `NSXMLParser`.
@@ -37,7 +37,7 @@ FOUNDATION_EXPORT NSString* SUFFIX_NONNULL const kRGInnerXMLKey;
 /**
  Set when `-addChildNode:` is called.  A weak reference to the enclosing node.
  */
-@property NULLABLE_PROPERTY(nonatomic, weak, readonly) RGXMLNode* parentNode;
+@property RG_NULLABLE_PROPERTY(nonatomic, weak, readonly) RGXMLNode* parentNode;
 
 /**
  Attributes come from <object id="123" name="cool"> and will equal @{ "id" : "123", "name" : "cool" }.
@@ -46,12 +46,12 @@ FOUNDATION_EXPORT NSString* SUFFIX_NONNULL const kRGInnerXMLKey;
  
  You may mutate the collection.
  */
-@property NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableDictionary GENERIC(NSString*, NSString*) * attributes;
+@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableDictionary RG_GENERIC(NSString*, NSString*) * attributes;
 
 /**
  The name of the tag.  <foobar>...</foobar> will have the value of `foobar` here.
  */
-@property NULLABLE_PROPERTY(nonatomic, strong) NSString* name;
+@property RG_NULLABLE_PROPERTY(nonatomic, strong) NSString* name;
 
 /**
  The innerXML if any, including unwrapped CDATA. 
@@ -60,29 +60,29 @@ FOUNDATION_EXPORT NSString* SUFFIX_NONNULL const kRGInnerXMLKey;
  
  adjacent open and close tags will be the empty string; <object></object>
  */
-@property NULLABLE_PROPERTY(nonatomic, strong) NSString* innerXML;
+@property RG_NULLABLE_PROPERTY(nonatomic, strong) NSString* innerXML;
 
 /**
  This property contains any sub-nodes of this node.  Those sub-nodes have this node as the value of their `parentNode` property.
  */
-@property NULL_RESETTABLE_PROPERTY(nonatomic, strong, readonly) NSArray GENERIC(RGXMLNode*) * childNodes;
+@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong, readonly) NSArray RG_GENERIC(RGXMLNode*) * childNodes;
 
 /**
  Returns the receiver and all of its children as a dictionary representation.  The `innerXML` of the node is returned on the key `kRGInnerXMLKey`.
  
  @warning raises an exception if there exists a child without a name.
  */
-- (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation;
+- (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation;
 
 /**
- May return either `NSMutableArray<RGXMLNode*>` or `PREFIX_NULLABLE RGXMLNode`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
+ May return either `NSMutableArray<RGXMLNode*>` or `RG_PREFIX_NULLABLE RGXMLNode`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
  */
-- (PREFIX_NULLABLE id) childrenNamed:(PREFIX_NULLABLE NSString*)name;
+- (RG_PREFIX_NULLABLE id) childrenNamed:(RG_PREFIX_NULLABLE NSString*)name;
 
 /**
  Call this method to insert a new node into this object's `childNodes` property.
  */
-- (void) addChildNode:(PREFIX_NONNULL RGXMLNode*)node;
+- (void) addChildNode:(RG_PREFIX_NONNULL RGXMLNode*)node;
 
 @end
 

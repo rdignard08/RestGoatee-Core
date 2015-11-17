@@ -33,7 +33,7 @@ RG_FILE_START
 /**
  @abstract returns the receiver represented as a dictionary with its property names as keys and the values are the values of that property.  It is highly recommended that any class which you want to be serializable implement `RGSerializable`.
  */
-- (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation;
+- (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation;
 
 @end
 

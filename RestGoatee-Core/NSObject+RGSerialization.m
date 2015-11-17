@@ -28,7 +28,7 @@ RG_FILE_START
 
 @implementation NSObject (RGSerialization)
 
-- (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, id) *) dictionaryRepresentation {
+- (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation {
 #ifdef DEBUG /* enabled when debugging so you can find your logic errors while building */
     if ([NSThread callStackSymbols].count > 1000) {
         [NSException raise:NSGenericException format:@"Too deep, probably have a cycle"];

@@ -39,7 +39,7 @@ RG_FILE_START
  @param context Subclasses (or the properties thereof) typed `NSManagedObject` must provide a context all others may safely pass `nil`.
  @return an array of objects of the type of the receiver.  The return value is mutable, and you can mutate it to your heart's content.
  */
-+ (PREFIX_NONNULL NSMutableArray GENERIC(id /* __kindof receiver */) *) objectsFromArraySource:(PREFIX_NULLABLE id<NSFastEnumeration>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
++ (RG_PREFIX_NONNULL NSMutableArray RG_GENERIC(id /* __kindof receiver */) *) objectsFromArraySource:(RG_PREFIX_NULLABLE id<NSFastEnumeration>)source inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 /**
  @abstract The receiver (the `Class` object) of this method will attempt to initialize an instance of itself with properties assigned from an `RGDataSource`.
@@ -47,7 +47,7 @@ RG_FILE_START
  @param context Subclasses (or the properties thereof) typed `NSManagedObject` must provide a context all others may safely pass `nil`.
  @return an instance of the receiver; constructed with the values provided by `source`.
  */
-+ (PREFIX_NONNULL instancetype) objectFromDataSource:(PREFIX_NULLABLE id<RGDataSource>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
++ (RG_PREFIX_NONNULL instancetype) objectFromDataSource:(RG_PREFIX_NULLABLE id<RGDataSource>)source inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 /**
  @abstract merges a data source into an existing object.  The return value is not a new object, but rather is the receiver augmented with the values in `object`.  Wherever they conflict, `source` takes precedence.
@@ -55,7 +55,7 @@ RG_FILE_START
  @param context Since there may be sub objects which are `NSManagedObject` subclasses, it may be necessary to provide an `NSManagedObjectContext` to contain them.
  @return the receiving object extended with `source`; any conflicts will take `source`'s value as precedent.
  */
-- (PREFIX_NONNULL instancetype) extendWith:(PREFIX_NULLABLE id<RGDataSource>)source inContext:(PREFIX_NULLABLE NSManagedObjectContext*)context;
+- (RG_PREFIX_NONNULL instancetype) extendWith:(RG_PREFIX_NULLABLE id<RGDataSource>)source inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 @end
 

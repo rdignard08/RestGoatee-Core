@@ -162,65 +162,65 @@ CATEGORY_SPEC(NSObject, RG_SharedImpl)
 #pragma mark - rg_propertyList
 - (void) testPropertyList {
     NSDictionary* propertyList = [[RGTestObject2 class] rg_propertyList];
-    XCTAssert(propertyList[STRING_SEL(stringProperty)] != nil);
-    XCTAssert(propertyList[STRING_SEL(urlProperty)] != nil);
-    XCTAssert(propertyList[STRING_SEL(numberProperty)] != nil);
-    XCTAssert(propertyList[STRING_SEL(decimalProperty)] != nil);
-    XCTAssert(propertyList[STRING_SEL(valueProperty)] != nil);
-    XCTAssert(propertyList[STRING_SEL(idProperty)] != nil);
-    XCTAssert(propertyList[STRING_SEL(classProperty)] != nil);
-    XCTAssert(propertyList[STRING_SEL(arrayProperty)] != nil);
-    XCTAssert(propertyList[STRING_SEL(dictionaryProperty)] != nil);
-    XCTAssert(propertyList[STRING_SEL(objectProperty)] != nil);
-    XCTAssert(propertyList[STRING_SEL(dateProperty)] != nil);
+    XCTAssert(propertyList[RG_STRING_SEL(stringProperty)] != nil);
+    XCTAssert(propertyList[RG_STRING_SEL(urlProperty)] != nil);
+    XCTAssert(propertyList[RG_STRING_SEL(numberProperty)] != nil);
+    XCTAssert(propertyList[RG_STRING_SEL(decimalProperty)] != nil);
+    XCTAssert(propertyList[RG_STRING_SEL(valueProperty)] != nil);
+    XCTAssert(propertyList[RG_STRING_SEL(idProperty)] != nil);
+    XCTAssert(propertyList[RG_STRING_SEL(classProperty)] != nil);
+    XCTAssert(propertyList[RG_STRING_SEL(arrayProperty)] != nil);
+    XCTAssert(propertyList[RG_STRING_SEL(dictionaryProperty)] != nil);
+    XCTAssert(propertyList[RG_STRING_SEL(objectProperty)] != nil);
+    XCTAssert(propertyList[RG_STRING_SEL(dateProperty)] != nil);
 }
 
 #pragma mark - rg_classForProperty:
 - (void) testRGClassForProperty {
     RGTestObject2* object = [RGTestObject2 new];
-    XCTAssert([[(RGPropertyDeclaration*)[[object class] rg_propertyList][STRING_SEL(stringProperty)] type] isEqual:[NSString class]]);
+    XCTAssert([[(RGPropertyDeclaration*)[[object class] rg_propertyList][RG_STRING_SEL(stringProperty)] type] isEqual:[NSString class]]);
 }
 
 #pragma mark - rg_isPrimitive:
 - (void) testIsPrimitiveString {
     RGTestObject2* object = [RGTestObject2 new];
-    RGPropertyDeclaration* declaration = [[object class] rg_propertyList][STRING_SEL(stringProperty)];
+    RGPropertyDeclaration* declaration = [[object class] rg_propertyList][RG_STRING_SEL(stringProperty)];
     XCTAssert(declaration.isPrimitive == NO);
 }
 
 - (void) testIsPrimitiveId {
     RGTestObject2* object = [RGTestObject2 new];
-    RGPropertyDeclaration* declaration = [[object class] rg_propertyList][STRING_SEL(idProperty)];
+    RGPropertyDeclaration* declaration = [[object class] rg_propertyList][RG_STRING_SEL(idProperty)];
     XCTAssert(declaration.isPrimitive == NO);
 }
 
 - (void) testIsPrimitiveClass {
     RGTestObject2* object = [RGTestObject2 new];
-    RGPropertyDeclaration* declaration = [[object class] rg_propertyList][STRING_SEL(classProperty)];
+    RGPropertyDeclaration* declaration = [[object class] rg_propertyList][RG_STRING_SEL(classProperty)];
     XCTAssert(declaration.isPrimitive == NO);
 }
 
 - (void) testIsPrimitiveNumber {
     RGTestObject2* object = [RGTestObject2 new];
-    RGPropertyDeclaration* declaration = [[object class] rg_propertyList][STRING_SEL(numberProperty)];
+    RGPropertyDeclaration* declaration = [[object class] rg_propertyList][RG_STRING_SEL(numberProperty)];
     XCTAssert(declaration.isPrimitive == NO);
 }
 
 - (void) testIsPrimitiveInt {
     RGTestObject2* object = [RGTestObject2 new];
-    RGPropertyDeclaration* declaration = [[object class] rg_propertyList][STRING_SEL(intProperty)];
+    RGPropertyDeclaration* declaration = [[object class] rg_propertyList][RG_STRING_SEL(intProperty)];
     XCTAssert(declaration.isPrimitive == YES);
 }
 
 #pragma mark - rg_declarationForProperty:
 - (void) testDeclarationExists {
     RGTestObject2* object = [RGTestObject2 new];
-    XCTAssert([[object class] rg_propertyList][STRING_SEL(stringProperty)] != nil);
+    XCTAssert([[object class] rg_propertyList][RG_STRING_SEL(stringProperty)] != nil);
 }
 
 - (void) testDeclarationDoesNotExist {
     RGTestObject2* object = [RGTestObject2 new];
-    XCTAssert([[object class] rg_propertyList][STRING_SEL(rg_propertyList)] == nil);
+    XCTAssert([[object class] rg_propertyList][RG_STRING_SEL(rg_propertyList)] == nil);
 }
 
 SPEC_END

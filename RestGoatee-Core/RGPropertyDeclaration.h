@@ -24,17 +24,17 @@ NSString* const rg_canonicalForm(const char* const utf8Input) __attribute__((pur
 /**
  The name of the property.
  */
-@property NONNULL_PROPERTY(nonatomic, strong, readonly) NSString* name;
+@property RG_NONNULL_PROPERTY(nonatomic, strong, readonly) NSString* name;
 
 /**
  The name of the property as used for key resolution.
  */
-@property NONNULL_PROPERTY(nonatomic, strong, readonly) NSString* canonicalName;
+@property RG_NONNULL_PROPERTY(nonatomic, strong, readonly) NSString* canonicalName;
 
 /**
  A `Class` object, an instance of which can contain the value of this property.  Primitive properties use `NSNumber` by default.
  */
-@property NONNULL_PROPERTY(nonatomic, strong, readonly) Class type;
+@property RG_NONNULL_PROPERTY(nonatomic, strong, readonly) Class type;
 
 /**
  The memory management semantics of the property.  The default is `assign` (`kRGPropertyAssign`).
@@ -54,7 +54,7 @@ NSString* const rg_canonicalForm(const char* const utf8Input) __attribute__((pur
 /**
  The designated initializer; it is a programmer error to invoke `-init`.
  */
-- (PREFIX_NONNULL instancetype) initWithProperty:(objc_property_t)property NS_DESIGNATED_INITIALIZER;
+- (RG_PREFIX_NONNULL instancetype) initWithProperty:(objc_property_t)property NS_DESIGNATED_INITIALIZER;
 
 @end
 

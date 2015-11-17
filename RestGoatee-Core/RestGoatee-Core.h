@@ -43,12 +43,12 @@ RG_FILE_START
 /**
  rg_swizzle is a basic implementation of swizzling.  It does not clobber the super class if the method is not on the subclass.
  */
-void rg_swizzle(Class SUFFIX_NULLABLE cls, SEL SUFFIX_NULLABLE original, SEL SUFFIX_NULLABLE replacement) __attribute__((cold));
+void rg_swizzle(Class RG_SUFFIX_NULLABLE cls, SEL RG_SUFFIX_NULLABLE original, SEL RG_SUFFIX_NULLABLE replacement) __attribute__((cold));
 
 /**
  The `rg_log` function is the backing debug function of `RGLog`.  It logs the file name & line number of the call site.
  */
-void rg_log(NSString* SUFFIX_NULLABLE format, ...) __attribute__((cold));
+void rg_log(NSString* RG_SUFFIX_NULLABLE format, ...) __attribute__((cold));
 #ifndef RGLog
     #ifdef DEBUG
         #define RGLog(format, ...)                                      \
@@ -62,8 +62,8 @@ void rg_log(NSString* SUFFIX_NULLABLE format, ...) __attribute__((cold));
                 ret;                                                    \
             }), (long)__LINE__, ##__VA_ARGS__)
     #else
-        /* we define out with `VOID_NOOP` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */
-        #define RGLog(...) VOID_NOOP
+        /* we define out with `RG_VOID_NOOP` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */
+        #define RGLog(...) RG_VOID_NOOP
     #endif
 #endif
 

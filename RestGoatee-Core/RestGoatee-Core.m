@@ -26,7 +26,7 @@
 
 RG_FILE_START
 
-void __attribute__((cold)) rg_log(NSString* SUFFIX_NULLABLE format, ...) {
+void __attribute__((cold)) rg_log(NSString* RG_SUFFIX_NULLABLE format, ...) {
     va_list vl;
     va_start(vl, format);
     char* fileName = va_arg(vl, char*);
@@ -36,7 +36,7 @@ void __attribute__((cold)) rg_log(NSString* SUFFIX_NULLABLE format, ...) {
     va_end(vl);
 }
 
-void __attribute__((cold)) rg_swizzle(Class SUFFIX_NULLABLE cls, SEL SUFFIX_NULLABLE original, SEL SUFFIX_NULLABLE replacement) {
+void __attribute__((cold)) rg_swizzle(Class RG_SUFFIX_NULLABLE cls, SEL RG_SUFFIX_NULLABLE original, SEL RG_SUFFIX_NULLABLE replacement) {
     IMP replacementImplementation = method_setImplementation(class_getInstanceMethod(cls, replacement), class_getMethodImplementation(cls, original));
     // get the replacement IMP
     // we assume swizzle is called on the class with the override_... selector, so we can safety force original onto replacement

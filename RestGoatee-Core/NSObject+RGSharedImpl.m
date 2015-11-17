@@ -27,17 +27,17 @@
 
 RG_FILE_START
 
-NSString* SUFFIX_NONNULL const kRGSerializationKey = @"__class";
+NSString* RG_SUFFIX_NONNULL const kRGSerializationKey = @"__class";
 
 /* storage for extern'd class references */
-Class SUFFIX_NONNULL rg_NSObjectClass;
-Class SUFFIX_NONNULL rg_NSObjectMetaClass;
-Class SUFFIX_NULLABLE rg_NSManagedObject;
-Class SUFFIX_NULLABLE rg_NSEntityDescription;
+Class RG_SUFFIX_NONNULL rg_NSObjectClass;
+Class RG_SUFFIX_NONNULL rg_NSObjectMetaClass;
+Class RG_SUFFIX_NULLABLE rg_NSManagedObject;
+Class RG_SUFFIX_NULLABLE rg_NSEntityDescription;
 
-NSArray GENERIC(NSString*) * SUFFIX_NONNULL __attribute__((pure)) rg_dateFormats(void) {
+NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL __attribute__((pure)) rg_dateFormats(void) {
     static dispatch_once_t onceToken;
-    static NSArray GENERIC(NSString*) * _sDateFormats;
+    static NSArray RG_GENERIC(NSString*) * _sDateFormats;
     dispatch_once(&onceToken, ^{
         _sDateFormats = @[ @"yyyy-MM-dd'T'HH:mm:ssZZZZZ", @"yyyy-MM-dd HH:mm:ss ZZZZZ", @"yyyy-MM-dd'T'HH:mm:ssz", @"yyyy-MM-dd" ];
     });
@@ -56,7 +56,7 @@ NSArray GENERIC(NSString*) * SUFFIX_NONNULL __attribute__((pure)) rg_dateFormats
     });
 }
 
-+ (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, RGVariableDeclaration*) *) rg_propertyList {
++ (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, RGVariableDeclaration*) *) rg_propertyList {
     NSMutableDictionary* rg_propertyList = objc_getAssociatedObject(self, @selector(rg_propertyList));
     if (!rg_propertyList) {
         rg_propertyList = [NSMutableDictionary new];
@@ -76,7 +76,7 @@ NSArray GENERIC(NSString*) * SUFFIX_NONNULL __attribute__((pure)) rg_dateFormats
     return rg_propertyList;
 }
 
-+ (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, RGVariableDeclaration*) *) rg_canonicalPropertyList {
++ (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, RGVariableDeclaration*) *) rg_canonicalPropertyList {
     NSAssert(objc_getAssociatedObject(self, @selector(rg_propertyList)), @"rg_canonicalPropertyList was invoked before rg_propertyList, there's a logic error somewhere");
     return objc_getAssociatedObject(self, @selector(rg_canonicalPropertyList));
 }

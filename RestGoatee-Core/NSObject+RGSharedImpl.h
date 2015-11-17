@@ -39,39 +39,39 @@ RG_FILE_START
  id originalObject = [NSClassFromString(serialized[kRGSerializationKey]) objectFromDataSource:serialized];
  ```
  */
-FOUNDATION_EXPORT NSString* SUFFIX_NONNULL const kRGSerializationKey;
+FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGSerializationKey;
 
 /**
  Will be `objc_getClass("NSObject")` i.e. `[NSObject class]`.
  */
-FOUNDATION_EXPORT Class SUFFIX_NONNULL rg_NSObjectClass;
+FOUNDATION_EXPORT Class RG_SUFFIX_NONNULL rg_NSObjectClass;
 
 /**
  Will be `objc_getMetaClass("NSObject")`.
  */
-FOUNDATION_EXPORT Class SUFFIX_NONNULL rg_NSObjectMetaClass;
+FOUNDATION_EXPORT Class RG_SUFFIX_NONNULL rg_NSObjectMetaClass;
 
 /* These classes are used to dynamically link into coredata if present. */
 
 /**
  Will be `[NSManagedObject class]` or `Nil` (if not linked/available).
  */
-FOUNDATION_EXPORT Class SUFFIX_NULLABLE rg_NSManagedObject;
+FOUNDATION_EXPORT Class RG_SUFFIX_NULLABLE rg_NSManagedObject;
 
 /**
  Will be `[NSEntityDescription class]` or `Nil` (if not linked/available).
  */
-FOUNDATION_EXPORT Class SUFFIX_NULLABLE rg_NSEntityDescription;
+FOUNDATION_EXPORT Class RG_SUFFIX_NULLABLE rg_NSEntityDescription;
 
 /**
  Returns the built-in date formats the library supports. Contains: ISO, `-[NSDate description]`.
  */
-NSArray GENERIC(NSString*) * SUFFIX_NULLABLE rg_dateFormats(void) __attribute__((pure));
+NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NULLABLE rg_dateFormats(void) __attribute__((pure));
 
 /**
  Returns `YES` if `Class cls = object;` is not a pointer type conversion.
  */
-BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isClassObject(id SUFFIX_NULLABLE object) {
+BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isClassObject(id RG_SUFFIX_NULLABLE object) {
     /* if the class of the meta-class == NSObject's meta-class; object was itself a Class object */
     /* object_getClass * object_getClass * <plain_nsobject> should not return true */
     Class currentType = object_getClass(object);
@@ -81,35 +81,35 @@ BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isClassO
 /**
  Returns `YES` if object has the same type as `NSObject`'s meta class.
  */
-BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isMetaClassObject(id SUFFIX_NULLABLE object) {
+BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isMetaClassObject(id RG_SUFFIX_NULLABLE object) {
     return rg_isClassObject(object) && class_isMetaClass(object);
 }
 
 /**
  Returns `YES` if the given type can be adequately represented by an `NSString`.
  */
-BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isInlineObject(Class SUFFIX_NULLABLE cls) {
+BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isInlineObject(Class RG_SUFFIX_NULLABLE cls) {
     return [cls isSubclassOfClass:[NSDate class]] || [cls isSubclassOfClass:[NSString class]] || [cls isSubclassOfClass:[NSData class]] || [cls isSubclassOfClass:[NSNull class]] || [cls isSubclassOfClass:[NSValue class]] || [cls isSubclassOfClass:[NSURL class]];
 }
 
 /**
  Returns `YES` if the given type can be adequately represented by an `NSArray`.
  */
-BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isCollectionObject(Class SUFFIX_NULLABLE cls) {
+BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isCollectionObject(Class RG_SUFFIX_NULLABLE cls) {
     return [cls isSubclassOfClass:[NSSet class]] || [cls isSubclassOfClass:[NSArray class]] || [cls isSubclassOfClass:[NSOrderedSet class]];
 }
 
 /**
  Returns `YES` if the given type is a "key => value" type.  Thus it can be represented by an `NSDictionary`.
  */
-BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isKeyedCollectionObject(Class SUFFIX_NULLABLE cls) {
+BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isKeyedCollectionObject(Class RG_SUFFIX_NULLABLE cls) {
     return [cls isSubclassOfClass:[NSDictionary class]] || [cls isSubclassOfClass:[RGXMLNode class]];
 }
 
 /**
  Returns `YES` if the given class conforms to `RGDataSource`.  Necessary due to some bug.
  */
-BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isDataSourceClass(Class SUFFIX_NULLABLE cls) {
+BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isDataSourceClass(Class RG_SUFFIX_NULLABLE cls) {
     return [cls conformsToProtocol:@protocol(RGDataSource)] || [cls isSubclassOfClass:[NSDictionary class]]; /* 2nd clause due to a bug */
 }
 
@@ -121,12 +121,12 @@ BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isDataSo
 /**
  This is describes the meta data of the given class.  It declares the properties in an object-oriented manner.  The keys are the names of the properties keyed to their declaration.
  */
-+ (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, RGPropertyDeclaration*) *) rg_propertyList;
++ (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, RGPropertyDeclaration*) *) rg_propertyList;
 
 /**
  This describes the meta data of the class.  The keys are the canonical representation of the property name mapped to an `RGPropertyDeclaration` object.
  */
-+ (PREFIX_NONNULL NSMutableDictionary GENERIC(NSString*, RGPropertyDeclaration*) *) rg_canonicalPropertyList;
++ (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, RGPropertyDeclaration*) *) rg_canonicalPropertyList;
 
 @end
 

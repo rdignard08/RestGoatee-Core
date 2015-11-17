@@ -24,7 +24,7 @@
 #import "RestGoatee-Core.h"
 #import "NSObject+RGSharedImpl.h"
 
-FILE_START
+RG_FILE_START
 
 @interface NSObject (RGForwardDeclarations)
 
@@ -208,4 +208,4 @@ FILE_START
 
 @end
 
-FILE_END
+RG_FILE_END

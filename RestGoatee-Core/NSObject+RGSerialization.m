@@ -24,7 +24,7 @@
 #import "RestGoatee-Core.h"
 #import "NSObject+RGSharedImpl.h"
 
-FILE_START
+RG_FILE_START
 
 @implementation NSObject (RGSerialization)
 
@@ -64,4 +64,4 @@ FILE_START
 
 @end
 
-FILE_END
+RG_FILE_END

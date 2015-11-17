@@ -23,7 +23,7 @@
 
 #import "RGDefines.h"
 
-FILE_START
+RG_FILE_START
 
 @protocol RGDataSource;
 @class NSManagedObjectContext;
@@ -59,4 +59,4 @@ FILE_START
 
 @end
 
-FILE_END
+RG_FILE_END

@@ -23,7 +23,7 @@
 
 #import "RGDefines.h"
 
-FILE_START
+RG_FILE_START
 
 /**
  This protocol should be implemented if an object is to be safely serialized.  The default behavior is to iterate over all properties, which will very likely lead to cycles (and thus very hard to track down crashes).
@@ -40,4 +40,4 @@ FILE_START
 
 @end
 
-FILE_END
+RG_FILE_END

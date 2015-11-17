@@ -25,7 +25,7 @@
 
 NSString* SUFFIX_NONNULL const kRGInnerXMLKey = @"__innerXML__";
 
-FILE_START
+RG_FILE_START
 
 @interface RGXMLNode ()
 
@@ -135,4 +135,4 @@ FILE_START
 
 @end
 
-FILE_END
+RG_FILE_END

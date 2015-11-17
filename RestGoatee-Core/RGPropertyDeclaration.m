@@ -1,7 +1,7 @@
 
 #import "RGPropertyDeclaration.h"
 
-FILE_START
+RG_FILE_START
 
 NSString* const rg_canonicalForm(const char* const utfName) {
     const size_t nameLength = strlen(utfName);
@@ -87,4 +87,4 @@ NSString* const rg_canonicalForm(const char* const utfName) {
 
 @end
 
-FILE_END
+RG_FILE_END

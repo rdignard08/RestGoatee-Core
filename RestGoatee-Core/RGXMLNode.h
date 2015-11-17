@@ -25,7 +25,7 @@
 #import "RGDataSource.h"
 #import "RGSerializable.h"
 
-FILE_START
+RG_FILE_START
 
 FOUNDATION_EXPORT NSString* SUFFIX_NONNULL const kRGInnerXMLKey;
 
@@ -86,4 +86,4 @@ FOUNDATION_EXPORT NSString* SUFFIX_NONNULL const kRGInnerXMLKey;
 
 @end
 
-FILE_END
+RG_FILE_END

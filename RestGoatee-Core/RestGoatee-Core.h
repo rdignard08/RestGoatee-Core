@@ -38,7 +38,7 @@
 #import "NSObject+RGDeserialization.h"
 #import "NSObject+RGSerialization.h"
 
-FILE_START
+RG_FILE_START
 
 /**
  rg_swizzle is a basic implementation of swizzling.  It does not clobber the super class if the method is not on the subclass.
@@ -67,4 +67,4 @@ void rg_log(NSString* SUFFIX_NULLABLE format, ...) __attribute__((cold));
     #endif
 #endif
 
-FILE_END
+RG_FILE_END

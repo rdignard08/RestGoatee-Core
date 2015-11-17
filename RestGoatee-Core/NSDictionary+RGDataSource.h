@@ -23,7 +23,7 @@
 
 #import "RGDataSource.h"
 
-FILE_START
+RG_FILE_START
 
 /**
  `NSDictionary` already declares and implements all the methods of `RGDataSource`.  This allows us to pass an `NSDictionary` where ever a variable is typed `id<RGDataSource>`.
@@ -32,4 +32,4 @@ FILE_START
 
 @end
 
-FILE_END
+RG_FILE_END

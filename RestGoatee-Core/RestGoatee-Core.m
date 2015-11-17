@@ -24,7 +24,7 @@
 #import "RestGoatee-Core.h"
 #import <objc/runtime.h>
 
-FILE_START
+RG_FILE_START
 
 void __attribute__((cold)) rg_log(NSString* SUFFIX_NULLABLE format, ...) {
     va_list vl;
@@ -48,4 +48,4 @@ void __attribute__((cold)) rg_swizzle(Class SUFFIX_NULLABLE cls, SEL SUFFIX_NULL
     }
 }
 
-FILE_END
+RG_FILE_END

@@ -9,7 +9,7 @@ typedef NS_ENUM(NSUInteger, RGStorageSemantics) {
     kRGPropertyWeak
 };
 
-FILE_START
+RG_FILE_START
 
 /**
  Returns the property name in as its canonical key.
@@ -58,4 +58,4 @@ NSString* const rg_canonicalForm(const char* const utf8Input) __attribute__((pur
 
 @end
 
-FILE_END
+RG_FILE_END

@@ -21,15 +21,15 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#ifndef FILE_START
-    #define FILE_START \
+#ifndef RG_FILE_START
+    #define RG_FILE_START \
     _Pragma("clang diagnostic push") \
     _Pragma("clang diagnostic ignored \"-Wgnu\"") \
     _Pragma("clang assume_nonnull begin")
 #endif
 
-#ifndef FILE_END
-    #define FILE_END \
+#ifndef RG_FILE_END
+    #define RG_FILE_END \
     _Pragma("clang assume_nonnull end") \
     _Pragma("clang diagnostic pop")
 #endif

@@ -25,7 +25,7 @@
 #import "RestGoatee-Core.h"
 #import "RGPropertyDeclaration.h"
 
-FILE_START
+RG_FILE_START
 
 NSString* SUFFIX_NONNULL const kRGSerializationKey = @"__class";
 
@@ -83,4 +83,4 @@ NSArray GENERIC(NSString*) * SUFFIX_NONNULL __attribute__((pure)) rg_dateFormats
 
 @end
 
-FILE_END
+RG_FILE_END

@@ -24,7 +24,7 @@
 #import "RGXMLSerializer.h"
 #import "RestGoatee-Core.h"
 
-FILE_START
+RG_FILE_START
 
 @interface RGXMLSerializer () <NSXMLParserDelegate>
 
@@ -101,4 +101,4 @@ FILE_START
 
 @end
 
-FILE_END
+RG_FILE_END

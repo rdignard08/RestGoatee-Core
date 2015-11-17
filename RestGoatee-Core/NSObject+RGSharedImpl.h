@@ -27,7 +27,7 @@
 #import "RGDataSource.h"
 #import <objc/runtime.h>
 
-FILE_START
+RG_FILE_START
 
 /**
  This key is inserted into `NSDictionary*` instances which are serialized by this library.  It facilitates easier reconversion back to the original type.  Usage:
@@ -130,4 +130,4 @@ BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isDataSo
 
 @end
 
-FILE_END
+RG_FILE_END

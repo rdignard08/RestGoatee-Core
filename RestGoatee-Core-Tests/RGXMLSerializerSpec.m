@@ -33,7 +33,7 @@ CLASS_SPEC(RGXMLSerializer)
     XCTAssert([rootNode.name isEqual:@"xml"]);
     XCTAssert([rootNode childNodes].count == 3);
     XCTAssert([[rootNode.childNodes.firstObject valueForKey:@"attribute"] isEqual:@"value"]);
-    XCTAssert([[rootNode childrenNamed:@"child1"] count] == 2);
+    XCTAssert([(NSArray*)[rootNode childrenNamed:@"child1"] count] == 2);
 }
 
 SPEC_END

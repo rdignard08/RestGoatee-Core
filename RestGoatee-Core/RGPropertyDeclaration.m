@@ -23,9 +23,14 @@ NSString* const rg_canonicalForm(const char* const utfName) {
 @synthesize canonicalName = _canonicalName;
 @synthesize storageSemantics = _storageSemantics;
 
-- (RG_PREFIX_NONNULL instancetype) initWithProperty:(objc_property_t)property {
+- (RG_PREFIX_NONNULL instancetype) init {
+    NSAssert(NO, @"-init is not a valid initializer of %@", [self class]);
+    return [self initWithProperty:NULL];
+}
+
+- (RG_PREFIX_NONNULL instancetype) initWithProperty:(RG_PREFIX_NULLABLE objc_property_t)property {
     self = [super init];
-    if (self) {
+    if (self && property) {
         const char* utfName = property_getName(property);
         self->_name = @(utfName);
         self->_canonicalName = rg_canonicalForm(utfName);

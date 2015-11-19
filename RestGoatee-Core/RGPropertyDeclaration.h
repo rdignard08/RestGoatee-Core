@@ -54,7 +54,7 @@ NSString* const rg_canonicalForm(const char* const utf8Input) __attribute__((pur
 /**
  The designated initializer; it is a programmer error to invoke `-init`.
  */
-- (RG_PREFIX_NONNULL instancetype) initWithProperty:(objc_property_t)property NS_DESIGNATED_INITIALIZER;
+- (RG_PREFIX_NONNULL instancetype) initWithProperty:(RG_PREFIX_NULLABLE objc_property_t)property NS_DESIGNATED_INITIALIZER;
 
 @end
 

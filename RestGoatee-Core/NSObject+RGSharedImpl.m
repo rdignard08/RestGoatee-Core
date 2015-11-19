@@ -56,7 +56,7 @@ NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL __attribute__((pure)) rg_dateF
     });
 }
 
-+ (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, RGVariableDeclaration*) *) rg_propertyList {
++ (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, RGPropertyDeclaration*) *) rg_propertyList {
     NSMutableDictionary* rg_propertyList = objc_getAssociatedObject(self, @selector(rg_propertyList));
     if (!rg_propertyList) {
         rg_propertyList = [NSMutableDictionary new];
@@ -76,7 +76,7 @@ NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL __attribute__((pure)) rg_dateF
     return rg_propertyList;
 }
 
-+ (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, RGVariableDeclaration*) *) rg_canonicalPropertyList {
++ (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, RGPropertyDeclaration*) *) rg_canonicalPropertyList {
     NSAssert(objc_getAssociatedObject(self, @selector(rg_propertyList)), @"rg_canonicalPropertyList was invoked before rg_propertyList, there's a logic error somewhere");
     return objc_getAssociatedObject(self, @selector(rg_canonicalPropertyList));
 }

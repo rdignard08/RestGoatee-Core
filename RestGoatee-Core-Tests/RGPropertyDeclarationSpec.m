@@ -1,4 +1,3 @@
-
 /* Copyright (c) 11/19/15, Ryan Dignard
  All rights reserved.
  

@@ -34,6 +34,18 @@
 
 CATEGORY_SPEC(NSObject, RG_Deserialization)
 
+#pragma mark - objectsFromArraySource:inContext:
+- (void) testArraySourceNormal {
+    NSArray* output = [RGTestObject2 objectsFromArraySource:@[
+                                                              @{ RG_STRING_SEL(stringProperty) : @"abcd" },
+                                                              @{ RG_STRING_SEL(numberProperty) : @2 }
+                                                              ] inContext:nil];
+    XCTAssert([[output.firstObject stringProperty] isEqual:@"abcd"]);
+    XCTAssert([output.firstObject numberProperty] == nil);
+    XCTAssert([output.lastObject stringProperty] == nil);
+    XCTAssert([[output.lastObject numberProperty] isEqual:@2]);
+}
+
 #pragma mark - rg_initProperty:withValue:inContext: with NSString
 - (void) testStringToString {
     RGTestObject2* object = [RGTestObject2 new];

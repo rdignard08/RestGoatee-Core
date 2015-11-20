@@ -24,7 +24,7 @@ NSString* const rg_canonicalForm(const char* const utfName) {
 @synthesize storageSemantics = _storageSemantics;
 
 - (RG_PREFIX_NONNULL instancetype) init {
-    NSAssert(NO, @"-init is not a valid initializer of %@", [self class]);
+    [NSException raise:NSGenericException format:@"-init is not a valid initializer of %@", [self class]];
     return [self initWithProperty:NULL];
 }
 

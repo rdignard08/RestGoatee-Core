@@ -86,10 +86,6 @@ NSString* const rg_canonicalForm(const char* const utfName) {
     return self;
 }
 
-- (RG_PREFIX_NONNULL NSString*) description {
-    return [NSString stringWithFormat:@"%@\nname: %@\ncanonicalName: %@\ntype: %@\nstorageSemantics: %@\nisPrimitive: %@\n readOnly: %@", super.description, self.name, self.canonicalName, self.type, @(self.storageSemantics), @(self.isPrimitive), @(self.readOnly)];
-}
-
 @end
 
 RG_FILE_END

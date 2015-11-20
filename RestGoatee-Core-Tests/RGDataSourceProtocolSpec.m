@@ -34,10 +34,8 @@
 - (RG_PREFIX_NULLABLE id) valueForKeyPath:(RG_PREFIX_NONNULL NSString*)string {
     if ([string isEqual:@"stringProperty"]) {
         return @"abd";
-    } else if ([string isEqual:@"idProperty"]) {
-        return [NSObject class];
     }
-    return nil;
+    return [NSObject class];
 }
 
 - (RG_PREFIX_NONNULL NSArray*) allKeys {
@@ -46,10 +44,6 @@
 
 - (NSUInteger) countByEnumeratingWithState:(RG_PREFIX_NONNULL NSFastEnumerationState*)state objects:(__unsafe_unretained id[])buffer count:(NSUInteger)len {
     return [self.allKeys countByEnumeratingWithState:state objects:buffer count:len];
-}
-
-- (RG_PREFIX_NULLABLE id) valueForKey:(RG_PREFIX_NONNULL NSString*)key {
-    return [self valueForKeyPath:key];
 }
 
 @end

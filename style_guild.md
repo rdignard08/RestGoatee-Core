@@ -39,7 +39,7 @@ Preprocessor
 File scope
 ======
 
-- All symbols with external linkage (`extern` or not specfied) should be prefixed with the lowercase class prefix and an underscore
+- All symbols with external linkage (`extern` or not specfied) should be prefixed with the lowercase class prefix and a `_`
 - If initialized at runtime, should be thread-safe with `dispatch_once`
 - Should not be `nil`, `Nil`, `NULL`, `'\0'`, `0`, `0.0` defined.
     - If that value is desired, leave the declaration without definition.

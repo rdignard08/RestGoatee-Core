@@ -3,10 +3,10 @@
 #import <objc/runtime.h>
 
 typedef NS_ENUM(NSUInteger, RGStorageSemantics) {
-    kRGPropertyAssign,
-    kRGPropertyStrong,
-    kRGPropertyCopy,
-    kRGPropertyWeak
+    kRGPropertyAssign = 0x00,
+    kRGPropertyWeak = 0x01,
+    kRGPropertyStrong = 0x10,
+    kRGPropertyCopy = 0x11
 };
 
 RG_FILE_START

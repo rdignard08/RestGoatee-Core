@@ -49,7 +49,7 @@
 
 @end
 
-CLASS_SPEC(RGDeserializationDelegate)
+CLASS_SPEC(RGDeserializable)
 
 - (void) testOverrides {
     RGTestObject4* object = [RGTestObject4 objectFromDataSource:@{ RG_STRING_SEL(stringProperty) : @"123" } inContext:nil];

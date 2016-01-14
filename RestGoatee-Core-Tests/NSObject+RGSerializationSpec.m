@@ -22,3 +22,21 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RestGoatee-Core.h"
+#import "RGTestObject2.h"
+
+extern NSString* RG_SUFFIX_NONNULL const kRGSerializationKey;
+
+CATEGORY_SPEC(NSObject, RGSerialization)
+
+#pragma mark - dictionaryRepresentation
+- (void)testDictionaryRepresentationBasic {
+    RGTestObject2* obj = [RGTestObject2 new];
+    obj.dictionaryProperty = @{ @"aKey" : @"aValue" };
+    obj.arrayProperty = @[ @"aValue" ];
+    NSDictionary* dictionaryRepresentation = [obj dictionaryRepresentation];
+    XCTAssert([dictionaryRepresentation[RG_STRING_SEL(dictionaryProperty)] isEqual:obj.dictionaryProperty]);
+    XCTAssert([dictionaryRepresentation[RG_STRING_SEL(arrayProperty)] isEqual:obj.arrayProperty]);
+    XCTAssert([dictionaryRepresentation[kRGSerializationKey] isEqual:NSStringFromClass([RGTestObject2 class])]);
+}
+
+SPEC_END

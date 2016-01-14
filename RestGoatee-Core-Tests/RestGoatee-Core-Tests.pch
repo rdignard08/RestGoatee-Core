@@ -14,13 +14,3 @@ RG_FILE_START \
 
 #define SPEC_END @end \
 RG_FILE_END
-
-static inline NSString* randomStringOfLength(const size_t length) {
-    static const char* characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    static const size_t charactersLength = 2 * 26 + 10;
-    char* inputBuffer = malloc(length * sizeof(char));
-    for (size_t i = 0; i < length; i++) {
-        inputBuffer[i] = characters[arc4random_uniform(charactersLength)];
-    }
-    return [[NSString alloc] initWithBytesNoCopy:inputBuffer length:length encoding:NSUTF8StringEncoding freeWhenDone:YES];
-}

@@ -26,6 +26,8 @@
 
 RG_FILE_START
 
+NSString* RG_SUFFIX_NONNULL const kRGDateFormatterKey = @"kRGDateFormatterKey";
+
 void __attribute__((cold)) rg_log(NSString* RG_SUFFIX_NULLABLE format, ...) {
     va_list vl;
     va_start(vl, format);
@@ -46,6 +48,15 @@ void __attribute__((cold)) rg_swizzle(Class RG_SUFFIX_NULLABLE cls, SEL RG_SUFFI
     // if it doesn't then that means an IMP is already there so we have to overwrite it
     if (!class_addMethod(cls, original, replacementImplementation, method_getTypeEncoding(class_getInstanceMethod(cls, replacement)))) { method_setImplementation(class_getInstanceMethod(cls, original), replacementImplementation);
     }
+}
+
+NSDateFormatter* RG_SUFFIX_NONNULL rg_threadsafe_formatter(void) {
+    NSDateFormatter* currentFormatter = [NSThread currentThread].threadDictionary[kRGDateFormatterKey];
+    if (!currentFormatter) {
+        currentFormatter = [NSDateFormatter new];
+        [NSThread currentThread].threadDictionary[kRGDateFormatterKey] = currentFormatter;
+    }
+    return currentFormatter;
 }
 
 RG_FILE_END

@@ -168,7 +168,7 @@ RG_FILE_START
     } else if ([propertyType isSubclassOfClass:[NSDate class]]) { /* NSDate */
         if ([value isKindOfClass:[RGXMLNode class]]) value = [value innerXML];
         NSString* dateFormat = [[self class] respondsToSelector:@selector(dateFormatForProperty:)] ? [[self class] dateFormatForProperty:key] : nil;
-        NSDateFormatter* dateFormatter = [NSDateFormatter new];
+        NSDateFormatter* dateFormatter = rg_threadsafe_formatter();
         if (dateFormat) {
             dateFormatter.dateFormat = dateFormat;
             [self setValue:[dateFormatter dateFromString:value] forKey:key];

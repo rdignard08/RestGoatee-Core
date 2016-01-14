@@ -35,7 +35,7 @@ RG_FILE_START
 }
 
 - (RG_PREFIX_NONNULL id) rg_dictionaryHelper {
-#ifdef DEBUG /* enabled when debugging so you can find your logic errors while building */
+#ifdef DEBUG /* enabled when debugging so you can find your logic errors while building, on stack overflow gdb will fail */
     if ([NSThread callStackSymbols].count > 1000) {
         [NSException raise:NSGenericException format:@"Too deep, probably have a cycle"];
     }

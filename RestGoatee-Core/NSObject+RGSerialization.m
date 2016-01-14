@@ -55,7 +55,6 @@ RG_FILE_START
         for (NSString* key in (id<NSFastEnumeration>)self) {
             ret[key] = [(NSObject*)[self valueForKey:key] rg_dictionaryHelper];
         }
-        ret[kRGSerializationKey] = NSStringFromClass([self class]);
         return ret;
     } else { /* any old schleb object */
         NSMutableDictionary* ret = [NSMutableDictionary new];

@@ -116,10 +116,10 @@
 		BE2009551BCA252000A9E8A0 /* RestGoatee-Core-Tests */ = {
 			isa = PBXGroup;
 			children = (
-				BE637B7E1BFEA4E5000E25E8 /* FunctionSpecs */,
-				BE20096D1BCC2BE400A9E8A0 /* ProtocolSpecs */,
 				BE2009611BCA25BC00A9E8A0 /* CategorySpecs */,
 				BE2009621BCA262500A9E8A0 /* ClassSpecs */,
+				BE637B7E1BFEA4E5000E25E8 /* FunctionSpecs */,
+				BE20096D1BCC2BE400A9E8A0 /* ProtocolSpecs */,
 				BE2009561BCA252000A9E8A0 /* Supporting Files */,
 			);
 			path = "RestGoatee-Core-Tests";
@@ -128,12 +128,12 @@
 		BE2009561BCA252000A9E8A0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BE2009571BCA252000A9E8A0 /* Info.plist */,
+				BE2009631BCA265F00A9E8A0 /* RestGoatee-Core-Tests.pch */,
 				BE68CA621BCF631200DFEC70 /* RGTestObject1.h */,
 				BE68CA651BCF631200DFEC70 /* RGTestObject1.m */,
 				BE68CA641BCF631200DFEC70 /* RGTestObject2.h */,
 				BE68CA631BCF631200DFEC70 /* RGTestObject2.m */,
-				BE2009631BCA265F00A9E8A0 /* RestGoatee-Core-Tests.pch */,
-				BE2009571BCA252000A9E8A0 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -142,8 +142,8 @@
 			isa = PBXGroup;
 			children = (
 				BE2009681BCC29A900A9E8A0 /* NSObject+RGDeserializationSpec.m */,
-				BEF4BE6C1BD58BFC00ACDAF7 /* NSObject+RGSharedImplSpec.m */,
 				BEEC23701C47848900588655 /* NSObject+RGSerializationSpec.m */,
+				BEF4BE6C1BD58BFC00ACDAF7 /* NSObject+RGSharedImplSpec.m */,
 			);
 			name = CategorySpecs;
 			sourceTree = "<group>";
@@ -151,9 +151,9 @@
 		BE2009621BCA262500A9E8A0 /* ClassSpecs */ = {
 			isa = PBXGroup;
 			children = (
+				BE637B7C1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m */,
 				BE2009641BCA27AE00A9E8A0 /* RGXMLNodeSpec.m */,
 				BEF4BE611BD4A0B600ACDAF7 /* RGXMLSerializerSpec.m */,
-				BE637B7C1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m */,
 			);
 			name = ClassSpecs;
 			sourceTree = "<group>";
@@ -161,12 +161,12 @@
 		BE2009661BCB70D000A9E8A0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BE7A6FB31BE2FEDA009F5A4F /* RGPropertyDeclaration.h */,
+				BE7A6FB41BE2FEDA009F5A4F /* RGPropertyDeclaration.m */,
 				BEAB13C01BBDB4960027300D /* RGXMLNode.h */,
 				BEAB13C11BBDB4960027300D /* RGXMLNode.m */,
 				BEAB13C41BBDB4960027300D /* RGXMLSerializer.h */,
 				BEAB13C51BBDB4960027300D /* RGXMLSerializer.m */,
-				BE7A6FB31BE2FEDA009F5A4F /* RGPropertyDeclaration.h */,
-				BE7A6FB41BE2FEDA009F5A4F /* RGPropertyDeclaration.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -215,8 +215,8 @@
 		BEAB13CE1BBDB5370027300D /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				BEAB13B51BBDB45A0027300D /* RestGoatee-Core.podspec */,
 				BEAB13CF1BBDB5530027300D /* RestGoatee-Core.pch */,
+				BEAB13B51BBDB45A0027300D /* RestGoatee-Core.podspec */,
 			);
 			name = SupportingFiles;
 			sourceTree = "<group>";
@@ -243,12 +243,12 @@
 		BEFFB8431BBDB15900EAF95D /* RestGoatee-Core */ = {
 			isa = PBXGroup;
 			children = (
-				BE20096A1BCC2A7800A9E8A0 /* Protocols */,
 				BE2009671BCB70DA00A9E8A0 /* Categories */,
 				BE2009661BCB70D000A9E8A0 /* Classes */,
-				BEAE72311BD9725900F23ABE /* RGDefines.h */,
+				BE20096A1BCC2A7800A9E8A0 /* Protocols */,
 				BEAB13B61BBDB4960027300D /* RestGoatee-Core.h */,
 				BEAB13B71BBDB4960027300D /* RestGoatee-Core.m */,
+				BEAE72311BD9725900F23ABE /* RGDefines.h */,
 			);
 			path = "RestGoatee-Core";
 			sourceTree = "<group>";

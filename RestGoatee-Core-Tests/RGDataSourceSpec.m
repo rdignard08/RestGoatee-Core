@@ -48,7 +48,7 @@
 
 @end
 
-CLASS_SPEC(RGDataSourceProtocol)
+CLASS_SPEC(RGDataSource)
 
 - (void) testDataSource {
     RGTestObject2* object = [RGTestObject2 objectFromDataSource:[RGTestObject3 new] inContext:nil];

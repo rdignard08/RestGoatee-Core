@@ -36,4 +36,34 @@ CLASS_SPEC(RGPropertyDeclaration)
     }
 }
 
+#pragma mark - rg_canonical
+- (void) testSpaces {
+    XCTAssert([rg_canonical_form("          ") isEqual:@""]);
+}
+
+- (void) testNumbers {
+    XCTAssert([rg_canonical_form("1234add1234") isEqual:@"1234add1234"]);
+}
+
+- (void) testCapitals {
+    XCTAssert([rg_canonical_form("ABCDE") isEqual:@"abcde"]);
+}
+
+- (void) testSymbols {
+    XCTAssert([rg_canonical_form("!@#$abcde&*!@#") isEqual:@"abcde"]);
+}
+
+- (void) testUnicode {
+    XCTAssert([rg_canonical_form("abc💅bcd") isEqual:@"abcbcd"]);
+}
+
+- (void) testShortString {
+    XCTAssert([rg_canonical_form("") isEqual:@""]);
+}
+
+- (void) testLongString {
+    char* str = "sjkdfslkhasajskhdl2746981237JAgkHKJSGFKJHSKJSFHKJAGSd jdksdhflk sdklfh lksdjf l!&#^*&!%$)(!)$*@&@&@&@$&@*$^JKgsdajdajsdhaskdahr";
+    XCTAssert([rg_canonical_form(str) isEqual:@"sjkdfslkhasajskhdl2746981237jagkhkjsgfkjhskjsfhkjagsdjdksdhflksdklfhlksdjfljkgsdajdajsdhaskdahr"]);
+}
+
 SPEC_END

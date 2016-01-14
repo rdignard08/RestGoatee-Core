@@ -67,7 +67,7 @@ RG_FILE_START
         if (overrideDest) {
             [self rg_initProperty:properties[overrideDest] withValue:value inContext:context];
         } else {
-            [self rg_initProperty:canonicalProperties[rg_canonicalForm(key.UTF8String)] withValue:value inContext:context];
+            [self rg_initProperty:canonicalProperties[rg_canonical_form(key.UTF8String)] withValue:value inContext:context];
         }
     }
     return self;

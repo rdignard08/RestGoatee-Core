@@ -14,7 +14,7 @@ RG_FILE_START
 /**
  Returns the property name in as its canonical key.
  */
-NSString* const rg_canonicalForm(const char* const utf8Input) __attribute__((pure));
+NSString* const rg_canonical_form(const char* const utf8Input) __attribute__((pure));
 
 /**
  An object that encapsulates a property declaration, and enables object based introspection of a class.  It is a programmer error to invoke `-init`.

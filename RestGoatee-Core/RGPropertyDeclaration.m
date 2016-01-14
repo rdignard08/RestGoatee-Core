@@ -3,7 +3,7 @@
 
 RG_FILE_START
 
-NSString* const rg_canonicalForm(const char* const utfName) {
+NSString* const rg_canonical_form(const char* const utfName) {
     const size_t nameLength = strlen(utfName);
     size_t outputLength = 0;
     char* canonicalBuffer = malloc(nameLength);
@@ -33,7 +33,7 @@ NSString* const rg_canonicalForm(const char* const utfName) {
     if (self && property) {
         const char* utfName = property_getName(property);
         self->_name = @(utfName);
-        self->_canonicalName = rg_canonicalForm(utfName);
+        self->_canonicalName = rg_canonical_form(utfName);
         uint32_t attributeCount = 0;
         objc_property_attribute_t* attributes = property_copyAttributeList(property, &attributeCount);
         for (uint32_t i = 0; i < attributeCount; i++) {

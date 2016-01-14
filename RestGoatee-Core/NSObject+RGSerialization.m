@@ -47,13 +47,13 @@ RG_FILE_START
     } else if (rg_isCollectionObject([self class])) {
         NSMutableArray* ret = [NSMutableArray new];
         for (NSObject* object in (id<NSFastEnumeration>)self) {
-            [ret addObject:[object dictionaryRepresentation]];
+            [ret addObject:[object rg_dictionaryHelper]];
         }
         return ret;
     } else if (rg_isKeyedCollectionObject([self class])) { /* a dictionary / RGXMLNode */
         NSMutableDictionary* ret = [NSMutableDictionary new];
         for (NSString* key in (id<NSFastEnumeration>)self) {
-            ret[key] = [(NSObject*)[self valueForKey:key] dictionaryRepresentation];
+            ret[key] = [(NSObject*)[self valueForKey:key] rg_dictionaryHelper];
         }
         ret[kRGSerializationKey] = NSStringFromClass([self class]);
         return ret;
@@ -62,7 +62,7 @@ RG_FILE_START
         NSArray* keys = [[self class] respondsToSelector:@selector(serializableKeys)] ? [[self class] serializableKeys] : [[self class] rg_propertyList].allKeys;
         for (NSString* propertyName in keys) {
             if ([rg_NSManagedObject instancesRespondToSelector:NSSelectorFromString(propertyName)] || [NSObject instancesRespondToSelector:NSSelectorFromString(propertyName)]) continue;
-            ret[propertyName] = [(NSObject*)([self valueForKey:propertyName] ?: [NSNull null]) dictionaryRepresentation];
+            ret[propertyName] = [(NSObject*)([self valueForKey:propertyName] ?: [NSNull null]) rg_dictionaryHelper];
         }
         ret[kRGSerializationKey] = NSStringFromClass([self class]);
         return ret;

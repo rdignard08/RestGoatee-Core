@@ -35,11 +35,9 @@ RG_FILE_START
 }
 
 - (RG_PREFIX_NONNULL id) rg_dictionaryHelper {
-#ifdef DEBUG /* enabled when debugging so you can find your logic errors while building, on stack overflow gdb will fail */
-    if ([NSThread callStackSymbols].count > 1000) {
-        [NSException raise:NSGenericException format:@"Too deep, probably have a cycle"];
-    }
-#endif
+    /* enabled when debugging so you can find your logic errors while building, on stack overflow gdb will fail */
+    NSAssert([NSThread callStackSymbols].count < 1000, @"Too deep, probably have a cycle");
+    
     if ([[self class] isSubclassOfClass:[NSNull class]]) {
         return self;
     } else if (rg_isInlineObject([self class]) || rg_isClassObject(self)) { /* classes can be stored as strings too */

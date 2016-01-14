@@ -32,7 +32,7 @@
 
 @end
 
-CATEGORY_SPEC(NSObject, RG_Deserialization)
+CATEGORY_SPEC(NSObject, RGDeserialization)
 
 #pragma mark - objectsFromArraySource:inContext:
 - (void) testArraySourceNormal {

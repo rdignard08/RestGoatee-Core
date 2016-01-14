@@ -26,7 +26,7 @@
 #import "RGTestObject2.h"
 #import <objc/runtime.h>
 
-CATEGORY_SPEC(NSObject, RG_SharedImpl)
+CATEGORY_SPEC(NSObject, RGSharedImpl)
 
 #pragma mark - rg_dateFormats
 - (void) testDateFormatsNullability {

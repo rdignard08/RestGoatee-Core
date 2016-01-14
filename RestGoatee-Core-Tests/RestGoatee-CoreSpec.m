@@ -100,5 +100,23 @@ CLASS_SPEC(RestGoatee_Core)
     XCTAssert([baseObject.method isEqual:@"foo"]);
 }
 
+#pragma mark - rg_threadsafe_formatter
+- (void) testRGThreadSafeFormatterSame {
+    NSDateFormatter* formatter = rg_threadsafe_formatter();
+    NSDateFormatter* anotherFormatter = rg_threadsafe_formatter();
+    XCTAssert(formatter == anotherFormatter);
+}
+
+- (void) testRGThreadSafeFormatterDiffered {
+    NSDateFormatter* formatter = rg_threadsafe_formatter();
+    __block NSDateFormatter* anotherFormatter;
+    dispatch_queue_t backgroundQueue = dispatch_queue_create("background", DISPATCH_QUEUE_SERIAL);
+    dispatch_async(backgroundQueue, ^{
+        anotherFormatter = rg_threadsafe_formatter();
+    });
+    dispatch_sync(backgroundQueue, ^{}); // apple's so smart dispatch_sync will lie.
+    XCTAssert(formatter != anotherFormatter);
+}
+
 SPEC_END
 

@@ -26,6 +26,22 @@
 
 extern NSString* RG_SUFFIX_NONNULL const kRGSerializationKey;
 
+@interface RGTestObject5 : NSObject <RGSerializable>
+
+@property (nonatomic, strong) NSString* stringProperty;
+@property (nonatomic, strong) NSArray* arrayProperty;
+@property (nonatomic, strong) NSNumber* numberProperty;
+
+@end
+
+@implementation RGTestObject5
+
++ (NSArray*) serializableKeys {
+    return @[ RG_STRING_SEL(stringProperty), RG_STRING_SEL(numberProperty) ];
+}
+
+@end
+
 CATEGORY_SPEC(NSObject, RGSerialization)
 
 #pragma mark - dictionaryRepresentation
@@ -37,6 +53,17 @@ CATEGORY_SPEC(NSObject, RGSerialization)
     XCTAssert([dictionaryRepresentation[RG_STRING_SEL(dictionaryProperty)] isEqual:obj.dictionaryProperty]);
     XCTAssert([dictionaryRepresentation[RG_STRING_SEL(arrayProperty)] isEqual:obj.arrayProperty]);
     XCTAssert([dictionaryRepresentation[kRGSerializationKey] isEqual:NSStringFromClass([RGTestObject2 class])]);
+}
+
+- (void)testRGSerializable {
+    RGTestObject5* obj = [RGTestObject5 new];
+    obj.stringProperty = @"abcd";
+    obj.arrayProperty = @[ @"aValue" ];
+    obj.numberProperty = @3;
+    NSDictionary* dictionary = [obj dictionaryRepresentation];
+    XCTAssert([dictionary[RG_STRING_SEL(stringProperty)] isEqual:@"abcd"]);
+    XCTAssert(dictionary[RG_STRING_SEL(arrayProperty)] == nil);
+    XCTAssert([dictionary[RG_STRING_SEL(numberProperty)] isEqual:@"3"]);
 }
 
 SPEC_END

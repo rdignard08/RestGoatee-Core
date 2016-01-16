@@ -33,7 +33,7 @@ void __attribute__((cold)) rg_log(NSString* RG_SUFFIX_NULLABLE format, ...) {
     va_start(vl, format);
     char* fileName = va_arg(vl, char*);
     unsigned long lineNumber = va_arg(vl, unsigned long);
-    NSString* line = [[NSString alloc] initWithFormat:[NSString stringWithFormat:@"[%@:%@] %@", @(fileName), @(lineNumber), format ?: @""] arguments:vl];
+    NSString* line = [[NSString alloc] initWithFormat:[NSString stringWithFormat:@"[%@:%@] %@", @(fileName), @(lineNumber), format ?: @"(null)"] arguments:vl];
     fprintf(stderr, "%s\n", line.UTF8String);
     va_end(vl);
 }

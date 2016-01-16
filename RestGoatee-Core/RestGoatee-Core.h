@@ -56,15 +56,18 @@ void rg_swizzle(Class RG_SUFFIX_NULLABLE cls, SEL RG_SUFFIX_NULLABLE original, S
 void rg_log(NSString* RG_SUFFIX_NULLABLE format, ...) __attribute__((cold));
 #ifndef RGLog
     #ifdef DEBUG
-        #define RGLog(format, ...)                                      \
-            rg_log(format, ({                                           \
-                char* ret = __FILE__;                                   \
-                for (char* string = __FILE__; string[0]; string++) {    \
-                    if (string[0] == '/') {                             \
-                        ret = string + 1;                               \
-                    }                                                   \
-                }                                                       \
-                ret;                                                    \
+        #define RGLog(format, ...)                          \
+            rg_log(format, ({                               \
+                const size_t length = sizeof(__FILE__) - 1; \
+                char* ret = __FILE__ + length;              \
+                while (ret != __FILE__) {                   \
+                    char* replacement = ret - 1;            \
+                    if (*replacement == '/') {              \
+                        break;                              \
+                    }                                       \
+                    ret = replacement;                      \
+                }                                           \
+                ret;                                        \
             }), (long)__LINE__, ##__VA_ARGS__)
     #else
         /* we define out with `RG_VOID_NOOP` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */

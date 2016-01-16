@@ -68,7 +68,7 @@ void rg_log(NSString* RG_SUFFIX_NULLABLE format, ...) __attribute__((cold));
                     ret = replacement;                      \
                 }                                           \
                 ret;                                        \
-            }), (long)__LINE__, ##__VA_ARGS__)
+            }), (unsigned long)__LINE__, ##__VA_ARGS__)
     #else
         /* we define out with `RG_VOID_NOOP` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */
         #define RGLog(...) RG_VOID_NOOP

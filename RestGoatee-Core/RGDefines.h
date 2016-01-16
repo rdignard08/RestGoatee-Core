@@ -24,13 +24,11 @@
 #ifndef RG_FILE_START
     #define RG_FILE_START \
     _Pragma("clang diagnostic push") \
-    _Pragma("clang diagnostic ignored \"-Wgnu\"") \
-    _Pragma("clang assume_nonnull begin")
+    _Pragma("clang diagnostic ignored \"-Wgnu\"")
 #endif
 
 #ifndef RG_FILE_END
     #define RG_FILE_END \
-    _Pragma("clang assume_nonnull end") \
     _Pragma("clang diagnostic pop")
 #endif
 

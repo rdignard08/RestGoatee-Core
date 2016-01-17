@@ -27,7 +27,7 @@
 CLASS_SPEC(RGXMLSerializer)
 
 - (void) testXMLDeserialize {
-    NSXMLParser* parser = [[NSXMLParser alloc] initWithData:(NSData* _Nonnull)[@"<xml><child1 attribute=\"value\"></child1><child2>some data</child2><child1><child4/></child1></xml>" dataUsingEncoding:NSUTF8StringEncoding]];
+    NSXMLParser* parser = [[NSXMLParser alloc] initWithData:(NSData* RG_SUFFIX_NONNULL)[@"<xml><child1 attribute=\"value\"></child1><child2>some data</child2><child1><child4/></child1></xml>" dataUsingEncoding:NSUTF8StringEncoding]];
     RGXMLSerializer* serializer = [[RGXMLSerializer alloc] initWithParser:parser];
     RGXMLNode* rootNode = serializer.rootNode.childNodes.firstObject;
     XCTAssert([rootNode.name isEqual:@"xml"]);
@@ -42,7 +42,7 @@ CLASS_SPEC(RGXMLSerializer)
 }
 
 - (void) testCDATA {
-    NSXMLParser* parser = [[NSXMLParser alloc] initWithData:(NSData* _Nonnull)[@"<xml><child1><![CDATA[abcdefg]]></child1></xml>" dataUsingEncoding:NSUTF8StringEncoding]];
+    NSXMLParser* parser = [[NSXMLParser alloc] initWithData:(NSData* RG_SUFFIX_NONNULL)[@"<xml><child1><![CDATA[abcdefg]]></child1></xml>" dataUsingEncoding:NSUTF8StringEncoding]];
     RGXMLSerializer* serializer = [[RGXMLSerializer alloc] initWithParser:parser];
     RGXMLNode* rootNode = serializer.rootNode.childNodes.firstObject;
     XCTAssert([rootNode.name isEqual:@"xml"]);

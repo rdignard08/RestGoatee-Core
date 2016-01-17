@@ -48,7 +48,7 @@ RG_FILE_START
     NSObject<RGDeserializable>* ret;
     if ([self isSubclassOfClass:rg_NSManagedObject]) {
         NSAssert(context, @"A subclass of NSManagedObject must be created within a valid NSManagedObjectContext.");
-        NSManagedObjectContext* _Nonnull validContext = (id _Nonnull)context;
+        NSManagedObjectContext* RG_SUFFIX_NONNULL validContext = (id RG_SUFFIX_NONNULL)context;
         ret = [rg_NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:validContext];
     } else {
         ret = [self new];

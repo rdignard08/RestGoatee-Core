@@ -36,4 +36,9 @@ CLASS_SPEC(RGXMLSerializer)
     XCTAssert([(NSArray*)[rootNode childrenNamed:@"child1"] count] == 2);
 }
 
+- (void) testXMLFailure {
+    RGXMLSerializer* serializer = [[RGXMLSerializer alloc] initWithParser:nil];
+    XCTAssert(serializer.rootNode.childNodes.count == 0);
+}
+
 SPEC_END

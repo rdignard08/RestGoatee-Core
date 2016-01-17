@@ -66,4 +66,63 @@ CLASS_SPEC(RGPropertyDeclaration)
     XCTAssert([rg_canonical_form(str) isEqual:@"sjkdfslkhasajskhdl2746981237jagkhkjsgfkjhskjsfhkjagsdjdksdhflksdklfhlksdjfljkgsdajdajsdhaskdahr"]);
 }
 
+- (void) testMallocBasedString {
+    char str[] = "sjkdfslkhasajskhdl2746981237JAgkHKJSGFKJ" \
+                "HSKJSFHKJAGSd jdksdhflk sdklfh lksdjf l!" \
+                "&#^*&!%$)(!)$*@&@&@&@$&@*$^JKgsdajdajsdh" \
+                "askdahr012345678901234567890QWERTYUIOP{}" \
+                "ASDFGHJKL:'ZXCVBNM<>?!@#4%^&*()_+‚€‹›‡⁄°" \
+                "àßfrëasdghdkajsahdasdaskldjasdkjlasdskdj" \
+                "sjkdfslkhasajskhdl2746981237JAgkHKJSGFKJ" \
+                "HSKJSFHKJAGSd jdksdhflk sdklfh lksdjf l!" \
+                "&#^*&!%$)(!)$*@&@&@&@$&@*$^JKgsdajdajsdh" \
+                "askdahr012345678901234567890QWERTYUIOP{}" \
+                "ASDFGHJKL:'ZXCVBNM<>?!@#4%^&*()_+‚€‹›‡⁄°" \
+                "àßfrëasdghdkajsahdasdaskldjasdkjlasdskdj" \
+                "sjkdfslkhasajskhdl2746981237JAgkHKJSGFKJ" \
+                "HSKJSFHKJAGSd jdksdhflk sdklfh lksdjf l!" \
+                "&#^*&!%$)(!)$*@&@&@&@$&@*$^JKgsdajdajsdh" \
+                "askdahr012345678901234567890QWERTYUIOP{}" \
+                "ASDFGHJKL:'ZXCVBNM<>?!@#4%^&*()_+‚€‹›‡⁄°" \
+                "àßfrëasdghdkajsahdasdaskldjasdkjlasdskdj" \
+                "sjkdfslkhasajskhdl2746981237JAgkHKJSGFKJ" \
+                "HSKJSFHKJAGSd jdksdhflk sdklfh lksdjf l!" \
+                "&#^*&!%$)(!)$*@&@&@&@$&@*$^JKgsdajdajsdh" \
+                "askdahr012345678901234567890QWERTYUIOP{}" \
+                "ASDFGHJKL:'ZXCVBNM<>?!@#4%^&*()_+‚€‹›‡⁄°" \
+                "àßfrëasdghdkajsahdasdaskldjasdkjlasdskdj" \
+                "sjkdfslkhasajskhdl2746981237JAgkHKJSGFKJ" \
+                "HSKJSFHKJAGSd jdksdhflk sdklfh lksdjf l!" \
+                "&#^*&!%$)(!)$*@&@&@&@$&@*$^JKgsdajdajsdh" \
+                "askdahr012345678901234567890QWERTYUIOP{}" \
+                "ASDFGHJKL:'ZXCVBNM<>?!@#4%^&*()_+‚€‹›‡⁄°" \
+                "àßfrëasdghdkajsahdasdaskldjasdkjlasdskdj";
+    XCTAssert(sizeof(str) > kRGMaxAutoSize);
+    
+    XCTAssert([rg_canonical_form(str) isEqual:
+               @"sjkdfslkhasajskhdl2746981237jagkhkjsgfkj" \
+                "hskjsfhkjagsdjdksdhflksdklfhlksdjfljkgsd" \
+                "ajdajsdhaskdahr012345678901234567890qwer" \
+                "tyuiopasdfghjklzxcvbnm4frasdghdkajsahdas" \
+                "daskldjasdkjlasdskdjsjkdfslkhasajskhdl27" \
+                "46981237jagkhkjsgfkjhskjsfhkjagsdjdksdhf" \
+                "lksdklfhlksdjfljkgsdajdajsdhaskdahr01234" \
+                "5678901234567890qwertyuiopasdfghjklzxcvb" \
+                "nm4frasdghdkajsahdasdaskldjasdkjlasdskdj" \
+                "sjkdfslkhasajskhdl2746981237jagkhkjsgfkj" \
+                "hskjsfhkjagsdjdksdhflksdklfhlksdjfljkgsd" \
+                "ajdajsdhaskdahr012345678901234567890qwer" \
+                "tyuiopasdfghjklzxcvbnm4frasdghdkajsahdas" \
+                "daskldjasdkjlasdskdjsjkdfslkhasajskhdl27" \
+                "46981237jagkhkjsgfkjhskjsfhkjagsdjdksdhf" \
+                "lksdklfhlksdjfljkgsdajdajsdhaskdahr01234" \
+                "5678901234567890qwertyuiopasdfghjklzxcvb" \
+                "nm4frasdghdkajsahdasdaskldjasdkjlasdskdj" \
+                "sjkdfslkhasajskhdl2746981237jagkhkjsgfkj" \
+                "hskjsfhkjagsdjdksdhflksdklfhlksdjfljkgsd" \
+                "ajdajsdhaskdahr012345678901234567890qwer" \
+                "tyuiopasdfghjklzxcvbnm4frasdghdkajsahdas" \
+                "daskldjasdkjlasdskdj"]);
+}
+
 SPEC_END

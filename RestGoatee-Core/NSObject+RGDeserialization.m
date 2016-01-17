@@ -48,7 +48,8 @@ RG_FILE_START
     NSObject<RGDeserializable>* ret;
     if ([self isSubclassOfClass:rg_NSManagedObject]) {
         NSAssert(context, @"A subclass of NSManagedObject must be created within a valid NSManagedObjectContext.");
-        ret = [rg_NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:context];
+        NSManagedObjectContext* _Nonnull validContext = (id _Nonnull)context;
+        ret = [rg_NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:validContext];
     } else {
         ret = [self new];
     }
@@ -104,8 +105,11 @@ RG_FILE_START
         NSMutableArray RG_GENERIC(id) * ret = [NSMutableArray new];
         for (__strong id obj in value) {
             if (rg_isDataSourceClass([obj class])) {
-                Class objectClass = NSClassFromString(obj[kRGSerializationKey]);
-                obj = rg_isDataSourceClass(objectClass) || !objectClass ? obj : [objectClass objectFromDataSource:obj inContext:context];
+                NSString* serializationKey = obj[kRGSerializationKey];
+                if (serializationKey) {
+                    Class objectClass = NSClassFromString(serializationKey);
+                    obj = rg_isDataSourceClass(objectClass) || !objectClass ? obj : [objectClass objectFromDataSource:obj inContext:context];
+                }
             }
             [ret addObject:obj];
         }

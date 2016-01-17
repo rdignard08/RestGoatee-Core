@@ -71,6 +71,16 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
                     break;
                 case 'T':
                 case 't': { /* I have no idea what 'old-style' typing looks like; gonna assume it's the same / no one uses it */
+                    if (strcmp(@encode(Class), attribute.value) == 0) {
+                        self->_type = objc_getMetaClass("NSObject");
+                        self->_isPrimitive = NO;
+                        break;
+                    } else if (strcmp(@encode(id), attribute.value) == 0) {
+                        self->_type = objc_getClass("NSObject");
+                        self->_isPrimitive = NO;
+                        break;
+                    }
+                    
                     const size_t typeLength = strlen(attribute.value);
                     size_t outputLength = 0;
                     char* buffer = malloc(typeLength + 1);
@@ -84,14 +94,7 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
                         }
                     } /* there should be 2 '"' on each end, the class is in the middle */
                     buffer[outputLength] = '\0';
-                    Class propertyType = Nil;
-                    if (strcmp(@encode(Class), attribute.value) == 0) {
-                        propertyType = objc_getMetaClass("NSObject");
-                    } else if (strcmp(@encode(id), attribute.value) == 0) {
-                        propertyType = objc_getClass("NSObject");
-                    } else {
-                        propertyType = objc_getClass(buffer);
-                    }
+                    Class propertyType = objc_getClass(buffer);
                     free(buffer);
                     self->_type = propertyType ?: [NSNumber self];
                     self->_isPrimitive = !propertyType;

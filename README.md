@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/rdignard08/RestGoatee-Core.svg?branch=master)](https://travis-ci.org/rdignard08/RestGoatee-Core)
+[![CocoaPods Version](https://img.shields.io/cocoapods/v/RestGoatee-Core.svg)](https://cocoapods.org/pods/RestGoatee-Core)
 RestGoatee-Core
 ===============
 

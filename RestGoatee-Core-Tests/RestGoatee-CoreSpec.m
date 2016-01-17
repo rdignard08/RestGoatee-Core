@@ -65,7 +65,7 @@ CLASS_SPEC(RestGoatee_Core)
 #pragma mark - rg_log
 - (void) testRGLogNormal {
     @try {
-        rg_log(@"hello", __FILE__, (long)__LINE__);
+        RGLog(@"hello");
     } @catch (NSException* e) {
         XCTAssert(NO, @"exception raised when it shouldn't be");
     }
@@ -73,7 +73,7 @@ CLASS_SPEC(RestGoatee_Core)
 
 - (void) testRGLogNil {
     @try {
-        rg_log(nil, __FILE__, (long)__LINE__);
+        RGLog(nil);
     } @catch (NSException* e) {
         XCTAssert(NO, @"exception raised when it shouldn't be");
     }

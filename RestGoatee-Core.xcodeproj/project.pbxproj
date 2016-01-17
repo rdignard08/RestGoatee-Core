@@ -14,7 +14,6 @@
 		BE637B801BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE637B7F1BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m */; };
 		BE68CA661BCF631200DFEC70 /* RGTestObject2.m in Sources */ = {isa = PBXBuildFile; fileRef = BE68CA631BCF631200DFEC70 /* RGTestObject2.m */; };
 		BE68CA671BCF631200DFEC70 /* RGTestObject1.m in Sources */ = {isa = PBXBuildFile; fileRef = BE68CA651BCF631200DFEC70 /* RGTestObject1.m */; };
-		BE68CA681BCF655700DFEC70 /* NSObject+RGDeserialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13B91BBDB4960027300D /* NSObject+RGDeserialization.m */; };
 		BE7A6FB51BE2FEDA009F5A4F /* RGPropertyDeclaration.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7A6FB41BE2FEDA009F5A4F /* RGPropertyDeclaration.m */; };
 		BEAB13C61BBDB4960027300D /* RestGoatee-Core.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13B71BBDB4960027300D /* RestGoatee-Core.m */; };
 		BEAB13C71BBDB4960027300D /* NSObject+RGDeserialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13B91BBDB4960027300D /* NSObject+RGDeserialization.m */; };
@@ -25,10 +24,8 @@
 		BEEC23711C47848900588655 /* NSObject+RGSerializationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEC23701C47848900588655 /* NSObject+RGSerializationSpec.m */; };
 		BEF4BE621BD4A0B600ACDAF7 /* RGXMLSerializerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE611BD4A0B600ACDAF7 /* RGXMLSerializerSpec.m */; };
 		BEF4BE641BD4B24A00ACDAF7 /* RGDataSourceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE631BD4B24A00ACDAF7 /* RGDataSourceSpec.m */; };
-		BEF4BE651BD4B4ED00ACDAF7 /* NSObject+RGSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BD1BBDB4960027300D /* NSObject+RGSerialization.m */; };
 		BEF4BE691BD4BEE100ACDAF7 /* RGDeserializableSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE681BD4BEE100ACDAF7 /* RGDeserializableSpec.m */; };
 		BEF4BE6D1BD58BFC00ACDAF7 /* NSObject+RGSharedImplSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4BE6C1BD58BFC00ACDAF7 /* NSObject+RGSharedImplSpec.m */; };
-		BEF4BE6E1BD58C3B00ACDAF7 /* NSObject+RGSharedImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BF1BBDB4960027300D /* NSObject+RGSharedImpl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -343,13 +340,10 @@
 			files = (
 				BE68CA661BCF631200DFEC70 /* RGTestObject2.m in Sources */,
 				BE2009651BCA27AE00A9E8A0 /* RGXMLNodeSpec.m in Sources */,
-				BEF4BE651BD4B4ED00ACDAF7 /* NSObject+RGSerialization.m in Sources */,
 				BE2009691BCC29A900A9E8A0 /* NSObject+RGDeserializationSpec.m in Sources */,
-				BEF4BE6E1BD58C3B00ACDAF7 /* NSObject+RGSharedImpl.m in Sources */,
 				BEF4BE6D1BD58BFC00ACDAF7 /* NSObject+RGSharedImplSpec.m in Sources */,
 				BE637B801BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m in Sources */,
 				BEF4BE641BD4B24A00ACDAF7 /* RGDataSourceSpec.m in Sources */,
-				BE68CA681BCF655700DFEC70 /* NSObject+RGDeserialization.m in Sources */,
 				BE637B7D1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m in Sources */,
 				BEF4BE691BD4BEE100ACDAF7 /* RGDeserializableSpec.m in Sources */,
 				BE68CA671BCF631200DFEC70 /* RGTestObject1.m in Sources */,
@@ -401,6 +395,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LLVM_LTO = NO;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.restgoatee.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -422,6 +417,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.restgoatee.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
@@ -571,7 +567,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LLVM_LTO = NO;
 				OTHER_CFLAGS = "-O0";
-				OTHER_LDFLAGS = "-load_all";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -585,7 +580,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LLVM_LTO = YES;
 				OTHER_CFLAGS = "-O0";
-				OTHER_LDFLAGS = "-load_all";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

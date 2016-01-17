@@ -80,13 +80,13 @@ RG_FILE_START
         if (![handledNames containsObject:childNode.name]) {
             [handledNames addObject:childNode.name];
             id children = [self childrenNamed:childNode.name];
-            if ([children isKindOfClass:[NSArray class]]) {
+            if ([children isKindOfClass:[NSArray self]]) {
                 NSMutableArray RG_GENERIC(NSDictionary RG_GENERIC(NSString*, id) *) * replacementContainer = [NSMutableArray new];
                 for (RGXMLNode* node in children) {
                     [replacementContainer addObject:[node dictionaryRepresentation]];
                 }
                 ret[childNode.name] = replacementContainer;
-            } else if ([children isKindOfClass:[RGXMLNode class]]) {
+            } else if ([children isKindOfClass:[RGXMLNode self]]) {
                 NSMutableDictionary RG_GENERIC(NSString*, NSString*) * value = [(RGXMLNode*)children attributes];
                 [value addEntriesFromDictionary:[(RGXMLNode*)children dictionaryRepresentation]];
                 ret[childNode.name] = value;

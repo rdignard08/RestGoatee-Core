@@ -42,7 +42,7 @@ RG_FILE_START
 FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGSerializationKey;
 
 /**
- Will be `objc_getClass("NSObject")` i.e. `[NSObject class]`.
+ Will be `objc_getClass("NSObject")` i.e. `[NSObject self]`.
  */
 FOUNDATION_EXPORT Class RG_SUFFIX_NONNULL rg_NSObjectClass;
 
@@ -54,12 +54,12 @@ FOUNDATION_EXPORT Class RG_SUFFIX_NONNULL rg_NSObjectMetaClass;
 /* These classes are used to dynamically link into coredata if present. */
 
 /**
- Will be `[NSManagedObject class]` or `Nil` (if not linked/available).
+ Will be `[NSManagedObject self]` or `Nil` (if not linked/available).
  */
 FOUNDATION_EXPORT Class RG_SUFFIX_NULLABLE rg_NSManagedObject;
 
 /**
- Will be `[NSEntityDescription class]` or `Nil` (if not linked/available).
+ Will be `[NSEntityDescription self]` or `Nil` (if not linked/available).
  */
 FOUNDATION_EXPORT Class RG_SUFFIX_NULLABLE rg_NSEntityDescription;
 
@@ -89,28 +89,28 @@ BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isMetaCl
  Returns `YES` if the given type can be adequately represented by an `NSString`.
  */
 BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isInlineObject(Class RG_SUFFIX_NULLABLE cls) {
-    return [cls isSubclassOfClass:[NSDate class]] || [cls isSubclassOfClass:[NSString class]] || [cls isSubclassOfClass:[NSData class]] || [cls isSubclassOfClass:[NSNull class]] || [cls isSubclassOfClass:[NSValue class]] || [cls isSubclassOfClass:[NSURL class]];
+    return [cls isSubclassOfClass:[NSDate self]] || [cls isSubclassOfClass:[NSString self]] || [cls isSubclassOfClass:[NSData self]] || [cls isSubclassOfClass:[NSNull self]] || [cls isSubclassOfClass:[NSValue self]] || [cls isSubclassOfClass:[NSURL self]];
 }
 
 /**
  Returns `YES` if the given type can be adequately represented by an `NSArray`.
  */
 BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isCollectionObject(Class RG_SUFFIX_NULLABLE cls) {
-    return [cls isSubclassOfClass:[NSSet class]] || [cls isSubclassOfClass:[NSArray class]] || [cls isSubclassOfClass:[NSOrderedSet class]];
+    return [cls isSubclassOfClass:[NSSet self]] || [cls isSubclassOfClass:[NSArray self]] || [cls isSubclassOfClass:[NSOrderedSet self]];
 }
 
 /**
  Returns `YES` if the given type is a "key => value" type.  Thus it can be represented by an `NSDictionary`.
  */
 BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isKeyedCollectionObject(Class RG_SUFFIX_NULLABLE cls) {
-    return [cls isSubclassOfClass:[NSDictionary class]] || [cls isSubclassOfClass:[RGXMLNode class]];
+    return [cls isSubclassOfClass:[NSDictionary self]] || [cls isSubclassOfClass:[RGXMLNode self]];
 }
 
 /**
  Returns `YES` if the given class conforms to `RGDataSource`.  Necessary due to some bug.
  */
 BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isDataSourceClass(Class RG_SUFFIX_NULLABLE cls) {
-    return [cls conformsToProtocol:@protocol(RGDataSource)] || [cls isSubclassOfClass:[NSDictionary class]]; /* 2nd clause due to a bug */
+    return [cls conformsToProtocol:@protocol(RGDataSource)] || [cls isSubclassOfClass:[NSDictionary self]]; /* 2nd clause due to a bug */
 }
 
 /**

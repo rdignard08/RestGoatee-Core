@@ -30,7 +30,7 @@ RG_FILE_START
 
 - (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation {
     NSMutableDictionary* ret = [self rg_dictionaryHelper];
-    NSAssert([ret isKindOfClass:[NSDictionary class]], @"Called `dictionaryRepresentation` on an object whose correct representation is not a dictionary");
+    NSAssert([ret isKindOfClass:[NSDictionary self]], @"Called `dictionaryRepresentation` on an object whose correct representation is not a dictionary");
     return ret;
 }
 
@@ -38,7 +38,7 @@ RG_FILE_START
     /* enabled when debugging so you can find your logic errors while building, on stack overflow gdb will fail */
     NSAssert([NSThread callStackSymbols].count < 1000, @"Too deep, probably have a cycle");
     
-    if ([[self class] isSubclassOfClass:[NSNull class]]) {
+    if ([[self class] isSubclassOfClass:[NSNull self]]) {
         return self;
     } else if (rg_isInlineObject([self class]) || rg_isClassObject(self)) { /* classes can be stored as strings too */
         return self.description;

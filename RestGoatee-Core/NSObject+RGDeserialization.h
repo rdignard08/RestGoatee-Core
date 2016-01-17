@@ -51,7 +51,7 @@ RG_FILE_START
 
 /**
  @abstract merges a data source into an existing object.  The return value is not a new object, but rather is the receiver augmented with the values in `object`.  Wherever they conflict, `source` takes precedence.
- @param object Can be of type `NSDictionary`, `RGXMLNode`, or any class conforming to `RGDataSource`.
+ @param source Can be of type `NSDictionary`, `RGXMLNode`, or any class conforming to `RGDataSource`.
  @param context Since there may be sub objects which are `NSManagedObject` subclasses, it may be necessary to provide an `NSManagedObjectContext` to contain them.
  @return the receiving object extended with `source`; any conflicts will take `source`'s value as precedent.
  */

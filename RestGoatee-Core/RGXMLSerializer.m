@@ -96,7 +96,8 @@ RG_FILE_START
 }
 
 - (void) parser:(__unused id)p foundCDATA:(RG_PREFIX_NONNULL NSData*)CDATABlock {
-    [self.currentString appendString:[[NSString alloc] initWithData:CDATABlock encoding:NSUTF8StringEncoding]];
+    NSString* stringValue = [[NSString alloc] initWithData:CDATABlock encoding:NSUTF8StringEncoding];
+    [self.currentString appendString:stringValue];
 }
 
 @end

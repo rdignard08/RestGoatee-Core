@@ -51,7 +51,7 @@ FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGInnerXMLKey;
 /**
  The name of the tag.  <foobar>...</foobar> will have the value of `foobar` here.
  */
-@property RG_NULLABLE_PROPERTY(nonatomic, strong) NSString* name;
+@property RG_NONNULL_PROPERTY(nonatomic, strong) NSString* name;
 
 /**
  The innerXML if any, including unwrapped CDATA. 

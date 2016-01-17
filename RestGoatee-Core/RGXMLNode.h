@@ -69,8 +69,6 @@ FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGInnerXMLKey;
 
 /**
  Returns the receiver and all of its children as a dictionary representation.  The `innerXML` of the node is returned on the key `kRGInnerXMLKey`.
- 
- @warning raises an exception if there exists a child without a name.
  */
 - (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation;
 

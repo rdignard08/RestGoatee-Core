@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.author           = { "Ryan Dignard" => "conceptuallyflawed@gmail.com" }
   s.source           = { :git => "https://github.com/rdignard08/RestGoatee-Core.git", :tag => s.version.to_s }
 
-  s.platform     = :ios, '6.0'
+  s.platform     = :ios, '5.0'
   s.requires_arc = true
   s.source_files = 'RestGoatee-Core'
 end

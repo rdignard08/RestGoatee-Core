@@ -31,7 +31,7 @@ CLASS_SPEC(RGXMLSerializer)
     RGXMLSerializer* serializer = [[RGXMLSerializer alloc] initWithParser:parser];
     RGXMLNode* rootNode = serializer.rootNode.childNodes.firstObject;
     XCTAssert([rootNode.name isEqual:@"xml"]);
-    XCTAssert([rootNode childNodes].count == 3);
+    XCTAssert(rootNode.childNodes.count == 3);
     XCTAssert([[rootNode.childNodes.firstObject valueForKey:@"attribute"] isEqual:@"value"]);
     XCTAssert([(NSArray*)[rootNode childrenNamed:@"child1"] count] == 2);
 }
@@ -39,6 +39,15 @@ CLASS_SPEC(RGXMLSerializer)
 - (void) testXMLFailure {
     RGXMLSerializer* serializer = [[RGXMLSerializer alloc] initWithParser:nil];
     XCTAssert(serializer.rootNode.childNodes.count == 0);
+}
+
+- (void) testCDATA {
+    NSXMLParser* parser = [[NSXMLParser alloc] initWithData:[@"<xml><child1><![CDATA[abcdefg]]></child1></xml>" dataUsingEncoding:NSUTF8StringEncoding]];
+    RGXMLSerializer* serializer = [[RGXMLSerializer alloc] initWithParser:parser];
+    RGXMLNode* rootNode = serializer.rootNode.childNodes.firstObject;
+    XCTAssert([rootNode.name isEqual:@"xml"]);
+    XCTAssert(rootNode.childNodes.count == 1);
+    XCTAssert([[rootNode.childNodes.firstObject innerXML] isEqual:@"abcdefg"]);
 }
 
 SPEC_END

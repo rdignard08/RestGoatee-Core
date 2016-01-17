@@ -36,7 +36,7 @@ RG_FILE_START
 
 - (RG_PREFIX_NONNULL id) rg_dictionaryHelper {
     /* enabled when debugging so you can find your logic errors while building, on stack overflow gdb will fail */
-    NSAssert([NSThread callStackSymbols].count < 1000, @"Too deep, probably have a cycle");
+    NSAssert([NSThread callStackSymbols].count < kRGMaxAutoSize, @"Too deep, probably have a cycle");
     
     if ([[self class] isSubclassOfClass:[NSNull self]]) {
         return self;

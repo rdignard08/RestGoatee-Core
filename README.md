@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/rdignard08/RestGoatee-Core.svg?branch=master)](https://travis-ci.org/rdignard08/RestGoatee-Core)
+[![Coverage Status](https://codecov.io/github/rdignard08/RestGoatee-Core/coverage.svg?branch=master)](https://codecov.io/github/rdignard08/RestGoatee-Core?branch=master)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods Version](https://img.shields.io/cocoapods/v/RestGoatee-Core.svg)](https://cocoapods.org/pods/RestGoatee-Core)
 RestGoatee-Core
 ===============

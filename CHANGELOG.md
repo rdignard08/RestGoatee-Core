@@ -1,5 +1,8 @@
 # RestGoatee CHANGELOG
 
+## 2.0.4
+- Basic swift package manager support.
+
 ## 2.0.3
 - A new NSDateFormatter is not allocated for each date property.  These are reused across threads.
 - rg_threadsafe_formatter is available for use, do not leave the object's properties modified.

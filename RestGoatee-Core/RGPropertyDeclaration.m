@@ -73,6 +73,7 @@ NSString* const rg_canonical_form(const char* const utfName) {
                     } else {
                         propertyType = objc_getClass(buffer);
                     }
+                    free(buffer);
                     self->_type = propertyType ?: [NSNumber self];
                     self->_isPrimitive = !propertyType;
                 }

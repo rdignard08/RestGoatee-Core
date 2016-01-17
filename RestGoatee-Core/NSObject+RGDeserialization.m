@@ -131,7 +131,10 @@ RG_FILE_START
     /* Otherwise... this mess */
     
     if (rg_isMetaClassObject(propertyType)) { /* the property's type is Meta-class so its a reference to Class */
-        if ([value isKindOfClass:[RGXMLNode self]]) value = [value innerXML];
+        if ([value isKindOfClass:[RGXMLNode self]]) {
+            NSString* innerXML = [value innerXML];
+            value = innerXML ?: @"";
+        }
         [self setValue:NSClassFromString([value description]) forKey:key];
     } else if ([propertyType isSubclassOfClass:[NSDictionary self]] && ([value isKindOfClass:[NSDictionary self]] || [value isKindOfClass:[RGXMLNode self]])) { /* NSDictionary */
         if ([value isKindOfClass:[RGXMLNode self]]) value = [(RGXMLNode*)value dictionaryRepresentation];
@@ -143,21 +146,30 @@ RG_FILE_START
                                                                            [value isKindOfClass:[NSString self]] ||
                                                                            [value isKindOfClass:[RGXMLNode self]])) {
         /* NSDecimalNumber, subclasses must go first */
-        if ([value isKindOfClass:[RGXMLNode self]]) value = [value innerXML];
+        if ([value isKindOfClass:[RGXMLNode self]]) {
+            NSString* innerXML = [value innerXML];
+            value = innerXML ?: @"";
+        }
         if ([value isKindOfClass:[NSNumber self]]) value = [value stringValue];
         [self setValue:[propertyType decimalNumberWithString:value] forKey:key];
     } else if ([propertyType isSubclassOfClass:[NSNumber self]] && ([value isKindOfClass:[NSNumber self]] ||
                                                                     [value isKindOfClass:[NSString self]] ||
                                                                     [value isKindOfClass:[RGXMLNode self]])) {
         /* NSNumber */
-        if ([value isKindOfClass:[RGXMLNode self]]) value = [value innerXML];
+        if ([value isKindOfClass:[RGXMLNode self]]) {
+            NSString* innerXML = [value innerXML];
+            value = innerXML ?: @"";
+        }
         if ([value isKindOfClass:[NSString self]]) value = @([value doubleValue]);
         [self setValue:value forKey:key]; /* Note: setValue: will unwrap the value if the destination is a primitive */
     } else if ([propertyType isSubclassOfClass:[NSValue self]] && ([value isKindOfClass:[NSNumber self]] ||
                                                                    [value isKindOfClass:[NSString self]] ||
                                                                    [value isKindOfClass:[RGXMLNode self]])) {
         /* NSValue */
-        if ([value isKindOfClass:[RGXMLNode self]]) value = [value innerXML];
+        if ([value isKindOfClass:[RGXMLNode self]]) {
+            NSString* innerXML = [value innerXML];
+            value = innerXML ?: @"";
+        }
         if ([value isKindOfClass:[NSString self]]) value = @([value doubleValue]);
         [self setValue:value forKey:key]; /* This is an NSNumber, which is a subclass of NSValue hence it's a valid assignment */
     } else if (([propertyType isSubclassOfClass:[NSString self]] || [propertyType isSubclassOfClass:[NSURL self]]) && ([value isKindOfClass:[NSNumber self]] ||
@@ -165,12 +177,18 @@ RG_FILE_START
                                                                                                                        [value isKindOfClass:[RGXMLNode self]] ||
                                                                                                                        [value isKindOfClass:[NSArray self]])) {
         /* NSString, NSURL */
-        if ([value isKindOfClass:[RGXMLNode self]]) value = [value innerXML];
+        if ([value isKindOfClass:[RGXMLNode self]]) {
+            NSString* innerXML = [value innerXML];
+            value = innerXML ?: @"";
+        }
         if ([value isKindOfClass:[NSArray self]]) value = [value componentsJoinedByString:@","];
         if ([value isKindOfClass:[NSNumber self]]) value = [value stringValue];
         [self setValue:[[propertyType alloc] initWithString:value] forKey:key];
     } else if ([propertyType isSubclassOfClass:[NSDate self]]) { /* NSDate */
-        if ([value isKindOfClass:[RGXMLNode self]]) value = [value innerXML];
+        if ([value isKindOfClass:[RGXMLNode self]]) {
+            NSString* innerXML = [value innerXML];
+            value = innerXML ?: @"";
+        }
         NSString* dateFormat = [[self class] respondsToSelector:@selector(dateFormatForProperty:)] ? [[self class] dateFormatForProperty:key] : nil;
         NSDateFormatter* dateFormatter = rg_threadsafe_formatter();
         if (dateFormat) {

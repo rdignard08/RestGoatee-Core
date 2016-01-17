@@ -34,6 +34,72 @@
 
 CATEGORY_SPEC(NSObject, RGDeserialization)
 
+/**
+ <?xml version="1.0" encoding="UTF-8"?>
+ <root>
+ <uri><![CDATA[http://api.bart.gov/api/stn.aspx?cmd=stns]]></uri>
+ <stations>
+ <station>
+ <name>12th St. Oakland City Center</name>
+ <abbr>12TH</abbr>
+ <gtfs_latitude>37.803664</gtfs_latitude>
+ <gtfs_longitude>-122.271604</gtfs_longitude>
+ <address>1245 Broadway</address>
+ <city>Oakland</city>
+ <county>alameda</county>
+ <state>CA</state>
+ <zipcode>94612</zipcode>
+ </station>
+ <station>
+ <name>16th St. Mission</name>
+ <abbr>16TH</abbr>
+ <gtfs_latitude>37.765062</gtfs_latitude>
+ <gtfs_longitude>-122.419694</gtfs_longitude>
+ <address>2000 Mission Street</address>
+ <city>San Francisco</city>
+ <county>sanfrancisco</county>
+ <state>CA</state>
+ <zipcode>94110</zipcode>
+ </station>
+ <station>
+ <name>19th St. Oakland</name>
+ <abbr>19TH</abbr>
+ <gtfs_latitude>37.80787</gtfs_latitude>
+ <gtfs_longitude>-122.269029</gtfs_longitude>
+ <address>1900 Broadway</address>
+ <city>Oakland</city>
+ <county>alameda</county>
+ <state>CA</state>
+ <zipcode>94612</zipcode>
+ </station>
+ <station>
+ <name>24th St. Mission</name>
+ <abbr>24TH</abbr>
+ <gtfs_latitude>37.752254</gtfs_latitude>
+ <gtfs_longitude>-122.418466</gtfs_longitude>
+ <address>2800 Mission Street</address>
+ <city>San Francisco</city>
+ <county>sanfrancisco</county>
+ <state>CA</state>
+ <zipcode>94110</zipcode>
+ </station>
+ <station>
+ <name>Ashby</name>
+ <abbr>ASHB</abbr>
+ <gtfs_latitude>37.853024</gtfs_latitude>
+ <gtfs_longitude>-122.26978</gtfs_longitude>
+ <address>3100 Adeline Street</address>
+ <city>Berkeley</city>
+ <county>alameda</county>
+ <state>CA</state>
+ <zipcode>94703</zipcode>
+ </station>
+ </stations>
+ </root>
+ */
+
+#pragma mark - objectsFromArraySource:inContext: (XML)
+
 #pragma mark - objectsFromArraySource:inContext:
 - (void) testArraySourceNormal {
     NSArray* output = [RGTestObject2 objectsFromArraySource:@[

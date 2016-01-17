@@ -28,7 +28,7 @@ RG_FILE_START
 
 NSString* RG_SUFFIX_NONNULL const kRGDateFormatterKey = @"kRGDateFormatterKey";
 
-const size_t kRGMaxAutoSize = 2 << 10;
+const size_t kRGMaxAutoSize = 1 << 10;
 
 void __attribute__((cold)) rg_log(NSString* RG_SUFFIX_NULLABLE format, ...) {
     va_list vl;

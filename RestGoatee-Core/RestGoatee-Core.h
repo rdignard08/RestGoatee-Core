@@ -46,6 +46,11 @@ RG_FILE_START
 FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGDateFormatterKey;
 
 /**
+ This is the largest memory allocation that will be made on the stack for a single identifer (VLA).
+ */
+FOUNDATION_EXPORT const size_t kRGMaxAutoSize;
+
+/**
  `rg_swizzle` is a basic implementation of swizzling.  It does not clobber the super class if the method is not on the subclass.
  */
 void rg_swizzle(Class RG_SUFFIX_NULLABLE cls, SEL RG_SUFFIX_NULLABLE original, SEL RG_SUFFIX_NULLABLE replacement) __attribute__((cold));

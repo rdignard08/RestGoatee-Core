@@ -52,7 +52,7 @@ CLASS_SPEC(RGPropertyDeclaration)
 
 #pragma mark - properties
 - (void) testSimpleObject {
-    NSDictionary<NSString*, RGPropertyDeclaration*>* properties = [RGTestObject6 rg_propertyList];
+    NSDictionary* properties = [RGTestObject6 rg_propertyList];
     RGPropertyDeclaration* stringProperty = properties[RG_STRING_SEL(string1)];
     XCTAssert(stringProperty.type == [NSString class]);
     XCTAssert(stringProperty.isPrimitive == NO);

@@ -80,6 +80,8 @@ static RGXMLNode* childNode4;
     XCTAssert([childNode1.attributes[@"attribute"] isEqual:@"value"]);
     XCTAssert(childNode2.attributes != nil);
     XCTAssert(childNode2.attributes.count == 0);
+    childNode1.attributes = nil;
+    XCTAssert([childNode1.attributes isEqual:@{}]);
 }
 
 - (void) testName {

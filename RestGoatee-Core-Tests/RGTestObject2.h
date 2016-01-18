@@ -7,6 +7,6 @@
 @property (nonatomic, strong) NSDate* dateProperty;
 @property (nonatomic, weak) NSString* weakProperty;
 @property (nonatomic, assign) NSInteger intProperty;
-@property (nonatomic, strong) id readOnlyProperty;
+@property (nonatomic, strong, readonly) id readOnlyProperty;
 
 @end

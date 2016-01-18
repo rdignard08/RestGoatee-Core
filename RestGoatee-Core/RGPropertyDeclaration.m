@@ -81,9 +81,7 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
 - (RG_PREFIX_NONNULL instancetype) initWithProperty:(RG_PREFIX_NULLABLE objc_property_t)property {
     self = [super init];
     if (self && property) {
-        const char* utfName = property_getName(property);
-        self->_name = @(utfName);
-        self->_canonicalName = rg_canonical_form(utfName);
+        [self initializeName:property];
         uint32_t attributeCount = 0;
         objc_property_attribute_t* attributes = property_copyAttributeList(property, &attributeCount);
         for (uint32_t i = 0; i < attributeCount; i++) {
@@ -101,35 +99,8 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
                     self->_storageSemantics = kRGPropertyWeak;
                     break;
                 case 'T':
-                case 't': { /* I have no idea what 'old-style' typing looks like; gonna assume it's the same / no one uses it */
-                    if (strcmp(@encode(Class), attribute.value) == 0) {
-                        self->_type = objc_getMetaClass("NSObject");
-                        self->_isPrimitive = NO;
-                        break;
-                    } else if (strcmp(@encode(id), attribute.value) == 0) {
-                        self->_type = objc_getClass("NSObject");
-                        self->_isPrimitive = NO;
-                        break;
-                    }
-                    
-                    const size_t typeLength = strlen(attribute.value);
-                    size_t outputLength = 0;
-                    char* buffer = malloc(typeLength + 1);
-                    BOOL foundFirst = NO;
-                    for (size_t j = 0; j != typeLength; j++) {
-                        char c = attribute.value[j];
-                        if (foundFirst) {
-                            if (c == '"') break; else buffer[outputLength++] = c;
-                        } else if (c == '"') {
-                            foundFirst = YES;
-                        }
-                    } /* there should be 2 '"' on each end, the class is in the middle */
-                    buffer[outputLength] = '\0';
-                    Class propertyType = objc_getClass(buffer);
-                    free(buffer);
-                    self->_type = propertyType ?: [NSNumber self];
-                    self->_isPrimitive = !propertyType;
-                }
+                case 't': /* I have no idea what 'old-style' typing looks like; gonna assume it's the same / no one uses it */
+                    [self initializeType:attribute.value];
                     break;
                 case 'R':
                     self->_readOnly = YES;
@@ -138,6 +109,42 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
         free(attributes);
     }
     return self;
+}
+
+- (void) initializeName:(RG_PREFIX_NULLABLE objc_property_t)property {
+    const char* utfName = property_getName(property);
+    self->_name = @(utfName);
+    self->_canonicalName = rg_canonical_form(utfName);
+}
+
+- (void) initializeType:(const char*)value {
+    BOOL isClass = strcmp(@encode(Class), value) == 0;
+    if (isClass || strcmp(@encode(id), value) == 0) {
+        self->_type = isClass ? objc_getMetaClass("NSObject") : objc_getClass("NSObject");
+        self->_isPrimitive = NO;
+        return;
+    }
+    const size_t typeLength = strlen(value);
+    size_t outputLength = 0;
+    char* buffer = malloc(typeLength);
+    BOOL foundFirst = NO;
+    for (size_t j = 0; j != typeLength; j++) {
+        char c = value[j];
+        if (foundFirst) {
+            if (c == '"') {
+                break;
+            } else {
+                buffer[outputLength++] = c;
+            }
+        } else if (c == '"') {
+            foundFirst = YES;
+        }
+    } /* there should be 2 '"' on each end, the class is in the middle */
+    buffer[outputLength] = '\0';
+    Class propertyType = objc_getClass(buffer);
+    free(buffer);
+    self->_type = propertyType ?: [NSNumber self];
+    self->_isPrimitive = !propertyType;
 }
 
 @end

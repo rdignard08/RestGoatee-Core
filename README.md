@@ -34,6 +34,95 @@ Using cocoapods add `pod 'RestGoatee-Core'` to your Podfile and run `pod install
 
 Example
 =======
+##### Let's explore how to work with the given domain model:
+```objc
+@interface BaseObject : NSObject
+@property (nonatomic, strong) NSString* stringValue;
+@property (nonatomic, strong) NSNumber* numberValue;
+@property (nonatomic, assign) double doubleValue;
+@end
+
+@interface DerivedObject : BaseObject
+@property (nonatomic, strong) NSDate* dateValue;
+@property (nonatomic, strong) id rawValue;
+@end
+```
+
+
+##### Getting started, let's make an instance of DerivedObject with an NSDictionary:
+```objc
+DerivedObject* derived = [DerivedObject objectFromDataSource:@{
+                                                             @"stringValue" : @"aString",
+                                                             @"numberValue" : @3,
+                                                             @"doubleValue" : @3.14,
+                                                             @"dateValue" : @"2016-01-17T16:13:00-0800",
+                                                             @"rawValue" : [NSNull null]
+                                                             } inContext:nil];
+
+/* // Tests that everything is working...
+assert([derived.stringValue isEqual:@"aString"]);
+assert([derived.numberValue isEqual:@3]);
+assert(derived.doubleValue == 3.14);
+assert([derived.dateValue timeIntervalSince1970] == 1453075980.0);
+assert(derived.rawValue == [NSNull null]);
+*/
+```
+
+
+##### What if not all properties are specified?
+```objc
+DerivedObject* derived = [DerivedObject objectFromDataSource:@{ @"stringValue" : @"aString" } inContext:nil];
+/* // Tests...
+assert([derived.stringValue isEqual:@"aString"]);
+assert(derived.numberValue == nil);
+assert(derived.doubleValue == 0.0);
+*/
+```
+If a value isn't provided it remains the default value.  Likewise if more keys are provided that aren't used they are ignored.
+
+
+##### What if my API returns NSNull or the value?
+```objc
+DerivedObject* derived = [DerivedObject objectFromDataSource:@{ @"stringValue" : [NSNull null] } inContext:nil];
+/* // Tests...
+assert(derived.stringValue == nil);
+*/
+```
+The rules are pretty simple, and guarantee you will never break the type system (an `NSURL*` property will always have an `NSURL` or `nil`).
+- If the value provided is a subclass of the property type it gets set to that value.
+- If the value can be converted to the type of the property (`NSNumber` => `NSString` through `.stringValue`) it gets set to the converted value.
+- Otherwise the property remains unset and the value is discarded.
+- As a consequence, properties of type `id` or `NSObject*` will receive any value.
+
+
+##### What if my API keys are snake case?
+```objc
+DerivedObject* derived = [DerivedObject objectFromDataSource:@{ @"string_value" : @"aString" } inContext:nil];
+/* // Tests...
+assert([derived.stringValue isEqual:@"aString"]);
+*/
+```
+Not CamelCase? No problem. The implicit mapping will handle all cases where the lowercase ASCII alphabet and numbers of the keys match.
+
+
+##### What if my API keys are _really_ different?
+```objc
+@implementation DerivedObject
+
++ (NSDictionary*) overrideKeysForMapping {
+    return @{ @"super_secret_str" : @"stringValue" };
+}
+
+@end
+
+DerivedObject* derived = [DerivedObject objectFromDataSource:@{ @"super_secret_str" : @"aString" } inContext:nil];
+/* // Tests...
+assert([derived.stringValue isEqual:@"aString"]);
+*/
+```
+Providing `+overrideKeysForMapping` gives you the flexibility to map a key to the name of the property.  Any key not specified goes through the default process so you only need to specify the exceptions.
+
+
 For an example of the use case see https://github.com/rdignard08/RestGoatee
 
 License

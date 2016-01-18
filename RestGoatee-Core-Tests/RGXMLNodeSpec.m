@@ -59,12 +59,13 @@ static RGXMLNode* childNode4;
 }
 
 - (void) testInit {
+    BOOL raisedException = NO;
     @try {
         [RGXMLNode new];
-        XCTAssert(NO, @"init did not raise");
     } @catch (NSException* exception) {
-        XCTAssert([exception.name isEqual:NSGenericException]);
+        raisedException = YES;
     }
+    XCTAssert(raisedException);
 }
 
 - (void) testParentNode {

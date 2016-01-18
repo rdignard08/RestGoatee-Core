@@ -28,12 +28,13 @@
 CLASS_SPEC(RGPropertyDeclaration)
 
 - (void) testInit {
+    BOOL raisedException = NO;
     @try {
         [RGPropertyDeclaration new];
-        XCTAssert(NO, @"init did not raise");
     } @catch (NSException* e) {
-        XCTAssert([e.name isEqual:NSGenericException]);
+        raisedException = YES;
     }
+    XCTAssert(raisedException);
 }
 
 #pragma mark - rg_canonical

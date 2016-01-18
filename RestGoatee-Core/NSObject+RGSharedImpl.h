@@ -107,10 +107,10 @@ BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isKeyedC
 }
 
 /**
- Returns `YES` if the given class conforms to `RGDataSource`.  Necessary due to some bug.
+ Returns `YES` if the given class conforms to `RGDataSource`.  Necessary due to some bug (the 2nd clause).
  */
 BOOL inline __attribute__((pure, always_inline, warn_unused_result)) rg_isDataSourceClass(Class RG_SUFFIX_NULLABLE cls) {
-    return [cls conformsToProtocol:@protocol(RGDataSource)] || [cls isSubclassOfClass:[NSDictionary self]]; /* 2nd clause due to a bug */
+    return [cls conformsToProtocol:@protocol(RGDataSource)] || [cls isSubclassOfClass:[NSDictionary self]];
 }
 
 /**

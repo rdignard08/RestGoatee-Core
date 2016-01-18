@@ -127,7 +127,7 @@ RG_FILE_START
 }
 
 - (NSUInteger) countByEnumeratingWithState:(RG_PREFIX_NONNULL NSFastEnumerationState*)state objects:(__unsafe_unretained id[])buffer count:(NSUInteger)len {
-    NSUInteger ret = [self.keys countByEnumeratingWithState:state objects:buffer count:len];
+    NSUInteger ret = [self.allKeys countByEnumeratingWithState:state objects:buffer count:len];
     if (!ret) {
         self.keys = nil;
     }

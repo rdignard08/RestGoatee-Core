@@ -42,6 +42,8 @@ CLASS_SPEC(RGPropertyDeclaration)
 - (void) testSimpleObject {
     NSDictionary* properties = [RGTestObject2 rg_propertyList];
     RGPropertyDeclaration* stringProperty = properties[RG_STRING_SEL(dateProperty)];
+    XCTAssert([stringProperty.name isEqual:RG_STRING_SEL(dateProperty)]);
+    XCTAssert([stringProperty.canonicalName isEqual:@"dateproperty"]);
     XCTAssert(stringProperty.type == [NSDate class]);
     XCTAssert(stringProperty.isPrimitive == NO);
     XCTAssert(stringProperty.readOnly == NO);
@@ -56,6 +58,8 @@ CLASS_SPEC(RGPropertyDeclaration)
     XCTAssert(somethingProperty.isPrimitive == NO);
     XCTAssert(somethingProperty.readOnly == NO);
     XCTAssert(somethingProperty.storageSemantics == kRGPropertyWeak);
+    RGPropertyDeclaration* readOnlyProperty = properties[RG_STRING_SEL(readOnlyProperty)];
+    XCTAssert(readOnlyProperty.readOnly == YES);
 }
 
 #pragma mark - rg_canonical

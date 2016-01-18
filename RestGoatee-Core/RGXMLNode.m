@@ -103,8 +103,6 @@ RG_FILE_START
                 NSMutableDictionary RG_GENERIC(NSString*, NSString*) * value = [(RGXMLNode*)children attributes];
                 [value addEntriesFromDictionary:[(RGXMLNode*)children dictionaryRepresentation]];
                 ret[childNode.name] = value;
-            } else {
-                ret[childNode.name] = [NSNull null];
             }
         }
     }
@@ -143,7 +141,7 @@ RG_FILE_START
 }
 
 - (RG_PREFIX_NULLABLE id) valueForKey:(RG_PREFIX_NONNULL NSString*)key {
-    return self.attributes[key] ?: [self childrenNamed:key] ?: self.innerXML;
+    return [key isEqual:kRGInnerXMLKey] ? self.innerXML : (self.attributes[key] ?: [self childrenNamed:key]);
 }
 
 @end

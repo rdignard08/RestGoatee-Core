@@ -38,6 +38,36 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
 }
 
 @implementation RGPropertyDeclaration
+@synthesize name = _name;
+@synthesize canonicalName = _canonicalName;
+@synthesize type = _type;
+@synthesize storageSemantics = _storageSemantics;
+@synthesize isPrimitive = _isPrimitive;
+@synthesize readOnly = _readOnly;
+
+- (NSString*) name {
+    return _name;
+}
+
+- (NSString*) canonicalName {
+    return _canonicalName;
+}
+
+- (Class) type {
+    return _type;
+}
+
+- (RGStorageSemantics) storageSemantics {
+    return _storageSemantics;
+}
+
+- (BOOL) isPrimitive {
+    return _isPrimitive;
+}
+
+- (BOOL) readOnly {
+    return _readOnly;
+}
 
 - (RG_PREFIX_NONNULL instancetype) init {
     [NSException raise:NSGenericException format:@"-init is not a valid initializer of %@", [self class]];

@@ -59,34 +59,28 @@ DerivedObject* derived = [DerivedObject objectFromDataSource:@{
                                                              @"rawValue" : [NSNull null]
                                                              } inContext:nil];
 
-/* // Tests that everything is working...
 assert([derived.stringValue isEqual:@"aString"]);
 assert([derived.numberValue isEqual:@3]);
 assert(derived.doubleValue == 3.14);
 assert([derived.dateValue timeIntervalSince1970] == 1453075980.0);
 assert(derived.rawValue == [NSNull null]);
-*/
 ```
-
 
 ##### What if not all properties are specified?
 ```objc
 DerivedObject* derived = [DerivedObject objectFromDataSource:@{ @"stringValue" : @"aString" } inContext:nil];
-/* // Tests...
+
 assert([derived.stringValue isEqual:@"aString"]);
 assert(derived.numberValue == nil);
 assert(derived.doubleValue == 0.0);
-*/
 ```
 If a value isn't provided it remains the default value.  Likewise if more keys are provided that aren't used they are ignored.
-
 
 ##### What if my API returns NSNull or the value?
 ```objc
 DerivedObject* derived = [DerivedObject objectFromDataSource:@{ @"stringValue" : [NSNull null] } inContext:nil];
-/* // Tests...
+
 assert(derived.stringValue == nil);
-*/
 ```
 The rules are pretty simple, and guarantee you will never break the type system (an `NSURL*` property will always have an `NSURL` or `nil`).
 - If the value provided is a subclass of the property type it gets set to that value.
@@ -94,16 +88,13 @@ The rules are pretty simple, and guarantee you will never break the type system 
 - Otherwise the property remains unset and the value is discarded.
 - As a consequence, properties of type `id` or `NSObject*` will receive any value.
 
-
 ##### What if my API keys are snake case?
 ```objc
 DerivedObject* derived = [DerivedObject objectFromDataSource:@{ @"string_value" : @"aString" } inContext:nil];
-/* // Tests...
+
 assert([derived.stringValue isEqual:@"aString"]);
-*/
 ```
 Not CamelCase? No problem. The implicit mapping will handle all cases where the lowercase ASCII alphabet and numbers of the keys match.
-
 
 ##### What if my API keys are _really_ different?
 ```objc
@@ -116,12 +107,24 @@ Not CamelCase? No problem. The implicit mapping will handle all cases where the 
 @end
 
 DerivedObject* derived = [DerivedObject objectFromDataSource:@{ @"super_secret_str" : @"aString" } inContext:nil];
-/* // Tests...
+
 assert([derived.stringValue isEqual:@"aString"]);
-*/
 ```
 Providing `+overrideKeysForMapping` gives you the flexibility to map a key to the name of the property.  Any key not specified goes through the default process so you only need to specify the exceptions.
 
+##### How does serialization work?
+```objc
+DerivedObject* derived = [DerviedObject new];
+derived.stringValue = @"aString";
+derived.numberValue = @3;
+derived.doubleValue = 3.0;
+NSDictionary* dictionaryRepresentation = [derived dictionaryRepresentation];
+
+assert([dictionaryRepresentation[@"stringValue"] isEqual:@"aString"]);
+assert([dictionaryRepresentation[@"numberValue"] isEqual:@"3"]);
+assert([dictionaryRepresentation[@"doubleValue"] isEqual:@"3"]);
+```
+`-dictionaryRepresentation` returns a dictionary where the keys are the names of the properties and the values are the result of serializing that value.  A property of type `NSString*`, `NSURL*`, `NSNumber*`, or a primitive will be a value of `NSString*`.  `NSNull*` values stay the same.  `NSArray*`, `NSDictionary*`, and all other `NSObject*` subclasses are output by applying the same rules to their sub objects.
 
 For an example of the use case see https://github.com/rdignard08/RestGoatee
 

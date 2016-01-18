@@ -79,6 +79,7 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
                              @"<county>sanfrancisco</county>"
                              @"<state>CA</state>"
                              @"<zipcode>94110</zipcode>"
+                             @"<dummy value=\"false\"/>"
                            @"</station>"
                          @"</stations>"
                        @"</root>" dataUsingEncoding:NSUTF8StringEncoding];
@@ -95,6 +96,7 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     XCTAssert(parsedStations.count == 2);
     XCTAssert(innerRoot == rootNode.childNodes.firstObject);
     XCTAssert([[(RGXMLNode*)[innerRoot valueForKey:@"uri"] innerXML] isEqual:@"http://api.bart.gov/api/stn.aspx?cmd=stns"]);
+    XCTAssert([[innerRoot valueForKey:@"uri"] valueForKey:kRGInnerXMLKey]);
 }
 
 

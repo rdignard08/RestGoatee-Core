@@ -32,11 +32,6 @@
     _Pragma("clang diagnostic pop")
 #endif
 
-/* Technical compliance with C11 whill still running on C99 */
-#ifndef __STDC_NO_VLA__
-    #define __STDC_NO_VLA__ 0
-#endif
-
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgnu"
 

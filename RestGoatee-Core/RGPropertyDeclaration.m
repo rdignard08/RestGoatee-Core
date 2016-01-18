@@ -34,7 +34,7 @@ static NSString* RG_SUFFIX_NONNULL const rg_static_based_canonical(const char* R
 
 NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNULL const utfName) {
     const size_t length = strlen(utfName);
-    return length >= kRGMaxAutoSize || __STDC_NO_VLA__ ? rg_malloc_based_canonical(utfName, length) : rg_static_based_canonical(utfName, length);
+    return length >= kRGMaxAutoSize ? rg_malloc_based_canonical(utfName, length) : rg_static_based_canonical(utfName, length);
 }
 
 @implementation RGPropertyDeclaration

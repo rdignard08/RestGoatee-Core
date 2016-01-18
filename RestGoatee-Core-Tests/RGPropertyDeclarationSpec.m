@@ -26,18 +26,6 @@
 #import "RGTestObject2.h"
 #import "NSObject+RGSharedImpl.h"
 
-@interface RGTestObject6 : NSObject
-
-@property (nonatomic, strong) NSString* string1;
-@property (nonatomic, assign, readonly) NSUInteger number;
-@property (nonatomic, unsafe_unretained) id something;
-
-@end
-
-@implementation RGTestObject6
-
-@end
-
 CLASS_SPEC(RGPropertyDeclaration)
 
 - (void) testInit {
@@ -52,22 +40,22 @@ CLASS_SPEC(RGPropertyDeclaration)
 
 #pragma mark - properties
 - (void) testSimpleObject {
-    NSDictionary* properties = [RGTestObject6 rg_propertyList];
-    RGPropertyDeclaration* stringProperty = properties[RG_STRING_SEL(string1)];
-    XCTAssert(stringProperty.type == [NSString class]);
+    NSDictionary* properties = [RGTestObject2 rg_propertyList];
+    RGPropertyDeclaration* stringProperty = properties[RG_STRING_SEL(dateProperty)];
+    XCTAssert(stringProperty.type == [NSDate class]);
     XCTAssert(stringProperty.isPrimitive == NO);
     XCTAssert(stringProperty.readOnly == NO);
     XCTAssert(stringProperty.storageSemantics == kRGPropertyStrong);
-    RGPropertyDeclaration* numberProperty = properties[RG_STRING_SEL(number)];
+    RGPropertyDeclaration* numberProperty = properties[RG_STRING_SEL(intProperty)];
     XCTAssert(numberProperty.type == [NSNumber class]);
     XCTAssert(numberProperty.isPrimitive == YES);
-    XCTAssert(numberProperty.readOnly == YES);
+    XCTAssert(numberProperty.readOnly == NO);
     XCTAssert(numberProperty.storageSemantics == kRGPropertyAssign);
-    RGPropertyDeclaration* somethingProperty = properties[RG_STRING_SEL(something)];
-    XCTAssert(somethingProperty.type == [NSObject class]);
+    RGPropertyDeclaration* somethingProperty = properties[RG_STRING_SEL(weakProperty)];
+    XCTAssert(somethingProperty.type == [NSString class]);
     XCTAssert(somethingProperty.isPrimitive == NO);
     XCTAssert(somethingProperty.readOnly == NO);
-    XCTAssert(somethingProperty.storageSemantics == kRGPropertyAssign);
+    XCTAssert(somethingProperty.storageSemantics == kRGPropertyWeak);
 }
 
 #pragma mark - rg_canonical

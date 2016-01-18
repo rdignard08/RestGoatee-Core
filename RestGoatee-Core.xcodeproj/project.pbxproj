@@ -569,6 +569,8 @@
 				OTHER_CFLAGS = "-O0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -582,6 +584,8 @@
 				OTHER_CFLAGS = "-O0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};

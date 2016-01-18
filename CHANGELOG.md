@@ -1,5 +1,8 @@
 # RestGoatee CHANGELOG
 
+## 2.0.5
+- Add deployment targets for OS X, TvOS, and WatchOS
+
 ## 2.0.4
 - Basic swift package manager support.
 

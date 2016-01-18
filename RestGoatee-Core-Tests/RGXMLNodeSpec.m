@@ -44,22 +44,17 @@ static RGXMLNode* childNode4;
 
 - (void) setUp {
     [super setUp];
-    parentNode = [RGXMLNode new];
-    parentNode.name = @"xml";
-    childNode1 = [RGXMLNode new];
-    childNode1.name = @"child1";
+    parentNode = [[RGXMLNode alloc] initWithName:@"xml"];
+    childNode1 = [[RGXMLNode alloc] initWithName:@"child1"];
     childNode1.attributes[@"attribute"] = @"value";
     childNode1.innerXML = @"";
     [parentNode addChildNode:childNode1];
-    childNode2 = [RGXMLNode new];
-    childNode2.name = @"child2";
+    childNode2 = [[RGXMLNode alloc] initWithName:@"child2"];
     childNode2.innerXML = @"some data";
     [parentNode addChildNode:childNode2];
-    childNode3 = [RGXMLNode new];
-    childNode3.name = @"child1"; // same as childNode1
+    childNode3 = [[RGXMLNode alloc] initWithName:@"child1"]; // same as childNode1
     [parentNode addChildNode:childNode3];
-    childNode4 = [RGXMLNode new];
-    childNode4.name = @"child4";
+    childNode4 = [[RGXMLNode alloc] initWithName:@"child4"];
     [childNode3 addChildNode:childNode4];
 }
 
@@ -116,8 +111,7 @@ static RGXMLNode* childNode4;
 }
 
 - (void) testAddChildNode {
-    RGXMLNode* childNode5 = [RGXMLNode new];
-    childNode5.name = @"child5";
+    RGXMLNode* childNode5 = [[RGXMLNode alloc] initWithName:@"child5"];
     [parentNode addChildNode:childNode5];
     XCTAssert([parentNode childrenNamed:@"child5"] == childNode5);
     XCTAssert(childNode5.parentNode == parentNode);

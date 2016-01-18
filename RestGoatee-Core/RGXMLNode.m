@@ -38,6 +38,19 @@ RG_FILE_START
 @synthesize attributes = _attributes;
 @synthesize childNodes = _childNodes;
 
+- (RG_PREFIX_NULLABLE instancetype) init {
+    [NSException raise:NSGenericException format:@"-init is not a valid initializer of %@", [self class]];
+    return [super init];
+}
+
+- (RG_PREFIX_NONNULL instancetype) initWithName:(RG_PREFIX_NONNULL NSString*)name {
+    self = [super init];
+    if (self) {
+        self->_name = name;
+    }
+    return self;
+}
+
 #pragma mark - Properties
 - (RG_PREFIX_NONNULL NSMutableArray RG_GENERIC(NSString*) *) keys {
     if (!_keys) {

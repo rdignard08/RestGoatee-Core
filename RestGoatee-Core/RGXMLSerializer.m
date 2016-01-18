@@ -26,6 +26,8 @@
 
 RG_FILE_START
 
+NSString* RG_SUFFIX_NONNULL const kRGXMLDocumentNodeKey = @"kRGDocument";
+
 @interface RGXMLSerializer () <NSXMLParserDelegate>
 
 @property RG_NULLABLE_PROPERTY(nonatomic, weak) RGXMLNode* currentNode;
@@ -44,7 +46,7 @@ RG_FILE_START
 
 - (RG_PREFIX_NONNULL RGXMLNode*) rootNode {
     if (!_rootNode) {
-        _rootNode = [RGXMLNode new];
+        _rootNode = [[RGXMLNode alloc] initWithName:kRGXMLDocumentNodeKey];
         _currentNode = _rootNode;
 #ifdef DEBUG
         BOOL parsed =
@@ -76,8 +78,7 @@ RG_FILE_START
 
 #pragma mark - NSXMLParserDelegate
 - (void) parser:(__unused id)p didStartElement:(RG_PREFIX_NONNULL NSString*)element namespaceURI:(RG_PREFIX_NULLABLE __unused id)n qualifiedName:(RG_PREFIX_NULLABLE __unused id)q attributes:(RG_PREFIX_NONNULL NSDictionary*)attributes {
-    RGXMLNode* node = [RGXMLNode new];
-    node.name = element;
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:element];
     [node.attributes addEntriesFromDictionary:attributes];
     __strong RGXMLNode* strongNode = self.currentNode;
     [strongNode addChildNode:node];

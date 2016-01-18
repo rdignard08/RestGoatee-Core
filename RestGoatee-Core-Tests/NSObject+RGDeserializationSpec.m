@@ -25,6 +25,24 @@
 #import "RGTestObject2.h"
 #import "RGPropertyDeclaration.h"
 
+@interface RGBartStation : NSObject
+
+@property (nonatomic, strong) NSString* name;
+@property (nonatomic, strong) NSString* abbr;
+@property (nonatomic, strong) NSString* gtfsLatitude;
+@property (nonatomic, strong) NSString* gtfsLongitude;
+@property (nonatomic, strong) NSString* address;
+@property (nonatomic, strong) NSString* city;
+@property (nonatomic, strong) NSString* county;
+@property (nonatomic, strong) NSString* state;
+@property (nonatomic, strong) NSString* zipcode;
+
+@end
+
+@implementation RGBartStation
+
+@end
+
 @interface NSObject (_RGForwardDecl)
 
 + (NSDictionary*) rg_propertyList;
@@ -34,71 +52,51 @@
 
 CATEGORY_SPEC(NSObject, RGDeserialization)
 
-/**
- <?xml version="1.0" encoding="UTF-8"?>
- <root>
- <uri><![CDATA[http://api.bart.gov/api/stn.aspx?cmd=stns]]></uri>
- <stations>
- <station>
- <name>12th St. Oakland City Center</name>
- <abbr>12TH</abbr>
- <gtfs_latitude>37.803664</gtfs_latitude>
- <gtfs_longitude>-122.271604</gtfs_longitude>
- <address>1245 Broadway</address>
- <city>Oakland</city>
- <county>alameda</county>
- <state>CA</state>
- <zipcode>94612</zipcode>
- </station>
- <station>
- <name>16th St. Mission</name>
- <abbr>16TH</abbr>
- <gtfs_latitude>37.765062</gtfs_latitude>
- <gtfs_longitude>-122.419694</gtfs_longitude>
- <address>2000 Mission Street</address>
- <city>San Francisco</city>
- <county>sanfrancisco</county>
- <state>CA</state>
- <zipcode>94110</zipcode>
- </station>
- <station>
- <name>19th St. Oakland</name>
- <abbr>19TH</abbr>
- <gtfs_latitude>37.80787</gtfs_latitude>
- <gtfs_longitude>-122.269029</gtfs_longitude>
- <address>1900 Broadway</address>
- <city>Oakland</city>
- <county>alameda</county>
- <state>CA</state>
- <zipcode>94612</zipcode>
- </station>
- <station>
- <name>24th St. Mission</name>
- <abbr>24TH</abbr>
- <gtfs_latitude>37.752254</gtfs_latitude>
- <gtfs_longitude>-122.418466</gtfs_longitude>
- <address>2800 Mission Street</address>
- <city>San Francisco</city>
- <county>sanfrancisco</county>
- <state>CA</state>
- <zipcode>94110</zipcode>
- </station>
- <station>
- <name>Ashby</name>
- <abbr>ASHB</abbr>
- <gtfs_latitude>37.853024</gtfs_latitude>
- <gtfs_longitude>-122.26978</gtfs_longitude>
- <address>3100 Adeline Street</address>
- <city>Berkeley</city>
- <county>alameda</county>
- <state>CA</state>
- <zipcode>94703</zipcode>
- </station>
- </stations>
- </root>
- */
-
 #pragma mark - objectsFromArraySource:inContext: (XML)
+- (void) testXMLArraySource {
+    NSData* xmlData = [@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                       @"<root>"
+                         @"<uri><![CDATA[http://api.bart.gov/api/stn.aspx?cmd=stns]]></uri>"
+                         @"<stations>"
+                           @"<station>"
+                             @"<name>12th St. Oakland City Center</name>"
+                             @"<abbr>12TH</abbr>"
+                             @"<gtfs_latitude>37.803664</gtfs_latitude>"
+                             @"<gtfs_longitude>-122.271604</gtfs_longitude>"
+                             @"<address>1245 Broadway</address>"
+                             @"<city>Oakland</city>"
+                             @"<county>alameda</county>"
+                             @"<state>CA</state>"
+                             @"<zipcode>94612</zipcode>"
+                           @"</station>"
+                           @"<station>"
+                             @"<name>16th St. Mission</name>"
+                             @"<abbr>16TH</abbr>"
+                             @"<gtfs_latitude>37.765062</gtfs_latitude>"
+                             @"<gtfs_longitude>-122.419694</gtfs_longitude>"
+                             @"<address>2000 Mission Street</address>"
+                             @"<city>San Francisco</city>"
+                             @"<county>sanfrancisco</county>"
+                             @"<state>CA</state>"
+                             @"<zipcode>94110</zipcode>"
+                           @"</station>"
+                         @"</stations>"
+                       @"</root>" dataUsingEncoding:NSUTF8StringEncoding];
+    NSXMLParser* parser = [[NSXMLParser alloc] initWithData:xmlData];
+    RGXMLSerializer* serializer = [[RGXMLSerializer alloc] initWithParser:parser];
+    RGXMLNode* rootNode = serializer.rootNode;
+    RGXMLNode* innerRoot = [rootNode valueForKey:@"root"];
+    NSArray* stations = [rootNode valueForKeyPath:@"root.stations.station"];
+    NSArray* parsedStations = [RGBartStation objectsFromArraySource:stations inContext:nil];
+    RGBartStation* firstStation = parsedStations.firstObject;
+    XCTAssert([firstStation.name isEqual:@"12th St. Oakland City Center"]);
+    XCTAssert([firstStation.abbr isEqual:@"12TH"]);
+    XCTAssert([firstStation.address isEqual:@"1245 Broadway"]);
+    XCTAssert(parsedStations.count == 2);
+    XCTAssert(innerRoot == rootNode.childNodes.firstObject);
+    XCTAssert([[(RGXMLNode*)[innerRoot valueForKey:@"uri"] innerXML] isEqual:@"http://api.bart.gov/api/stn.aspx?cmd=stns"]);
+}
+
 
 #pragma mark - objectsFromArraySource:inContext:
 - (void) testArraySourceNormal {
@@ -487,7 +485,7 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
 #pragma mark - rg_initProperty:withValue:inContext: with RGXMLNode
 - (void) testNodeToString {
     RGTestObject2* object = [RGTestObject2 new];
-    RGXMLNode* node = [RGXMLNode new];
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
     node.innerXML = @"a string";
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(stringProperty)] withValue:node inContext:nil];
     XCTAssert([object.stringProperty isEqual:@"a string"]);
@@ -495,7 +493,7 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
 
 - (void) testNodeToURL {
     RGTestObject2* object = [RGTestObject2 new];
-    RGXMLNode* node = [RGXMLNode new];
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
     node.innerXML = @"http://google.com";
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(urlProperty)] withValue:node inContext:nil];
     XCTAssert([object.urlProperty isEqual:[NSURL URLWithString:@"http://google.com"]]);
@@ -503,7 +501,7 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
 
 - (void) testNodeToNumber {
     RGTestObject2* object = [RGTestObject2 new];
-    RGXMLNode* node = [RGXMLNode new];
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
     node.innerXML = @"2";
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(numberProperty)] withValue:node inContext:nil];
     XCTAssert([object.numberProperty isEqual:@2]);
@@ -511,7 +509,7 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
 
 - (void) testNodeToDecimal {
     RGTestObject2* object = [RGTestObject2 new];
-    RGXMLNode* node = [RGXMLNode new];
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
     node.innerXML = @"2.00";
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(decimalProperty)] withValue:node inContext:nil];
     XCTAssert([object.decimalProperty isEqual:[NSDecimalNumber decimalNumberWithString:@"2.00"]]);
@@ -519,7 +517,7 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
 
 - (void) testNodeToValue {
     RGTestObject2* object = [RGTestObject2 new];
-    RGXMLNode* node = [RGXMLNode new];
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
     node.innerXML = @"2";
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(valueProperty)] withValue:node inContext:nil];
     XCTAssert([object.valueProperty isEqual:@2]);
@@ -527,21 +525,21 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
 
 - (void) testNodeToId {
     RGTestObject2* object = [RGTestObject2 new];
-    RGXMLNode* node = [RGXMLNode new];
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(idProperty)] withValue:node inContext:nil];
     XCTAssert(object.idProperty == node);
 }
 
 - (void) testNodeToObject {
     RGTestObject2* object = [RGTestObject2 new];
-    RGXMLNode* node = [RGXMLNode new];
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(objectProperty)] withValue:node inContext:nil];
     XCTAssert(object.objectProperty == node);
 }
 
 - (void) testNodeToClass {
     RGTestObject2* object = [RGTestObject2 new];
-    RGXMLNode* node = [RGXMLNode new];
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
     node.innerXML = @"NSObject";
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(classProperty)] withValue:node inContext:nil];
     XCTAssert(object.classProperty == [NSObject class]);
@@ -549,19 +547,17 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
 
 - (void) testNodeToArray {
     RGTestObject2* object = [RGTestObject2 new];
-    RGXMLNode* node = [RGXMLNode new];
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(arrayProperty)] withValue:node inContext:nil];
     XCTAssert([object.arrayProperty isEqual:(@[])]);
 }
 
 - (void) testNodeToDictionary {
     RGTestObject2* object = [RGTestObject2 new];
-    RGXMLNode* node = [RGXMLNode new];
-    node.name = @"name1";
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@"name1"];
     node.attributes[@"name2"] = @"value2";
     node.innerXML = @"value1";
-    RGXMLNode* childNode = [RGXMLNode new];
-    childNode.name = @"child";
+    RGXMLNode* childNode = [[RGXMLNode alloc] initWithName:@"child"];
     [node addChildNode:childNode];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(dictionaryProperty)] withValue:node inContext:nil];
     XCTAssert([object.dictionaryProperty isEqual:(@{ kRGInnerXMLKey : @"value1", @"child" : @{}, @"name2" : @"value2" })]);

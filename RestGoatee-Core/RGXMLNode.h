@@ -68,6 +68,17 @@ FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGInnerXMLKey;
 @property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong, readonly) NSArray RG_GENERIC(RGXMLNode*) * childNodes;
 
 /**
+ Returns a node with the given name.  You must provide a nonnull name.  It is a programmer error to invoke `-init`.
+ @param name The name or identifier of this node.  Must not be nil.
+ */
+- (RG_PREFIX_NONNULL instancetype) initWithName:(RG_PREFIX_NONNULL NSString*)name NS_DESIGNATED_INITIALIZER;
+
+/**
+ @warning Do not invoke this method.  You must use `-initWithName:`.
+ */
+- (RG_PREFIX_NULLABLE instancetype) init NS_DESIGNATED_INITIALIZER;
+
+/**
  Returns the receiver and all of its children as a dictionary representation.  The `innerXML` of the node is returned on the key `kRGInnerXMLKey`.
  */
 - (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation;

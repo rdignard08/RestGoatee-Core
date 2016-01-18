@@ -25,6 +25,11 @@
 
 RG_FILE_START
 
+/**
+ This constant is used to identify the implicit document node.
+ */
+FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGXMLDocumentNodeKey;
+
 @class RGXMLNode;
 
 /**

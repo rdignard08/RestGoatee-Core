@@ -58,6 +58,15 @@ static RGXMLNode* childNode4;
     [childNode3 addChildNode:childNode4];
 }
 
+- (void) testInit {
+    @try {
+        [RGXMLNode new];
+        XCTAssert(NO, @"init did not raise");
+    } @catch (NSException* exception) {
+        XCTAssert([exception.name isEqual:NSGenericException]);
+    }
+}
+
 - (void) testParentNode {
     XCTAssert(parentNode.parentNode == nil);
     XCTAssert(childNode1.parentNode == parentNode);

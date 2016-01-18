@@ -64,19 +64,11 @@ CLASS_SPEC(RestGoatee_Core)
 
 #pragma mark - rg_log
 - (void) testRGLogNormal {
-    @try {
-        RGLog(@"hello");
-    } @catch (NSException* e) {
-        XCTAssert(NO, @"exception raised when it shouldn't be");
-    }
+    RGLog(@"hello"); // raised exception will fail rest of tests
 }
 
 - (void) testRGLogNil {
-    @try {
-        RGLog(nil);
-    } @catch (NSException* e) {
-        XCTAssert(NO, @"exception raised when it shouldn't be");
-    }
+    RGLog(nil); // raised exception will fail rest of tests
 }
 
 #pragma mark - rg_swizzle

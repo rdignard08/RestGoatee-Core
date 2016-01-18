@@ -37,6 +37,10 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
     return length >= kRGMaxAutoSize ? rg_malloc_based_canonical(utfName, length) : rg_static_based_canonical(utfName, length);
 }
 
+@interface RGPropertyDeclaration ()
+
+@end
+
 @implementation RGPropertyDeclaration
 @synthesize name = _name;
 @synthesize canonicalName = _canonicalName;

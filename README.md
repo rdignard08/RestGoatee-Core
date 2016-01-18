@@ -112,6 +112,26 @@ assert([derived.stringValue isEqual:@"aString"]);
 ```
 Providing `+overrideKeysForMapping` gives you the flexibility to map a key to the name of the property.  Any key not specified goes through the default process so you only need to specify the exceptions.
 
+##### What if the default behavior doesn't do what I want?
+```objc
+@implementation DerivedObject
+
+- (BOOL) shouldTransformValue:(id)value forProperty:(NSString*)propertyName {
+    if ([propertyName isEqual:@"stringValue"]) {
+        self.stringValue = [value description].uppercaseString;
+        return NO;
+    }
+    return YES;
+}
+
+@end
+
+DerivedObject* derived = [DerivedObject objectFromDataSource:@{ @"stringValue" : @"abcd" } inContext:nil];
+
+assert([derived.stringValue isEqual:@"ABCD"]);
+```
+You can override `-shouldTransformValue:forProperty:` and return `NO` whenever you want to take control directly.
+
 ##### How does serialization work?
 ```objc
 DerivedObject* derived = [DerviedObject new];

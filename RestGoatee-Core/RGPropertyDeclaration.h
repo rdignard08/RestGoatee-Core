@@ -54,7 +54,7 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
 /**
  The designated initializer; it is a programmer error to invoke `-init`.
  */
-- (RG_PREFIX_NONNULL instancetype) initWithProperty:(RG_PREFIX_NULLABLE objc_property_t)property NS_DESIGNATED_INITIALIZER;
+- (RG_PREFIX_NONNULL instancetype) initWithProperty:(RG_PREFIX_NONNULL objc_property_t)property NS_DESIGNATED_INITIALIZER;
 
 /**
  @warning Do not invoke this method.

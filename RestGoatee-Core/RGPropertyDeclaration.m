@@ -78,9 +78,9 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
     return [super init];
 }
 
-- (RG_PREFIX_NONNULL instancetype) initWithProperty:(RG_PREFIX_NULLABLE objc_property_t)property {
+- (RG_PREFIX_NONNULL instancetype) initWithProperty:(RG_PREFIX_NONNULL objc_property_t)property {
     self = [super init];
-    if (self && property) {
+    if (self) {
         [self initializeName:property];
         uint32_t attributeCount = 0;
         objc_property_attribute_t* attributes = property_copyAttributeList(property, &attributeCount);

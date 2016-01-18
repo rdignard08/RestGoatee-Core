@@ -31,12 +31,13 @@ NSString* RG_SUFFIX_NONNULL const kRGXMLDocumentNodeKey = @"kRGDocument";
 @interface RGXMLSerializer () <NSXMLParserDelegate>
 
 @property RG_NULLABLE_PROPERTY(nonatomic, weak) RGXMLNode* currentNode;
-@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableString* currentString;
+@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong, readonly) NSMutableString* currentString;
 
 @end
 
 @implementation RGXMLSerializer
 @synthesize rootNode = _rootNode;
+@synthesize currentString = _currentString;
 
 - (RG_PREFIX_NONNULL instancetype) initWithParser:(RG_PREFIX_NULLABLE NSXMLParser*)parser {
     self = [super init];

@@ -73,9 +73,9 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
     return _readOnly;
 }
 
-- (RG_PREFIX_NONNULL instancetype) init {
+- (RG_PREFIX_NULLABLE instancetype) init {
     [NSException raise:NSGenericException format:@"-init is not a valid initializer of %@", [self class]];
-    return [self initWithProperty:NULL];
+    return [super init];
 }
 
 - (RG_PREFIX_NONNULL instancetype) initWithProperty:(RG_PREFIX_NULLABLE objc_property_t)property {

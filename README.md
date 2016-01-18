@@ -14,7 +14,7 @@ Supports: iOS 5.0+, requires ARC
 
 This library's aim is one of simplicity in the common case and extensibility in the general case:<br/>
 1) The act of translating a data source to a domain model is not the place for business logic or key translation.<br/>
-2) The API layer should be able to handle new objects and object properties seemlessly without requiring new deserialization logic.  For example, this <a href="https://github.com/rdignard08/RestGoatee/commit/50b516c4e5377ef02a384b26ce94984655b424f0">commit</a> added an entirely new response object to the example project without fanfare.<br/>
+2) The API layer should be able to handle new objects and object properties seemlessly without requiring new deserialization logic.  This <a href="https://github.com/rdignard08/RestGoatee/commit/50b516c4e5377ef02a384b26ce94984655b424f0">commit</a> in the example project added an entirely new response object without fanfare.<br/>
 3) Due to JSON and XML having limited types, the deserializer needs to be able to intelligently map to a larger standard family of types.<br/>
 4) CoreData support is usually not done at the outset of a project; this library makes it easier to turn it on with minimal refactoring.  CoreData support is implicit, but inactive in projects without it.<br/>
 5) The default mapping behavior should be both generally intuitive (correct 99% of the time) and extensible.<br/>
@@ -30,7 +30,7 @@ Consider your favorite or most popular model framework:
   * JSON or XML? <img src="https://github.com/jloughry/Unicode/raw/master/graphics/green_check.png"/>
 
 # Installation
-Using cocoapods add `pod 'RestGoatee-Core'` to your Podfile and run `pod install`.  People without cocoapods can include the top level folder "RestGoatee-Core" in their repository.  Include `#import <RestGoatee-Core.h>` to include all public headers and start using the library. 
+Using cocoapods add `pod 'RestGoatee-Core'` to your Podfile and run `pod install`.  People without cocoapods can include the top level folder "RestGoatee-Core" in their repository (everything is prefixed).  Include `#import <RestGoatee-Core.h>` to include all public headers and start using the library. 
 
 Example
 =======
@@ -65,6 +65,7 @@ assert(derived.doubleValue == 3.14);
 assert([derived.dateValue timeIntervalSince1970] == 1453075980.0);
 assert(derived.rawValue == [NSNull null]);
 ```
+Making an object is as simple as that.  Supported data sources out of the box are NSDictionary (for JSON) and RGXMLNode (for XML), but the protocol is public and you can freely make your own data source.
 
 ##### What if not all properties are specified?
 ```objc
@@ -74,7 +75,7 @@ assert([derived.stringValue isEqual:@"aString"]);
 assert(derived.numberValue == nil);
 assert(derived.doubleValue == 0.0);
 ```
-If a value isn't provided it remains the default value.  Likewise if more keys are provided that aren't used they are ignored.
+If a value isn't provided it remains the default value.  Likewise, if there are keys which aren't used they'll be ignored.
 
 ##### What if my API returns NSNull or the value?
 ```objc
@@ -83,9 +84,9 @@ DerivedObject* derived = [DerivedObject objectFromDataSource:@{ @"stringValue" :
 assert(derived.stringValue == nil);
 ```
 The rules are pretty simple, and guarantee you will never break the type system (an `NSURL*` property will always have an `NSURL` or `nil`).
-- If the value provided is a subclass of the property type it gets set to that value.
+- If the value provided has the same type or a sub type of the property type it gets set to that value.
 - If the value can be converted to the type of the property (`NSNumber` => `NSString` through `.stringValue`) it gets set to the converted value.
-- Otherwise the property remains unset and the value is discarded.
+- Otherwise the property remains unset and the value is discarded.  You'll receive a runtime warning when this happens.
 - As a consequence, properties of type `id` or `NSObject*` will receive any value.
 
 ##### What if my API keys are snake case?
@@ -94,7 +95,7 @@ DerivedObject* derived = [DerivedObject objectFromDataSource:@{ @"string_value" 
 
 assert([derived.stringValue isEqual:@"aString"]);
 ```
-Not CamelCase? No problem. The implicit mapping will handle all cases where the lowercase ASCII alphabet and numbers of the keys match.
+Not CamelCase? No problem. The implicit mapping will handle all cases where the case insensitive ASCII alphabet and numbers of the keys match.
 
 ##### What if my API keys are _really_ different?
 ```objc
@@ -146,7 +147,7 @@ assert([dictionaryRepresentation[@"doubleValue"] isEqual:@"3"]);
 ```
 `-dictionaryRepresentation` returns a dictionary where the keys are the names of the properties and the values are the result of serializing that value.  A property of type `NSString*`, `NSURL*`, `NSNumber*`, or a primitive will be a value of `NSString*`.  `NSNull*` values stay the same.  `NSArray*`, `NSDictionary*`, and all other `NSObject*` subclasses are output by applying the same rules to their sub objects.
 
-For an example of the use case see https://github.com/rdignard08/RestGoatee
+For a working example see https://github.com/rdignard08/RestGoatee
 
 License
 =======

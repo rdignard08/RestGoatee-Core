@@ -24,6 +24,19 @@
 #import "RGPropertyDeclaration.h"
 #import "RestGoatee-Core.h"
 #import "RGTestObject2.h"
+#import "NSObject+RGSharedImpl.h"
+
+@interface RGTestObject6 : NSObject
+
+@property (nonatomic, strong) NSString* string1;
+@property (nonatomic, assign, readonly) NSUInteger number;
+@property (nonatomic, unsafe_unretained) id something;
+
+@end
+
+@implementation RGTestObject6
+
+@end
 
 CLASS_SPEC(RGPropertyDeclaration)
 
@@ -35,6 +48,26 @@ CLASS_SPEC(RGPropertyDeclaration)
         raisedException = YES;
     }
     XCTAssert(raisedException);
+}
+
+#pragma mark - properties
+- (void) testSimpleObject {
+    NSDictionary<NSString*, RGPropertyDeclaration*>* properties = [RGTestObject6 rg_propertyList];
+    RGPropertyDeclaration* stringProperty = properties[RG_STRING_SEL(string1)];
+    XCTAssert(stringProperty.type == [NSString class]);
+    XCTAssert(stringProperty.isPrimitive == NO);
+    XCTAssert(stringProperty.readOnly == NO);
+    XCTAssert(stringProperty.storageSemantics == kRGPropertyStrong);
+    RGPropertyDeclaration* numberProperty = properties[RG_STRING_SEL(number)];
+    XCTAssert(numberProperty.type == [NSNumber class]);
+    XCTAssert(numberProperty.isPrimitive == YES);
+    XCTAssert(numberProperty.readOnly == YES);
+    XCTAssert(numberProperty.storageSemantics == kRGPropertyAssign);
+    RGPropertyDeclaration* somethingProperty = properties[RG_STRING_SEL(something)];
+    XCTAssert(somethingProperty.type == [NSObject class]);
+    XCTAssert(somethingProperty.isPrimitive == NO);
+    XCTAssert(somethingProperty.readOnly == NO);
+    XCTAssert(somethingProperty.storageSemantics == kRGPropertyAssign);
 }
 
 #pragma mark - rg_canonical

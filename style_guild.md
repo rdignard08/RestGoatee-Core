@@ -64,3 +64,13 @@ File scope
   - No space will appear between the identifier and argument list
   - No space will appear before the first argument or after the last argument
   - A space will appear after each `,` in the argument list
+
+- class Interface
+  - Should declare the absolute minimum
+    - Protocol conformance should only be declared publicly if another class needs it
+    - Abosolutely no ivars 
+    - Properties should not be declared publicly 
+    - Methods should only be as necessary
+  - Prefer simple initializers, preferably `init`
+  - Expose properties instead of complex initializers
+

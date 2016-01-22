@@ -70,6 +70,7 @@ NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL __attribute__((pure)) rg_dateF
             rg_propertyList[declaration.name] = declaration;
             rg_canonicalPropertyList[declaration.canonicalName] = declaration;
         }
+        free(properties);
         objc_setAssociatedObject(self, @selector(rg_propertyList), rg_propertyList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         objc_setAssociatedObject(self, @selector(rg_canonicalPropertyList), rg_canonicalPropertyList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }

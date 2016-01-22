@@ -596,6 +596,13 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     XCTAssert([object.decimalProperty isEqual:[NSDecimalNumber decimalNumberWithString:@"2.00"]]);
 }
 
+- (void) testEmptyNodeToDecimal {
+    RGTestObject2* object = [RGTestObject2 new];
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(decimalProperty)] withValue:node inContext:nil];
+    XCTAssert([object.decimalProperty isEqual:[NSDecimalNumber notANumber]]);
+}
+
 - (void) testNodeToValue {
     RGTestObject2* object = [RGTestObject2 new];
     RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];

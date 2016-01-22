@@ -1,5 +1,11 @@
 # RestGoatee CHANGELOG
 
+## 2.1.1
+- Missing license declaration on some files.
+- The macros `RG_FILE_START` & `RG_FILE_END` are gone.
+- Project no longer has a prefix header.
+- All defined constants should be visible outside of the project.
+
 ## 2.1.0
 - May no longer create an RGXMLNode without a name
   - The document node now has a name `kRGXMLDocumentNodeKey`

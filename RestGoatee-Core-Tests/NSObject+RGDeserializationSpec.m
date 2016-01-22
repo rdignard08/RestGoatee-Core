@@ -24,6 +24,7 @@
 #import "RestGoatee-Core.h"
 #import "RGTestObject2.h"
 #import "RGPropertyDeclaration.h"
+#import "RGTestManagedObject.h"
 
 @interface RGBartStation : NSObject
 
@@ -110,6 +111,11 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     XCTAssert([output.firstObject numberProperty] == nil);
     XCTAssert([output.lastObject stringProperty] == nil);
     XCTAssert([[output.lastObject numberProperty] isEqual:@2]);
+}
+
+#pragma mark - objectFromDataSource:inContext NSManagedObject
+- (void) testBadContext {
+    XCTAssertThrows([RGTestManagedObject objectFromDataSource:nil inContext:nil]);
 }
 
 #pragma mark - rg_initProperty:withValue:inContext: with NSString

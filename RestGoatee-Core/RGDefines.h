@@ -60,3 +60,24 @@
 #ifndef RG_STRING_SEL
     #define RG_STRING_SEL(sel) NSStringFromSelector(@selector(sel))
 #endif
+
+#ifndef RGLog
+    #ifdef DEBUG
+        #define RGLog(format, ...)                          \
+            rg_log(format, ({                               \
+                const size_t length = sizeof(__FILE__) - 1; \
+                char* ret = __FILE__ + length;              \
+                while (ret != __FILE__) {                   \
+                    char* replacement = ret - 1;            \
+                    if (*replacement == '/') {              \
+                        break;                              \
+                    }                                       \
+                    ret = replacement;                      \
+                }                                           \
+                ret;                                        \
+            }), (unsigned long)__LINE__, ##__VA_ARGS__)
+    #else
+        /* we define out with `RG_VOID_NOOP` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */
+        #define RGLog(...) RG_VOID_NOOP
+    #endif
+#endif

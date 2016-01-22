@@ -21,14 +21,8 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "RGDefines.h"
 #import "RGDataSource.h"
 #import "RGSerializable.h"
-
-/**
- When serialized to an NSDictionary, the `innerXML` of the node will appear on this key.
- */
-FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGInnerXMLKey;
 
 /**
  The `RGXMLNode` is the parse result of `NSXMLParser`.

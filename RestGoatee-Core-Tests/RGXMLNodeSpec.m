@@ -22,6 +22,7 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RGXMLNode.h"
+#import "RGConstants.h"
 
 /**
  Represents the data

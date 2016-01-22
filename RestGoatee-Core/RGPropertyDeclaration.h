@@ -21,23 +21,8 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "RGDefines.h"
+#import "RGConstants.h"
 #import <objc/runtime.h>
-
-/**
- Defines an enumeration that describes a given property's storage semantics.  unsafe_unretained == assign, retain == strong.
- */
-typedef NS_ENUM(NSUInteger, RGStorageSemantics) {
-    kRGPropertyAssign = 0x00,
-    kRGPropertyWeak = 0x01,
-    kRGPropertyStrong = 0x10,
-    kRGPropertyCopy = 0x11
-};
-
-/**
- Returns the property name in as its canonical key.
- */
-NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNULL const utf8Input) __attribute__((pure));
 
 /**
  An object that encapsulates a property declaration, and enables object based introspection of a class.  It is a programmer error to invoke `-init`.

@@ -21,8 +21,10 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-/* preprocessor */
+/* preprocessor / C */
 #import "RGDefines.h"
+#import "RGConstants.h"
+#import "RGFunctions.h"
 
 /* protocols */
 #import "RGDataSource.h"
@@ -37,48 +39,3 @@
 #import "NSDictionary+RGDataSource.h"
 #import "NSObject+RGDeserialization.h"
 #import "NSObject+RGSerialization.h"
-
-/**
- This is the key used interally to store the value returned by `rg_threadsafe_formatter()`.  You must not use this key with the dictionary at `-[NSThread threadDictionary]`.
- */
-FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGDateFormatterKey;
-
-/**
- This is the largest memory allocation that will be made on the stack for a single identifer (VLA).
- */
-FOUNDATION_EXPORT const size_t kRGMaxAutoSize;
-
-/**
- `rg_swizzle` is a basic implementation of swizzling.  It does not clobber the super class if the method is not on the subclass.
- */
-void rg_swizzle(Class RG_SUFFIX_NULLABLE cls, SEL RG_SUFFIX_NULLABLE original, SEL RG_SUFFIX_NULLABLE replacement) __attribute__((cold));
-
-/**
- The `rg_log` function is the backing debug function of `RGLog`.  It logs the file name & line number of the call site.
- */
-void rg_log(NSString* RG_SUFFIX_NULLABLE format, ...) __attribute__((cold));
-#ifndef RGLog
-    #ifdef DEBUG
-        #define RGLog(format, ...)                          \
-            rg_log(format, ({                               \
-                const size_t length = sizeof(__FILE__) - 1; \
-                char* ret = __FILE__ + length;              \
-                while (ret != __FILE__) {                   \
-                    char* replacement = ret - 1;            \
-                    if (*replacement == '/') {              \
-                        break;                              \
-                    }                                       \
-                    ret = replacement;                      \
-                }                                           \
-                ret;                                        \
-            }), (unsigned long)__LINE__, ##__VA_ARGS__)
-    #else
-        /* we define out with `RG_VOID_NOOP` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */
-        #define RGLog(...) RG_VOID_NOOP
-    #endif
-#endif
-
-/**
- `rg_threadsafe_formatter` returns a per thread instance of `NSDateFormatter`.  Never pass the returned object between threads.  Always set the objects properties (`dateFormat`, `locale`, `timezone`, etc.) before use.
- */
-NSDateFormatter* RG_SUFFIX_NONNULL rg_threadsafe_formatter(void);

@@ -18,7 +18,8 @@
 		BE68CA661BCF631200DFEC70 /* RGTestObject2.m in Sources */ = {isa = PBXBuildFile; fileRef = BE68CA631BCF631200DFEC70 /* RGTestObject2.m */; };
 		BE68CA671BCF631200DFEC70 /* RGTestObject1.m in Sources */ = {isa = PBXBuildFile; fileRef = BE68CA651BCF631200DFEC70 /* RGTestObject1.m */; };
 		BE7A6FB51BE2FEDA009F5A4F /* RGPropertyDeclaration.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7A6FB41BE2FEDA009F5A4F /* RGPropertyDeclaration.m */; };
-		BEAB13C61BBDB4960027300D /* RestGoatee-Core.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13B71BBDB4960027300D /* RestGoatee-Core.m */; };
+		BE93BB551C5204360043BAAD /* RGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93BB541C5204360043BAAD /* RGConstants.m */; };
+		BE93BB581C52045A0043BAAD /* RGFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93BB571C52045A0043BAAD /* RGFunctions.m */; };
 		BEAB13C71BBDB4960027300D /* NSObject+RGDeserialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13B91BBDB4960027300D /* NSObject+RGDeserialization.m */; };
 		BEAB13C91BBDB4960027300D /* NSObject+RGSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BD1BBDB4960027300D /* NSObject+RGSerialization.m */; };
 		BEAB13CA1BBDB4960027300D /* NSObject+RGSharedImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BF1BBDB4960027300D /* NSObject+RGSharedImpl.m */; };
@@ -74,9 +75,12 @@
 		BE68CA651BCF631200DFEC70 /* RGTestObject1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGTestObject1.m; sourceTree = "<group>"; };
 		BE7A6FB31BE2FEDA009F5A4F /* RGPropertyDeclaration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGPropertyDeclaration.h; sourceTree = "<group>"; };
 		BE7A6FB41BE2FEDA009F5A4F /* RGPropertyDeclaration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGPropertyDeclaration.m; sourceTree = "<group>"; };
+		BE93BB531C5204360043BAAD /* RGConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGConstants.h; sourceTree = "<group>"; };
+		BE93BB541C5204360043BAAD /* RGConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGConstants.m; sourceTree = "<group>"; };
+		BE93BB561C52045A0043BAAD /* RGFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGFunctions.h; sourceTree = "<group>"; };
+		BE93BB571C52045A0043BAAD /* RGFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGFunctions.m; sourceTree = "<group>"; };
 		BEAB13B51BBDB45A0027300D /* RestGoatee-Core.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = "RestGoatee-Core.podspec"; sourceTree = "<group>"; };
 		BEAB13B61BBDB4960027300D /* RestGoatee-Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RestGoatee-Core.h"; sourceTree = "<group>"; };
-		BEAB13B71BBDB4960027300D /* RestGoatee-Core.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RestGoatee-Core.m"; sourceTree = "<group>"; };
 		BEAB13B81BBDB4960027300D /* NSObject+RGDeserialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RGDeserialization.h"; sourceTree = "<group>"; };
 		BEAB13B91BBDB4960027300D /* NSObject+RGDeserialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RGDeserialization.m"; sourceTree = "<group>"; };
 		BEAB13BC1BBDB4960027300D /* NSObject+RGSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RGSerialization.h"; sourceTree = "<group>"; };
@@ -230,6 +234,17 @@
 			name = FunctionSpecs;
 			sourceTree = "<group>";
 		};
+		BE93BB521C52041A0043BAAD /* C */ = {
+			isa = PBXGroup;
+			children = (
+				BE93BB531C5204360043BAAD /* RGConstants.h */,
+				BE93BB541C5204360043BAAD /* RGConstants.m */,
+				BE93BB561C52045A0043BAAD /* RGFunctions.h */,
+				BE93BB571C52045A0043BAAD /* RGFunctions.m */,
+			);
+			name = C;
+			sourceTree = "<group>";
+		};
 		BEAB13CE1BBDB5370027300D /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,11 +275,11 @@
 		BEFFB8431BBDB15900EAF95D /* RestGoatee-Core */ = {
 			isa = PBXGroup;
 			children = (
+				BE93BB521C52041A0043BAAD /* C */,
 				BE2009671BCB70DA00A9E8A0 /* Categories */,
 				BE2009661BCB70D000A9E8A0 /* Classes */,
 				BE20096A1BCC2A7800A9E8A0 /* Protocols */,
 				BEAB13B61BBDB4960027300D /* RestGoatee-Core.h */,
-				BEAB13B71BBDB4960027300D /* RestGoatee-Core.m */,
 				BEAE72311BD9725900F23ABE /* RGDefines.h */,
 			);
 			path = "RestGoatee-Core";
@@ -378,12 +393,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE93BB581C52045A0043BAAD /* RGFunctions.m in Sources */,
 				BEAB13CD1BBDB4960027300D /* RGXMLSerializer.m in Sources */,
 				BE7A6FB51BE2FEDA009F5A4F /* RGPropertyDeclaration.m in Sources */,
 				BEAB13CB1BBDB4960027300D /* RGXMLNode.m in Sources */,
 				BEAB13CA1BBDB4960027300D /* NSObject+RGSharedImpl.m in Sources */,
 				BEAB13C71BBDB4960027300D /* NSObject+RGDeserialization.m in Sources */,
-				BEAB13C61BBDB4960027300D /* RestGoatee-Core.m in Sources */,
+				BE93BB551C5204360043BAAD /* RGConstants.m in Sources */,
 				BEAB13C91BBDB4960027300D /* NSObject+RGSerialization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

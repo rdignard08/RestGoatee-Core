@@ -25,34 +25,7 @@
 #import "RestGoatee-Core.h"
 #import "RGPropertyDeclaration.h"
 
-NSString* RG_SUFFIX_NONNULL const kRGSerializationKey = @"__class";
-
-/* storage for extern'd class references */
-Class RG_SUFFIX_NONNULL rg_NSObjectClass;
-Class RG_SUFFIX_NONNULL rg_NSObjectMetaClass;
-Class RG_SUFFIX_NULLABLE rg_NSManagedObject;
-Class RG_SUFFIX_NULLABLE rg_NSEntityDescription;
-
-NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL __attribute__((pure)) rg_dateFormats(void) {
-    static dispatch_once_t onceToken;
-    static NSArray RG_GENERIC(NSString*) * _sDateFormats;
-    dispatch_once(&onceToken, ^{
-        _sDateFormats = @[ @"yyyy-MM-dd'T'HH:mm:ssZZZZZ", @"yyyy-MM-dd HH:mm:ss ZZZZZ", @"yyyy-MM-dd'T'HH:mm:ssz", @"yyyy-MM-dd" ];
-    });
-    return _sDateFormats;
-}
-
 @implementation NSObject (RGSharedImpl)
-
-+ (void) load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        rg_NSObjectClass = objc_getClass("NSObject");
-        rg_NSObjectMetaClass = objc_getMetaClass("NSObject");
-        rg_NSManagedObject = objc_getClass("NSManagedObject");
-        rg_NSEntityDescription = objc_getClass("NSEntityDescription");
-    });
-}
 
 + (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, RGPropertyDeclaration*) *) rg_propertyList {
     NSMutableDictionary* rg_propertyList = objc_getAssociatedObject(self, @selector(rg_propertyList));

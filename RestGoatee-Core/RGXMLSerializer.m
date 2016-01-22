@@ -21,10 +21,7 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "RGXMLSerializer.h"
 #import "RestGoatee-Core.h"
-
-NSString* RG_SUFFIX_NONNULL const kRGXMLDocumentNodeKey = @"kRGDocument";
 
 @interface RGXMLSerializer () <NSXMLParserDelegate>
 

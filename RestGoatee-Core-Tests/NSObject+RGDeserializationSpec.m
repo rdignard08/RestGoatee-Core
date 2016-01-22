@@ -158,6 +158,18 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     XCTAssert([[object.arrayOfSubObj.lastObject stringProperty] isEqual:@"baz"]);
 }
 
+- (void) testArrayToUnknowns {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(arrayProperty)] withValue:@[ @{ @"foo" : @"bar", kRGSerializationKey : @"NotAClass" } ] inContext:nil];
+    XCTAssert(([object.arrayProperty isEqual:@[ @{ @"foo" : @"bar", kRGSerializationKey : @"NotAClass" } ]]));
+}
+
+- (void) testArrayToDictionaries {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(arrayProperty)] withValue:@[ @{ @"foo" : @"bar", kRGSerializationKey : @"NSDictionary" } ] inContext:nil];
+    XCTAssert(([object.arrayProperty.firstObject isEqual:@{ @"foo" : @"bar", kRGSerializationKey : @"NSDictionary" }]));
+}
+
 #pragma mark - rg_initProperty:withValue:inContext: Mutable
 - (void) testStringToMutableString {
     RGTestObject1* object = [RGTestObject1 new];

@@ -38,8 +38,6 @@
 #import "NSObject+RGDeserialization.h"
 #import "NSObject+RGSerialization.h"
 
-RG_FILE_START
-
 /**
  This is the key used interally to store the value returned by `rg_threadsafe_formatter()`.  You must not use this key with the dictionary at `-[NSThread threadDictionary]`.
  */
@@ -84,5 +82,3 @@ void rg_log(NSString* RG_SUFFIX_NULLABLE format, ...) __attribute__((cold));
  `rg_threadsafe_formatter` returns a per thread instance of `NSDateFormatter`.  Never pass the returned object between threads.  Always set the objects properties (`dateFormat`, `locale`, `timezone`, etc.) before use.
  */
 NSDateFormatter* RG_SUFFIX_NONNULL rg_threadsafe_formatter(void);
-
-RG_FILE_END

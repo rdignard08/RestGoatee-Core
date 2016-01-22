@@ -25,8 +25,6 @@
 
 NSString* RG_SUFFIX_NONNULL const kRGInnerXMLKey = @"__innerXML__";
 
-RG_FILE_START
-
 @interface RGXMLNode ()
 
 @property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableArray RG_GENERIC(NSString*) * keys;
@@ -145,5 +143,3 @@ RG_FILE_START
 }
 
 @end
-
-RG_FILE_END

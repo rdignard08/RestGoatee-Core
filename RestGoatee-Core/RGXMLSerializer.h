@@ -23,8 +23,6 @@
 
 #import "RGDefines.h"
 
-RG_FILE_START
-
 /**
  This constant is used to identify the implicit document node.
  */
@@ -55,5 +53,3 @@ FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGXMLDocumentNodeKey;
 @property RG_NONNULL_PROPERTY(nonatomic, strong, readonly) RGXMLNode* rootNode;
 
 @end
-
-RG_FILE_END

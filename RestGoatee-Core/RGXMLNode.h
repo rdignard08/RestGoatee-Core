@@ -25,8 +25,6 @@
 #import "RGDataSource.h"
 #import "RGSerializable.h"
 
-RG_FILE_START
-
 /**
  When serialized to an NSDictionary, the `innerXML` of the node will appear on this key.
  */
@@ -97,5 +95,3 @@ FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGInnerXMLKey;
 - (void) addChildNode:(RG_PREFIX_NONNULL RGXMLNode*)node;
 
 @end
-
-RG_FILE_END

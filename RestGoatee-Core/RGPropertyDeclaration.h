@@ -34,8 +34,6 @@ typedef NS_ENUM(NSUInteger, RGStorageSemantics) {
     kRGPropertyCopy = 0x11
 };
 
-RG_FILE_START
-
 /**
  Returns the property name in as its canonical key.
  */
@@ -87,5 +85,3 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
 - (RG_PREFIX_NULLABLE instancetype) init NS_DESIGNATED_INITIALIZER;
 
 @end
-
-RG_FILE_END

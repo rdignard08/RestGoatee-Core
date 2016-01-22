@@ -23,19 +23,6 @@
 
 #import <Foundation/Foundation.h>
 
-#ifndef RG_FILE_START
-    #define RG_FILE_START \
-    _Pragma("clang diagnostic push") \
-    _Pragma("clang diagnostic ignored \"-Wgnu\"")
-#endif
-
-#ifndef RG_FILE_END
-    #define RG_FILE_END \
-    _Pragma("clang diagnostic pop")
-#endif
-
-RG_FILE_START
-
 #ifndef RG_NULLABLE_PROPERTY
     #if __has_feature(nullability)
         #define RG_NULLABLE_PROPERTY(...) (nullable, ## __VA_ARGS__)
@@ -73,5 +60,3 @@ RG_FILE_START
 #ifndef RG_STRING_SEL
     #define RG_STRING_SEL(sel) NSStringFromSelector(@selector(sel))
 #endif
-
-RG_FILE_END

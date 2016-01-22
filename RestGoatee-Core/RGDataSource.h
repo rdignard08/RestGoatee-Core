@@ -23,8 +23,6 @@
 
 #import "RGDefines.h"
 
-RG_FILE_START
-
 /**
  These are the methods that a data source must implement in order to be consumable by the `+[NSObject objectFromDataSource:inContext:]` family of methods.
  
@@ -47,5 +45,3 @@ RG_FILE_START
 - (RG_PREFIX_NONNULL NSArray RG_GENERIC(NSString*) *) allKeys;
 
 @end
-
-RG_FILE_END

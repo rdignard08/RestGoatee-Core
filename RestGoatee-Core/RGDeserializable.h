@@ -23,8 +23,6 @@
 
 #import "RGDefines.h"
 
-RG_FILE_START
-
 @class NSManagedObjectContext;
 
 /**
@@ -56,5 +54,3 @@ RG_FILE_START
 - (BOOL) shouldTransformValue:(RG_PREFIX_NULLABLE id)value forProperty:(RG_PREFIX_NONNULL NSString*)propertyName inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 @end
-
-RG_FILE_END

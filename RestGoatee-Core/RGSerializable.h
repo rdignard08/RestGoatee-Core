@@ -23,8 +23,6 @@
 
 #import "RGDefines.h"
 
-RG_FILE_START
-
 /**
  This protocol should be implemented if an object is to be safely serialized.  The default behavior is to iterate over all properties, which will very likely lead to cycles (and thus very hard to track down crashes).
  */
@@ -39,5 +37,3 @@ RG_FILE_START
 + (RG_PREFIX_NULLABLE NSArray RG_GENERIC(NSString*) *) serializableKeys;
 
 @end
-
-RG_FILE_END

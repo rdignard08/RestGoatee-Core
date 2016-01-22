@@ -24,8 +24,6 @@
 #import "RestGoatee-Core.h"
 #import "NSObject+RGSharedImpl.h"
 
-RG_FILE_START
-
 @implementation NSObject (RGSerialization)
 
 - (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation {
@@ -67,5 +65,3 @@ RG_FILE_START
 }
 
 @end
-
-RG_FILE_END

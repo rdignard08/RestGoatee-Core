@@ -24,8 +24,6 @@
 #import "RGXMLSerializer.h"
 #import "RestGoatee-Core.h"
 
-RG_FILE_START
-
 NSString* RG_SUFFIX_NONNULL const kRGXMLDocumentNodeKey = @"kRGDocument";
 
 @interface RGXMLSerializer () <NSXMLParserDelegate>
@@ -103,5 +101,3 @@ NSString* RG_SUFFIX_NONNULL const kRGXMLDocumentNodeKey = @"kRGDocument";
 }
 
 @end
-
-RG_FILE_END

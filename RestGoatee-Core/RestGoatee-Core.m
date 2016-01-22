@@ -24,8 +24,6 @@
 #import "RestGoatee-Core.h"
 #import <objc/runtime.h>
 
-RG_FILE_START
-
 NSString* RG_SUFFIX_NONNULL const kRGDateFormatterKey = @"kRGDateFormatterKey";
 
 const size_t kRGMaxAutoSize = 1 << 10;
@@ -60,5 +58,3 @@ NSDateFormatter* RG_SUFFIX_NONNULL rg_threadsafe_formatter(void) {
     }
     return currentFormatter;
 }
-
-RG_FILE_END

@@ -25,8 +25,6 @@
 #import "RestGoatee-Core.h"
 #import "RGPropertyDeclaration.h"
 
-RG_FILE_START
-
 NSString* RG_SUFFIX_NONNULL const kRGSerializationKey = @"__class";
 
 /* storage for extern'd class references */
@@ -83,5 +81,3 @@ NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL __attribute__((pure)) rg_dateF
 }
 
 @end
-
-RG_FILE_END

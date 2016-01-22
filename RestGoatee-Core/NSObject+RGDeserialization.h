@@ -23,8 +23,6 @@
 
 #import "RGDefines.h"
 
-RG_FILE_START
-
 @protocol RGDataSource;
 @class NSManagedObjectContext;
 
@@ -58,5 +56,3 @@ RG_FILE_START
 - (RG_PREFIX_NONNULL instancetype) extendWith:(RG_PREFIX_NULLABLE id<RGDataSource>)source inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 @end
-
-RG_FILE_END

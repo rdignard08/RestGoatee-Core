@@ -24,8 +24,6 @@
 #import "RestGoatee-Core.h"
 #import "NSObject+RGSharedImpl.h"
 
-RG_FILE_START
-
 @interface NSObject (RGForwardDeclarations)
 
 + (RG_PREFIX_NONNULL id) insertNewObjectForEntityForName:(RG_PREFIX_NONNULL NSString*)entityName inManagedObjectContext:(RG_PREFIX_NONNULL id)context;
@@ -219,5 +217,3 @@ RG_FILE_START
 }
 
 @end
-
-RG_FILE_END

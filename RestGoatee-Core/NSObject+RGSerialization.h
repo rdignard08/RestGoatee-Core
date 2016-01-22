@@ -23,8 +23,6 @@
 
 #import "RGDefines.h"
 
-RG_FILE_START
-
 /**
  This category can be used for the latter half of the serialization => deserialization => serialization process.
  
@@ -38,5 +36,3 @@ RG_FILE_START
 - (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation;
 
 @end
-
-RG_FILE_END

@@ -24,8 +24,6 @@
 #import "RGPropertyDeclaration.h"
 #import "RestGoatee-Core.h"
 
-RG_FILE_START
-
 static NSString* RG_SUFFIX_NONNULL const rg_malloc_based_canonical(const char* RG_SUFFIX_NONNULL const utfName, size_t length) {
     char* canonicalBuffer = malloc(length);
     size_t outputLength = 0;
@@ -136,5 +134,3 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
 }
 
 @end
-
-RG_FILE_END

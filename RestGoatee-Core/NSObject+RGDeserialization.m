@@ -211,8 +211,6 @@ RG_FILE_START
                                                                                             [value isKindOfClass:[RGXMLNode self]])) {
         /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
         [self setValue:[propertyType objectFromDataSource:value inContext:context] forKey:key];
-    } else if ([propertyType isSubclassOfClass:[NSObject self]] && [value isKindOfClass:propertyType]) { /* if there is literally nothing else we know about the property */
-        [self setValue:value forKey:key];
     }
     
 #ifdef DEBUG

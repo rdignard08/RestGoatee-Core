@@ -130,6 +130,14 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     XCTAssert(object != nil);
 }
 
+#pragma mark - rg_initProperty:withValue:inContext: Mutable
+- (void) testStringToMutableString {
+    RGTestObject1* object = [RGTestObject1 new];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject1 rg_propertyList][RG_STRING_SEL(mutableProperty)] withValue:@"foobar" inContext:nil];
+    [object.mutableProperty appendString:@"baz"];
+    XCTAssert([object.mutableProperty isEqual:@"foobarbaz"]);
+}
+
 #pragma mark - rg_initProperty:withValue:inContext: with NSString
 - (void) testStringToString {
     RGTestObject2* object = [RGTestObject2 new];

@@ -260,6 +260,12 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     XCTAssert(object.dictionaryProperty == nil);
 }
 
+- (void) testNullToPrimitive {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(intProperty)] withValue:[NSNull null] inContext:nil];
+    XCTAssert(object.intProperty == 0);
+}
+
 #pragma mark - rg_initProperty:withValue:inContext: with NSArray
 - (void) testArrayToString {
     RGTestObject2* object = [RGTestObject2 new];

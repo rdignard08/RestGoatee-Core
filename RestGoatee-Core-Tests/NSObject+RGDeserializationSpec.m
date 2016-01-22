@@ -118,6 +118,18 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     XCTAssertThrows([RGTestManagedObject objectFromDataSource:nil inContext:nil]);
 }
 
+- (void) testGoodContext {
+    NSEntityDescription* entity = [NSEntityDescription new];
+    entity.name = NSStringFromClass([RGTestManagedObject self]);
+    NSManagedObjectModel* model = [NSManagedObjectModel new];
+    model.entities = @[ entity ];
+    NSPersistentStoreCoordinator* store = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+    NSManagedObjectContext* context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    context.persistentStoreCoordinator = store;
+    RGTestManagedObject* object = [RGTestManagedObject objectFromDataSource:nil inContext:context];
+    XCTAssert(object != nil);
+}
+
 #pragma mark - rg_initProperty:withValue:inContext: with NSString
 - (void) testStringToString {
     RGTestObject2* object = [RGTestObject2 new];

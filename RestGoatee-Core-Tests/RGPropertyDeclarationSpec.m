@@ -29,13 +29,7 @@
 CLASS_SPEC(RGPropertyDeclaration)
 
 - (void) testInit {
-    BOOL raisedException = NO;
-    @try {
-        [RGPropertyDeclaration new];
-    } @catch (NSException* e) {
-        raisedException = YES;
-    }
-    XCTAssert(raisedException);
+    XCTAssertThrows([RGPropertyDeclaration new]);
 }
 
 - (void) testDealloc {

@@ -9,5 +9,6 @@
 @property (nonatomic, assign) NSInteger intProperty;
 @property (nonatomic, strong, readonly) id readOnlyProperty;
 @property (nonatomic, strong) RGTestObject1* subObject;
+@property (nonatomic, strong) NSArray* arrayOfSubObj;
 
 @end

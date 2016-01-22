@@ -26,6 +26,7 @@
 #import "RGPropertyDeclaration.h"
 #import "RGTestManagedObject.h"
 #import "RGBartStation.h"
+#import "NSObject+RGSharedImpl.h"
 
 @interface NSObject (_RGForwardDecl)
 
@@ -140,6 +141,21 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(subObject)] withValue:@{ @"stringProperty" : @"foobar" } inContext:nil];
     XCTAssert([object.subObject.stringProperty isEqual:@"foobar"]);
+}
+
+- (void) testArrayToSubObjects {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(arrayOfSubObj)] withValue:
+  @[
+    @{
+      kRGSerializationKey : NSStringFromClass([RGTestObject2 self]),
+      RG_STRING_SEL(stringProperty) : @"foobar"
+    }, @{
+      kRGSerializationKey : NSStringFromClass([RGTestObject2 self]),
+      RG_STRING_SEL(stringProperty) : @"baz"
+    }] inContext:nil];
+    XCTAssert([[object.arrayOfSubObj.firstObject stringProperty] isEqual:@"foobar"]);
+    XCTAssert([[object.arrayOfSubObj.lastObject stringProperty] isEqual:@"baz"]);
 }
 
 #pragma mark - rg_initProperty:withValue:inContext: Mutable

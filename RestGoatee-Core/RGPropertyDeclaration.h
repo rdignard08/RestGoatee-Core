@@ -2,6 +2,9 @@
 #import "RGDefines.h"
 #import <objc/runtime.h>
 
+/**
+ Defines an enumeration that describes a given property's storage semantics.  unsafe_unretained == assign, retain == strong.
+ */
 typedef NS_ENUM(NSUInteger, RGStorageSemantics) {
     kRGPropertyAssign = 0x00,
     kRGPropertyWeak = 0x01,

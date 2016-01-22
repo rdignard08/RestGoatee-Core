@@ -92,7 +92,7 @@ NSString* RG_SUFFIX_NONNULL const kRGXMLDocumentNodeKey = @"kRGDocument";
 
 - (void) parser:(__unused id)p didEndElement:(__unused id)e namespaceURI:(RG_PREFIX_NULLABLE __unused id)n qualifiedName:(RG_PREFIX_NULLABLE __unused id)q {
     __strong RGXMLNode* strongNode = self.currentNode;
-    strongNode.innerXML = self->_currentString;
+    strongNode.innerXML = self->_currentString; /* intentionally using the ivar so that if nil, nil goes to innerXML */
     self->_currentString = nil;
     self.currentNode = strongNode.parentNode; /* move up the parse tree */
 }

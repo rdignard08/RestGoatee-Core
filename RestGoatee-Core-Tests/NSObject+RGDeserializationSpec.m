@@ -626,6 +626,13 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     XCTAssert(object.classProperty == [NSObject class]);
 }
 
+- (void) testEmptyNodeToClass {
+    RGTestObject2* object = [RGTestObject2 new];
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(classProperty)] withValue:node inContext:nil];
+    XCTAssert(object.classProperty == Nil);
+}
+
 - (void) testNodeToArray {
     RGTestObject2* object = [RGTestObject2 new];
     RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];

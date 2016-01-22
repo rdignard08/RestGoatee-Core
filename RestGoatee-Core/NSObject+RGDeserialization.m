@@ -211,14 +211,6 @@ RG_FILE_START
                                                                                             [value isKindOfClass:[RGXMLNode self]])) {
         /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
         [self setValue:[propertyType objectFromDataSource:value inContext:context] forKey:key];
-    } else if ([value isKindOfClass:[NSArray self]]) { /* single entry arrays are converted to an inplace object */
-#ifdef DEBUG
-        [(NSArray*)value count] > 1 ? RGLog(@"Warning, data loss on property %@ on type %@", key, [self class]) : RG_VOID_NOOP;
-#endif
-        id firstValue = [value firstObject];
-        if (!firstValue || [firstValue isKindOfClass:propertyType]) {
-            [self setValue:value forKey:key];
-        }
     } else if ([propertyType isSubclassOfClass:[NSObject self]] && [value isKindOfClass:propertyType]) { /* if there is literally nothing else we know about the property */
         [self setValue:value forKey:key];
     }

@@ -44,16 +44,12 @@
 @property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableDictionary RG_GENERIC(NSString*, NSString*) * attributes;
 
 /**
- The name of the tag.  <foobar>...</foobar> will have the value of `foobar` here.
+ The name of the tag.  `<foobar>` will have the value of `foobar` here.
  */
 @property RG_NONNULL_PROPERTY(nonatomic, strong) NSString* name;
 
 /**
- The innerXML if any, including unwrapped CDATA. 
- 
- self-closing nodes will have nil; <br/>
- 
- adjacent open and close tags will be the empty string; <object></object>
+ The innerXML if any, including unwrapped CDATA.  self-closing nodes will have nil.  adjacent open and close tags will be the empty string.
  */
 @property RG_NULLABLE_PROPERTY(nonatomic, strong) NSString* innerXML;
 
@@ -79,7 +75,7 @@
 - (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation;
 
 /**
- May return either `NSMutableArray<RGXMLNode*>` or `RG_PREFIX_NULLABLE RGXMLNode`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
+ May return either `NSMutableArray<RGXMLNode*>` or `nullable RGXMLNode`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
  */
 - (RG_PREFIX_NULLABLE id) childrenNamed:(RG_PREFIX_NULLABLE NSString*)name;
 

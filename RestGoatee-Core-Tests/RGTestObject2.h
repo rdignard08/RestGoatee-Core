@@ -8,5 +8,6 @@
 @property (nonatomic, weak) NSString* weakProperty;
 @property (nonatomic, assign) NSInteger intProperty;
 @property (nonatomic, strong, readonly) id readOnlyProperty;
+@property (nonatomic, strong) RGTestObject1* subObject;
 
 @end

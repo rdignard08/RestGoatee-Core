@@ -12,6 +12,7 @@
 		BE2009691BCC29A900A9E8A0 /* NSObject+RGDeserializationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2009681BCC29A900A9E8A0 /* NSObject+RGDeserializationSpec.m */; };
 		BE3636CF1C51C79700A2E00A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3636CE1C51C79700A2E00A /* CoreData.framework */; };
 		BE3636D31C51C80A00A2E00A /* RGTestManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3636D21C51C80A00A2E00A /* RGTestManagedObject.m */; };
+		BE3636D61C51D09B00A2E00A /* RGBartStation.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3636D51C51D09B00A2E00A /* RGBartStation.m */; };
 		BE637B7D1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE637B7C1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m */; };
 		BE637B801BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE637B7F1BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m */; };
 		BE68CA661BCF631200DFEC70 /* RGTestObject2.m in Sources */ = {isa = PBXBuildFile; fileRef = BE68CA631BCF631200DFEC70 /* RGTestObject2.m */; };
@@ -63,6 +64,8 @@
 		BE3636CE1C51C79700A2E00A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		BE3636D11C51C80A00A2E00A /* RGTestManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTestManagedObject.h; sourceTree = "<group>"; };
 		BE3636D21C51C80A00A2E00A /* RGTestManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGTestManagedObject.m; sourceTree = "<group>"; };
+		BE3636D41C51D09B00A2E00A /* RGBartStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGBartStation.h; sourceTree = "<group>"; };
+		BE3636D51C51D09B00A2E00A /* RGBartStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGBartStation.m; sourceTree = "<group>"; };
 		BE637B7C1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGPropertyDeclarationSpec.m; sourceTree = "<group>"; };
 		BE637B7F1BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RestGoatee-CoreSpec.m"; sourceTree = "<group>"; };
 		BE68CA621BCF631200DFEC70 /* RGTestObject1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTestObject1.h; sourceTree = "<group>"; };
@@ -134,12 +137,14 @@
 				BE3636D01C51C7A800A2E00A /* Frameworks */,
 				BE2009571BCA252000A9E8A0 /* Info.plist */,
 				BE2009631BCA265F00A9E8A0 /* RestGoatee-Core-Tests.pch */,
+				BE3636D41C51D09B00A2E00A /* RGBartStation.h */,
+				BE3636D51C51D09B00A2E00A /* RGBartStation.m */,
+				BE3636D11C51C80A00A2E00A /* RGTestManagedObject.h */,
+				BE3636D21C51C80A00A2E00A /* RGTestManagedObject.m */,
 				BE68CA621BCF631200DFEC70 /* RGTestObject1.h */,
 				BE68CA651BCF631200DFEC70 /* RGTestObject1.m */,
 				BE68CA641BCF631200DFEC70 /* RGTestObject2.h */,
 				BE68CA631BCF631200DFEC70 /* RGTestObject2.m */,
-				BE3636D11C51C80A00A2E00A /* RGTestManagedObject.h */,
-				BE3636D21C51C80A00A2E00A /* RGTestManagedObject.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -361,6 +366,7 @@
 				BEF4BE6D1BD58BFC00ACDAF7 /* NSObject+RGSharedImplSpec.m in Sources */,
 				BE637B801BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m in Sources */,
 				BEF4BE641BD4B24A00ACDAF7 /* RGDataSourceSpec.m in Sources */,
+				BE3636D61C51D09B00A2E00A /* RGBartStation.m in Sources */,
 				BE637B7D1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m in Sources */,
 				BEF4BE691BD4BEE100ACDAF7 /* RGDeserializableSpec.m in Sources */,
 				BE68CA671BCF631200DFEC70 /* RGTestObject1.m in Sources */,

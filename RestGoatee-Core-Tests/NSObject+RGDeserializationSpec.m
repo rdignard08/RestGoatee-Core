@@ -113,6 +113,28 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     XCTAssert(object != nil);
 }
 
+#pragma mark - rg_initProperty:withValue:inContext: NSDate
+- (void) testXMLtoDate {
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@"date"];
+    node.innerXML = @"2016-01-17T16:13:00-0800";
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(dateProperty)] withValue:node inContext:nil];
+    XCTAssert(object.dateProperty.timeIntervalSince1970 == 1453075980.0);
+}
+
+- (void) testBadXMLtoDate {
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@"date"];
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(dateProperty)] withValue:node inContext:nil];
+    XCTAssert(object.dateProperty.timeIntervalSince1970 == 0.0);
+}
+
+- (void) testStringToDate {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(dateProperty)] withValue:@"2016-01-17T16:13:00-0800" inContext:nil];
+    XCTAssert(object.dateProperty.timeIntervalSince1970 == 1453075980.0);
+}
+
 #pragma mark - rg_initProperty:withValue:inContext: Mutable
 - (void) testStringToMutableString {
     RGTestObject1* object = [RGTestObject1 new];

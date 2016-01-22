@@ -1,4 +1,4 @@
-/* Copyright (c) 6/22/14, Ryan Dignard
+/* Copyright (c) 06/22/2014, Ryan Dignard
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -21,6 +21,8 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+#import <Foundation/Foundation.h>
+
 #ifndef RG_FILE_START
     #define RG_FILE_START \
     _Pragma("clang diagnostic push") \
@@ -32,8 +34,7 @@
     _Pragma("clang diagnostic pop")
 #endif
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu"
+RG_FILE_START
 
 #ifndef RG_NULLABLE_PROPERTY
     #if __has_feature(nullability)
@@ -63,8 +64,6 @@
     #endif
 #endif
 
-#pragma clang diagnostic pop
-
 /* `NULL` and `nil` are typed `void*` and I need it to be typed `void` */
 #ifndef RG_VOID_NOOP
     #define RG_VOID_NOOP ((void)0)
@@ -74,3 +73,5 @@
 #ifndef RG_STRING_SEL
     #define RG_STRING_SEL(sel) NSStringFromSelector(@selector(sel))
 #endif
+
+RG_FILE_END

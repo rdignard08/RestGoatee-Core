@@ -88,7 +88,6 @@
 		BEAB13C21BBDB4960027300D /* NSDictionary+RGDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+RGDataSource.h"; sourceTree = "<group>"; };
 		BEAB13C41BBDB4960027300D /* RGXMLSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGXMLSerializer.h; sourceTree = "<group>"; };
 		BEAB13C51BBDB4960027300D /* RGXMLSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGXMLSerializer.m; sourceTree = "<group>"; };
-		BEAB13CF1BBDB5530027300D /* RestGoatee-Core.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RestGoatee-Core.pch"; sourceTree = "<group>"; };
 		BEAE72311BD9725900F23ABE /* RGDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGDefines.h; sourceTree = "<group>"; };
 		BEB758371BE2134700102415 /* RGSerializable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGSerializable.h; sourceTree = "<group>"; };
 		BEEC23701C47848900588655 /* NSObject+RGSerializationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RGSerializationSpec.m"; sourceTree = "<group>"; };
@@ -234,7 +233,6 @@
 		BEAB13CE1BBDB5370027300D /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				BEAB13CF1BBDB5530027300D /* RestGoatee-Core.pch */,
 				BEAB13B51BBDB45A0027300D /* RestGoatee-Core.podspec */,
 			);
 			name = SupportingFiles;
@@ -485,7 +483,6 @@
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RestGoatee-Core.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -554,7 +551,6 @@
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RestGoatee-Core.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;

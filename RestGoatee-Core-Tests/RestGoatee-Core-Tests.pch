@@ -1,5 +1,5 @@
 
-#import "RestGoatee-Core.pch"
+#import <Foundation/Foundation.h>
 #import <XCTest/XCTest.h>
 
 #define CLASS_SPEC(className) \

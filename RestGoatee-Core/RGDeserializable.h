@@ -1,4 +1,4 @@
-/* Copyright (c) 10/12/15, Ryan Dignard
+/* Copyright (c) 10/12/2015, Ryan Dignard
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -20,6 +20,8 @@
  ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
+
+#import "RGDefines.h"
 
 RG_FILE_START
 

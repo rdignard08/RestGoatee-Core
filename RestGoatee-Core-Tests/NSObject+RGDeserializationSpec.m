@@ -588,6 +588,13 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     XCTAssert([object.numberProperty isEqual:@2]);
 }
 
+- (void) testEmptyNodeToNumber {
+    RGTestObject2* object = [RGTestObject2 new];
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(numberProperty)] withValue:node inContext:nil];
+    XCTAssert([object.numberProperty isEqual:@0]);
+}
+
 - (void) testNodeToDecimal {
     RGTestObject2* object = [RGTestObject2 new];
     RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
@@ -609,6 +616,13 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     node.innerXML = @"2";
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(valueProperty)] withValue:node inContext:nil];
     XCTAssert([object.valueProperty isEqual:@2]);
+}
+
+- (void) testEmptyNodeToValue {
+    RGTestObject2* object = [RGTestObject2 new];
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(valueProperty)] withValue:node inContext:nil];
+    XCTAssert([object.valueProperty isEqual:@0]);
 }
 
 - (void) testNodeToId {

@@ -118,7 +118,7 @@ RG_FILE_START
     
     /* __NSCFString -> NSMutableString -> NSString */
     id mutableVersion = [value respondsToSelector:@selector(mutableCopyWithZone:)] ? [value mutableCopy] : nil;
-    if ([mutableVersion isMemberOfClass:propertyType]) { /* if the target is a mutable of a immutable type we already have */
+    if ([mutableVersion isKindOfClass:propertyType]) { /* if the target is a mutable of a immutable type we already have */
         [self setValue:mutableVersion forKey:key];
         return;
     } /* This is the one instance where we can quickly cast down the value */

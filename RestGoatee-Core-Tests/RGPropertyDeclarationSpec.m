@@ -38,6 +38,13 @@ CLASS_SPEC(RGPropertyDeclaration)
     XCTAssert(raisedException);
 }
 
+- (void) testDealloc {
+    objc_property_t* properties = class_copyPropertyList([RGTestObject1 class], NULL);
+    RGPropertyDeclaration* declaration = [[RGPropertyDeclaration alloc] initWithProperty:*properties];
+    free(properties);
+    NSLog(@"%@ exists", declaration);
+}
+
 #pragma mark - properties
 - (void) testSimpleObject {
     NSDictionary* properties = [RGTestObject2 rg_propertyList];

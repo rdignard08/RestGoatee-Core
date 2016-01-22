@@ -1,5 +1,12 @@
 # RestGoatee CHANGELOG
 
+## 2.1.0
+- May no longer create an RGXMLNode without a name
+  - The document node now has a name `kRGXMLDocumentNodeKey`
+- Fixed leak in initialization
+- No longer converts a compatible array of objects into a single property of that type
+- The project is completely tested
+
 ## 2.0.5
 - Add deployment targets for OS X, TvOS, and WatchOS
 

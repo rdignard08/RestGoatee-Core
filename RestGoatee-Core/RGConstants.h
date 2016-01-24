@@ -24,7 +24,7 @@
 #import "RGDefines.h"
 
 /**
- Defines an enumeration that describes a given property's storage semantics.
+ @brief Defines an enumeration that describes a given property's storage semantics.
  */
 typedef NS_ENUM(NSUInteger, RGStorageSemantics) {
 /**

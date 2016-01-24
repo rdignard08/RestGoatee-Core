@@ -68,7 +68,7 @@ CLASS_SPEC(RestGoatee_Core)
 }
 
 - (void) testRGLogNil {
-    XCTAssertThrows(RGLog((NSString* _Nonnull)nil));
+    XCTAssertThrows(RGLog((NSString* RG_SUFFIX_NONNULL)nil));
 }
 
 #pragma mark - rg_swizzle

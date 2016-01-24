@@ -1,5 +1,10 @@
 # RestGoatee CHANGELOG
 
+## 2.1.2
+- `RGLog()` does not accept `nil` as input.
+- `RGLog()` is slightly faster.
+- `-[RGXMLSerializer initWithParser:]` is now the designated initializer.
+
 ## 2.1.1
 - Missing license declaration on some files.
 - The macros `RG_FILE_START` & `RG_FILE_END` are gone.

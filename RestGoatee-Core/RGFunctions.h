@@ -25,56 +25,70 @@
 #import "RGXMLNode.h"
 
 /**
- Returns the built-in date formats the library supports. Contains: ISO, `-[NSDate description]`.
+ @return the built-in date formats the library supports. Contains: ISO, `-[NSDate description]`.
  */
 NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NULLABLE rg_dateFormats(void) __attribute__((pure));
 
 /**
- `rg_threadsafe_formatter` returns a per thread instance of `NSDateFormatter`.  Never pass the returned object between threads.  Always set the objects properties (`dateFormat`, `locale`, `timezone`, etc.) before use.
+ @return a per thread instance of `NSDateFormatter`.  Never pass the returned object between threads.  Always set the objects properties (`dateFormat`, `locale`, `timezone`, etc.) before use.
  */
 NSDateFormatter* RG_SUFFIX_NONNULL rg_threadsafe_formatter(void);
 
 /**
- Returns the property name in as its canonical key.
+ @param utf8Input a `\0` terminated C string.  With unicodes must be UTF-8 encoded.  May not be `NULL`.
+ @return the property name in its canonical form.
  */
 NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNULL const utf8Input) __attribute__((pure));
 
 /**
- `rg_swizzle` is a basic implementation of swizzling.  It does not clobber the super class if the method is not on the subclass.
+ @discussion implements method swizzling.  Replaces the implementation identified by the selector `original` with the implementation identified by selector `replacement`.  Does not clobber the superclass's implementation of `original` if `cls` does not implement `original`.
+ @param cls the class onto which the replacement method selector should be grafted.  Technically allows `Nil` but pointless.
+ @param original the current selector whose associated implementation is the target of being changed.  Allows `NULL` which places no implementation on the selector identified by `replacement`.
+ @param replacement the replacement selector which will provide the new implementation for the original method.  Allows `NULL` which places no implementation on the selector identified by `original`.
  */
 void rg_swizzle(Class RG_SUFFIX_NULLABLE cls, SEL RG_SUFFIX_NULLABLE original, SEL RG_SUFFIX_NULLABLE replacement) __attribute__((cold));
 
 /**
- The `rg_log` function is the backing debug function of `RGLog`.  It logs the file name & line number of the call site.
+ @discussion is the backing debug function of the `RGLog()` macro.  It logs the file name & line number of the call site.
+ @param format the format string of the arguments _after_ lineNumber.  It is a programmer error to pass `nil`.
+ @param file the name of the file where the log was called.
+ @param lineNumber the line number of the log call.
+ @param ... values that will be called with `format` to generate the output.
  */
-void rg_log(NSString* RG_SUFFIX_NULLABLE format, ...) __attribute__((cold));
+void rg_log(NSString* RG_SUFFIX_NONNULL format, const char* RG_SUFFIX_NONNULL const file, unsigned long lineNumber, ...) __attribute__((cold, format(__NSString__, 1, 4)));
 
 /**
- Returns `YES` if the parameter `object` is of type `Class` but _not_ a meta-class.
+ @param object may be any type of object including `nil`.
+ @return `YES` if the parameter `object` is of type `Class` but _not_ a meta-class.
  */
 BOOL __attribute__((pure, always_inline, warn_unused_result)) rg_isClassObject(id RG_SUFFIX_NULLABLE object);
 
 /**
- Returns `YES` if object has the same type as `NSObject`'s meta class.
+ @param object may be any type of object including `nil`.
+ @return `YES` if object has the same type as `NSObject`'s meta class.
  */
 BOOL __attribute__((pure, always_inline, warn_unused_result)) rg_isMetaClassObject(id RG_SUFFIX_NULLABLE object);
 
 /**
- Returns `YES` if the given type can be adequately represented by an `NSString`.
+ @param cls the type to be tested for `NSString` similarity.
+ @return `YES` if the given type can be adequately represented by an `NSString`.
  */
 BOOL __attribute__((pure, always_inline, warn_unused_result)) rg_isInlineObject(Class RG_SUFFIX_NULLABLE cls);
 
 /**
- Returns `YES` if the given type can be adequately represented by an `NSArray`.
+ @param cls the type to be tested for `NSArray` similarity.
+ @return `YES` if the given type can be adequately represented by an `NSArray`.
  */
 BOOL __attribute__((pure, always_inline, warn_unused_result)) rg_isCollectionObject(Class RG_SUFFIX_NULLABLE cls);
 
 /**
- Returns `YES` if the given type is a "key => value" type.  Thus it can be represented by an `NSDictionary`.
+ @param cls the type to be tested for `NSDictionary` similarity.
+ @return `YES` if the given type is a "key => value" type.  Thus it can be represented by an `NSDictionary`.
  */
 BOOL __attribute__((pure, always_inline, warn_unused_result)) rg_isKeyedCollectionObject(Class RG_SUFFIX_NULLABLE cls);
 
 /**
- Returns `YES` if the given class conforms to `RGDataSource`.  Necessary due to some bug (the 2nd clause).
+ @param cls the type to be tested for conformance to `RGDataSource`.  Just `RGXMLNode` and `NSDictionary` by default.
+ @return `YES` if the given class conforms to `RGDataSource`.  Necessary due to some bug (the 2nd clause).
  */
 BOOL __attribute__((pure, always_inline, warn_unused_result)) rg_isDataSourceClass(Class RG_SUFFIX_NULLABLE cls);

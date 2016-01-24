@@ -34,6 +34,10 @@
 @synthesize rootNode = _rootNode;
 @synthesize currentString = _currentString;
 
+- (RG_PREFIX_NONNULL instancetype) init {
+    return [self initWithParser:nil];
+}
+
 - (RG_PREFIX_NONNULL instancetype) initWithParser:(RG_PREFIX_NULLABLE NSXMLParser*)parser {
     self = [super init];
     self.parser = parser;

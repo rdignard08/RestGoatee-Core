@@ -41,7 +41,7 @@ NSDateFormatter* RG_SUFFIX_NONNULL rg_threadsafe_formatter(void);
 NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNULL const utf8Input) __attribute__((pure));
 
 /**
- @discussion implements method swizzling.  Replaces the implementation identified by the selector `original` with the implementation identified by selector `replacement`.  Does not clobber the superclass's implementation of `original` if `cls` does not implement `original`.
+ @brief This function implements method swizzling.  Replaces the implementation identified by the selector `original` with the implementation identified by selector `replacement`.  Does not clobber the superclass's implementation of `original` if `cls` does not implement `original`.
  @param cls the class onto which the replacement method selector should be grafted.  Technically allows `Nil` but pointless.
  @param original the current selector whose associated implementation is the target of being changed.  Allows `NULL` which places no implementation on the selector identified by `replacement`.
  @param replacement the replacement selector which will provide the new implementation for the original method.  Allows `NULL` which places no implementation on the selector identified by `original`.
@@ -49,7 +49,7 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
 void rg_swizzle(Class RG_SUFFIX_NULLABLE cls, SEL RG_SUFFIX_NULLABLE original, SEL RG_SUFFIX_NULLABLE replacement) __attribute__((cold));
 
 /**
- @discussion is the backing debug function of the `RGLog()` macro.  It logs the file name & line number of the call site.
+ @brief This function is the backing debug function of the `RGLog()` macro.  It logs the file name & line number of the call site.
  @param format the format string of the arguments _after_ lineNumber.  It is a programmer error to pass `nil`.
  @param file the name of the file where the log was called.
  @param lineNumber the line number of the log call.

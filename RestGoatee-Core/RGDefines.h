@@ -25,44 +25,99 @@
 
 #ifndef RG_NULLABLE_PROPERTY
     #if __has_feature(nullability)
+/**
+ @brief This property can be `nil`.
+ */
         #define RG_NULLABLE_PROPERTY(...) (nullable, ## __VA_ARGS__)
+/**
+ @brief This property can not be `nil`.
+ */
         #define RG_NONNULL_PROPERTY(...) (nonnull, ## __VA_ARGS__)
+/**
+ @brief The getter of this property can never return `nil`, but `nil` is an acceptable assignment.
+ */
         #define RG_NULL_RESETTABLE_PROPERTY(...) (null_resettable, ## __VA_ARGS__)
+/**
+ @brief This declaration goes before a variable and allows `nil` values.
+ */
         #define RG_PREFIX_NULLABLE nullable
+/**
+ @brief This declaration goes after a variable and does not allows `nil` values.
+ */
         #define RG_SUFFIX_NULLABLE __nullable
+/**
+ @brief This declaration goes before a variable that does not allow `nil` values.
+ */
         #define RG_PREFIX_NONNULL nonnull
+/**
+ @brief This declaration goes after a variable that does not allow `nil` values.
+ */
         #define RG_SUFFIX_NONNULL __nonnull
     #else
+/**
+ @brief This property can be `nil`.
+ */
         #define RG_NULLABLE_PROPERTY(...) (__VA_ARGS__)
+/**
+ @brief This property can not be `nil`.
+ */
         #define RG_NONNULL_PROPERTY(...) (__VA_ARGS__)
+/**
+ @brief The getter of this property can never return `nil`, but `nil` is an acceptable assignment.
+ */
         #define RG_NULL_RESETTABLE_PROPERTY(...) (__VA_ARGS__)
+/**
+ @brief This declaration goes before a variable and allows `nil` values.
+ */
         #define RG_PREFIX_NULLABLE
+/**
+ @brief This declaration goes after a variable and does not allows `nil` values.
+ */
         #define RG_SUFFIX_NULLABLE
+/**
+ @brief This declaration goes before a variable that does not allow `nil` values.
+ */
         #define RG_PREFIX_NONNULL
+/**
+ @brief This declaration goes after a variable that does not allow `nil` values.
+ */
         #define RG_SUFFIX_NONNULL
     #endif
 #endif
 
 #ifndef RG_GENERIC
     #if __has_feature(objc_generics)
+/**
+ @brief This collection only accepts inputs of the given type and only returns the same.
+ */
         #define RG_GENERIC(...) < __VA_ARGS__ >
     #else
+/**
+ @brief This collection only accepts inputs of the given type and only returns the same.
+ */
         #define RG_GENERIC(...)
     #endif
 #endif
 
-/* `NULL` and `nil` are typed `void*` and I need it to be typed `void` */
 #ifndef RG_VOID_NOOP
+/**
+ @brief `NULL` and `nil` are typed `void*` and I need it to be typed `void`
+ */
     #define RG_VOID_NOOP ((void)0)
 #endif
 
-/* enables a selector declarations to be used in place of an `NSString`, provides spell checking. */
 #ifndef RG_STRING_SEL
+/**
+ @brief Enables selector declarations to be used in place of an `NSString`, provides spell checking.
+ */
     #define RG_STRING_SEL(sel) NSStringFromSelector(@selector(sel))
 #endif
 
 #ifndef RGLog
     #ifdef DEBUG
+/**
+ @brief A complete `NSLog()` replacement, but does not log in production.
+ */
         #define RGLog(format, ...)                          \
             rg_log(format, ({                               \
                 const size_t length = sizeof(__FILE__) - 1; \
@@ -78,6 +133,9 @@
             }), (unsigned long)__LINE__, ##__VA_ARGS__)
     #else
         /* we define out with `RG_VOID_NOOP` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */
+/**
+ @brief A complete `NSLog()` replacement, but does not log in production.
+ */
         #define RGLog(...) RG_VOID_NOOP
     #endif
 #endif

@@ -24,23 +24,22 @@
 #import "RGDefines.h"
 
 /**
- These are the methods that a data source must implement in order to be consumable by the `+[NSObject objectFromDataSource:inContext:]` family of methods.
- 
- Currently `NSDictionary` and `RGXMLNode` (the parsed output from `NSXMLParser`) are supported implicitly.
- 
- must be able to `for X in id<RGDataSource>`
+@brief These are the methods that a data source must implement in order to be consumable by the `+[NSObject objectFromDataSource:inContext:]` family of methods.
+@discussion Currently `NSDictionary` and `RGXMLNode` (the parsed output from `NSXMLParser`) are supported implicitly.  Must be able to `for X in id<RGDataSource>`
  */
 @protocol RGDataSource <NSObject, NSFastEnumeration>
 
 @required
 
 /**
- The data source must support `id value = [dataSource valueForKeyPath:@"foo.bar"]`.
+ @brief The data source must support `id value = [dataSource valueForKeyPath:@"foo.bar"]`.
+ @param string the key path to search the data structure for the associated value.
+ @return the value identified by key path `string`.
  */
 - (RG_PREFIX_NULLABLE id) valueForKeyPath:(RG_PREFIX_NONNULL NSString*)string;
 
 /**
- Returns an array of the keys which are present in this data source (but NOT sub data sources).
+ @return an array of the keys which are present in this data source (but NOT sub data sources).
  */
 - (RG_PREFIX_NONNULL NSArray RG_GENERIC(NSString*) *) allKeys;
 

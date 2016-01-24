@@ -28,30 +28,30 @@
  */
 typedef NS_ENUM(NSUInteger, RGStorageSemantics) {
 /**
- The value passed to the setter is assigned primitively.  Does not retain the assigned object.  Does not become `nil` when there are no strong references.  Equivalent to `unsafe_unretained` for object pointers.
+ @brief The value passed to the setter is assigned primitively.  Does not retain the assigned object.  Does not become `nil` when there are no strong references.  Equivalent to `unsafe_unretained` for object pointers.
 */
     kRGPropertyAssign = 0,
 /**
- The value passed to the setter is assigned weakly.  Does not retain the assigned object.  The return value is `nil` when there are no strong references.
+ @brief The value passed to the setter is assigned weakly.  Does not retain the assigned object.  The return value is `nil` when there are no strong references.
 */
     kRGPropertyWeak = 1,
 /**
- The value passed to the setter is sent `-retain` before being assigned to the backing ivar.  Equivalent to `retain`.
+ @brief The value passed to the setter is sent `-retain` before being assigned to the backing ivar.  Equivalent to `retain`.
 */
     kRGPropertyStrong = 2,
 /**
- The value passed to the setter is sent `-copy` before being assigned to the backing ivar.
+ @brief The value passed to the setter is sent `-copy` before being assigned to the backing ivar.
  */
     kRGPropertyCopy = 3
 };
 
 /**
- This is the largest memory allocation that will be made on the stack for a single identifer (VLA).
+ @brief This is the largest memory allocation that will be made on the stack for a single identifer (VLA).
  */
 FOUNDATION_EXPORT const size_t kRGMaxAutoSize;
 
 /**
- This key is inserted into `NSDictionary` instances which are serialized by this library.  It facilitates easier reconversion back to the original type.  For example:
+ @brief This key is inserted into `NSDictionary` instances which are serialized by this library.  It facilitates easier reconversion back to the original type.  For example:
  @code
  FooBar* fooBar = ...;
  ...
@@ -63,36 +63,36 @@ FOUNDATION_EXPORT const size_t kRGMaxAutoSize;
 FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGSerializationKey;
 
 /**
- This is the key used internally to store the value returned by `rg_threadsafe_formatter()`.  You must not use this key with the dictionary at `-[NSThread threadDictionary]`.
+ @brief This is the key used internally to store the value returned by `rg_threadsafe_formatter()`.  You must not use this key with the dictionary at `-[NSThread threadDictionary]`.
  */
 FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGDateFormatterKey;
 
 /**
- This constant is used to identify the implicit document node.
+ @brief This constant is used to identify the implicit document node.
  */
 FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGXMLDocumentNodeKey;
 
 /**
- When serialized to an `NSDictionary`, the `innerXML` of the node will appear on this key.
+ @brief When serialized to an `NSDictionary`, the `innerXML` of the node will appear on this key.
  */
 FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGInnerXMLKey;
 
 /**
- Will be `objc_getClass("NSObject")` i.e. `[NSObject self]`.
+ @brief Will be `objc_getClass("NSObject")` i.e. `[NSObject self]`.
  */
 FOUNDATION_EXPORT Class RG_SUFFIX_NONNULL rg_NSObjectClass;
 
 /**
- Will be `objc_getMetaClass("NSObject")`.
+ @brief Will be `objc_getMetaClass("NSObject")`.
  */
 FOUNDATION_EXPORT Class RG_SUFFIX_NONNULL rg_NSObjectMetaClass;
 
 /**
- Will be `[NSManagedObject self]` or `Nil` (if not linked/available).
+ @brief Will be `[NSManagedObject self]` or `Nil` (if not linked/available).
  */
 FOUNDATION_EXPORT Class RG_SUFFIX_NULLABLE rg_NSManagedObject;
 
 /**
- Will be `[NSEntityDescription self]` or `Nil` (if not linked/available).
+ @brief Will be `[NSEntityDescription self]` or `Nil` (if not linked/available).
  */
 FOUNDATION_EXPORT Class RG_SUFFIX_NULLABLE rg_NSEntityDescription;

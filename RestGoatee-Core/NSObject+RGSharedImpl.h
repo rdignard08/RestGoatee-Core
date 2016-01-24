@@ -28,17 +28,17 @@
 #import <objc/runtime.h>
 
 /**
- This is a private category which contains all the of the methods used jointly by the categories `RGDeserialization` and `RGSerialization`.
+ @brief This is a private category which contains all the of the methods used jointly by the categories `RGDeserialization` and `RGSerialization`.
  */
 @interface NSObject (RGSharedImpl)
 
 /**
- This is describes the meta data of the given class.  It declares the properties in an object-oriented manner.  The keys are the names of the properties keyed to their declaration.
+ @brief This is describes the meta data of the given class.  It declares the properties in an object-oriented manner.  The keys are the names of the properties keyed to their declaration.
  */
 + (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, RGPropertyDeclaration*) *) rg_propertyList;
 
 /**
- This describes the meta data of the class.  The keys are the canonical representation of the property name mapped to an `RGPropertyDeclaration` object.
+ @brief This describes the meta data of the class.  The keys are the canonical representation of the property name mapped to an `RGPropertyDeclaration` object.
  */
 + (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, RGPropertyDeclaration*) *) rg_canonicalPropertyList;
 

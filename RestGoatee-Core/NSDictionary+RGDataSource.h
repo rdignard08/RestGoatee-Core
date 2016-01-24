@@ -24,7 +24,7 @@
 #import "RGDataSource.h"
 
 /**
- `NSDictionary` already declares and implements all the methods of `RGDataSource`.  This allows us to pass an `NSDictionary` where ever a variable is typed `id<RGDataSource>`.
+ @brief `NSDictionary` already declares and implements all the methods of `RGDataSource`.  This allows us to pass an `NSDictionary` where ever a variable is typed `id<RGDataSource>`.
  */
 @interface NSDictionary (RGDataSource) <RGDataSource>
 

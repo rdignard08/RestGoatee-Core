@@ -25,42 +25,39 @@
 #import "RGSerializable.h"
 
 /**
- The `RGXMLNode` is the parse result of `NSXMLParser`.
+ @brief The `RGXMLNode` is the parse result of `NSXMLParser`.
  */
 @interface RGXMLNode : NSObject <RGDataSource>
 
 /**
- Set when `-addChildNode:` is called.  A weak reference to the enclosing node.
+ @brief Set when `-addChildNode:` is called.  A weak reference is made to the enclosing node.
  */
 @property RG_NULLABLE_PROPERTY(nonatomic, weak, readonly) RGXMLNode* parentNode;
 
 /**
- Attributes come from <object id="123" name="cool"> and will equal @{ "id" : "123", "name" : "cool" }.
- 
- Value can be obtained through valueForKeyPath:, @"object.id", in this example.
- 
- You may mutate the collection.
+ @brief Attributes come from `... id="123" name="cool"` and will equal @{ "id" : "123", "name" : "cool" }.  The value can be obtained through valueForKeyPath:, @"object.id", in this example.
+ @discussion You may mutate the collection.
  */
 @property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableDictionary RG_GENERIC(NSString*, NSString*) * attributes;
 
 /**
- The name of the tag.  `<foobar>` will have the value of `foobar` here.
+ @brief The name of the tag.  "foobar" enclosed in angle brackets will have the value of `foobar` here.
  */
 @property RG_NONNULL_PROPERTY(nonatomic, strong) NSString* name;
 
 /**
- The innerXML if any, including unwrapped CDATA.  self-closing nodes will have nil.  adjacent open and close tags will be the empty string.
+ @brief The inner XML if any, including unwrapped CDATA.  self-closing nodes will have `nil`.  adjacent open and close tags will be the empty string.
  */
 @property RG_NULLABLE_PROPERTY(nonatomic, strong) NSString* innerXML;
 
 /**
- This property contains any sub-nodes of this node.  Those sub-nodes have this node as the value of their `parentNode` property.
+ @brief This property contains any sub-nodes of this node.  Those sub-nodes have this node as the value of their `parentNode` property.
  */
 @property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong, readonly) NSArray RG_GENERIC(RGXMLNode*) * childNodes;
 
 /**
- Returns a node with the given name.  You must provide a nonnull name.  It is a programmer error to invoke `-init`.
- @param name The name or identifier of this node.  Must not be nil.
+ @param name The name or identifier of this node.  Must not be `nil`.
+ @return a node with the given name.  You must provide a `nonnull` name.  It is a programmer error to invoke `-init`.
  */
 - (RG_PREFIX_NONNULL instancetype) initWithName:(RG_PREFIX_NONNULL NSString*)name NS_DESIGNATED_INITIALIZER;
 
@@ -70,17 +67,17 @@
 - (RG_PREFIX_NULLABLE instancetype) init NS_DESIGNATED_INITIALIZER;
 
 /**
- Returns the receiver and all of its children as a dictionary representation.  The `innerXML` of the node is returned on the key `kRGInnerXMLKey`.
+ @return the receiver and all of its children as a dictionary representation.  The `innerXML` of the node is returned on the key `kRGInnerXMLKey`.
  */
 - (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation;
 
 /**
- May return either `NSMutableArray<RGXMLNode*>` or `nullable RGXMLNode`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
+ @return either `NSMutableArray` or `nullable RGXMLNode`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
  */
-- (RG_PREFIX_NULLABLE id) childrenNamed:(RG_PREFIX_NULLABLE NSString*)name;
+- (RG_PREFIX_NULLABLE id) childrenNamed:(RG_PREFIX_NULLABLE NSString*) name;
 
 /**
- Call this method to insert a new node into this object's `childNodes` property.
+ @brief Call this method to insert a new node into this object's `childNodes` property.
  */
 - (void) addChildNode:(RG_PREFIX_NONNULL RGXMLNode*)node;
 

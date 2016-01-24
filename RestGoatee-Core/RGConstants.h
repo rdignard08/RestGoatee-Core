@@ -24,13 +24,25 @@
 #import "RGDefines.h"
 
 /**
- Defines an enumeration that describes a given property's storage semantics.  unsafe_unretained == assign, retain == strong.
+ Defines an enumeration that describes a given property's storage semantics.
  */
 typedef NS_ENUM(NSUInteger, RGStorageSemantics) {
-    kRGPropertyAssign = 0x00,
-    kRGPropertyWeak = 0x01,
-    kRGPropertyStrong = 0x10,
-    kRGPropertyCopy = 0x11
+/**
+ The value passed to the setter is assigned primitively.  Does not retain the assigned object.  Does not become `nil` when there are no strong references.  Equivalent to `unsafe_unretained` for object pointers.
+*/
+    kRGPropertyAssign = 0,
+/**
+ The value passed to the setter is assigned weakly.  Does not retain the assigned object.  The return value is `nil` when there are no strong references.
+*/
+    kRGPropertyWeak = 1,
+/**
+ The value passed to the setter is sent `-retain` before being assigned to the backing ivar.  Equivalent to `retain`.
+*/
+    kRGPropertyStrong = 2,
+/**
+ The value passed to the setter is sent `-copy` before being assigned to the backing ivar.
+ */
+    kRGPropertyCopy = 3
 };
 
 /**
@@ -39,19 +51,19 @@ typedef NS_ENUM(NSUInteger, RGStorageSemantics) {
 FOUNDATION_EXPORT const size_t kRGMaxAutoSize;
 
 /**
- This key is inserted into `NSDictionary*` instances which are serialized by this library.  It facilitates easier reconversion back to the original type.  Usage:
- ```
+ This key is inserted into `NSDictionary` instances which are serialized by this library.  It facilitates easier reconversion back to the original type.  For example:
+ @code
  FooBar* fooBar = ...;
  ...
  NSDictionary* serialized = [fooBar dictionaryRepresentation];
  ...
  id originalObject = [NSClassFromString(serialized[kRGSerializationKey]) objectFromDataSource:serialized];
- ```
+ @endcode
  */
 FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGSerializationKey;
 
 /**
- This is the key used interally to store the value returned by `rg_threadsafe_formatter()`.  You must not use this key with the dictionary at `-[NSThread threadDictionary]`.
+ This is the key used internally to store the value returned by `rg_threadsafe_formatter()`.  You must not use this key with the dictionary at `-[NSThread threadDictionary]`.
  */
 FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGDateFormatterKey;
 
@@ -61,7 +73,7 @@ FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGDateFormatterKey;
 FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGXMLDocumentNodeKey;
 
 /**
- When serialized to an NSDictionary, the `innerXML` of the node will appear on this key.
+ When serialized to an `NSDictionary`, the `innerXML` of the node will appear on this key.
  */
 FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGInnerXMLKey;
 

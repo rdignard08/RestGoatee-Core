@@ -52,8 +52,9 @@
 
 /**
  @brief This property contains any sub-nodes of this node.  Those sub-nodes have this node as the value of their `parentNode` property.
+ @warning While this property is mutable, you must not mutate it directly.
  */
-@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong, readonly) NSArray RG_GENERIC(RGXMLNode*) * childNodes;
+@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong, readonly) NSMutableArray RG_GENERIC(RGXMLNode*) * childNodes;
 
 /**
  @param name The name or identifier of this node.  Must not be `nil`.

@@ -58,7 +58,7 @@
     return _keys;
 }
 
-- (RG_PREFIX_NONNULL NSArray RG_GENERIC(RGXMLNode*) *) childNodes {
+- (RG_PREFIX_NONNULL NSMutableArray RG_GENERIC(RGXMLNode*) *) childNodes {
     if (!_childNodes) {
         _childNodes = [NSMutableArray new];
     }
@@ -75,7 +75,7 @@
 #pragma mark - Public Methods
 - (void) addChildNode:(RG_PREFIX_NONNULL RGXMLNode*)node {
     node->_parentNode = self;
-    [(NSMutableArray*)self.childNodes addObject:node];
+    [self.childNodes addObject:node];
 }
 
 - (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation {
@@ -96,8 +96,9 @@
                 }
                 ret[childNode.name] = replacementContainer;
             } else if ([children isKindOfClass:[RGXMLNode self]]) {
-                NSMutableDictionary RG_GENERIC(NSString*, NSString*) * value = [(RGXMLNode*)children attributes];
-                [value addEntriesFromDictionary:[(RGXMLNode*)children dictionaryRepresentation]];
+                RGXMLNode* xmlChild = children;
+                NSMutableDictionary RG_GENERIC(NSString*, NSString*) * value = [xmlChild.attributes mutableCopy];
+                [value addEntriesFromDictionary:[xmlChild dictionaryRepresentation]];
                 ret[childNode.name] = value;
             }
         }

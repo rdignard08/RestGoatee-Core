@@ -49,7 +49,8 @@
     } else if (rg_isKeyedCollectionObject([self class])) { /* a dictionary / RGXMLNode */
         NSMutableDictionary* ret = [NSMutableDictionary new];
         for (NSString* key in (id<NSFastEnumeration>)self) {
-            ret[key] = [(NSObject*)[self valueForKey:key] rg_dictionaryHelper];
+            NSObject* targetObject = [self valueForKey:key];
+            ret[key] = [targetObject rg_dictionaryHelper];
         }
         return ret;
     } else { /* any old schleb object */
@@ -57,7 +58,8 @@
         NSArray* keys = [[self class] respondsToSelector:@selector(serializableKeys)] ? [[self class] serializableKeys] : [[self class] rg_propertyList].allKeys;
         for (NSString* propertyName in keys) {
             if ([rg_NSManagedObject instancesRespondToSelector:NSSelectorFromString(propertyName)] || [NSObject instancesRespondToSelector:NSSelectorFromString(propertyName)]) continue;
-            ret[propertyName] = [(NSObject*)([self valueForKey:propertyName] ?: [NSNull null]) rg_dictionaryHelper];
+            NSObject* targetObject = [self valueForKey:propertyName] ?: [NSNull null];
+            ret[propertyName] = [targetObject rg_dictionaryHelper];
         }
         ret[kRGSerializationKey] = NSStringFromClass([self class]);
         return ret;

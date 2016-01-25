@@ -1,5 +1,10 @@
 # RestGoatee CHANGELOG
 
+## 2.1.3
+- Project is once again has 100% branch coverage
+- `childNodes` is now exposed as `NSMutableArray` (it always was)
+- Iterating over `RGXMLNode` is slightly faster
+
 ## 2.1.2
 - `RGLog()` does not accept `nil` as input.
 - `RGLog()` is slightly faster.

@@ -25,7 +25,7 @@
 
 @interface RGXMLNode ()
 
-@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableArray RG_GENERIC(NSString*) * keys;
+@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableArray RG_GENERIC(NSString*) * allKeys;
 
 @end
 
@@ -47,14 +47,14 @@
 }
 
 #pragma mark - Properties
-- (RG_PREFIX_NONNULL NSMutableArray RG_GENERIC(NSString*) *) keys {
-    if (!_keys) {
-        _keys = [self.attributes.allKeys mutableCopy];
+- (RG_PREFIX_NONNULL NSMutableArray RG_GENERIC(NSString*) *) allKeys {
+    if (!_allKeys) {
+        _allKeys = [self.attributes.allKeys mutableCopy];
         for (RGXMLNode* child in self.childNodes) {
-            [_keys addObject:child.name];
+            [_allKeys addObject:child.name];
         }
     }
-    return _keys;
+    return _allKeys;
 }
 
 - (RG_PREFIX_NONNULL NSMutableArray RG_GENERIC(RGXMLNode*) *) childNodes {
@@ -116,14 +116,10 @@
 }
 
 #pragma mark - RGDataSource
-- (RG_PREFIX_NONNULL NSArray RG_GENERIC(NSString*) *) allKeys {
-    return self.keys;
-}
-
 - (NSUInteger) countByEnumeratingWithState:(RG_PREFIX_NONNULL NSFastEnumerationState*)state objects:(__unsafe_unretained id[])buffer count:(NSUInteger)len {
     NSUInteger ret = [self.allKeys countByEnumeratingWithState:state objects:buffer count:len];
     if (!ret) {
-        self.keys = nil;
+        self.allKeys = nil;
     }
     return ret;
 }

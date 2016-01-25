@@ -30,7 +30,6 @@
 @end
 
 @implementation RGXMLNode
-@synthesize parentNode = _parentNode;
 @synthesize attributes = _attributes;
 @synthesize childNodes = _childNodes;
 

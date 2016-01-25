@@ -35,9 +35,9 @@
     self = [super init];
     if (self) {
         [self initializeName:property];
-        uint32_t attributeCount = 0;
+        unsigned int attributeCount = 0;
         objc_property_attribute_t* attributes = property_copyAttributeList(property, &attributeCount);
-        for (uint32_t i = 0; i < attributeCount; i++) {
+        for (unsigned int i = 0; i < attributeCount; i++) {
             objc_property_attribute_t attribute = attributes[i];
             /* The first character is the type encoding; the other field is a value of some kind (if anything)
              See: https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtPropertyIntrospection.html */

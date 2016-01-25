@@ -36,7 +36,7 @@
         [rg_canonicalPropertyList addEntriesFromDictionary:[[self superclass] rg_canonicalPropertyList]];
         unsigned int count;
         objc_property_t* properties = class_copyPropertyList(self, &count);
-        for (uint32_t i = 0; i < count; i++) {
+        for (unsigned int i = 0; i < count; i++) {
             RGPropertyDeclaration* declaration = [[RGPropertyDeclaration alloc] initWithProperty:properties[i]];
             rg_propertyList[declaration.name] = declaration;
             rg_canonicalPropertyList[declaration.canonicalName] = declaration;

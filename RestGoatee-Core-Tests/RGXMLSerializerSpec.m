@@ -26,6 +26,10 @@
 
 CLASS_SPEC(RGXMLSerializer)
 
+- (void) testInit {
+    XCTAssertNoThrow([RGXMLSerializer new]);
+}
+
 - (void) testXMLDeserialize {
     NSXMLParser* parser = [[NSXMLParser alloc] initWithData:(NSData* RG_SUFFIX_NONNULL)[@"<xml><child1 attribute=\"value\"></child1><child2>some data</child2><child1><child4/></child1></xml>" dataUsingEncoding:NSUTF8StringEncoding]];
     RGXMLSerializer* serializer = [[RGXMLSerializer alloc] initWithParser:parser];

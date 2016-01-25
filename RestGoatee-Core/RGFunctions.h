@@ -27,18 +27,18 @@
 /**
  @return the built-in date formats the library supports. Contains: ISO, `-[NSDate description]`.
  */
-NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NULLABLE rg_dateFormats(void) __attribute__((pure));
+NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL rg_dateFormats(void) __attribute__((pure, returns_nonnull));
 
 /**
  @return a per thread instance of `NSDateFormatter`.  Never pass the returned object between threads.  Always set the objects properties (`dateFormat`, `locale`, `timezone`, etc.) before use.
  */
-NSDateFormatter* RG_SUFFIX_NONNULL rg_threadsafe_formatter(void);
+NSDateFormatter* RG_SUFFIX_NONNULL rg_threadsafe_formatter(void) __attribute__((hot, returns_nonnull));
 
 /**
  @param utf8Input a `\0` terminated C string.  With unicodes must be UTF-8 encoded.  May not be `NULL`.
  @return the property name in its canonical form.
  */
-NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNULL const utf8Input) __attribute__((pure));
+NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNULL const utf8Input) __attribute__((pure, nonnull, returns_nonnull));
 
 /**
  @brief This function implements method swizzling.  Replaces the implementation identified by the selector `original` with the implementation identified by selector `replacement`.  Does not clobber the superclass's implementation of `original` if `cls` does not implement `original`.
@@ -55,40 +55,40 @@ void rg_swizzle(Class RG_SUFFIX_NULLABLE cls, SEL RG_SUFFIX_NULLABLE original, S
  @param lineNumber the line number of the log call.
  @param ... values that will be called with `format` to generate the output.
  */
-void rg_log(NSString* RG_SUFFIX_NONNULL format, const char* RG_SUFFIX_NONNULL const file, unsigned long lineNumber, ...) __attribute__((cold, format(__NSString__, 1, 4)));
+void rg_log(NSString* RG_SUFFIX_NONNULL format, const char* RG_SUFFIX_NONNULL const file, unsigned long lineNumber, ...) __attribute__((cold, format(__NSString__, 1, 4), nonnull(1, 2)));
 
 /**
  @param object may be any type of object including `nil`.
  @return `YES` if the parameter `object` is of type `Class` but _not_ a meta-class.
  */
-BOOL __attribute__((pure, always_inline, warn_unused_result)) rg_isClassObject(id RG_SUFFIX_NULLABLE object);
+BOOL rg_isClassObject(id RG_SUFFIX_NULLABLE object) __attribute__((pure, always_inline, warn_unused_result));
 
 /**
  @param object may be any type of object including `nil`.
  @return `YES` if object has the same type as `NSObject`'s meta class.
  */
-BOOL __attribute__((pure, always_inline, warn_unused_result)) rg_isMetaClassObject(id RG_SUFFIX_NULLABLE object);
+BOOL rg_isMetaClassObject(id RG_SUFFIX_NULLABLE object) __attribute__((pure, always_inline, warn_unused_result));
 
 /**
  @param cls the type to be tested for `NSString` similarity.
  @return `YES` if the given type can be adequately represented by an `NSString`.
  */
-BOOL __attribute__((pure, always_inline, warn_unused_result)) rg_isInlineObject(Class RG_SUFFIX_NULLABLE cls);
+BOOL rg_isInlineObject(Class RG_SUFFIX_NULLABLE cls) __attribute__((pure, always_inline, warn_unused_result));
 
 /**
  @param cls the type to be tested for `NSArray` similarity.
  @return `YES` if the given type can be adequately represented by an `NSArray`.
  */
-BOOL __attribute__((pure, always_inline, warn_unused_result)) rg_isCollectionObject(Class RG_SUFFIX_NULLABLE cls);
+BOOL rg_isCollectionObject(Class RG_SUFFIX_NULLABLE cls) __attribute__((pure, always_inline, warn_unused_result));
 
 /**
  @param cls the type to be tested for `NSDictionary` similarity.
  @return `YES` if the given type is a "key => value" type.  Thus it can be represented by an `NSDictionary`.
  */
-BOOL __attribute__((pure, always_inline, warn_unused_result)) rg_isKeyedCollectionObject(Class RG_SUFFIX_NULLABLE cls);
+BOOL rg_isKeyedCollectionObject(Class RG_SUFFIX_NULLABLE cls) __attribute__((pure, always_inline, warn_unused_result));
 
 /**
  @param cls the type to be tested for conformance to `RGDataSource`.  Just `RGXMLNode` and `NSDictionary` by default.
  @return `YES` if the given class conforms to `RGDataSource`.  Necessary due to some bug (the 2nd clause).
  */
-BOOL __attribute__((pure, always_inline, warn_unused_result)) rg_isDataSourceClass(Class RG_SUFFIX_NULLABLE cls);
+BOOL rg_isDataSourceClass(Class RG_SUFFIX_NULLABLE cls) __attribute__((pure, always_inline, warn_unused_result));

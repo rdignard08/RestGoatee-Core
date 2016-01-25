@@ -69,8 +69,7 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
 void rg_log(NSString* RG_SUFFIX_NONNULL format, const char* RG_SUFFIX_NONNULL const file, unsigned long lineNumber, ...) {
     va_list variableArguments;
     va_start(variableArguments, lineNumber);
-    fprintf(stderr, "[%s:%lu] ", file, lineNumber);
-    fprintf(stderr, "%s\n", [[NSString alloc] initWithFormat:format arguments:variableArguments].UTF8String);
+    fprintf(stderr, "[%s:%lu] %s\n", file, lineNumber, [[NSString alloc] initWithFormat:format arguments:variableArguments].UTF8String);
     va_end(variableArguments);
 }
 

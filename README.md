@@ -65,7 +65,7 @@ assert(derived.doubleValue == 3.14);
 assert([derived.dateValue timeIntervalSince1970] == 1453075980.0);
 assert(derived.rawValue == [NSNull null]);
 ```
-Making an object is as simple as that.  Supported data sources out of the box are NSDictionary (for JSON) and RGXMLNode (for XML), but the protocol is public and you can freely make your own data source.
+Making an object is as simple as that.  Supported data sources out of the box are `NSDictionary` (for JSON) and `RGXMLNode` (for XML), but the protocol is public and you can freely make your own data source.
 
 ##### What if not all properties are specified?
 ```objc
@@ -85,7 +85,7 @@ assert(derived.stringValue == nil);
 ```
 The rules are pretty simple, and guarantee you will never break the type system (an `NSURL*` property will always have an `NSURL` or `nil`).
 - If the value provided has the same type or a sub type of the property type it gets set to that value.
-- If the value can be converted to the type of the property (`NSNumber` => `NSString` through `.stringValue`) it gets set to the converted value.
+- If the value can be converted to the type of the property (`NSNumber` => `NSString` through `.stringValue` for example) it gets set to the converted value.
 - Otherwise the property remains unset and the value is discarded.  You'll receive a runtime warning when this happens.
 - As a consequence, properties of type `id` or `NSObject*` will receive any value.
 

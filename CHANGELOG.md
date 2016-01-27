@@ -1,5 +1,9 @@
 # RestGoatee CHANGELOG
 
+## 2.1.4
+- `objectsFromArraySource:inContext:` now correctly indicates that the return values are a kind of NSObject not id
+- `RGLog()` is slightly faster (again)
+
 ## 2.1.3
 - Project is once again has 100% branch coverage
 - `childNodes` is now exposed as `NSMutableArray` (it always was)

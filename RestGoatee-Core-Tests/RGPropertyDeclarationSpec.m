@@ -64,6 +64,20 @@ CLASS_SPEC(RGPropertyDeclaration)
 }
 
 #pragma mark - rg_canonical
+- (void) testSpeed {
+    unsigned char* characters = calloc(256, 1);
+    for (unsigned char i = 0; i < 255; i++) {
+        characters[i] = i + 1;
+    }
+    [self measureBlock:^{
+        for (int i = 0; i < 100000; i++) {
+            NSString* foo = rg_canonical_form((char*)characters);
+            XCTAssert([foo isEqual:@"0123456789abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"]);
+        }
+    }];
+    free(characters);
+}
+
 - (void) testSpaces {
     XCTAssert([rg_canonical_form("          ") isEqual:@""]);
 }

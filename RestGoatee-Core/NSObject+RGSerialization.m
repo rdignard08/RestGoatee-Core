@@ -28,14 +28,14 @@
 
 - (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation {
     NSMutableDictionary* ret = [self rg_dictionaryHelper];
-    NSAssert([ret isKindOfClass:[NSDictionary self]], @"Called `dictionaryRepresentation` on an object whose correct representation is not a dictionary");
+    NSAssert([ret isKindOfClass:[NSDictionary self]], @"Called `dictionaryRepresentation` on an object whose correct"
+             @"representation is not a dictionary");
     return ret;
 }
 
 - (RG_PREFIX_NONNULL id) rg_dictionaryHelper {
     /* enabled when debugging so you can find your logic errors while building, on stack overflow gdb will fail */
     NSAssert([NSThread callStackSymbols].count < kRGMaxAutoSize, @"Too deep, probably have a cycle");
-    
     if ([[self class] isSubclassOfClass:[NSNull self]]) {
         return self;
     } else if (rg_isInlineObject([self class]) || rg_isClassObject(self)) { /* classes can be stored as strings too */
@@ -47,19 +47,27 @@
         }
         return ret;
     } else if (rg_isKeyedCollectionObject([self class])) { /* a dictionary / RGXMLNode */
-        NSMutableDictionary* ret = [NSMutableDictionary new];
+        NSMutableDictionary RG_GENERIC(NSString*, id) * ret = [NSMutableDictionary new];
         for (NSString* key in (id<NSFastEnumeration>)self) {
             NSObject* targetObject = [self valueForKey:key];
             ret[key] = [targetObject rg_dictionaryHelper];
         }
         return ret;
     } else { /* any old schleb object */
-        NSMutableDictionary* ret = [NSMutableDictionary new];
-        NSArray* keys = [[self class] respondsToSelector:@selector(serializableKeys)] ? [[self class] serializableKeys] : [[self class] rg_propertyList].allKeys;
+        NSMutableDictionary RG_GENERIC(NSString*, id) * ret = [NSMutableDictionary new];
+        NSArray RG_GENERIC(NSString*) * keys;
+        if ([[self class] respondsToSelector:@selector(serializableKeys)]) {
+            keys = [[self class] serializableKeys];
+        } else {
+            keys = [[self class] rg_propertyList].allKeys;
+        }
         for (NSString* propertyName in keys) {
-            if ([rg_NSManagedObject instancesRespondToSelector:NSSelectorFromString(propertyName)] || [NSObject instancesRespondToSelector:NSSelectorFromString(propertyName)]) continue;
-            NSObject* targetObject = [self valueForKey:propertyName] ?: [NSNull null];
-            ret[propertyName] = [targetObject rg_dictionaryHelper];
+            BOOL NSObjectSel = [NSObject instancesRespondToSelector:NSSelectorFromString(propertyName)];
+            BOOL NSManagedSel = [rg_NSManagedObject instancesRespondToSelector:NSSelectorFromString(propertyName)];
+            if (!NSObjectSel && !NSManagedSel) {
+                NSObject* targetObject = [self valueForKey:propertyName] ?: [NSNull null];
+                ret[propertyName] = [targetObject rg_dictionaryHelper];
+            }
         }
         ret[kRGSerializationKey] = NSStringFromClass([self class]);
         return ret;

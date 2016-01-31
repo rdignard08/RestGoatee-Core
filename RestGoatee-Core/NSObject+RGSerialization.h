@@ -24,7 +24,9 @@
 #import "RGDefines.h"
 
 /**
- @brief The method here can turn typical (i.e. non-cyclically strong) objects into JSON (specifically a JSON composed solely only of arrays, dictionaries, strings, and null; `true`, `false`, and numeric types are written out as strings).
+ @brief The method here can turn typical (i.e. non-cyclically strong) objects into JSON
+   (specifically a JSON composed solely only of arrays, dictionaries, strings, and null;
+   `true`, `false`, and numeric types are written out as strings).
  */
 @interface NSObject (RGSerialization)
 

@@ -26,7 +26,8 @@
 
 @interface NSObject (RGForwardDeclarations)
 
-+ (RG_PREFIX_NONNULL id) insertNewObjectForEntityForName:(RG_PREFIX_NONNULL NSString*)entityName inManagedObjectContext:(RG_PREFIX_NONNULL id)context;
++ (RG_PREFIX_NONNULL id) insertNewObjectForEntityForName:(RG_PREFIX_NONNULL NSString*)entityName
+                                  inManagedObjectContext:(RG_PREFIX_NONNULL NSManagedObjectContext*)context;
 
 @end
 

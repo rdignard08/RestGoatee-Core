@@ -40,7 +40,9 @@
    safely pass `nil`.
  @return an array of objects of the type of the receiver.  The return value is mutable, and you may mutate it.
  */
-+ (RG_PREFIX_NONNULL NSMutableArray RG_GENERIC(__kindof NSObject*) *) objectsFromArraySource:(RG_PREFIX_NULLABLE id<NSFastEnumeration>)source inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context;
++ (RG_PREFIX_NONNULL NSMutableArray RG_GENERIC(__kindof NSObject*) *)
+    objectsFromArraySource:(RG_PREFIX_NULLABLE id<NSFastEnumeration>)source
+                 inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 /**
  @brief The receiver (the `Class` object) of this method will attempt to initialize an instance of itself with

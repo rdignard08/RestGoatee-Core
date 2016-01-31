@@ -48,7 +48,10 @@
     if (!_rootNode) {
         _rootNode = [[RGXMLNode alloc] initWithName:kRGXMLDocumentNodeKey];
         _currentNode = _rootNode;
-        BOOL parseResult = [self.parser parse];
+#ifdef DEBUG
+        BOOL parseResult =
+#endif 
+        [self.parser parse];
         NSAssert(!self.parser || parseResult, @"XML Parsing failed");
     }
     return _rootNode;

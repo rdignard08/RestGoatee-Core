@@ -23,6 +23,7 @@
 
 #import "RGPropertyDeclaration.h"
 #import "RestGoatee-Core.h"
+#include <objc/runtime.h>
 
 @implementation RGPropertyDeclaration
 
@@ -40,7 +41,7 @@
         for (unsigned int i = 0; i < attributeCount; i++) {
             objc_property_attribute_t attribute = attributes[i];
             /* The first character is the type encoding; the other field is a value of some kind (if anything)
-             See: https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtPropertyIntrospection.html */
+               library/mac/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtPropertyIntrospection.html */
             switch (attribute.name[0]) {
                 case '&':
                     self->_storageSemantics = kRGPropertyStrong;
@@ -52,7 +53,7 @@
                     self->_storageSemantics = kRGPropertyWeak;
                     break;
                 case 'T':
-                case 't': /* I have no idea what 'old-style' typing looks like; gonna assume it's the same / no one uses it */
+                case 't': /* I have no idea what 'old-style' typing looks like; gonna assume it's the same */
                     [self initializeType:attribute.value];
                     break;
                 case 'R':

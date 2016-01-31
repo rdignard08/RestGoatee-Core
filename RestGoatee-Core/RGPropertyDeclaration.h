@@ -22,7 +22,11 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RGConstants.h"
-#import <objc/runtime.h>
+
+/**
+ Forward declaration from objc/runtime.h so the runtime doesn't appear in the public headers.
+ */
+typedef struct objc_property* rg_property;
 
 /**
  @brief An object that encapsulates a property declaration, and enables object based introspection of a class.  It is a programmer error to invoke `-init`.
@@ -63,7 +67,7 @@
  @brief The designated initializer; it is a programmer error to invoke `-init`.
  @param property the property structure to be used in the construction of this object.
  */
-- (RG_PREFIX_NONNULL instancetype) initWithProperty:(RG_PREFIX_NONNULL objc_property_t)property NS_DESIGNATED_INITIALIZER;
+- (RG_PREFIX_NONNULL instancetype) initWithProperty:(RG_PREFIX_NONNULL rg_property)property NS_DESIGNATED_INITIALIZER;
 
 /**
  @brief The `NSObject` designated initializer.

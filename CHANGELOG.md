@@ -1,5 +1,9 @@
 # RestGoatee CHANGELOG
 
+## 2.1.5
+- `<objc/runtime.h>` will no longer be included with the public headers
+- `RGXMLSerializer` will now raise exceptions on malformed XML instand of issuing warnings
+
 ## 2.1.4
 - `objectsFromArraySource:inContext:` now correctly indicates that the return values are a kind of NSObject not id
 - `RGLog()` is slightly faster (again)

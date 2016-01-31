@@ -36,7 +36,7 @@ CLASS_SPEC(RGPropertyDeclaration)
     objc_property_t* properties = class_copyPropertyList([RGTestObject1 class], NULL);
     RGPropertyDeclaration* declaration = [[RGPropertyDeclaration alloc] initWithProperty:*properties];
     free(properties);
-    NSLog(@"%@ exists", declaration);
+    XCTAssert(declaration);
 }
 
 #pragma mark - properties

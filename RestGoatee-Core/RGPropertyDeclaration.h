@@ -24,12 +24,13 @@
 #import "RGConstants.h"
 
 /**
- Forward declaration from objc/runtime.h so the runtime doesn't appear in the public headers.
+ @brief Forward declaration from objc/runtime.h so the runtime doesn't appear in the public headers.
  */
 typedef struct objc_property* rg_property;
 
 /**
- @brief An object that encapsulates a property declaration, and enables object based introspection of a class.  It is a programmer error to invoke `-init`.
+ @brief An object that encapsulates a property declaration, and enables object based introspection of a class.
+   It is a programmer error to invoke `-init`.
  */
 @interface RGPropertyDeclaration : NSObject
 
@@ -44,7 +45,8 @@ typedef struct objc_property* rg_property;
 @property RG_NONNULL_PROPERTY(nonatomic, strong, readonly) NSString* canonicalName;
 
 /**
- @brief A `Class` object, an instance of which can contain the value of this property.  Primitive properties use `NSNumber` by default.
+ @brief A `Class` object, an instance of which can contain the value of this property.
+   Primitive properties use `NSNumber` by default.
  */
 @property RG_NONNULL_PROPERTY(nonatomic, strong, readonly) Class type;
 

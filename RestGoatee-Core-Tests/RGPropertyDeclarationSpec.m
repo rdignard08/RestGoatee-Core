@@ -25,6 +25,7 @@
 #import "RestGoatee-Core.h"
 #import "RGTestObject2.h"
 #import "NSObject+RGSharedImpl.h"
+#include <objc/runtime.h>
 
 CLASS_SPEC(RGPropertyDeclaration)
 

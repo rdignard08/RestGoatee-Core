@@ -24,6 +24,7 @@
 #import "NSObject+RGSharedImpl.h"
 #import "RestGoatee-Core.h"
 #import "RGPropertyDeclaration.h"
+#include <objc/runtime.h>
 
 @implementation NSObject (RGSharedImpl)
 
@@ -43,13 +44,17 @@
         }
         free(properties);
         objc_setAssociatedObject(self, @selector(rg_propertyList), rg_propertyList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        objc_setAssociatedObject(self, @selector(rg_canonicalPropertyList), rg_canonicalPropertyList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self,
+                                 @selector(rg_canonicalPropertyList),
+                                 rg_canonicalPropertyList,
+                                 OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return rg_propertyList;
 }
 
 + (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, RGPropertyDeclaration*) *) rg_canonicalPropertyList {
-    NSAssert(objc_getAssociatedObject(self, @selector(rg_propertyList)), @"rg_canonicalPropertyList was invoked before rg_propertyList, there's a logic error somewhere");
+    NSAssert(objc_getAssociatedObject(self, @selector(rg_propertyList)), @"rg_canonicalPropertyList was invoked before"
+             @"rg_propertyList, there's a logic error somewhere");
     return objc_getAssociatedObject(self, @selector(rg_canonicalPropertyList));
 }
 

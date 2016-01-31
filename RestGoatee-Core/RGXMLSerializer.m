@@ -80,7 +80,7 @@
 - (void) parser:(__unused id)p didStartElement:(RG_PREFIX_NONNULL NSString*)element namespaceURI:(RG_PREFIX_NULLABLE __unused id)n qualifiedName:(RG_PREFIX_NULLABLE __unused id)q attributes:(RG_PREFIX_NONNULL NSDictionary*)attributes {
     RGXMLNode* node = [[RGXMLNode alloc] initWithName:element];
     [node.attributes addEntriesFromDictionary:attributes];
-    __strong RGXMLNode* strongNode = self.currentNode;
+    RGXMLNode* strongNode = self.currentNode;
     [strongNode addChildNode:node];
     self.currentNode = node;
 }
@@ -90,7 +90,7 @@
 }
 
 - (void) parser:(__unused id)p didEndElement:(__unused id)e namespaceURI:(RG_PREFIX_NULLABLE __unused id)n qualifiedName:(RG_PREFIX_NULLABLE __unused id)q {
-    __strong RGXMLNode* strongNode = self.currentNode;
+    RGXMLNode* strongNode = self.currentNode;
     strongNode.innerXML = self->_currentString; /* intentionally using the ivar so that if nil, nil goes to innerXML */
     self->_currentString = nil;
     self.currentNode = strongNode.parentNode; /* move up the parse tree */

@@ -28,12 +28,16 @@ NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL rg_dateFormats(void) {
     static dispatch_once_t onceToken;
     static NSArray RG_GENERIC(NSString*) * _sDateFormats;
     dispatch_once(&onceToken, ^{
-        _sDateFormats = @[ @"yyyy-MM-dd'T'HH:mm:ssZZZZZ", @"yyyy-MM-dd HH:mm:ss ZZZZZ", @"yyyy-MM-dd'T'HH:mm:ssz", @"yyyy-MM-dd" ];
+        _sDateFormats = @[ @"yyyy-MM-dd'T'HH:mm:ssZZZZZ",
+                           @"yyyy-MM-dd HH:mm:ss ZZZZZ",
+                           @"yyyy-MM-dd'T'HH:mm:ssz",
+                           @"yyyy-MM-dd" ];
     });
     return _sDateFormats;
 }
 
-static NSString* RG_SUFFIX_NONNULL const rg_malloc_based_canonical(const char* RG_SUFFIX_NONNULL const utfName, size_t length) {
+static NSString* RG_SUFFIX_NONNULL const rg_malloc_based_canonical(const char* RG_SUFFIX_NONNULL const utfName,
+                                                                   size_t length) {
     char* canonicalBuffer = malloc(length);
     size_t outputLength = 0;
     for (size_t i = 0; i != length; i++) {
@@ -44,10 +48,14 @@ static NSString* RG_SUFFIX_NONNULL const rg_malloc_based_canonical(const char* R
             canonicalBuffer[outputLength++] = c + (const int)('a' - 'A'); /* 'a' - 'A' == 32 */
         } /* unicodes, symbols, spaces, etc. are completely skipped */
     }
-    return [[NSString alloc] initWithBytesNoCopy:canonicalBuffer length:outputLength encoding:NSUTF8StringEncoding freeWhenDone:YES];
+    return [[NSString alloc] initWithBytesNoCopy:canonicalBuffer
+                                          length:outputLength
+                                        encoding:NSUTF8StringEncoding
+                                    freeWhenDone:YES];
 }
 
-static NSString* RG_SUFFIX_NONNULL const rg_static_based_canonical(const char* RG_SUFFIX_NONNULL const utfName, size_t length) {
+static NSString* RG_SUFFIX_NONNULL const rg_static_based_canonical(const char* RG_SUFFIX_NONNULL const utfName,
+                                                                   size_t length) {
     char canonicalBuffer[length];
     size_t outputLength = 0;
     for (size_t i = 0; i != length; i++) {
@@ -63,25 +71,37 @@ static NSString* RG_SUFFIX_NONNULL const rg_static_based_canonical(const char* R
 
 NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNULL const utfName) {
     const size_t length = strlen(utfName);
-    return length >= kRGMaxAutoSize ? rg_malloc_based_canonical(utfName, length) : rg_static_based_canonical(utfName, length);
+    if (length >= kRGMaxAutoSize) {
+        return rg_malloc_based_canonical(utfName, length);
+    }
+    return rg_static_based_canonical(utfName, length);
 }
 
-void rg_log(NSString* RG_SUFFIX_NONNULL format, const char* RG_SUFFIX_NONNULL const file, unsigned long lineNumber, ...) {
-    va_list variableArguments;
-    va_start(variableArguments, lineNumber);
-    fprintf(stderr, "[%s:%lu] %s\n", file, lineNumber, [[NSString alloc] initWithFormat:format arguments:variableArguments].UTF8String);
-    va_end(variableArguments);
+void rg_log(NSString* RG_SUFFIX_NONNULL format,
+            const char* RG_SUFFIX_NONNULL const file,
+            unsigned long line,
+            ...) {
+    va_list arguments;
+    va_start(arguments, line);
+    NSString* output = [[NSString alloc] initWithFormat:format arguments:arguments];
+    fprintf(stderr, "[%s:%lu] %s\n", file, line, output.UTF8String);
+    va_end(arguments);
 }
 
 void rg_swizzle(Class RG_SUFFIX_NULLABLE cls, SEL RG_SUFFIX_NULLABLE original, SEL RG_SUFFIX_NULLABLE replacement) {
-    IMP replacementImplementation = method_setImplementation(class_getInstanceMethod(cls, replacement), class_getMethodImplementation(cls, original));
+    IMP replacementImplementation = method_setImplementation(class_getInstanceMethod(cls, replacement),
+                                                             class_getMethodImplementation(cls, original));
     // get the replacement IMP
-    // we assume swizzle is called on the class with the override_... selector, so we can safety force original onto replacement
+    // we assume swizzle is called on the class with replacement, so we can safety force original onto replacement
     // set the original IMP on the replacement selector
     // try to add the replacement IMP directly to the class on original selector
     // if it succeeds then we're all good (the original before was located on the superclass)
     // if it doesn't then that means an IMP is already there so we have to overwrite it
-    if (!class_addMethod(cls, original, replacementImplementation, method_getTypeEncoding(class_getInstanceMethod(cls, replacement)))) { method_setImplementation(class_getInstanceMethod(cls, original), replacementImplementation);
+    if (!class_addMethod(cls,
+                         original,
+                         replacementImplementation,
+                         method_getTypeEncoding(class_getInstanceMethod(cls, replacement)))) {
+        method_setImplementation(class_getInstanceMethod(cls, original), replacementImplementation);
     }
 }
 
@@ -112,14 +132,17 @@ BOOL rg_isMetaClassObject(id RG_SUFFIX_NULLABLE object) {
  Returns `YES` if the given type can be adequately represented by an `NSString`.
  */
 BOOL rg_isInlineObject(Class RG_SUFFIX_NULLABLE cls) {
-    return [cls isSubclassOfClass:[NSDate self]] || [cls isSubclassOfClass:[NSString self]] || [cls isSubclassOfClass:[NSData self]] || [cls isSubclassOfClass:[NSNull self]] || [cls isSubclassOfClass:[NSValue self]] || [cls isSubclassOfClass:[NSURL self]];
+    return [cls isSubclassOfClass:[NSDate self]] || [cls isSubclassOfClass:[NSString self]] ||
+           [cls isSubclassOfClass:[NSData self]] || [cls isSubclassOfClass:[NSNull self]] ||
+           [cls isSubclassOfClass:[NSValue self]] || [cls isSubclassOfClass:[NSURL self]];
 }
 
 /**
  Returns `YES` if the given type can be adequately represented by an `NSArray`.
  */
 BOOL rg_isCollectionObject(Class RG_SUFFIX_NULLABLE cls) {
-    return [cls isSubclassOfClass:[NSSet self]] || [cls isSubclassOfClass:[NSArray self]] || [cls isSubclassOfClass:[NSOrderedSet self]];
+    return [cls isSubclassOfClass:[NSSet self]] || [cls isSubclassOfClass:[NSArray self]] ||
+           [cls isSubclassOfClass:[NSOrderedSet self]];
 }
 
 /**

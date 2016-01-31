@@ -131,8 +131,7 @@
                 }                                           \
                 ret;                                        \
             }), (unsigned long)__LINE__, ##__VA_ARGS__)
-    #else
-        /* we define out with `RG_VOID_NOOP` generally this is `NULL` to allow constructs like `condition ?: RGLog(@"Blah")`. */
+    #else /* we define out with `RG_VOID_NOOP` generally this is `NULL` to allow usage in conditional operators. */
 /**
  @brief A complete `NSLog()` replacement, but does not log in production.
  */

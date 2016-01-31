@@ -24,7 +24,8 @@
 #import "RGDefines.h"
 
 /**
- @brief This protocol should be implemented if an object is to be safely serialized.  The default behavior is to iterate over all properties, which will very likely lead to cycles (and thus very hard to track down crashes).
+ @brief This protocol should be implemented if an object is to be safely serialized.  The default behavior is to iterate
+   over all properties, which will very likely lead to cycles (and thus very hard to track down crashes).
  */
 @protocol RGSerializable <NSObject>
 

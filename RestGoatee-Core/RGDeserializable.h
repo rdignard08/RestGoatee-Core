@@ -26,31 +26,40 @@
 @class NSManagedObjectContext;
 
 /**
-@brief Domain model objects may (but are not required) to conform to this protocol.  You may return non-standard data formats for use with `NSDataFormatter` and a dictionary of response keys which map to property names.
+ @brief Domain model objects may (but are not required) to conform to this protocol.  You may return non-standard data
+   formats for use with `NSDataFormatter` and a dictionary of response keys which map to property names.
  */
 @protocol RGDeserializable <NSObject>
 
 @optional
 /**
- @brief Provide any overrides for default mapping behavior here.  Any unspecified key(s) will use the default behavior for mapping.
- @return a dictionary with keys and values of type `NSString` which is read left-to-right: JSON source to target property name.  Can return `nil` (say you're overriding a class that implements this).
+ @brief Provide any overrides for default mapping behavior here.  Any unspecified key(s) will use the default behavior
+   for mapping.
+ @return a dictionary with keys and values of type `NSString` which is read left-to-right: JSON source to target
+   property name.  Can return `nil` (say you're overriding a class that implements this).
  */
 + (RG_PREFIX_NULLABLE NSDictionary RG_GENERIC(NSString*, NSString*) *) overrideKeysForMapping;
 
 /**
- @brief Provide a custom date format for use with the given property `propertyName`.  See documentation of `NSDate` for proper formats.
+ @brief Provide a custom date format for use with the given property `propertyName`.  See documentation of `NSDate` for
+   proper formats.
  @param propertyName The name of the property being set.
- @return a date format string to be used for the given property.  Can return `nil` (say you're overriding a class that implements this).
+ @return a date format string to be used for the given property.  Can return `nil` (say you're overriding a class that
+   implements this).
  */
 + (RG_PREFIX_NULLABLE NSString*) dateFormatForProperty:(RG_PREFIX_NONNULL NSString*)propertyName;
 
 /**
- @brief implement this method to provide custom logic on a given property.  This method tends to be necessary for deserializing arrays that lack a metadata key indicating the type of the object.
+ @brief implement this method to provide custom logic on a given property.  This method tends to be necessary for
+   deserializing arrays that lack a metadata key indicating the type of the object.
  @param value The raw input received from the data source.  The type of this object should always be checked before use.
  @param propertyName The name of the property being set.
- @param context If the deserialization target is an `NSManagedObject` subclass or contains one you may use the parameter `context` for its construction.
+ @param context If the deserialization target is an `NSManagedObject` subclass or contains one you may use the parameter
+   `context` for its construction.
  @return `NO` if caller will handle assignment or `YES` if the default is desired.
  */
-- (BOOL) shouldTransformValue:(RG_PREFIX_NULLABLE id)value forProperty:(RG_PREFIX_NONNULL NSString*)propertyName inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context;
+- (BOOL) shouldTransformValue:(RG_PREFIX_NULLABLE id)value
+                  forProperty:(RG_PREFIX_NONNULL NSString*)propertyName
+                    inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context;
 
 @end

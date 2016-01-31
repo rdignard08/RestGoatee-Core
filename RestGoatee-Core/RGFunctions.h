@@ -30,7 +30,8 @@
 NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL rg_dateFormats(void) __attribute__((pure, returns_nonnull));
 
 /**
- @return a per thread instance of `NSDateFormatter`.  Never pass the returned object between threads.  Always set the objects properties (`dateFormat`, `locale`, `timezone`, etc.) before use.
+ @return a per thread instance of `NSDateFormatter`.  Never pass the returned object between threads.
+   Always set the objects properties (`dateFormat`, `locale`, `timezone`, etc.) before use.
  */
 NSDateFormatter* RG_SUFFIX_NONNULL rg_threadsafe_formatter(void) __attribute__((hot, returns_nonnull));
 
@@ -38,24 +39,34 @@ NSDateFormatter* RG_SUFFIX_NONNULL rg_threadsafe_formatter(void) __attribute__((
  @param utf8Input a `\0` terminated C string.  With unicodes must be UTF-8 encoded.  May not be `NULL`.
  @return the property name in its canonical form.
  */
-NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNULL const utf8Input) __attribute__((pure, nonnull, returns_nonnull));
+NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNULL const utf8Input)
+    __attribute__((pure, nonnull, returns_nonnull));
 
 /**
- @brief This function implements method swizzling.  Replaces the implementation identified by the selector `original` with the implementation identified by selector `replacement`.  Does not clobber the superclass's implementation of `original` if `cls` does not implement `original`.
- @param cls the class onto which the replacement method selector should be grafted.  Technically allows `Nil` but pointless.
- @param original the current selector whose associated implementation is the target of being changed.  Allows `NULL` which places no implementation on the selector identified by `replacement`.
- @param replacement the replacement selector which will provide the new implementation for the original method.  Allows `NULL` which places no implementation on the selector identified by `original`.
+ @brief This function implements method swizzling.  Replaces the implementation identified by the selector `original`
+   with the implementation identified by selector `replacement`.  Does not clobber the superclass's implementation of
+   `original` if `cls` does not implement `original`.
+ @param cls the class onto which the replacement method selector should be grafted.  Technically allows `Nil`.
+ @param original the current selector whose associated implementation is the target of being changed.  Allows `NULL`
+   which places no implementation on the selector identified by `replacement`.
+ @param replacement the replacement selector which will provide the new implementation for the original method.
+   Allows `NULL` which places no implementation on the selector identified by `original`.
  */
-void rg_swizzle(Class RG_SUFFIX_NULLABLE cls, SEL RG_SUFFIX_NULLABLE original, SEL RG_SUFFIX_NULLABLE replacement) __attribute__((cold));
+void rg_swizzle(Class RG_SUFFIX_NULLABLE cls,
+                SEL RG_SUFFIX_NULLABLE original,
+                SEL RG_SUFFIX_NULLABLE replacement) __attribute__((cold));
 
 /**
- @brief This function is the backing debug function of the `RGLog()` macro.  It logs the file name & line number of the call site.
+ @brief This function is the backing debug function of the `RGLog()` macro.  It logs the file name & line number.
  @param format the format string of the arguments _after_ lineNumber.  It is a programmer error to pass `nil`.
  @param file the name of the file where the log was called.
- @param lineNumber the line number of the log call.
+ @param line the line number of the log call.
  @param ... values that will be called with `format` to generate the output.
  */
-void rg_log(NSString* RG_SUFFIX_NONNULL format, const char* RG_SUFFIX_NONNULL const file, unsigned long lineNumber, ...) __attribute__((cold, format(__NSString__, 1, 4), nonnull(1, 2)));
+void rg_log(NSString* RG_SUFFIX_NONNULL format,
+            const char* RG_SUFFIX_NONNULL const file,
+            unsigned long line,
+            ...) __attribute__((cold, format(__NSString__, 1, 4), nonnull(1, 2)));
 
 /**
  @param object may be any type of object including `nil`.

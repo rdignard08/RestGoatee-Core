@@ -24,8 +24,10 @@
 #import "RGDefines.h"
 
 /**
-@brief These are the methods that a data source must implement in order to be consumable by the `+[NSObject objectFromDataSource:inContext:]` family of methods.
-@discussion Currently `NSDictionary` and `RGXMLNode` (the parsed output from `NSXMLParser`) are supported implicitly.  Must be able to `for X in id<RGDataSource>`
+@brief These are the methods that a data source must implement in order to be consumable by the
+   `+[NSObject objectFromDataSource:inContext:]` family of methods.
+@discussion Currently `NSDictionary` and `RGXMLNode` (the parsed output from `NSXMLParser`) are supported implicitly.
+   Must be able to `for X in id<RGDataSource>`
  */
 @protocol RGDataSource <NSObject, NSFastEnumeration>
 

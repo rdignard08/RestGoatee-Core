@@ -25,6 +25,11 @@
 #import "RGSerializable.h"
 
 /**
+ @brief A mutable `NSDictionary` which only accepts `NSString` keys and values.
+ */
+typedef NSMutableDictionary RG_GENERIC(NSString*, NSString*) RGMutableAttributes;
+
+/**
  @brief The `RGXMLNode` is the parse result of `NSXMLParser`.
  */
 @interface RGXMLNode : NSObject <RGDataSource>
@@ -35,11 +40,11 @@
 @property RG_NULLABLE_PROPERTY(nonatomic, weak, readonly) RGXMLNode* parentNode;
 
 /**
- @brief Attributes come from `... id="123" name="cool"` and will equal @{ "id" : "123", "name" : "cool" }.
-   The value can be obtained through valueForKeyPath:, @"object.id", in this example.
+ @brief Attributes come from `... id="123" name="cool"` and will equal `@{ "id" : "123", "name" : "cool" }`.
+   The value can be obtained through `-[RGXMLNode valueForKeyPath:@"object.id"]`, in this example.
  @discussion You may mutate the collection.
  */
-@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableDictionary RG_GENERIC(NSString*, NSString*) * attributes;
+@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong) RGMutableAttributes* attributes;
 
 /**
  @brief The name of the tag.  "foobar" enclosed in angle brackets will have the value of `foobar` here.

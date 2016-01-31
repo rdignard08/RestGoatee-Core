@@ -35,7 +35,8 @@
 @property RG_NULLABLE_PROPERTY(nonatomic, weak, readonly) RGXMLNode* parentNode;
 
 /**
- @brief Attributes come from `... id="123" name="cool"` and will equal @{ "id" : "123", "name" : "cool" }.  The value can be obtained through valueForKeyPath:, @"object.id", in this example.
+ @brief Attributes come from `... id="123" name="cool"` and will equal @{ "id" : "123", "name" : "cool" }.
+   The value can be obtained through valueForKeyPath:, @"object.id", in this example.
  @discussion You may mutate the collection.
  */
 @property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableDictionary RG_GENERIC(NSString*, NSString*) * attributes;
@@ -46,12 +47,14 @@
 @property RG_NONNULL_PROPERTY(nonatomic, strong) NSString* name;
 
 /**
- @brief The inner XML if any, including unwrapped CDATA.  self-closing nodes will have `nil`.  adjacent open and close tags will be the empty string.
+ @brief The inner XML if any, including unwrapped CDATA.  self-closing nodes will have `nil`.
+   Adjacent open and close tags will be the empty string.
  */
 @property RG_NULLABLE_PROPERTY(nonatomic, strong) NSString* innerXML;
 
 /**
- @brief This property contains any sub-nodes of this node.  Those sub-nodes have this node as the value of their `parentNode` property.
+ @brief This property contains any sub-nodes of this node.
+   Those sub-nodes have this node as the value of their `parentNode` property.
  @warning While this property is mutable, you must not mutate it directly.
  */
 @property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong, readonly) NSMutableArray RG_GENERIC(RGXMLNode*) * childNodes;
@@ -68,12 +71,14 @@
 - (RG_PREFIX_NULLABLE instancetype) init NS_DESIGNATED_INITIALIZER;
 
 /**
- @return the receiver and all of its children as a dictionary representation.  The `innerXML` of the node is returned on the key `kRGInnerXMLKey`.
+ @return the receiver and all of its children as a dictionary representation.
+   The `innerXML` of the node is returned on the key `kRGInnerXMLKey`.
  */
 - (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation;
 
 /**
- @return either `NSMutableArray` or `nullable RGXMLNode`.  If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
+ @return either `NSMutableArray` or `nullable RGXMLNode`.
+   If there are multiple children with that name, the array is returned; otherwise a single node or `nil`.
  */
 - (RG_PREFIX_NULLABLE id) childrenNamed:(RG_PREFIX_NULLABLE NSString*) name;
 

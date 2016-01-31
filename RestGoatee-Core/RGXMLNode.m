@@ -116,7 +116,9 @@
 }
 
 #pragma mark - RGDataSource
-- (NSUInteger) countByEnumeratingWithState:(RG_PREFIX_NONNULL NSFastEnumerationState*)state objects:(__unsafe_unretained id[])buffer count:(NSUInteger)len {
+- (NSUInteger) countByEnumeratingWithState:(RG_PREFIX_NONNULL NSFastEnumerationState*)state
+                                   objects:(__unsafe_unretained id RG_SUFFIX_NONNULL[])buffer
+                                     count:(NSUInteger)len {
     NSUInteger ret = [self.allKeys countByEnumeratingWithState:state objects:buffer count:len];
     if (!ret) {
         self.allKeys = nil;
@@ -129,7 +131,9 @@
     if (range.location == NSNotFound) {
         return [self valueForKey:string];
     }
-    return [[self childrenNamed:[string substringToIndex:range.location]] valueForKeyPath:[string substringFromIndex:range.location + 1]];
+    NSString* currentKey = [string substringToIndex:range.location];
+    NSString* remainingKeyPath = [string substringFromIndex:range.location + 1];
+    return [[self childrenNamed:currentKey] valueForKeyPath:remainingKeyPath];
 }
 
 - (RG_PREFIX_NULLABLE id) valueForKey:(RG_PREFIX_NONNULL NSString*)key {

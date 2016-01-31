@@ -26,7 +26,8 @@
 @class RGXMLNode;
 
 /**
- @brief This class takes an `NSXMLParser*` and returns a built network of `RGXMLNode*`.  You may reuse an instance of this class by assigning a new `parser`.
+ @brief This class takes an `NSXMLParser*` and returns a built network of `RGXMLNode*`.  
+   You may reuse an instance of this class by assigning a new `parser`.
  */
 @interface RGXMLSerializer : NSObject
 

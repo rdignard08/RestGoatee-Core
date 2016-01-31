@@ -9,6 +9,7 @@ General
   - In the case that these guidelines create multiple adjacent new lines, they are combined into a single instance
 - `extern` should always appear first
 - `const` applied to a pointer should have a space between the `*` and `const`
+- limit lines to 120 characters
 
 Preprocessor
 ======

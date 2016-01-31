@@ -48,15 +48,8 @@
     if (!_rootNode) {
         _rootNode = [[RGXMLNode alloc] initWithName:kRGXMLDocumentNodeKey];
         _currentNode = _rootNode;
-#ifdef DEBUG
-        BOOL parsed =
-#endif
-        [self.parser parse];
-#ifdef DEBUG
-        if (!parsed) {
-            RGLog(@"Warning, XML parsing failed");
-        }
-#endif
+        BOOL parseResult = [self.parser parse];
+        NSAssert(!self.parser || parseResult, @"XML Parsing failed");
     }
     return _rootNode;
 }
@@ -77,19 +70,23 @@
 }
 
 #pragma mark - NSXMLParserDelegate
-- (void) parser:(__unused id)p didStartElement:(RG_PREFIX_NONNULL NSString*)element namespaceURI:(RG_PREFIX_NULLABLE __unused id)n qualifiedName:(RG_PREFIX_NULLABLE __unused id)q attributes:(RG_PREFIX_NONNULL NSDictionary*)attributes {
-    RGXMLNode* node = [[RGXMLNode alloc] initWithName:element];
+- (void) parser:(RG_PREFIX_NONNULL __unused id)parser
+didStartElement:(RG_PREFIX_NONNULL NSString*)elementName
+   namespaceURI:(RG_PREFIX_NULLABLE __unused id)namespaceURI
+  qualifiedName:(RG_PREFIX_NULLABLE __unused id)qName
+     attributes:(RG_PREFIX_NONNULL NSDictionary*)attributes {
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:elementName];
     [node.attributes addEntriesFromDictionary:attributes];
     RGXMLNode* strongNode = self.currentNode;
     [strongNode addChildNode:node];
     self.currentNode = node;
 }
 
-- (void) parser:(__unused id)p foundCharacters:(RG_PREFIX_NONNULL NSString*)string {
+- (void) parser:(RG_PREFIX_NONNULL __unused id)parser foundCharacters:(RG_PREFIX_NONNULL NSString*)string {
     [self.currentString appendString:string];
 }
 
-- (void) parser:(__unused id)parser
+- (void) parser:(RG_PREFIX_NONNULL __unused id)parser
   didEndElement:(RG_PREFIX_NONNULL NSString*)elementName
    namespaceURI:(RG_PREFIX_NULLABLE __unused id)namespaceURI
   qualifiedName:(RG_PREFIX_NULLABLE __unused id)qName {
@@ -100,8 +97,9 @@
     self.currentNode = strongNode.parentNode; /* move up the parse tree */
 }
 
-- (void) parser:(__unused id)p foundCDATA:(RG_PREFIX_NONNULL NSData*)CDATABlock {
+- (void) parser:(RG_PREFIX_NONNULL __unused id)parser foundCDATA:(RG_PREFIX_NONNULL NSData*)CDATABlock {
     NSString* stringValue = [[NSString alloc] initWithData:CDATABlock encoding:NSUTF8StringEncoding];
+    NSAssert(stringValue, @"Malformed XML, CDATA block not valid UTF-8");
     [self.currentString appendString:stringValue];
 }
 

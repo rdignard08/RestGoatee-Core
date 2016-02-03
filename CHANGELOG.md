@@ -2,10 +2,10 @@
 
 ## 2.1.5
 - `<objc/runtime.h>` will no longer be included with the public headers
-- `RGXMLSerializer` will now raise exceptions on malformed XML instand of issuing warnings
+- `RGXMLSerializer` will now raise exceptions on malformed XML instead of issuing warnings
 
 ## 2.1.4
-- `objectsFromArraySource:inContext:` now correctly indicates that the return values are a kind of NSObject not id
+- `objectsFromArraySource:inContext:` now correctly indicates that the return values are a kind of `NSObject` not `id`
 - `RGLog()` is slightly faster (again)
 
 ## 2.1.3
@@ -25,7 +25,7 @@
 - All defined constants should be visible outside of the project.
 
 ## 2.1.0
-- May no longer create an RGXMLNode without a name
+- May no longer create an `RGXMLNode` without a name
   - The document node now has a name `kRGXMLDocumentNodeKey`
 - Fixed leak in initialization
 - No longer converts a compatible array of objects into a single property of that type
@@ -43,13 +43,13 @@
 - Fix nullability warnings in the project.
 - Nothing is assumed nonnull, as the whole library has been audited.
 - Fixed a bug preventing dictionaryRepresentation from working.
-- NSException raise:... have been replaced with NSAssert.
-- Speed up of about 50% for calls to rg_canonical_form with a small string.
+- NSException raise:... have been replaced with `NSAssert`.
+- Speed up of about 50% for calls to `rg_canonical_form` with a small string.
 - Fix leak in RGPropertyDeclaration setup code.
-- The property name on RGXMLNode is now nonnull (this was true before).
+- The property name on `RGXMLNode` is now nonnull (this was true before).
 - corrected and expanded some document comments.
-- Speed up in calls to RGLog().
-- RGLog(nil) will print (null) instead of the empty string.
+- Speed up in calls to `RGLog()`.
+- `RGLog(nil)` will print "(null)" instead of the empty string.
 
 ## 0.1.0
 

@@ -61,6 +61,16 @@ typedef struct objc_property* rg_property;
 @property (nonatomic, assign, readonly) BOOL isPrimitive;
 
 /**
+ @brief `YES` if the declared property is of type `float`, `double`, `long double`.  `NSNumber` excluded.
+ */
+@property (nonatomic, assign, readonly) BOOL isFloatingPoint;
+
+/**
+ @brief `YES` if the declared property is of type `char`, `short`, `int`, `long`, `long long`, 
+ */
+@property (nonatomic, assign, readonly) BOOL isIntegral;
+
+/**
  @brief Whether or not the property is modifiable.  The default is `NO`.
  */
 @property (nonatomic, assign, readonly) BOOL readOnly;

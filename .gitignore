@@ -26,7 +26,8 @@ DerivedData
 #
 #Pods/
 
-ObjectiveC.gcno
+*.gcno
+*.gcda
 compile_commands.json
 xcodebuild.log
 

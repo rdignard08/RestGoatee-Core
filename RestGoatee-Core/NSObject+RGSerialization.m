@@ -36,7 +36,7 @@
 - (RG_PREFIX_NONNULL id) rg_dictionaryHelper {
     /* enabled when debugging so you can find your logic errors while building, on stack overflow gdb will fail */
     NSAssert([NSThread callStackSymbols].count < kRGMaxAutoSize, @"Too deep, probably have a cycle");
-    if ([[self class] isSubclassOfClass:[NSNull self]]) {
+    if ([[self class] isSubclassOfClass:[NSNull self]] || [[self class] isSubclassOfClass:[NSString self]]) {
         return self;
     } else if (rg_isInlineObject([self class]) || rg_isClassObject(self)) { /* classes can be stored as strings too */
         return self.description;

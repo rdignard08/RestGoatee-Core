@@ -99,20 +99,21 @@
     if (!property) return;
     NSString* key = property.name;
     Class propertyType = property.type;
+    id target = value;
     /* first ask if there's a custom implementation */
     if ([self respondsToSelector:@selector(shouldTransformValue:forProperty:inContext:)] &&
-        ![(id<RGDeserializable>)self shouldTransformValue:value forProperty:key inContext:context]) {
+        ![(id<RGDeserializable>)self shouldTransformValue:target forProperty:key inContext:context]) {
         return;
     }
     /* null and non-existent set the property to 0 - possible optimization since init already does this */
-    if (!value || [value isKindOfClass:[NSNull self]]) {
+    if (!target || [target isKindOfClass:[NSNull self]]) {
         [self setValue:property.isPrimitive ? @0 : nil forKey:key];
         return;
     }
-    if ([value isKindOfClass:[NSArray self]]) { /* If the array we're given contains objects which we can create,
-                                                 create those too */
+    if ([target isKindOfClass:[NSArray self]]) { /* If the array we're given contains objects which we can create,
+                                                    create those too */
         NSMutableArray RG_GENERIC(id) * ret = [NSMutableArray new];
-        for (__strong id obj in value) {
+        for (__strong id obj in target) {
             if (rg_isDataSourceClass([obj class])) {
                 NSString* serializationKey = obj[kRGSerializationKey];
                 if (serializationKey) {
@@ -124,82 +125,83 @@
             }
             [ret addObject:obj];
         }
-        value = ret;
+        target = ret;
     }
     /* __NSCFString -> NSMutableString -> NSString */
-    id mutableVersion = [value respondsToSelector:@selector(mutableCopyWithZone:)] ? [value mutableCopy] : nil;
+    id mutableVersion = [target respondsToSelector:@selector(mutableCopyWithZone:)] ? [target mutableCopy] : nil;
     if ([mutableVersion isKindOfClass:propertyType]) { /* if the target is a mutable of a immutable type we have */
         [self setValue:mutableVersion forKey:key];
         return;
     } /* This is the one instance where we can quickly cast down the value */
     
-    if ([value isKindOfClass:propertyType]) { /* NSValue */
-        [self setValue:value forKey:key];
+    if ([target isKindOfClass:propertyType]) { /* NSValue */
+        [self setValue:target forKey:key];
         return;
     } /* If JSONValue is already a subclass of propertyType theres no reason to coerce it */
     
     /* Otherwise... this mess */
     
     if (rg_isMetaClassObject(propertyType)) { /* the property's type is Meta-class so its a reference to Class */
-        if ([value isKindOfClass:[RGXMLNode self]]) {
-            NSString* innerXML = [value innerXML];
-            value = innerXML ?: @"";
+        if ([target isKindOfClass:[RGXMLNode self]]) {
+            NSString* innerXML = [target innerXML];
+            target = innerXML ?: @"";
         }
-        [self setValue:NSClassFromString([value description]) forKey:key];
+        [self setValue:NSClassFromString([target description]) forKey:key];
     } else if ([propertyType isSubclassOfClass:[NSDictionary self]] &&
-               ([value isKindOfClass:[NSDictionary self]] || [value isKindOfClass:[RGXMLNode self]])) {
+               ([target isKindOfClass:[NSDictionary self]] || [target isKindOfClass:[RGXMLNode self]])) {
         /* NSDictionary */
-        if ([value isKindOfClass:[RGXMLNode self]]) value = [(RGXMLNode*)value dictionaryRepresentation];
-        [self setValue:[[propertyType alloc] initWithDictionary:value] forKey:key];
+        if ([target isKindOfClass:[RGXMLNode self]]) target = [(RGXMLNode*)target dictionaryRepresentation];
+        [self setValue:[[propertyType alloc] initWithDictionary:target] forKey:key];
     } else if (rg_isCollectionObject(propertyType) &&
-               ([value isKindOfClass:[NSArray self]] || [value isKindOfClass:[RGXMLNode self]])) {
+               ([target isKindOfClass:[NSArray self]] || [target isKindOfClass:[RGXMLNode self]])) {
         /* NSArray, NSSet, or NSOrderedSet */
-        if ([value isKindOfClass:[RGXMLNode self]]) value = [value childNodes];
-        [self setValue:[[propertyType alloc] initWithArray:value] forKey:key];
-    } else if ([propertyType isSubclassOfClass:[NSDecimalNumber self]] && ([value isKindOfClass:[NSNumber self]] ||
-                                                                           [value isKindOfClass:[NSString self]] ||
-                                                                           [value isKindOfClass:[RGXMLNode self]])) {
+        if ([target isKindOfClass:[RGXMLNode self]]) target = [target childNodes];
+        [self setValue:[[propertyType alloc] initWithArray:target] forKey:key];
+    } else if ([propertyType isSubclassOfClass:[NSDecimalNumber self]] && ([target isKindOfClass:[NSNumber self]] ||
+                                                                           [target isKindOfClass:[NSString self]] ||
+                                                                           [target isKindOfClass:[RGXMLNode self]])) {
         /* NSDecimalNumber, subclasses must go first */
-        if ([value isKindOfClass:[RGXMLNode self]]) {
-            NSString* innerXML = [value innerXML];
-            value = innerXML ?: @"";
+        if ([target isKindOfClass:[RGXMLNode self]]) {
+            NSString* innerXML = [target innerXML];
+            target = innerXML ?: @"";
         }
-        if ([value isKindOfClass:[NSNumber self]]) value = [value stringValue];
-        [self setValue:[propertyType decimalNumberWithString:value] forKey:key];
-    } else if ([propertyType isSubclassOfClass:[NSNumber self]] && ([value isKindOfClass:[NSNumber self]] ||
-                                                                    [value isKindOfClass:[NSString self]] ||
-                                                                    [value isKindOfClass:[RGXMLNode self]])) {
+        if ([target isKindOfClass:[NSNumber self]]) target = [target stringValue];
+        [self setValue:[propertyType decimalNumberWithString:target] forKey:key];
+    } else if ([propertyType isSubclassOfClass:[NSNumber self]] && ([target isKindOfClass:[NSNumber self]] ||
+                                                                    [target isKindOfClass:[NSString self]] ||
+                                                                    [target isKindOfClass:[RGXMLNode self]])) {
         /* NSNumber */
-        if ([value isKindOfClass:[RGXMLNode self]]) {
-            NSString* innerXML = [value innerXML];
-            value = innerXML ?: @"";
+        if ([target isKindOfClass:[RGXMLNode self]]) {
+            NSString* innerXML = [target innerXML];
+            target = innerXML ?: @"";
         }
-        if ([value isKindOfClass:[NSString self]]) value = @([value doubleValue]);
-        [self setValue:value forKey:key]; /* Note: setValue: will unwrap the value if the destination is a primitive */
-    } else if ([propertyType isSubclassOfClass:[NSValue self]] && ([value isKindOfClass:[NSNumber self]] ||
-                                                                   [value isKindOfClass:[NSString self]] ||
-                                                                   [value isKindOfClass:[RGXMLNode self]])) {
+        if ([target isKindOfClass:[NSString self]]) target = @([target doubleValue]);
+        [self setValue:target forKey:key]; /* Note: setValue: will unwrap the value if the destination is a primitive */
+    } else if ([propertyType isSubclassOfClass:[NSValue self]] && ([target isKindOfClass:[NSNumber self]] ||
+                                                                   [target isKindOfClass:[NSString self]] ||
+                                                                   [target isKindOfClass:[RGXMLNode self]])) {
         /* NSValue */
-        if ([value isKindOfClass:[RGXMLNode self]]) {
-            NSString* innerXML = [value innerXML];
-            value = innerXML ?: @"";
+        if ([target isKindOfClass:[RGXMLNode self]]) {
+            NSString* innerXML = [target innerXML];
+            target = innerXML ?: @"";
         }
-        if ([value isKindOfClass:[NSString self]]) value = @([value doubleValue]);
-        [self setValue:value forKey:key]; /* NSNumber is a subclass of NSValue hence it's a valid assignment */
+        if ([target isKindOfClass:[NSString self]]) target = @([target doubleValue]);
+        [self setValue:target forKey:key]; /* NSNumber is a subclass of NSValue hence it's a valid assignment */
     } else if (([propertyType isSubclassOfClass:[NSString self]] || [propertyType isSubclassOfClass:[NSURL self]]) &&
-               ([value isKindOfClass:[NSNumber self]] || [value isKindOfClass:[NSString self]] ||
-                [value isKindOfClass:[RGXMLNode self]] || [value isKindOfClass:[NSArray self]])) { /* NSString, NSURL */
-        if ([value isKindOfClass:[RGXMLNode self]]) {
-            NSString* innerXML = [value innerXML];
-            value = innerXML ?: @"";
+               ([target isKindOfClass:[NSNumber self]] || [target isKindOfClass:[NSString self]] ||
+                [target isKindOfClass:[RGXMLNode self]] || [target isKindOfClass:[NSArray self]])) {
+                   /* NSString, NSURL */
+        if ([target isKindOfClass:[RGXMLNode self]]) {
+            NSString* innerXML = [target innerXML];
+            target = innerXML ?: @"";
         }
-        if ([value isKindOfClass:[NSArray self]]) value = [value componentsJoinedByString:@","];
-        if ([value isKindOfClass:[NSNumber self]]) value = [value stringValue];
-        [self setValue:[[propertyType alloc] initWithString:value] forKey:key];
+        if ([target isKindOfClass:[NSArray self]]) target = [target componentsJoinedByString:@","];
+        if ([target isKindOfClass:[NSNumber self]]) target = [target stringValue];
+        [self setValue:[[propertyType alloc] initWithString:target] forKey:key];
     } else if ([propertyType isSubclassOfClass:[NSDate self]]) { /* NSDate */
-        if ([value isKindOfClass:[RGXMLNode self]]) {
-            NSString* innerXML = [value innerXML];
-            value = innerXML ?: @"";
+        if ([target isKindOfClass:[RGXMLNode self]]) {
+            NSString* innerXML = [target innerXML];
+            target = innerXML ?: @"";
         }
         NSString* dateFormat = nil;
         if ([[self class] respondsToSelector:@selector(dateFormatForProperty:)]) {
@@ -208,12 +210,12 @@
         NSDateFormatter* dateFormatter = rg_threadsafe_formatter();
         if (dateFormat) {
             dateFormatter.dateFormat = dateFormat;
-            [self setValue:[dateFormatter dateFromString:value] forKey:key];
+            [self setValue:[dateFormatter dateFromString:target] forKey:key];
             return; /* Let's not second-guess the developer... */
         }
         for (NSString* predefinedFormat in rg_dateFormats()) {
             dateFormatter.dateFormat = predefinedFormat;
-            NSDate* date = [dateFormatter dateFromString:value];
+            NSDate* date = [dateFormatter dateFromString:target];
             if (date) {
                 [self setValue:date forKey:key];
                 break;
@@ -221,9 +223,9 @@
         }
     /* At this point we've exhausted the supported foundation classes for the LHS... these handle sub-objects */
     } else if (!rg_isInlineObject(propertyType) && !rg_isCollectionObject(propertyType) &&
-               ([value isKindOfClass:[NSDictionary self]] || [value isKindOfClass:[RGXMLNode self]])) {
+               ([target isKindOfClass:[NSDictionary self]] || [target isKindOfClass:[RGXMLNode self]])) {
         /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
-        [self setValue:[propertyType objectFromDataSource:value inContext:context] forKey:key];
+        [self setValue:[propertyType objectFromDataSource:target inContext:context] forKey:key];
     }
 #ifdef DEBUG
     [self valueForKey:key] ? RG_VOID_NOOP : RGLog(@"FAIL: initialization of property %@ on type %@", key, [self class]);

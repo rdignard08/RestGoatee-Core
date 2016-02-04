@@ -55,9 +55,6 @@
                 case 'T':
                     [self initializeType:attribute.value];
                     break;
-                case 't': /* I have no idea what 'old-style' typing looks like; gonna assume it's the same */
-                    [self initializeType:attribute.value];
-                    break;
                 case 'R':
                     self->_readOnly = YES;
                     break;

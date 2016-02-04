@@ -41,11 +41,12 @@ static NSString* RG_SUFFIX_NONNULL const rg_malloc_based_canonical(const char* R
     char* canonicalBuffer = malloc(length);
     size_t outputLength = 0;
     for (size_t i = 0; i != length; i++) {
-        char c = utfName[i];
-        if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')) { /* a digit or lowercase character; no change */
-            canonicalBuffer[outputLength++] = c;
-        } else if (c >= 'A' && c <= 'Z') { /* an uppercase character; to lower */
-            canonicalBuffer[outputLength++] = c + (const int)('a' - 'A'); /* 'a' - 'A' == 32 */
+        char letter = utfName[i];
+        /* a digit or lowercase character; no change */
+        if ((letter >= '0' && letter <= '9') || (letter >= 'a' && letter <= 'z')) {
+            canonicalBuffer[outputLength++] = letter;
+        } else if (letter >= 'A' && letter <= 'Z') { /* an uppercase character; to lower */
+            canonicalBuffer[outputLength++] = letter + (const int)('a' - 'A'); /* 'a' - 'A' == 32 */
         } /* unicodes, symbols, spaces, etc. are completely skipped */
     }
     return [[NSString alloc] initWithBytesNoCopy:canonicalBuffer
@@ -59,11 +60,12 @@ static NSString* RG_SUFFIX_NONNULL const rg_static_based_canonical(const char* R
     char canonicalBuffer[length];
     size_t outputLength = 0;
     for (size_t i = 0; i != length; i++) {
-        char c = utfName[i];
-        if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')) { /* a digit or lowercase character; no change */
-            canonicalBuffer[outputLength++] = c;
-        } else if (c >= 'A' && c <= 'Z') { /* an uppercase character; to lower */
-            canonicalBuffer[outputLength++] = c + (const int)('a' - 'A'); /* 'a' - 'A' == 32 */
+        char letter = utfName[i];
+        /* a digit or lowercase character; no change */
+        if ((letter >= '0' && letter <= '9') || (letter >= 'a' && letter <= 'z')) {
+            canonicalBuffer[outputLength++] = letter;
+        } else if (letter >= 'A' && letter <= 'Z') { /* an uppercase character; to lower */
+            canonicalBuffer[outputLength++] = letter + (const int)('a' - 'A'); /* 'a' - 'A' == 32 */
         } /* unicodes, symbols, spaces, etc. are completely skipped */
     }
     return [[NSString alloc] initWithBytes:canonicalBuffer length:outputLength encoding:NSUTF8StringEncoding];
@@ -89,8 +91,8 @@ void rg_log(NSString* RG_SUFFIX_NONNULL format,
 }
 
 void rg_swizzle(Class RG_SUFFIX_NULLABLE cls, SEL RG_SUFFIX_NULLABLE original, SEL RG_SUFFIX_NULLABLE replacement) {
-    IMP replacementImplementation = method_setImplementation(class_getInstanceMethod(cls, replacement),
-                                                             class_getMethodImplementation(cls, original));
+    IMP replacementImp = method_setImplementation(class_getInstanceMethod(cls, replacement),
+                                                  class_getMethodImplementation(cls, original));
     // get the replacement IMP
     // we assume swizzle is called on the class with replacement, so we can safety force original onto replacement
     // set the original IMP on the replacement selector
@@ -99,9 +101,9 @@ void rg_swizzle(Class RG_SUFFIX_NULLABLE cls, SEL RG_SUFFIX_NULLABLE original, S
     // if it doesn't then that means an IMP is already there so we have to overwrite it
     if (!class_addMethod(cls,
                          original,
-                         replacementImplementation,
+                         replacementImp,
                          method_getTypeEncoding(class_getInstanceMethod(cls, replacement)))) {
-        method_setImplementation(class_getInstanceMethod(cls, original), replacementImplementation);
+        method_setImplementation(class_getInstanceMethod(cls, original), replacementImp);
     }
 }
 

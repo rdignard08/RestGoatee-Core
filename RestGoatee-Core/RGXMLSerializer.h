@@ -39,7 +39,7 @@
 /**
  @brief Triggers the parsing to execute when accessed the first time.
  */
-@property RG_NONNULL_PROPERTY(nonatomic, strong, readonly) RGXMLNode* rootNode;
+@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong, readonly) RGXMLNode* rootNode;
 
 /**
  @brief Designated initializer.

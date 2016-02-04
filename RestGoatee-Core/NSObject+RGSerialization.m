@@ -53,25 +53,23 @@
             ret[key] = [targetObject rg_dictionaryHelper];
         }
         return ret;
-    } else { /* any old schleb object */
-        NSMutableDictionary RG_GENERIC(NSString*, id) * ret = [NSMutableDictionary new];
-        NSArray RG_GENERIC(NSString*) * keys;
-        if ([[self class] respondsToSelector:@selector(serializableKeys)]) {
-            keys = [[self class] serializableKeys];
-        } else {
-            keys = [[self class] rg_propertyList].allKeys;
-        }
-        for (NSString* propertyName in keys) {
-            BOOL NSObjectSel = [NSObject instancesRespondToSelector:NSSelectorFromString(propertyName)];
-            BOOL NSManagedSel = [rg_NSManagedObject instancesRespondToSelector:NSSelectorFromString(propertyName)];
-            if (!NSObjectSel && !NSManagedSel) {
-                NSObject* targetObject = [self valueForKey:propertyName] ?: [NSNull null];
-                ret[propertyName] = [targetObject rg_dictionaryHelper];
-            }
-        }
-        ret[kRGSerializationKey] = NSStringFromClass([self class]);
-        return ret;
+    } /* any old schleb object */
+    NSMutableDictionary RG_GENERIC(NSString*, id) * ret = [NSMutableDictionary new];
+    NSArray RG_GENERIC(NSString*) * keys;
+    if ([[self class] respondsToSelector:@selector(serializableKeys)]) {
+        keys = [[self class] serializableKeys];
+    } else {
+        keys = [[self class] rg_propertyList].allKeys;
     }
+    for (NSString* propertyName in keys) {
+        SEL target = NSSelectorFromString(propertyName);
+        if (![NSObject instancesRespondToSelector:target] && ![rg_NSManagedObject instancesRespondToSelector:target]) {
+            NSObject* targetObject = [self valueForKey:propertyName] ?: [NSNull null];
+            ret[propertyName] = [targetObject rg_dictionaryHelper];
+        }
+    }
+    ret[kRGSerializationKey] = NSStringFromClass([self class]);
+    return ret;
 }
 
 @end

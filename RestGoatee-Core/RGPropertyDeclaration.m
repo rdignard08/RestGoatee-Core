@@ -53,11 +53,16 @@
                     self->_storageSemantics = kRGPropertyWeak;
                     break;
                 case 'T':
+                    [self initializeType:attribute.value];
+                    break;
                 case 't': /* I have no idea what 'old-style' typing looks like; gonna assume it's the same */
                     [self initializeType:attribute.value];
                     break;
                 case 'R':
                     self->_readOnly = YES;
+                    break;
+                default:
+                    break;
             }
         }
         free(attributes);
@@ -83,14 +88,14 @@
     char* buffer = malloc(typeLength);
     BOOL foundFirst = NO;
     for (size_t j = 0; j != typeLength; j++) {
-        char c = value[j];
+        char letter = value[j];
         if (foundFirst) {
-            if (c == '"') {
+            if (letter == '"') {
                 break;
             } else {
-                buffer[outputLength++] = c;
+                buffer[outputLength++] = letter;
             }
-        } else if (c == '"') {
+        } else if (letter == '"') {
             foundFirst = YES;
         }
     } /* there should be 2 '"' on each end, the class is in the middle */

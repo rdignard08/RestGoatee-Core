@@ -73,7 +73,7 @@
 
 #pragma mark - Public Methods
 - (void) addChildNode:(RG_PREFIX_NONNULL RGXMLNode*)node {
-    node->_parentNode = self;
+    node.parentNode = self;
     [self.childNodes addObject:node];
 }
 

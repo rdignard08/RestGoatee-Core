@@ -37,7 +37,7 @@ typedef NSMutableDictionary RG_GENERIC(NSString*, NSString*) RGMutableAttributes
 /**
  @brief Set when `-addChildNode:` is called.  A weak reference is made to the enclosing node.
  */
-@property RG_NULLABLE_PROPERTY(nonatomic, weak, readonly) RGXMLNode* parentNode;
+@property RG_NULLABLE_PROPERTY(nonatomic, weak) RGXMLNode* parentNode;
 
 /**
  @brief Attributes come from `... id="123" name="cool"` and will equal `@{ "id" : "123", "name" : "cool" }`.

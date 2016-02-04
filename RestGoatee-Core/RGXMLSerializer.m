@@ -26,13 +26,12 @@
 @interface RGXMLSerializer () <NSXMLParserDelegate>
 
 @property RG_NULLABLE_PROPERTY(nonatomic, weak) RGXMLNode* currentNode;
-@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong, readonly) NSMutableString* currentString;
+@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableString* currentString;
+@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong, readwrite) RGXMLNode* rootNode;
 
 @end
 
 @implementation RGXMLSerializer
-@synthesize rootNode = _rootNode;
-@synthesize currentString = _currentString;
 
 - (RG_PREFIX_NONNULL instancetype) init {
     return [self initWithParser:nil];
@@ -46,8 +45,8 @@
 
 - (RG_PREFIX_NONNULL RGXMLNode*) rootNode {
     if (!_rootNode) {
-        _rootNode = [[RGXMLNode alloc] initWithName:kRGXMLDocumentNodeKey];
-        _currentNode = _rootNode;
+        _rootNode = [[RGXMLNode alloc] initWithName:rg_XMLRootNodeKey];
+        self.currentNode = _rootNode;
 #ifdef DEBUG
         BOOL parseResult =
 #endif 
@@ -66,7 +65,7 @@
 
 - (void) setParser:(RG_PREFIX_NULLABLE NSXMLParser*)parser {
     if (_parser != parser) {
-        _rootNode = nil;
+        self.rootNode = nil;
         _parser = parser;
         _parser.delegate = self;
     }
@@ -96,7 +95,7 @@ didStartElement:(RG_PREFIX_NONNULL NSString*)elementName
     RGXMLNode* strongNode = self.currentNode;
     NSAssert([elementName isEqual:strongNode.name], @"Malformed XML");
     strongNode.innerXML = self->_currentString; /* intentionally using the ivar so that if nil, nil goes to innerXML */
-    self->_currentString = nil;
+    self.currentString = nil;
     self.currentNode = strongNode.parentNode; /* move up the parse tree */
 }
 

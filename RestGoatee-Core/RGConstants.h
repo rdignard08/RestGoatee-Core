@@ -75,7 +75,7 @@ FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGDateFormatterKey;
 /**
  @brief This constant is used to identify the implicit document node.
  */
-FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGXMLDocumentNodeKey;
+FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const rg_XMLRootNodeKey;
 
 /**
  @brief When serialized to an `NSDictionary`, the `innerXML` of the node will appear on this key.
@@ -100,4 +100,4 @@ FOUNDATION_EXPORT Class RG_SUFFIX_NULLABLE rg_NSManagedObject;
 /**
  @brief Will be `[NSEntityDescription self]` or `Nil` (if not linked/available).
  */
-FOUNDATION_EXPORT Class RG_SUFFIX_NULLABLE rg_NSEntityDescription;
+FOUNDATION_EXPORT Class RG_SUFFIX_NULLABLE rg_NSEntityDescClass;

@@ -51,7 +51,7 @@
     if ([self isSubclassOfClass:rg_NSManagedObject]) {
         NSAssert(context, @"A subclass of NSManagedObject must be created within a valid NSManagedObjectContext.");
         NSManagedObjectContext* RG_SUFFIX_NONNULL validContext = (id RG_SUFFIX_NONNULL)context;
-        ret = [rg_NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self)
+        ret = [rg_NSEntityDescClass insertNewObjectForEntityForName:NSStringFromClass(self)
                                                inManagedObjectContext:validContext];
     } else {
         ret = [self new];
@@ -100,10 +100,9 @@
     NSString* key = property.name;
     Class propertyType = property.type;
     /* first ask if there's a custom implementation */
-    if ([self respondsToSelector:@selector(shouldTransformValue:forProperty:inContext:)]) {
-        if (![(id<RGDeserializable>)self shouldTransformValue:value forProperty:key inContext:context]) {
-            return;
-        }
+    if ([self respondsToSelector:@selector(shouldTransformValue:forProperty:inContext:)] &&
+        ![(id<RGDeserializable>)self shouldTransformValue:value forProperty:key inContext:context]) {
+        return;
     }
     /* null and non-existent set the property to 0 - possible optimization since init already does this */
     if (!value || [value isKindOfClass:[NSNull self]]) {
@@ -211,14 +210,13 @@
             dateFormatter.dateFormat = dateFormat;
             [self setValue:[dateFormatter dateFromString:value] forKey:key];
             return; /* Let's not second-guess the developer... */
-        } else {
-            for (NSString* predefinedFormat in rg_dateFormats()) {
-                dateFormatter.dateFormat = predefinedFormat;
-                NSDate* date = [dateFormatter dateFromString:value];
-                if (date) {
-                    [self setValue:date forKey:key];
-                    break;
-                }
+        }
+        for (NSString* predefinedFormat in rg_dateFormats()) {
+            dateFormatter.dateFormat = predefinedFormat;
+            NSDate* date = [dateFormatter dateFromString:value];
+            if (date) {
+                [self setValue:date forKey:key];
+                break;
             }
         }
     /* At this point we've exhausted the supported foundation classes for the LHS... these handle sub-objects */

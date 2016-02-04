@@ -32,21 +32,21 @@
     NSMutableDictionary* rg_propertyList = objc_getAssociatedObject(self, @selector(rg_propertyList));
     if (!rg_propertyList) {
         rg_propertyList = [NSMutableDictionary new];
-        NSMutableDictionary* rg_canonicalPropertyList = [NSMutableDictionary new];
+        NSMutableDictionary* canonicalList = [NSMutableDictionary new];
         [rg_propertyList addEntriesFromDictionary:[[self superclass] rg_propertyList]];
-        [rg_canonicalPropertyList addEntriesFromDictionary:[[self superclass] rg_canonicalPropertyList]];
+        [canonicalList addEntriesFromDictionary:[[self superclass] rg_canonicalPropertyList]];
         unsigned int count;
         objc_property_t* properties = class_copyPropertyList(self, &count);
         for (unsigned int i = 0; i < count; i++) {
             RGPropertyDeclaration* declaration = [[RGPropertyDeclaration alloc] initWithProperty:properties[i]];
             rg_propertyList[declaration.name] = declaration;
-            rg_canonicalPropertyList[declaration.canonicalName] = declaration;
+            canonicalList[declaration.canonicalName] = declaration;
         }
         free(properties);
         objc_setAssociatedObject(self, @selector(rg_propertyList), rg_propertyList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         objc_setAssociatedObject(self,
                                  @selector(rg_canonicalPropertyList),
-                                 rg_canonicalPropertyList,
+                                 canonicalList,
                                  OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return rg_propertyList;

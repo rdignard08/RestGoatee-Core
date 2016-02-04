@@ -10,6 +10,6 @@
 @property (nonatomic, strong, readonly) id readOnlyProperty;
 @property (nonatomic, strong) RGTestObject1* subObject;
 @property (nonatomic, strong) NSArray* arrayOfSubObj;
-@property (nonatomic, assign) CGFloat floatProperty;
+@property (nonatomic, assign) float floatProperty;
 
 @end

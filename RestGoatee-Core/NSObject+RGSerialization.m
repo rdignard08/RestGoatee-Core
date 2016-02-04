@@ -41,19 +41,31 @@
     } else if (rg_isInlineObject([self class]) || rg_isClassObject(self)) { /* classes can be stored as strings too */
         return self.description;
     } else if (rg_isCollectionObject([self class])) {
-        NSMutableArray* ret = [NSMutableArray new];
-        for (NSObject* object in (id<NSFastEnumeration>)self) {
-            [ret addObject:[object rg_dictionaryHelper]];
-        }
-        return ret;
+        return [self rg_serializeArrayLike];
     } else if (rg_isKeyedCollectionObject([self class])) { /* a dictionary / RGXMLNode */
-        NSMutableDictionary RG_GENERIC(NSString*, id) * ret = [NSMutableDictionary new];
-        for (NSString* key in (id<NSFastEnumeration>)self) {
-            NSObject* targetObject = [self valueForKey:key];
-            ret[key] = [targetObject rg_dictionaryHelper];
-        }
-        return ret;
-    } /* any old schleb object */
+        return [self rg_serializeDictionaryLike];
+    }
+    return [self rg_serializeObject]; /* any old schleb object */
+}
+
+- (RG_PREFIX_NONNULL NSArray*) rg_serializeArrayLike {
+    NSMutableArray* ret = [NSMutableArray new];
+    for (NSObject* object in (id<NSFastEnumeration>)self) {
+        [ret addObject:[object rg_dictionaryHelper]];
+    }
+    return ret;
+}
+
+- (RG_PREFIX_NONNULL NSDictionary*) rg_serializeDictionaryLike {
+    NSMutableDictionary RG_GENERIC(NSString*, id) * ret = [NSMutableDictionary new];
+    for (NSString* key in (id<NSFastEnumeration>)self) {
+        NSObject* targetObject = [self valueForKey:key];
+        ret[key] = [targetObject rg_dictionaryHelper];
+    }
+    return ret;
+}
+
+- (RG_PREFIX_NONNULL NSDictionary*) rg_serializeObject {
     NSMutableDictionary RG_GENERIC(NSString*, id) * ret = [NSMutableDictionary new];
     NSArray RG_GENERIC(NSString*) * keys;
     if ([[self class] respondsToSelector:@selector(serializableKeys)]) {

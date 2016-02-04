@@ -6,6 +6,21 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		BE63EE651C633D8700D451D2 /* OCLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = BE63EE681C633D8700D451D2 /* Build configuration list for PBXAggregateTarget "OCLint" */;
+			buildPhases = (
+				BE63EE691C633DA300D451D2 /* ShellScript */,
+			);
+			dependencies = (
+				BE63EE6B1C633DB000D451D2 /* PBXTargetDependency */,
+			);
+			name = OCLint;
+			productName = OCLint;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		BE20095A1BCA252000A9E8A0 /* libRestGoatee-Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFFB8411BBDB15900EAF95D /* libRestGoatee-Core.a */; };
 		BE2009651BCA27AE00A9E8A0 /* RGXMLNodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2009641BCA27AE00A9E8A0 /* RGXMLNodeSpec.m */; };
@@ -34,6 +49,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		BE20095B1BCA252000A9E8A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEFFB8391BBDB15900EAF95D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BEFFB8401BBDB15900EAF95D;
+			remoteInfo = "RestGoatee-Core";
+		};
+		BE63EE6A1C633DB000D451D2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BEFFB8391BBDB15900EAF95D /* Project object */;
 			proxyType = 1;
@@ -335,6 +357,10 @@
 					BE2009531BCA252000A9E8A0 = {
 						CreatedOnToolsVersion = 6.4;
 					};
+					BE63EE651C633D8700D451D2 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 5W2NB69P29;
+					};
 					BEFFB8401BBDB15900EAF95D = {
 						CreatedOnToolsVersion = 6.4;
 					};
@@ -354,6 +380,7 @@
 			targets = (
 				BEFFB8401BBDB15900EAF95D /* RestGoatee-Core */,
 				BE2009531BCA252000A9E8A0 /* RestGoatee-Core-Tests */,
+				BE63EE651C633D8700D451D2 /* OCLint */,
 			);
 		};
 /* End PBXProject section */
@@ -367,6 +394,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BE63EE691C633DA300D451D2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = ./oclint_run.sh;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BE2009501BCA252000A9E8A0 /* Sources */ = {
@@ -411,6 +454,11 @@
 			isa = PBXTargetDependency;
 			target = BEFFB8401BBDB15900EAF95D /* RestGoatee-Core */;
 			targetProxy = BE20095B1BCA252000A9E8A0 /* PBXContainerItemProxy */;
+		};
+		BE63EE6B1C633DB000D451D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BEFFB8401BBDB15900EAF95D /* RestGoatee-Core */;
+			targetProxy = BE63EE6A1C633DB000D451D2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -459,6 +507,20 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.restgoatee.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BE63EE661C633D8700D451D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BE63EE671C633D8700D451D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -638,6 +700,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		BE63EE681C633D8700D451D2 /* Build configuration list for PBXAggregateTarget "OCLint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE63EE661C633D8700D451D2 /* Debug */,
+				BE63EE671C633D8700D451D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		BEFFB83C1BBDB15900EAF95D /* Build configuration list for PBXProject "RestGoatee-Core" */ = {
 			isa = XCConfigurationList;

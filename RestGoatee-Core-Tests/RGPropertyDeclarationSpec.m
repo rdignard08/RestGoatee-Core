@@ -48,20 +48,27 @@ CLASS_SPEC(RGPropertyDeclaration)
     XCTAssert([stringProperty.canonicalName isEqual:@"dateproperty"]);
     XCTAssert(stringProperty.type == [NSDate class]);
     XCTAssert(stringProperty.isPrimitive == NO);
-    XCTAssert(stringProperty.readOnly == NO);
+    XCTAssert(stringProperty.isReadOnly == NO);
     XCTAssert(stringProperty.storageSemantics == kRGPropertyStrong);
     RGPropertyDeclaration* numberProperty = properties[RG_STRING_SEL(intProperty)];
     XCTAssert(numberProperty.type == [NSNumber class]);
     XCTAssert(numberProperty.isPrimitive == YES);
-    XCTAssert(numberProperty.readOnly == NO);
+    XCTAssert(numberProperty.isIntegral == YES);
+    XCTAssert(numberProperty.isFloatingPoint == NO);
+    XCTAssert(numberProperty.isReadOnly == NO);
     XCTAssert(numberProperty.storageSemantics == kRGPropertyAssign);
     RGPropertyDeclaration* somethingProperty = properties[RG_STRING_SEL(weakProperty)];
     XCTAssert(somethingProperty.type == [NSString class]);
     XCTAssert(somethingProperty.isPrimitive == NO);
-    XCTAssert(somethingProperty.readOnly == NO);
+    XCTAssert(somethingProperty.isReadOnly == NO);
     XCTAssert(somethingProperty.storageSemantics == kRGPropertyWeak);
     RGPropertyDeclaration* readOnlyProperty = properties[RG_STRING_SEL(readOnlyProperty)];
-    XCTAssert(readOnlyProperty.readOnly == YES);
+    XCTAssert(readOnlyProperty.isReadOnly == YES);
+    RGPropertyDeclaration* floatProperty = properties[RG_STRING_SEL(floatProperty)];
+    XCTAssert(floatProperty.type == [NSNumber class]);
+    XCTAssert(floatProperty.isPrimitive == YES);
+    XCTAssert(floatProperty.isIntegral == NO);
+    XCTAssert(floatProperty.isFloatingPoint == YES);
 }
 
 #pragma mark - rg_canonical

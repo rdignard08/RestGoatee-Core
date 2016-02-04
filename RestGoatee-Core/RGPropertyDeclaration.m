@@ -56,7 +56,7 @@
                     [self initializeType:attribute.value];
                     break;
                 case 'R':
-                    self->_readOnly = YES;
+                    self->_isReadOnly = YES;
                     break;
                 default:
                     break;
@@ -101,6 +101,25 @@
     free(buffer);
     self->_type = propertyType ?: [NSNumber self];
     self->_isPrimitive = !propertyType;
+    if (self->_isPrimitive) {
+        if (strcmp(@encode(float), value) == 0 ||
+            strcmp(@encode(double), value) == 0 ||
+            strcmp(@encode(long double), value) == 0) {
+            self->_isFloatingPoint = YES;
+        } else if (strcmp(@encode(_Bool), value) == 0 ||
+                   strcmp(@encode(char), value) == 0 ||
+                   strcmp(@encode(unsigned char), value) == 0 ||
+                   strcmp(@encode(short), value) == 0 ||
+                   strcmp(@encode(unsigned short), value) == 0 ||
+                   strcmp(@encode(int), value) == 0 ||
+                   strcmp(@encode(unsigned int), value) == 0 ||
+                   strcmp(@encode(long), value) == 0 ||
+                   strcmp(@encode(unsigned long), value) == 0 ||
+                   strcmp(@encode(long long), value) == 0 ||
+                   strcmp(@encode(unsigned long long), value) == 0) {
+            self->_isIntegral = YES;
+        }
+    }
 }
 
 @end

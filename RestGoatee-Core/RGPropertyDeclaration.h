@@ -61,19 +61,20 @@ typedef struct objc_property* rg_property;
 @property (nonatomic, assign, readonly) BOOL isPrimitive;
 
 /**
- @brief `YES` if the declared property is of type `float`, `double`, `long double`.  `NSNumber` excluded.
+ @brief `YES` if the declared property is of type `float`, `double`, `long double`.  Excludes `NSNumber*`.
  */
 @property (nonatomic, assign, readonly) BOOL isFloatingPoint;
 
 /**
- @brief `YES` if the declared property is of type `char`, `short`, `int`, `long`, `long long`, 
+ @brief `YES` if the declared property is of type `_Bool`, `char`, `short`, `int`, `long`, `long long`, or an unsigned
+   equivalent.  Includes enumerations encoded by their backing type.  Excludes `NSNumber*`.
  */
 @property (nonatomic, assign, readonly) BOOL isIntegral;
 
 /**
  @brief Whether or not the property is modifiable.  The default is `NO`.
  */
-@property (nonatomic, assign, readonly) BOOL readOnly;
+@property (nonatomic, assign, readonly) BOOL isReadOnly;
 
 /**
  @brief The designated initializer; it is a programmer error to invoke `-init`.

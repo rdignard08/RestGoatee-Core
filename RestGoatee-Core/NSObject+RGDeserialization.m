@@ -67,18 +67,15 @@
         overrides = [[self class] overrideKeysForMapping];
     }
     NSDictionary* properties = [[self class] rg_propertyList];
-    NSDictionary* canonicalProperties = [[self class] rg_canonicalPropertyList];
+    NSDictionary* canonicals = [[self class] rg_canonicalPropertyList];
     /* for each piece of data I have; if there's an override: initialize literally; otherwise initialize canonically */
     for (NSString* key in source) {
         id value = [source valueForKeyPath:key];
         NSAssert(value, @"This should always be true but I'm not 100%% on that");
-        NSString* overrideDest = overrides[key];
-        if (overrideDest) {
-            [self rg_initProperty:properties[overrideDest] withValue:value inContext:context];
-        } else {
-            [self rg_initProperty:canonicalProperties[rg_canonical_form(key.UTF8String)]
-                        withValue:value
-                        inContext:context];
+        NSString* override = overrides[key];
+        RGPropertyDeclaration* target = override ? properties[override] : canonicals[rg_canonical_form(key.UTF8String)];
+        if (target) {
+            [self rg_initProperty:target withValue:value inContext:context];
         }
     }
     return self;
@@ -91,12 +88,9 @@
  JSON types when deserialized from NSData are: NSNull, NSNumber (number or boolean), NSString, NSArray, NSDictionary.
  RGXMLNode is odd, but it can be used as nil, NSString, NSDictionary, or NSArray where required.
  */
-- (void) rg_initProperty:(RG_PREFIX_NULLABLE RGPropertyDeclaration*)property
+- (void) rg_initProperty:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property
                withValue:(RG_PREFIX_NONNULL id)value
                inContext:(RG_PREFIX_NULLABLE id)context {
-    
-    /* can't initialize a property that doesn't exist */
-    if (!property) return;
     NSString* key = property.name;
     Class propertyType = property.type;
     id target = value;

@@ -111,7 +111,7 @@
     }
     
     if ([propertyType isSubclassOfClass:[NSValue self]]) {
-        
+        [self rg_initValueProp:property withValue:value];
     }
     
     if ([target isKindOfClass:[NSArray self]]) { /* If the array we're given contains objects which we can create,

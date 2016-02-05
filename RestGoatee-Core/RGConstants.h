@@ -73,6 +73,12 @@ FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGSerializationKey;
 FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGDateFormatterKey;
 
 /**
+ @brief This is the key used internally to store the value returned by `rg_number_formatter()`.
+ You must not use this key with the dictionary at `-[NSThread threadDictionary]`.
+ */
+FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGNumberFormatKey;
+
+/**
  @brief This constant is used to identify the implicit document node.
  */
 FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const rg_XMLRootNodeKey;

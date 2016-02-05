@@ -28,6 +28,7 @@ const size_t kRGMaxAutoSize = 1 << 10;
 
 NSString* RG_SUFFIX_NONNULL const kRGSerializationKey = @"__class";
 NSString* RG_SUFFIX_NONNULL const kRGDateFormatterKey = @"kRGDateFormatterKey";
+NSString* RG_SUFFIX_NONNULL const kRGNumberFormatKey = @"kRGNumberFormatKey";
 NSString* RG_SUFFIX_NONNULL const rg_XMLRootNodeKey = @"kRGDocument";
 NSString* RG_SUFFIX_NONNULL const kRGInnerXMLKey = @"__innerXML__";
 

@@ -46,7 +46,7 @@ typedef struct objc_property* rg_property;
 
 /**
  @brief A `Class` object, an instance of which can contain the value of this property.
-   Primitive properties use `NSNumber` by default.
+   Primitive properties use `[NSNumber self]` by default.
  */
 @property RG_NONNULL_PROPERTY(nonatomic, strong, readonly) Class type;
 

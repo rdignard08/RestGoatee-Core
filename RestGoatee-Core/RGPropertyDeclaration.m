@@ -76,7 +76,7 @@
 - (void) initializeType:(const char*)value {
     BOOL isClass = strcmp(@encode(Class), value) == 0;
     if (isClass || strcmp(@encode(id), value) == 0) {
-        self->_type = isClass ? rg_NSObjectMetaClass : rg_NSObjectClass;
+        self->_type = isClass ? kRGNSObjectMetaClass : kRGNSObjectClass;
         self->_isPrimitive = NO;
         return;
     }

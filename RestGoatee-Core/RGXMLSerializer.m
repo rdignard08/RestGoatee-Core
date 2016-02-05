@@ -45,7 +45,7 @@
 
 - (RG_PREFIX_NONNULL RGXMLNode*) rootNode {
     if (!_rootNode) {
-        _rootNode = [[RGXMLNode alloc] initWithName:rg_XMLRootNodeKey];
+        _rootNode = [[RGXMLNode alloc] initWithName:kRGXMLRootNodeKey];
         self.currentNode = _rootNode;
 #ifdef DEBUG
         BOOL parseResult =

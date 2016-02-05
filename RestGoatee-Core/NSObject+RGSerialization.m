@@ -75,7 +75,7 @@
     }
     for (NSString* propertyName in keys) {
         SEL target = NSSelectorFromString(propertyName);
-        if (![NSObject instancesRespondToSelector:target] && ![rg_NSManagedObject instancesRespondToSelector:target]) {
+        if (![NSObject instancesRespondToSelector:target] && ![kRGNSManagedObject instancesRespondToSelector:target]) {
             NSObject* targetObject = [self valueForKey:propertyName] ?: [NSNull null];
             ret[propertyName] = [targetObject rg_dictionaryHelper];
         }

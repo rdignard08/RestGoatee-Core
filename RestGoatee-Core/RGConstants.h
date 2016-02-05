@@ -81,7 +81,7 @@ FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGNumberFormatKey;
 /**
  @brief This constant is used to identify the implicit document node.
  */
-FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const rg_XMLRootNodeKey;
+FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGXMLRootNodeKey;
 
 /**
  @brief When serialized to an `NSDictionary`, the `innerXML` of the node will appear on this key.
@@ -91,19 +91,19 @@ FOUNDATION_EXPORT NSString* RG_SUFFIX_NONNULL const kRGInnerXMLKey;
 /**
  @brief Will be `objc_getClass("NSObject")` i.e. `[NSObject self]`.
  */
-FOUNDATION_EXPORT Class RG_SUFFIX_NONNULL rg_NSObjectClass;
+FOUNDATION_EXPORT Class RG_SUFFIX_NONNULL kRGNSObjectClass;
 
 /**
  @brief Will be `objc_getMetaClass("NSObject")`.
  */
-FOUNDATION_EXPORT Class RG_SUFFIX_NONNULL rg_NSObjectMetaClass;
+FOUNDATION_EXPORT Class RG_SUFFIX_NONNULL kRGNSObjectMetaClass;
 
 /**
  @brief Will be `[NSManagedObject self]` or `Nil` (if not linked/available).
  */
-FOUNDATION_EXPORT Class RG_SUFFIX_NULLABLE rg_NSManagedObject;
+FOUNDATION_EXPORT Class RG_SUFFIX_NULLABLE kRGNSManagedObject;
 
 /**
  @brief Will be `[NSEntityDescription self]` or `Nil` (if not linked/available).
  */
-FOUNDATION_EXPORT Class RG_SUFFIX_NULLABLE rg_NSEntityDescClass;
+FOUNDATION_EXPORT Class RG_SUFFIX_NULLABLE kRGNSEntityDescClass;

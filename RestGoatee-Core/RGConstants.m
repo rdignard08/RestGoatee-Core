@@ -29,14 +29,14 @@ const size_t kRGMaxAutoSize = 1 << 10;
 NSString* RG_SUFFIX_NONNULL const kRGSerializationKey = @"__class";
 NSString* RG_SUFFIX_NONNULL const kRGDateFormatterKey = @"kRGDateFormatterKey";
 NSString* RG_SUFFIX_NONNULL const kRGNumberFormatKey = @"kRGNumberFormatKey";
-NSString* RG_SUFFIX_NONNULL const rg_XMLRootNodeKey = @"kRGDocument";
+NSString* RG_SUFFIX_NONNULL const kRGXMLRootNodeKey = @"kRGDocument";
 NSString* RG_SUFFIX_NONNULL const kRGInnerXMLKey = @"__innerXML__";
 
 /* storage for extern'd class references */
-Class RG_SUFFIX_NONNULL rg_NSObjectClass;
-Class RG_SUFFIX_NONNULL rg_NSObjectMetaClass;
-Class RG_SUFFIX_NULLABLE rg_NSManagedObject;
-Class RG_SUFFIX_NULLABLE rg_NSEntityDescClass;
+Class RG_SUFFIX_NONNULL kRGNSObjectClass;
+Class RG_SUFFIX_NONNULL kRGNSObjectMetaClass;
+Class RG_SUFFIX_NULLABLE kRGNSManagedObject;
+Class RG_SUFFIX_NULLABLE kRGNSEntityDescClass;
 
 @interface RGConstants : NSObject 
 
@@ -47,10 +47,10 @@ Class RG_SUFFIX_NULLABLE rg_NSEntityDescClass;
 + (void) load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        rg_NSObjectClass = objc_getClass("NSObject");
-        rg_NSObjectMetaClass = objc_getMetaClass("NSObject");
-        rg_NSManagedObject = objc_getClass("NSManagedObject");
-        rg_NSEntityDescClass = objc_getClass("NSEntityDescription");
+        kRGNSObjectClass = objc_getClass("NSObject");
+        kRGNSObjectMetaClass = objc_getMetaClass("NSObject");
+        kRGNSManagedObject = objc_getClass("NSManagedObject");
+        kRGNSEntityDescClass = objc_getClass("NSEntityDescription");
     });
 }
 

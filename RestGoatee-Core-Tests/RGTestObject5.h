@@ -1,4 +1,4 @@
-/* Copyright (c) 01/13/2016, Ryan Dignard
+/* Copyright (c) 02/04/2016, Ryan Dignard
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -21,32 +21,12 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "RestGoatee-Core.h"
-#import "RGTestObject2.h"
-#import "RGTestObject5.h"
+#import "RGSerializable.h"
 
-CATEGORY_SPEC(NSObject, RGSerialization)
+@interface RGTestObject5 : NSObject <RGSerializable>
 
-#pragma mark - dictionaryRepresentation
-- (void)testDictionaryRepresentationBasic {
-    RGTestObject2* obj = [RGTestObject2 new];
-    obj.dictionaryProperty = @{ @"aKey" : @"aValue" };
-    obj.arrayProperty = @[ @"aValue" ];
-    NSDictionary* dictionaryRepresentation = [obj dictionaryRepresentation];
-    XCTAssert([dictionaryRepresentation[RG_STRING_SEL(dictionaryProperty)] isEqual:obj.dictionaryProperty]);
-    XCTAssert([dictionaryRepresentation[RG_STRING_SEL(arrayProperty)] isEqual:obj.arrayProperty]);
-    XCTAssert([dictionaryRepresentation[kRGSerializationKey] isEqual:NSStringFromClass([RGTestObject2 class])]);
-}
+@property (nonatomic, strong) NSString* stringProperty;
+@property (nonatomic, strong) NSArray* arrayProperty;
+@property (nonatomic, strong) NSNumber* numberProperty;
 
-- (void)testRGSerializable {
-    RGTestObject5* obj = [RGTestObject5 new];
-    obj.stringProperty = @"abcd";
-    obj.arrayProperty = @[ @"aValue" ];
-    obj.numberProperty = @3;
-    NSDictionary* dictionary = [obj dictionaryRepresentation];
-    XCTAssert([dictionary[RG_STRING_SEL(stringProperty)] isEqual:@"abcd"]);
-    XCTAssert(dictionary[RG_STRING_SEL(arrayProperty)] == nil);
-    XCTAssert([dictionary[RG_STRING_SEL(numberProperty)] isEqual:@"3"]);
-}
-
-SPEC_END
+@end

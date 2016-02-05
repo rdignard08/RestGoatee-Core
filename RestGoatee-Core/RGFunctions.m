@@ -132,40 +132,25 @@ BOOL rg_isClassObject(id RG_SUFFIX_NULLABLE object) {
     return currentType != kRGNSObjectClass && object_getClass(currentType) == kRGNSObjectClass;
 }
 
-/**
- Returns `YES` if object has the same type as `NSObject`'s meta class.
- */
 BOOL rg_isMetaClassObject(id RG_SUFFIX_NULLABLE object) {
     return rg_isClassObject(object) && class_isMetaClass(object);
 }
 
-/**
- Returns `YES` if the given type can be adequately represented by an `NSString`.
- */
 BOOL rg_isInlineObject(Class RG_SUFFIX_NULLABLE cls) {
     return [cls isSubclassOfClass:[NSDate self]] || [cls isSubclassOfClass:[NSString self]] ||
            [cls isSubclassOfClass:[NSData self]] || [cls isSubclassOfClass:[NSNull self]] ||
            [cls isSubclassOfClass:[NSValue self]] || [cls isSubclassOfClass:[NSURL self]];
 }
 
-/**
- Returns `YES` if the given type can be adequately represented by an `NSArray`.
- */
 BOOL rg_isCollectionObject(Class RG_SUFFIX_NULLABLE cls) {
     return [cls isSubclassOfClass:[NSSet self]] || [cls isSubclassOfClass:[NSArray self]] ||
            [cls isSubclassOfClass:[NSOrderedSet self]];
 }
 
-/**
- Returns `YES` if the given type is a "key => value" type.  Thus it can be represented by an `NSDictionary`.
- */
 BOOL rg_isKeyedCollectionObject(Class RG_SUFFIX_NULLABLE cls) {
     return [cls isSubclassOfClass:[NSDictionary self]] || [cls isSubclassOfClass:[RGXMLNode self]];
 }
 
-/**
- Returns `YES` if the given class conforms to `RGDataSource`.  Necessary due to some bug (the 2nd clause).
- */
 BOOL rg_isDataSourceClass(Class RG_SUFFIX_NULLABLE cls) {
     return [cls conformsToProtocol:@protocol(RGDataSource)] || [cls isSubclassOfClass:[NSDictionary self]];
 }

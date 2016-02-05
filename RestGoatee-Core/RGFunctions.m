@@ -156,17 +156,23 @@ BOOL rg_isDataSourceClass(Class RG_SUFFIX_NULLABLE cls) {
 }
 
 BOOL rg_is_integral_encoding(const char* RG_SUFFIX_NONNULL const encoding) {
-    return strcmp(@encode(_Bool), encoding) == 0 ||
-           strcmp(@encode(char), encoding) == 0 ||
-           strcmp(@encode(unsigned char), encoding) == 0 ||
-           strcmp(@encode(short), encoding) == 0 ||
-           strcmp(@encode(unsigned short), encoding) == 0 ||
-           strcmp(@encode(int), encoding) == 0 ||
-           strcmp(@encode(unsigned int), encoding) == 0 ||
-           strcmp(@encode(long), encoding) == 0 ||
-           strcmp(@encode(unsigned long), encoding) == 0 ||
-           strcmp(@encode(long long), encoding) == 0 ||
-           strcmp(@encode(unsigned long long), encoding) == 0;
+    static const char* const types[] = { @encode(_Bool),
+                                         @encode(char),
+                                         @encode(unsigned char),
+                                         @encode(short),
+                                         @encode(unsigned short),
+                                         @encode(int),
+                                         @encode(unsigned int),
+                                         @encode(long),
+                                         @encode(unsigned long),
+                                         @encode(long long),
+                                         @encode(unsigned long long) };
+    for (size_t i = 0; i < sizeof(types) / sizeof(const char* const); i++) {
+        if (strcmp(types[i], encoding) == 0) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 BOOL rg_is_floating_encoding(const char* RG_SUFFIX_NONNULL const encoding) {

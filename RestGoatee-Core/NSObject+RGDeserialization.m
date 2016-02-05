@@ -100,10 +100,20 @@
         return;
     }
     /* null and non-existent set the property to 0 - possible optimization since init already does this */
-    if (!target || [target isKindOfClass:[NSNull self]]) {
+    if ([target isKindOfClass:[NSNull self]]) {
         [self setValue:property.isPrimitive ? @0 : nil forKey:key];
         return;
     }
+    
+    if ([propertyType isSubclassOfClass:[NSString self]]) {
+        [self rg_initStringProp:property withValue:value];
+        return;
+    }
+    
+    if ([propertyType isSubclassOfClass:[NSValue self]]) {
+        
+    }
+    
     if ([target isKindOfClass:[NSArray self]]) { /* If the array we're given contains objects which we can create,
                                                     create those too */
         NSMutableArray RG_GENERIC(id) * ret = [NSMutableArray new];
@@ -121,6 +131,7 @@
         }
         target = ret;
     }
+    
     /* __NSCFString -> NSMutableString -> NSString */
     id mutableVersion = [target respondsToSelector:@selector(mutableCopyWithZone:)] ? [target mutableCopy] : nil;
     if ([mutableVersion isKindOfClass:propertyType]) { /* if the target is a mutable of a immutable type we have */
@@ -132,6 +143,7 @@
         [self setValue:target forKey:key];
         return;
     } /* If JSONValue is already a subclass of propertyType theres no reason to coerce it */
+    
     
     /* Otherwise... this mess */
     
@@ -190,10 +202,10 @@
             target = [rg_number_formatter() numberFromString:target];
         }
         [self setValue:target forKey:key]; /* NSNumber is a subclass of NSValue hence it's a valid assignment */
-    } else if (([propertyType isSubclassOfClass:[NSString self]] || [propertyType isSubclassOfClass:[NSURL self]]) &&
+    } else if ([propertyType isSubclassOfClass:[NSURL self]] &&
                ([target isKindOfClass:[NSNumber self]] || [target isKindOfClass:[NSString self]] ||
                 [target isKindOfClass:[RGXMLNode self]] || [target isKindOfClass:[NSArray self]])) {
-                   /* NSString, NSURL */
+                   /* NSURL */
         if ([target isKindOfClass:[RGXMLNode self]]) {
             NSString* innerXML = [target innerXML];
             target = innerXML ?: @"";
@@ -233,6 +245,28 @@
 #ifdef DEBUG
     [self valueForKey:key] ? RG_VOID_NOOP : RGLog(@"FAIL: initialization of property %@ on type %@", key, [self class]);
 #endif
+}
+
+- (void) rg_initStringProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {
+    id RG_SUFFIX_NULLABLE source = value;
+    if ([source isKindOfClass:[RGXMLNode self]]) {
+        source = [value innerXML];
+    } else if ([source isKindOfClass:[NSValue self]]) {
+        source = [source stringValue];
+    } else if ([source isKindOfClass:[NSArray self]]) {
+        source = [source componentsJoinedByString:@","];
+    }
+    if ([source isKindOfClass:[NSString self]]) {
+        if ([property.type isSubclassOfClass:[NSMutableString self]]) {
+            [self setValue:[value mutableCopy] forKey:property.name];
+        } else {
+            [self setValue:source forKey:property.name];
+        }
+    }
+}
+
+- (void) rg_initValueProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {
+    id RG_SUFFIX_NULLABLE source = value;
 }
 
 @end

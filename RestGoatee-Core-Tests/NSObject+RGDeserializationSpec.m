@@ -647,7 +647,7 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     RGTestObject2* object = [RGTestObject2 new];
     RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(valueProperty)] withValue:node inContext:nil];
-    XCTAssert([object.valueProperty isEqual:@0]);
+    XCTAssert(object.valueProperty == nil);
 }
 
 - (void) testNodeToId {

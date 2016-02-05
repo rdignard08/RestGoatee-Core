@@ -193,7 +193,7 @@
             target = innerXML ?: @"";
         }
         if ([target isKindOfClass:[NSString self]]) {
-            target = [rg_number_formatter() numberFromString:target] ?: @0;
+            target = [rg_number_formatter() numberFromString:target];
         }
         [self setValue:target forKey:key]; /* NSNumber is a subclass of NSValue hence it's a valid assignment */
     } else if (([propertyType isSubclassOfClass:[NSString self]] || [propertyType isSubclassOfClass:[NSURL self]]) &&

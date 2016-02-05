@@ -28,9 +28,8 @@
 #import "RGBartStation.h"
 #import "NSObject+RGSharedImpl.h"
 
-@interface NSObject (_RGForwardDecl)
+@interface NSObject (RGForwardDecl)
 
-+ (NSDictionary*) rg_propertyList;
 - (void) rg_initProperty:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NULLABLE id)value inContext:(RG_PREFIX_NULLABLE id)context;
 
 @end

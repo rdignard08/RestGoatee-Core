@@ -22,42 +22,8 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RestGoatee-Core.h"
-
-@interface RGBaseObject : NSObject
-
-- (NSString*) method;
-
-@end
-
-@implementation RGBaseObject
-
-- (NSString*) method {
-    return @"foo";
-}
-
-@end
-
-@interface RGDerivedObject1 : RGBaseObject @end
-@implementation RGDerivedObject1
-
-- (NSString*) method {
-    return @"bar";
-}
-
-- (NSString*) override_method {
-    return @"baz";
-}
-
-@end
-
-@interface RGDerivedObject2 : RGBaseObject @end
-@implementation RGDerivedObject2
-
-- (NSString*) override_method {
-    return @"baz";
-}
-
-@end
+#import "RGDerivedObject1.h"
+#import "RGDerivedObject2.h"
 
 CLASS_SPEC(RestGoatee_Core)
 
@@ -106,6 +72,24 @@ CLASS_SPEC(RestGoatee_Core)
         anotherFormatter = rg_threadsafe_formatter();
     });
     dispatch_sync(backgroundQueue, ^{}); // apple's so smart dispatch_sync will lie.
+    XCTAssert(formatter != anotherFormatter);
+}
+
+#pragma mark - rg_number_formatter
+- (void) testRGNumberFormatterSame {
+    id formatter = rg_number_formatter();
+    id anotherFormatter = rg_number_formatter();
+    XCTAssert(formatter == anotherFormatter);
+}
+
+- (void) testRGNumberFormatterDifferent {
+    id formatter = rg_number_formatter();
+    __block id anotherFormatter;
+    dispatch_queue_t backgroundQueue = dispatch_queue_create("background", DISPATCH_QUEUE_SERIAL);
+    dispatch_async(backgroundQueue, ^{
+        anotherFormatter = rg_number_formatter();
+    });
+    dispatch_sync(backgroundQueue, ^{});
     XCTAssert(formatter != anotherFormatter);
 }
 

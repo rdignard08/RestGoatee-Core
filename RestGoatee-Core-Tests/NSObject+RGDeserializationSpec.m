@@ -173,7 +173,7 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
 - (void) testStringToIntegral {
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(longProperty)] withValue:@"4900111000" inContext:nil];
-    XCTAssert(object.longProperty == 4900111000ul);
+    XCTAssert(object.longProperty == 4900111000ull);
 }
 
 - (void) testStringToDouble {

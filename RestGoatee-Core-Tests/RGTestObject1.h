@@ -13,7 +13,7 @@
 @property (nonatomic, strong) Class classProperty;
 @property (nonatomic, strong) NSArray* arrayProperty;
 @property (nonatomic, strong) NSDictionary* dictionaryProperty;
-@property (nonatomic, assign) unsigned long longProperty;
+@property (nonatomic, assign) uint64_t longProperty;
 @property (nonatomic, assign) double doubleProperty;
 @property (nonatomic, assign) NSRange rangeProperty;
 

@@ -21,32 +21,8 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "RGDataSource.h"
-#import "RGTestObject2.h"
+#import "RGTestObject3.h"
 #import "RestGoatee-Core.h"
-
-@interface RGTestObject3 : RGTestObject2 <RGDataSource>
-
-@end
-
-@implementation RGTestObject3
-
-- (RG_PREFIX_NULLABLE id) valueForKeyPath:(RG_PREFIX_NONNULL NSString*)string {
-    if ([string isEqual:@"stringProperty"]) {
-        return @"abd";
-    }
-    return [NSObject class];
-}
-
-- (RG_PREFIX_NONNULL NSArray*) allKeys {
-    return @[ @"stringProperty", @"idProperty" ];
-}
-
-- (NSUInteger) countByEnumeratingWithState:(RG_PREFIX_NONNULL NSFastEnumerationState*)state objects:(__unsafe_unretained id[])buffer count:(NSUInteger)len {
-    return [self.allKeys countByEnumeratingWithState:state objects:buffer count:len];
-}
-
-@end
 
 CLASS_SPEC(RGDataSource)
 

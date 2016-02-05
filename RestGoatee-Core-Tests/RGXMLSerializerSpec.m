@@ -1,4 +1,4 @@
-/* Copyright (c) 10/18/15, Ryan Dignard
+/* Copyright (c) 10/18/2015, Ryan Dignard
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without

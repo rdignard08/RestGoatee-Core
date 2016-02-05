@@ -24,7 +24,7 @@
 #import "RestGoatee-Core.h"
 #import <objc/runtime.h>
 
-NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL rg_dateFormats(void) {
+NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL rg_date_formats(void) {
     static dispatch_once_t onceToken;
     static NSArray RG_GENERIC(NSString*) * _sDateFormats;
     dispatch_once(&onceToken, ^{
@@ -112,6 +112,15 @@ NSDateFormatter* RG_SUFFIX_NONNULL rg_threadsafe_formatter(void) {
     if (!currentFormatter) {
         currentFormatter = [NSDateFormatter new];
         [NSThread currentThread].threadDictionary[kRGDateFormatterKey] = currentFormatter;
+    }
+    return currentFormatter;
+}
+
+NSNumberFormatter* RG_SUFFIX_NONNULL rg_number_formatter(void) {
+    NSNumberFormatter* currentFormatter = [NSThread currentThread].threadDictionary[kRGNumberFormatKey];
+    if (!currentFormatter) {
+        currentFormatter = [NSNumberFormatter new];
+        [NSThread currentThread].threadDictionary[kRGNumberFormatKey] = currentFormatter;
     }
     return currentFormatter;
 }

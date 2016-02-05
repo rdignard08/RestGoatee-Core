@@ -176,17 +176,11 @@
             target = innerXML ?: @"";
         }
         if ([target isKindOfClass:[NSString self]]) {
-            if (property.isPrimitive) {
-                if (property.isIntegral) {
-                    target = @([target longLongValue]); /* TODO: should support unsigned long long */
-                } else if (property.isFloatingPoint) {
-                    target = @([target doubleValue]);
-                } else {
-                    RGLog(@"Unsupported Destination for NSString: %@ on %@", property.name, [self class]);
-                    return;
-                }
+            if (property.isIntegral || property.isFloatingPoint || !property.isPrimitive) {
+                target = [rg_number_formatter() numberFromString:target] ?: (property.isPrimitive ? @0 : nil);
             } else {
-                target = @([target doubleValue]); /* TODO: this can still be lossy */
+                RGLog(@"Unsupported Destination for NSString: %@ on %@", property.name, [self class]);
+                return;
             }
         }
         [self setValue:target forKey:key]; /* Note: setValue: will unwrap the value if the destination is a primitive */
@@ -198,7 +192,9 @@
             NSString* innerXML = [target innerXML];
             target = innerXML ?: @"";
         }
-        if ([target isKindOfClass:[NSString self]]) target = @([target doubleValue]);
+        if ([target isKindOfClass:[NSString self]]) {
+            target = [rg_number_formatter() numberFromString:target] ?: @0;
+        }
         [self setValue:target forKey:key]; /* NSNumber is a subclass of NSValue hence it's a valid assignment */
     } else if (([propertyType isSubclassOfClass:[NSString self]] || [propertyType isSubclassOfClass:[NSURL self]]) &&
                ([target isKindOfClass:[NSNumber self]] || [target isKindOfClass:[NSString self]] ||
@@ -226,7 +222,7 @@
             [self setValue:[dateFormatter dateFromString:target] forKey:key];
             return; /* Let's not second-guess the developer... */
         }
-        for (NSString* predefinedFormat in rg_dateFormats()) {
+        for (NSString* predefinedFormat in rg_date_formats()) {
             dateFormatter.dateFormat = predefinedFormat;
             NSDate* date = [dateFormatter dateFromString:target];
             if (date) {

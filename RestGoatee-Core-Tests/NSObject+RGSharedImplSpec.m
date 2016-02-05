@@ -30,14 +30,14 @@ CATEGORY_SPEC(NSObject, RGSharedImpl)
 
 #pragma mark - rg_dateFormats
 - (void) testDateFormatsNullability {
-    XCTAssert(rg_dateFormats() != nil);
+    XCTAssert(rg_date_formats() != nil);
 }
 
 - (void) testDateFormatsNSDateParsable {
     NSDate* date = [NSDate new];
     NSDateFormatter* formatter = [NSDateFormatter new];
     BOOL foundAGoodOne = NO;
-    for (NSString* format in rg_dateFormats()) {
+    for (NSString* format in rg_date_formats()) {
         formatter.dateFormat = format;
         if ((int)date.timeIntervalSince1970 == (int)[formatter dateFromString:[date description]].timeIntervalSince1970) {
             foundAGoodOne = YES;
@@ -51,7 +51,7 @@ CATEGORY_SPEC(NSObject, RGSharedImpl)
 - (void) testDateFormatsISOParsable {
     NSDateFormatter* formatter = [NSDateFormatter new];
     NSDate* date;
-    for (NSString* format in rg_dateFormats()) {
+    for (NSString* format in rg_date_formats()) {
         formatter.dateFormat = format;
         NSDate* currentDate = [formatter dateFromString:@"2015-10-19T13:52:23-800"];
         if ((int)currentDate.timeIntervalSince1970 == 1445291543) {

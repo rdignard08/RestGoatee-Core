@@ -189,6 +189,12 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     XCTAssert(memcmp(&range, &(NSRange){ 0, 0 }, sizeof(NSRange)) == 0);
 }
 
+- (void) testBadStringToIntegral {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(longProperty)] withValue:@"aNumber" inContext:nil];
+    XCTAssert(object.longProperty == 0);
+}
+
 #pragma mark - rg_initProperty:withValue:inContext: Mutable
 - (void) testStringToMutableString {
     RGTestObject1* object = [RGTestObject1 new];
@@ -611,7 +617,7 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     RGTestObject2* object = [RGTestObject2 new];
     RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(numberProperty)] withValue:node inContext:nil];
-    XCTAssert([object.numberProperty isEqual:@0]);
+    XCTAssert(object.numberProperty == nil);
 }
 
 - (void) testNodeToDecimal {

@@ -27,13 +27,19 @@
 /**
  @return the built-in date formats the library supports. Contains: ISO, `-[NSDate description]`.
  */
-NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL rg_dateFormats(void) __attribute__((pure, returns_nonnull));
+NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL rg_date_formats(void) __attribute__((pure, returns_nonnull));
 
 /**
  @return a per thread instance of `NSDateFormatter`.  Never pass the returned object between threads.
-   Always set the objects properties (`dateFormat`, `locale`, `timezone`, etc.) before use.
+   Always set and restore the object's properties (`dateFormat`, `locale`, `timezone`, etc.) before use.
  */
 NSDateFormatter* RG_SUFFIX_NONNULL rg_threadsafe_formatter(void) __attribute__((hot, returns_nonnull));
+
+/**
+ @return a per thread instance of `NSNumberFormatter`.  Never pass the returned object between threads.
+   Always set and restore the object's properties (`numberStyle`, `locale`, `formatterBehavior`, etc.) before use.
+ */
+NSNumberFormatter* RG_SUFFIX_NONNULL rg_number_formatter(void) __attribute__((hot, returns_nonnull));
 
 /**
  @param utf8Input a `\0` terminated C string.  With unicodes must be UTF-8 encoded.  May not be `NULL`.

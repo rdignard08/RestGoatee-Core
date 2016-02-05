@@ -175,7 +175,20 @@
             NSString* innerXML = [target innerXML];
             target = innerXML ?: @"";
         }
-        if ([target isKindOfClass:[NSString self]]) target = @([target doubleValue]);
+        if ([target isKindOfClass:[NSString self]]) {
+            if (property.isPrimitive) {
+                if (property.isIntegral) {
+                    target = @([target longLongValue]); /* TODO: should support unsigned long long */
+                } else if (property.isFloatingPoint) {
+                    target = @([target doubleValue]);
+                } else {
+                    RGLog(@"Unsupported Destination for NSString: %@ on %@", property.name, [self class]);
+                    return;
+                }
+            } else {
+                target = @([target doubleValue]); /* TODO: this can still be lossy */
+            }
+        }
         [self setValue:target forKey:key]; /* Note: setValue: will unwrap the value if the destination is a primitive */
     } else if ([propertyType isSubclassOfClass:[NSValue self]] && ([target isKindOfClass:[NSNumber self]] ||
                                                                    [target isKindOfClass:[NSString self]] ||

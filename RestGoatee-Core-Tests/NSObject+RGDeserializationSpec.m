@@ -170,6 +170,25 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     XCTAssert(([object.arrayProperty.firstObject isEqual:@{ @"foo" : @"bar", kRGSerializationKey : @"NSDictionary" }]));
 }
 
+- (void) testStringToIntegral {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(longProperty)] withValue:@"4900111000" inContext:nil];
+    XCTAssert(object.longProperty == 4900111000);
+}
+
+- (void) testStringToDouble {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(doubleProperty)] withValue:@"1234.54" inContext:nil];
+    XCTAssert(object.doubleProperty == 1234.54);
+}
+
+- (void) testStringToRange {
+    RGTestObject2* object = [RGTestObject2 new];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(rangeProperty)] withValue:@"{3,2}" inContext:nil];
+    NSRange range = object.rangeProperty;
+    XCTAssert(memcmp(&range, &(NSRange){ 0, 0 }, sizeof(NSRange)) == 0);
+}
+
 #pragma mark - rg_initProperty:withValue:inContext: Mutable
 - (void) testStringToMutableString {
     RGTestObject1* object = [RGTestObject1 new];

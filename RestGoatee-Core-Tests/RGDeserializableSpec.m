@@ -21,33 +21,7 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import "NSObject+RGDeserialization.h"
-#import "RGTestObject2.h"
-#import "RestGoatee-Core.h"
-
-@interface RGTestObject4 : RGTestObject2 <RGDeserializable>
-
-@end
-
-@implementation RGTestObject4
-
-+ (RG_PREFIX_NULLABLE NSDictionary*) overrideKeysForMapping {
-    return @{ RG_STRING_SEL(stringProperty) : RG_STRING_SEL(numberProperty) };
-}
-
-+ (RG_PREFIX_NULLABLE NSString*) dateFormatForProperty:(RG_PREFIX_NONNULL NSString* __unused)propertyName {
-    return @"dd/MM/yyyy";
-}
-
-- (BOOL) shouldTransformValue:(RG_PREFIX_NULLABLE __unused id)value forProperty:(RG_PREFIX_NONNULL NSString*)propertyName inContext:(RG_PREFIX_NULLABLE __unused NSManagedObjectContext*)context {
-    if ([propertyName isEqual:RG_STRING_SEL(idProperty)]) {
-        self.idProperty = @"foobaz";
-        return NO;
-    }
-    return YES;
-}
-
-@end
+#import "RGTestObject4.h"
 
 CLASS_SPEC(RGDeserializable)
 

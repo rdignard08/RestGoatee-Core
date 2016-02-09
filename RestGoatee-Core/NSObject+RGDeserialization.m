@@ -105,7 +105,7 @@
         return;
     }
     
-    if ([propertyType isSubclassOfClass:[NSString self]] || [propertyType isSubclassOfClass:[NSURL self]]) {
+    if ([propertyType isSubclassOfClass:[NSString self]] || [propertyType isSubclassOfClass:[NSURL self]] || [propertyType isSubclassOfClass:[NSDecimalNumber self]]) {
         [self rg_initStringProp:property withValue:value];
         return;
     }

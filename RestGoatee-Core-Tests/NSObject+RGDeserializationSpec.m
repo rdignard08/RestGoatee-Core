@@ -358,7 +358,7 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
 - (void) testArrayToDecimal {
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(decimalProperty)] withValue:@[ @"abc", @"def" ] inContext:nil];
-    XCTAssert(object.decimalProperty == nil);
+    XCTAssert([object.decimalProperty isEqual:[NSDecimalNumber notANumber]]);
 }
 
 - (void) testArrayToValue {
@@ -637,7 +637,7 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     RGTestObject2* object = [RGTestObject2 new];
     RGXMLNode* node = [[RGXMLNode alloc] initWithName:@""];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(decimalProperty)] withValue:node inContext:nil];
-    XCTAssert([object.decimalProperty isEqual:[NSDecimalNumber notANumber]]);
+    XCTAssert(object.decimalProperty == nil);
 }
 
 - (void) testNodeToValue {

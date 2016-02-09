@@ -202,17 +202,6 @@
             target = [rg_number_formatter() numberFromString:target];
         }
         [self setValue:target forKey:key]; /* NSNumber is a subclass of NSValue hence it's a valid assignment */
-    } else if ([propertyType isSubclassOfClass:[NSURL self]] &&
-               ([target isKindOfClass:[NSNumber self]] || [target isKindOfClass:[NSString self]] ||
-                [target isKindOfClass:[RGXMLNode self]] || [target isKindOfClass:[NSArray self]])) {
-                   /* NSURL */
-        if ([target isKindOfClass:[RGXMLNode self]]) {
-            NSString* innerXML = [target innerXML];
-            target = innerXML ?: @"";
-        }
-        if ([target isKindOfClass:[NSArray self]]) target = [target componentsJoinedByString:@","];
-        if ([target isKindOfClass:[NSNumber self]]) target = [target stringValue];
-        [self setValue:[[propertyType alloc] initWithString:target] forKey:key];
     } else if ([propertyType isSubclassOfClass:[NSDate self]]) { /* NSDate */
         if ([target isKindOfClass:[RGXMLNode self]]) {
             NSString* innerXML = [target innerXML];

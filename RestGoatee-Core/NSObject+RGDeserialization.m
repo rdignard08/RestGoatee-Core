@@ -105,7 +105,7 @@
         return;
     }
     
-    if ([propertyType isSubclassOfClass:[NSString self]]) {
+    if ([propertyType isSubclassOfClass:[NSString self]] || [propertyType isSubclassOfClass:[NSURL self]]) {
         [self rg_initStringProp:property withValue:value];
         return;
     }
@@ -257,11 +257,8 @@
         source = [source componentsJoinedByString:@","];
     }
     if ([source isKindOfClass:[NSString self]]) {
-        if ([property.type isSubclassOfClass:[NSMutableString self]]) {
-            [self setValue:[value mutableCopy] forKey:property.name];
-        } else {
-            [self setValue:source forKey:property.name];
-        }
+        NSString* RG_SUFFIX_NONNULL nonnullSource = (id RG_SUFFIX_NONNULL)source;
+        [self setValue:[[property.type alloc] initWithString:nonnullSource] forKey:property.name];
     }
 }
 

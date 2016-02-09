@@ -113,6 +113,11 @@
         return;
     }
     
+    if ([propertyType isSubclassOfClass:[NSDate self]]) {
+        [self rg_initDateProp:property withValue:target];
+        return;
+    }
+    
     if (rg_isCollectionObject(propertyType)) {
         [self rg_initArrayProp:property withValue:target];
         return;
@@ -164,30 +169,6 @@
             target = [rg_number_formatter() numberFromString:target];
         }
         [self setValue:target forKey:key]; /* NSNumber is a subclass of NSValue hence it's a valid assignment */
-    } else if ([propertyType isSubclassOfClass:[NSDate self]]) { /* NSDate */
-        if ([target isKindOfClass:[RGXMLNode self]]) {
-            NSString* innerXML = [target innerXML];
-            target = innerXML ?: @"";
-        }
-        NSString* dateFormat = nil;
-        if ([[self class] respondsToSelector:@selector(dateFormatForProperty:)]) {
-            dateFormat = [[self class] dateFormatForProperty:key];
-        }
-        NSDateFormatter* dateFormatter = rg_threadsafe_formatter();
-        if (dateFormat) {
-            dateFormatter.dateFormat = dateFormat;
-            [self setValue:[dateFormatter dateFromString:target] forKey:key];
-            return; /* Let's not second-guess the developer... */
-        }
-        for (NSString* predefinedFormat in rg_date_formats()) {
-            dateFormatter.dateFormat = predefinedFormat;
-            NSDate* date = [dateFormatter dateFromString:target];
-            if (date) {
-                [self setValue:date forKey:key];
-                break;
-            }
-        }
-    /* At this point we've exhausted the supported foundation classes for the LHS... these handle sub-objects */
     } else if (!rg_isInlineObject(propertyType) && !rg_isCollectionObject(propertyType) &&
                ([target isKindOfClass:[NSDictionary self]] || [target isKindOfClass:[RGXMLNode self]])) {
         /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
@@ -220,6 +201,35 @@
     }
     if ([source isKindOfClass:[NSString self]]) {
         [self setValue:NSClassFromString(source) forKey:propery.name];
+    }
+}
+
+- (void) rg_initDateProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {
+    NSString* source = [value isKindOfClass:[NSString self]] ? value : nil;
+    if ([value isKindOfClass:[RGXMLNode self]]) {
+        source = [value innerXML];
+    } else if ([value isKindOfClass:[NSNumber self]]) {
+        source = [value stringValue];
+    }
+    if ([source isKindOfClass:[NSString self]]) {
+        NSString* dateFormat;
+        if ([[self class] respondsToSelector:@selector(dateFormatForProperty:)]) {
+            dateFormat = [[self class] dateFormatForProperty:property.name];
+        }
+        NSDateFormatter* dateFormatter = rg_threadsafe_formatter();
+        if (dateFormat) {
+            dateFormatter.dateFormat = dateFormat;
+            [self setValue:[dateFormatter dateFromString:source] forKey:property.name];
+            return; /* Let's not second-guess the developer... */
+        }
+        for (NSString* predefinedFormat in rg_date_formats()) {
+            dateFormatter.dateFormat = predefinedFormat;
+            NSDate* date = [dateFormatter dateFromString:source];
+            if (date) {
+                [self setValue:date forKey:property.name];
+                return;
+            }
+        }
     }
 }
 

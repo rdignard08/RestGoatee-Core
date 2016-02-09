@@ -242,8 +242,6 @@
         source = [value innerXML];
     } else if ([value isKindOfClass:[NSNumber self]]) {
         source = [value stringValue];
-    } else if ([value isKindOfClass:[NSArray self]]) {
-        source = [value componentsJoinedByString:@","];
     }
     if ([source isKindOfClass:[NSString self]]) {
         [self setValue:[[property.type alloc] initWithString:source] forKey:property.name];

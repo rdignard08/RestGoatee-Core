@@ -340,13 +340,13 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
 - (void) testArrayToString {
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(stringProperty)] withValue:@[ @"abc", @"def" ] inContext:nil];
-    XCTAssert([object.stringProperty isEqual:@"abc,def"]);
+    XCTAssert(object.stringProperty == nil);
 }
 
 - (void) testArrayToURL {
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(urlProperty)] withValue:@[ @"abc", @"def" ] inContext:nil];
-    XCTAssert([object.urlProperty isEqual:[NSURL URLWithString:@"abc,def"]]);
+    XCTAssert(object.urlProperty == nil);
 }
 
 - (void) testArrayToNumber {
@@ -358,7 +358,7 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
 - (void) testArrayToDecimal {
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(decimalProperty)] withValue:@[ @"abc", @"def" ] inContext:nil];
-    XCTAssert([object.decimalProperty isEqual:[NSDecimalNumber notANumber]]);
+    XCTAssert(object.decimalProperty == nil);
 }
 
 - (void) testArrayToValue {

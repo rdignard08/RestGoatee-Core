@@ -185,3 +185,22 @@ BOOL rg_is_floating_encoding(const char* RG_SUFFIX_NONNULL const encoding) {
            strcmp(@encode(double), encoding) == 0 ||
            strcmp(@encode(long double), encoding) == 0;
 }
+
+NSMutableArray* RG_SUFFIX_NONNULL rg_unpack_array(NSArray* RG_SUFFIX_NULLABLE target,
+                                                  NSManagedObjectContext* RG_SUFFIX_NULLABLE context) {
+    NSMutableArray* ret = [NSMutableArray new];
+    for (__strong id obj in target) {
+        NSString* serializationKey = [obj isKindOfClass:[NSDictionary self]] ? obj[kRGSerializationKey] : nil;
+        if ([obj isKindOfClass:[RGXMLNode self]]) {
+            serializationKey = [obj valueForKey:kRGSerializationKey];
+        }
+        if (serializationKey) {
+            Class objectClass = NSClassFromString(serializationKey);
+            if (!rg_isDataSourceClass(objectClass) && objectClass) {
+                obj = [objectClass objectFromDataSource:obj inContext:context];
+            }
+        }
+        [ret addObject:obj];
+    }
+    return ret;
+}

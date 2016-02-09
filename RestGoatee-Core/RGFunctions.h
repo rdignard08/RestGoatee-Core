@@ -24,6 +24,8 @@
 #import "RGConstants.h"
 #import "RGXMLNode.h"
 
+@class NSManagedObjectContext;
+
 /**
  @return the built-in date formats the library supports. Contains: ISO, `-[NSDate description]`.
  */
@@ -129,3 +131,11 @@ BOOL rg_is_integral_encoding(const char* RG_SUFFIX_NONNULL const encoding)
  */
 BOOL rg_is_floating_encoding(const char* RG_SUFFIX_NONNULL const encoding)
     __attribute__((pure, always_inline, warn_unused_result));
+
+/**
+ @param array the array object to unpack.
+ @param context the new context for use with any unpacked object(s).
+ @return A new array with each sub object which was unpackable unpacked.
+ */
+NSMutableArray* RG_SUFFIX_NONNULL rg_unpack_array(NSArray* RG_SUFFIX_NULLABLE array,
+                                                  NSManagedObjectContext* RG_SUFFIX_NULLABLE context);

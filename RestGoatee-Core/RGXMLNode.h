@@ -49,13 +49,13 @@ typedef NSMutableDictionary RG_GENERIC(NSString*, NSString*) RGMutableAttributes
 /**
  @brief The name of the tag.  "foobar" enclosed in angle brackets will have the value of `foobar` here.
  */
-@property RG_NONNULL_PROPERTY(nonatomic, strong) NSString* name;
+@property RG_NONNULL_PROPERTY(nonatomic, copy) NSString* name;
 
 /**
  @brief The inner XML if any, including unwrapped CDATA.  self-closing nodes will have `nil`.
    Adjacent open and close tags will be the empty string.
  */
-@property RG_NULLABLE_PROPERTY(nonatomic, strong) NSString* innerXML;
+@property RG_NULLABLE_PROPERTY(nonatomic, copy) NSString* innerXML;
 
 /**
  @brief This property contains any sub-nodes of this node.

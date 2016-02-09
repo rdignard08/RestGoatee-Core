@@ -94,15 +94,12 @@
                withValue:(RG_PREFIX_NONNULL id)value
                inContext:(RG_PREFIX_NULLABLE id)context {
     NSString* key = property.name;
-    /* If the array we're given contains objects which we can create, create those too */
-    id target = [value isKindOfClass:[NSArray self]] ? rg_unpack_array(value, context) : value;
-    
-    if (![self rg_handleBuiltIn:property withValue:target]) {
-        if ([target isKindOfClass:property.type]) {  /* If already a subclass theres no reason to coerce it */
-        [self setValue:target forKey:key];
-        } else if ([target isKindOfClass:[NSDictionary self]] || [target isKindOfClass:[RGXMLNode self]]) {
+    if (![self rg_handleBuiltIn:property withValue:value inContext:context]) {
+        if ([value isKindOfClass:property.type]) {  /* If already a subclass theres no reason to coerce it */
+        [self setValue:value forKey:key];
+        } else if ([value isKindOfClass:[NSDictionary self]] || [value isKindOfClass:[RGXMLNode self]]) {
         /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
-        [self setValue:[property.type objectFromDataSource:target inContext:context] forKey:key];
+        [self setValue:[property.type objectFromDataSource:value inContext:context] forKey:key];
         }
     }
 #ifdef DEBUG
@@ -110,11 +107,13 @@
 #endif
 }
 
-- (BOOL) rg_handleBuiltIn:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {
+- (BOOL) rg_handleBuiltIn:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property
+                withValue:(RG_PREFIX_NONNULL id)value
+                inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context {
     if (rg_isStringInitObject(property.type)) {
         [self rg_initStringProp:property withValue:value];
     } else if (rg_isCollectionObject(property.type)) {
-        [self rg_initArrayProp:property withValue:value];
+        [self rg_initArrayProp:property withValue:value inContext:context];
     } else if ([property.type isSubclassOfClass:[NSDictionary self]]) {
         [self rg_initDictProp:property withValue:value];
     } else if ([property.type isSubclassOfClass:[NSValue self]]) {
@@ -168,13 +167,16 @@
     }
 }
 
-- (void) rg_initArrayProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {
+- (void) rg_initArrayProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property
+                withValue:(RG_PREFIX_NONNULL id)value
+                inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context {
     NSAssert([property.type instancesRespondToSelector:@selector(initWithArray:)], @"Wrong initializer");
     NSArray* source = [value isKindOfClass:[NSArray self]] ? value : nil;
     if ([value isKindOfClass:[RGXMLNode self]]) {
         source = [value childNodes];
     }
     if (source) {
+        source = rg_unpack_array(source, context);
         [self setValue:[[property.type alloc] initWithArray:source] forKey:property.name];
     }
 }

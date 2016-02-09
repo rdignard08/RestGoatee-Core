@@ -303,13 +303,13 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
 - (void) testNullToId {
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(idProperty)] withValue:[NSNull null] inContext:nil];
-    XCTAssert(object.idProperty == nil);
+    XCTAssert(object.idProperty == [NSNull null]);
 }
 
 - (void) testNullToObject {
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(objectProperty)] withValue:[NSNull null] inContext:nil];
-    XCTAssert(object.objectProperty == nil);
+    XCTAssert(object.objectProperty == [NSNull null]);
 }
 
 - (void) testNullToClass {

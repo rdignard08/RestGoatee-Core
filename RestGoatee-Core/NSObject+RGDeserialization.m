@@ -99,23 +99,9 @@
         ![(id<RGDeserializable>)self shouldTransformValue:target forProperty:key inContext:context]) {
         return;
     }
-    /* null and non-existent set the property to 0 - possible optimization since init already does this */
-    if ([target isKindOfClass:[NSNull self]]) {
-        [self setValue:property.isPrimitive ? @0 : nil forKey:key];
-        return;
-    }
-    
-    if ([propertyType isSubclassOfClass:[NSString self]] || [propertyType isSubclassOfClass:[NSURL self]] || [propertyType isSubclassOfClass:[NSDecimalNumber self]]) {
-        [self rg_initStringProp:property withValue:value];
-        return;
-    }
-    
-    if ([propertyType isSubclassOfClass:[NSValue self]]) {
-        [self rg_initValueProp:property withValue:value];
-    }
     
     if ([target isKindOfClass:[NSArray self]]) { /* If the array we're given contains objects which we can create,
-                                                    create those too */
+                                                  create those too */
         NSMutableArray RG_GENERIC(id) * ret = [NSMutableArray new];
         for (__strong id obj in target) {
             if (rg_isDataSourceClass([obj class])) {
@@ -130,6 +116,27 @@
             [ret addObject:obj];
         }
         target = ret;
+    }
+    
+    if ([propertyType isSubclassOfClass:[NSString self]] ||
+        [propertyType isSubclassOfClass:[NSURL self]] ||
+        [propertyType isSubclassOfClass:[NSDecimalNumber self]]) {
+        [self rg_initStringProp:property withValue:target];
+        return;
+    }
+    
+    if (rg_isCollectionObject(propertyType)) {
+        [self rg_initArrayProp:property withValue:target];
+        return;
+    }
+    
+    if ([propertyType isSubclassOfClass:[NSDictionary self]]) {
+        [self rg_initDictProp:property withValue:target];
+        return;
+    }
+    
+    if ([propertyType isSubclassOfClass:[NSValue self]]) {
+        [self rg_initValueProp:property withValue:target];
     }
     
     /* __NSCFString -> NSMutableString -> NSString */
@@ -153,26 +160,6 @@
             target = innerXML ?: @"";
         }
         [self setValue:NSClassFromString([target description]) forKey:key];
-    } else if ([propertyType isSubclassOfClass:[NSDictionary self]] &&
-               ([target isKindOfClass:[NSDictionary self]] || [target isKindOfClass:[RGXMLNode self]])) {
-        /* NSDictionary */
-        if ([target isKindOfClass:[RGXMLNode self]]) target = [(RGXMLNode*)target dictionaryRepresentation];
-        [self setValue:[[propertyType alloc] initWithDictionary:target] forKey:key];
-    } else if (rg_isCollectionObject(propertyType) &&
-               ([target isKindOfClass:[NSArray self]] || [target isKindOfClass:[RGXMLNode self]])) {
-        /* NSArray, NSSet, or NSOrderedSet */
-        if ([target isKindOfClass:[RGXMLNode self]]) target = [target childNodes];
-        [self setValue:[[propertyType alloc] initWithArray:target] forKey:key];
-    } else if ([propertyType isSubclassOfClass:[NSDecimalNumber self]] && ([target isKindOfClass:[NSNumber self]] ||
-                                                                           [target isKindOfClass:[NSString self]] ||
-                                                                           [target isKindOfClass:[RGXMLNode self]])) {
-        /* NSDecimalNumber, subclasses must go first */
-        if ([target isKindOfClass:[RGXMLNode self]]) {
-            NSString* innerXML = [target innerXML];
-            target = innerXML ?: @"";
-        }
-        if ([target isKindOfClass:[NSNumber self]]) target = [target stringValue];
-        [self setValue:[propertyType decimalNumberWithString:target] forKey:key];
     } else if ([propertyType isSubclassOfClass:[NSNumber self]] && ([target isKindOfClass:[NSNumber self]] ||
                                                                     [target isKindOfClass:[NSString self]] ||
                                                                     [target isKindOfClass:[RGXMLNode self]])) {
@@ -237,6 +224,7 @@
 }
 
 - (void) rg_initStringProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {
+    NSAssert([property.type instancesRespondToSelector:@selector(initWithString:)], @"Wrong initializer");
     NSString* source = [value isKindOfClass:[NSString self]] ? value : nil;
     if ([value isKindOfClass:[RGXMLNode self]]) {
         source = [value innerXML];
@@ -245,6 +233,28 @@
     }
     if ([source isKindOfClass:[NSString self]]) {
         [self setValue:[[property.type alloc] initWithString:source] forKey:property.name];
+    }
+}
+
+- (void) rg_initArrayProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {
+    NSAssert([property.type instancesRespondToSelector:@selector(initWithArray:)], @"Wrong initializer");
+    NSArray* source = [value isKindOfClass:[NSArray self]] ? value : nil;
+    if ([value isKindOfClass:[RGXMLNode self]]) {
+        source = [value childNodes];
+    }
+    if ([source isKindOfClass:[NSArray self]]) {
+        [self setValue:[[property.type alloc] initWithArray:source] forKey:property.name];
+    }
+}
+
+- (void) rg_initDictProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {
+    NSAssert([property.type instancesRespondToSelector:@selector(initWithDictionary:)], @"Wrong initializer");
+    NSDictionary* source = [value isKindOfClass:[NSDictionary self]] ? value : nil;
+    if ([value isKindOfClass:[RGXMLNode self]]) {
+        source = [(RGXMLNode*)value dictionaryRepresentation];
+    }
+    if ([source isKindOfClass:[NSDictionary self]]) {
+        [self setValue:[[property.type alloc] initWithDictionary:source] forKey:property.name];
     }
 }
 

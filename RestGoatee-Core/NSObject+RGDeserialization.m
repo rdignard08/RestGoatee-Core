@@ -140,37 +140,22 @@
 
 - (void) rg_initStringProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {
     NSAssert([property.type instancesRespondToSelector:@selector(initWithString:)], @"Wrong initializer");
-    NSString* source = [value isKindOfClass:[NSString self]] ? value : nil;
-    if ([value isKindOfClass:[RGXMLNode self]]) {
-        source = [value innerXML];
-    } else if ([value isKindOfClass:[NSNumber self]]) {
-        source = [value stringValue];
-    }
+    NSString* source = rg_to_string(value);
     if (source) {
         [self setValue:[[property.type alloc] initWithString:source] forKey:property.name];
     }
 }
 
 - (void) rg_initClassProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)propery withValue:(RG_PREFIX_NONNULL id)value {
-    NSString* source = [value isKindOfClass:[NSString self]] ? value : nil;
-    if ([value isKindOfClass:[RGXMLNode self]]) {
-        source = [value innerXML];
-    } else if ([value isKindOfClass:[NSNumber self]]) {
-        source = [value stringValue];
-    }
+    NSString* source = rg_to_string(value);
     if (source) {
         [self setValue:NSClassFromString(source) forKey:propery.name];
     }
 }
 
 - (void) rg_initDateProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {
-    NSString* source = [value isKindOfClass:[NSString self]] ? value : nil;
-    if ([value isKindOfClass:[RGXMLNode self]]) {
-        source = [value innerXML];
-    } else if ([value isKindOfClass:[NSNumber self]]) {
-        source = [value stringValue];
-    }
-    if ([source isKindOfClass:[NSString self]]) {
+    NSString* source = rg_to_string(value);
+    if (source) {
         NSString* dateFormat;
         if ([[self class] respondsToSelector:@selector(dateFormatForProperty:)]) {
             dateFormat = [[self class] dateFormatForProperty:property.name];
@@ -216,10 +201,7 @@
 
 - (void) rg_initValueProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {
     NSNumber* source = [value isKindOfClass:[NSNumber self]] ? value : nil;
-    NSString* stringValue = [value isKindOfClass:[NSString self]] ? value : nil;
-    if ([value isKindOfClass:[RGXMLNode self]]) {
-        stringValue = [value innerXML];
-    }
+    NSString* stringValue = rg_to_string(value);
     if (stringValue) {
         if (property.isIntegral || property.isFloatingPoint || !property.isPrimitive) {
             source = [rg_number_formatter() numberFromString:stringValue] ?: (property.isPrimitive ? @0 : nil);

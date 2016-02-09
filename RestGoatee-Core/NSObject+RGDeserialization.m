@@ -237,17 +237,16 @@
 }
 
 - (void) rg_initStringProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {
-    id RG_SUFFIX_NULLABLE source = value;
-    if ([source isKindOfClass:[RGXMLNode self]]) {
+    NSString* source = [value isKindOfClass:[NSString self]] ? value : nil;
+    if ([value isKindOfClass:[RGXMLNode self]]) {
         source = [value innerXML];
-    } else if ([source isKindOfClass:[NSValue self]]) {
-        source = [source stringValue];
-    } else if ([source isKindOfClass:[NSArray self]]) {
-        source = [source componentsJoinedByString:@","];
+    } else if ([value isKindOfClass:[NSNumber self]]) {
+        source = [value stringValue];
+    } else if ([value isKindOfClass:[NSArray self]]) {
+        source = [value componentsJoinedByString:@","];
     }
     if ([source isKindOfClass:[NSString self]]) {
-        NSString* RG_SUFFIX_NONNULL nonnullSource = (id RG_SUFFIX_NONNULL)source;
-        [self setValue:[[property.type alloc] initWithString:nonnullSource] forKey:property.name];
+        [self setValue:[[property.type alloc] initWithString:source] forKey:property.name];
     }
 }
 

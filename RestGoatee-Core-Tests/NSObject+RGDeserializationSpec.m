@@ -165,7 +165,23 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     RGXMLNode* node2 = [[RGXMLNode alloc] initWithName:@"node2"];
     node2.attributes[kRGSerializationKey] = NSStringFromClass([RGTestObject2 self]);
     node2.attributes[RG_STRING_SEL(stringProperty)] = @"baz";
-    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(arrayOfSubObj)] withValue: @[ node1, node2 ] inContext:nil];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(arrayOfSubObj)] withValue:@[ node1, node2 ] inContext:nil];
+    XCTAssert([[object.arrayOfSubObj.firstObject stringProperty] isEqual:@"foobar"]);
+    XCTAssert([[object.arrayOfSubObj.lastObject stringProperty] isEqual:@"baz"]);
+}
+
+- (void) testNodeOfNodes {
+    RGTestObject2* object = [RGTestObject2 new];
+    RGXMLNode* parentNode = [[RGXMLNode alloc] initWithName:@"parent"];
+    RGXMLNode* node1 = [[RGXMLNode alloc] initWithName:@"node1"];
+    node1.attributes[kRGSerializationKey] = NSStringFromClass([RGTestObject2 self]);
+    node1.attributes[RG_STRING_SEL(stringProperty)] = @"foobar";
+    [parentNode addChildNode:node1];
+    RGXMLNode* node2 = [[RGXMLNode alloc] initWithName:@"node2"];
+    node2.attributes[kRGSerializationKey] = NSStringFromClass([RGTestObject2 self]);
+    node2.attributes[RG_STRING_SEL(stringProperty)] = @"baz";
+    [parentNode addChildNode:node2];
+    [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(arrayOfSubObj)] withValue:parentNode inContext:nil];
     XCTAssert([[object.arrayOfSubObj.firstObject stringProperty] isEqual:@"foobar"]);
     XCTAssert([[object.arrayOfSubObj.lastObject stringProperty] isEqual:@"baz"]);
 }

@@ -105,31 +105,19 @@
     
     if (rg_isStringInitObject(propertyType)) {
         [self rg_initStringProp:property withValue:target];
-        return;
     } else if (rg_isCollectionObject(propertyType)) {
         [self rg_initArrayProp:property withValue:target];
-        return;
     } else if ([propertyType isSubclassOfClass:[NSDictionary self]]) {
         [self rg_initDictProp:property withValue:target];
-        return;
     } else if ([propertyType isSubclassOfClass:[NSValue self]]) {
         [self rg_initValueProp:property withValue:target];
-        return;
     } else if (rg_isMetaClassObject(propertyType)) {
         [self rg_initClassProp:property withValue:target];
-        return;
     } else if ([propertyType isSubclassOfClass:[NSDate self]]) {
         [self rg_initDateProp:property withValue:target];
-        return;
-    } else if ([target isKindOfClass:propertyType]) {
+    } else if ([target isKindOfClass:propertyType]) {  /* If already a subclass theres no reason to coerce it */
         [self setValue:target forKey:key];
-        return;
-    } /* If JSONValue is already a subclass of propertyType theres no reason to coerce it */
-    
-    
-    /* Otherwise... this mess */
-    if (!rg_isInlineObject(propertyType) && !rg_isCollectionObject(propertyType) &&
-               ([target isKindOfClass:[NSDictionary self]] || [target isKindOfClass:[RGXMLNode self]])) {
+    } else if ([target isKindOfClass:[NSDictionary self]] || [target isKindOfClass:[RGXMLNode self]]) {
         /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
         [self setValue:[propertyType objectFromDataSource:target inContext:context] forKey:key];
     }

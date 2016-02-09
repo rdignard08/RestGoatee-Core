@@ -74,12 +74,11 @@
         NSAssert(value, @"This should always be true but I'm not 100%% on that");
         NSString* override = overrides[key];
         RGPropertyDeclaration* target = override ? properties[override] : canonicals[rg_canonical_form(key.UTF8String)];
-        if (target) {
-            /* ask if there's a custom implementation, if not proceed to the rule */
-            if (![self respondsToSelector:@selector(shouldTransformValue:forProperty:inContext:)] ||
-                [self shouldTransformValue:value forProperty:target.name inContext:context]) {
-                [self rg_initProperty:target withValue:value inContext:context];
-            }
+        /* ask if there's a custom implementation, if not proceed to the rules */
+        if (target &&
+            (![self respondsToSelector:@selector(shouldTransformValue:forProperty:inContext:)] ||
+            [self shouldTransformValue:value forProperty:target.name inContext:context])) {
+            [self rg_initProperty:target withValue:value inContext:context];
         }
     }
     return self;

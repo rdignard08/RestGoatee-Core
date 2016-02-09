@@ -106,75 +106,29 @@
     if (rg_isStringInitObject(propertyType)) {
         [self rg_initStringProp:property withValue:target];
         return;
-    }
-    
-    if ([propertyType isSubclassOfClass:[NSValue self]]) {
-        [self rg_initValueProp:property withValue:target];
-        return;
-    }
-    
-    if (rg_isMetaClassObject(propertyType)) {
-        [self rg_initClassProp:property withValue:target];
-        return;
-    }
-    
-    if ([propertyType isSubclassOfClass:[NSDate self]]) {
-        [self rg_initDateProp:property withValue:target];
-        return;
-    }
-    
-    if (rg_isCollectionObject(propertyType)) {
+    } else if (rg_isCollectionObject(propertyType)) {
         [self rg_initArrayProp:property withValue:target];
         return;
-    }
-    
-    if ([propertyType isSubclassOfClass:[NSDictionary self]]) {
+    } else if ([propertyType isSubclassOfClass:[NSDictionary self]]) {
         [self rg_initDictProp:property withValue:target];
         return;
-    }
-    
-    if ([propertyType isSubclassOfClass:[NSValue self]]) {
+    } else if ([propertyType isSubclassOfClass:[NSValue self]]) {
         [self rg_initValueProp:property withValue:target];
-    }
-    
-    if ([target isKindOfClass:propertyType]) { /* NSValue */
+        return;
+    } else if (rg_isMetaClassObject(propertyType)) {
+        [self rg_initClassProp:property withValue:target];
+        return;
+    } else if ([propertyType isSubclassOfClass:[NSDate self]]) {
+        [self rg_initDateProp:property withValue:target];
+        return;
+    } else if ([target isKindOfClass:propertyType]) {
         [self setValue:target forKey:key];
         return;
     } /* If JSONValue is already a subclass of propertyType theres no reason to coerce it */
     
     
     /* Otherwise... this mess */
-    
-    if ([propertyType isSubclassOfClass:[NSNumber self]] && ([target isKindOfClass:[NSNumber self]] ||
-                                                                    [target isKindOfClass:[NSString self]] ||
-                                                                    [target isKindOfClass:[RGXMLNode self]])) {
-        /* NSNumber */
-        if ([target isKindOfClass:[RGXMLNode self]]) {
-            NSString* innerXML = [target innerXML];
-            target = innerXML ?: @"";
-        }
-        if ([target isKindOfClass:[NSString self]]) {
-            if (property.isIntegral || property.isFloatingPoint || !property.isPrimitive) {
-                target = [rg_number_formatter() numberFromString:target] ?: (property.isPrimitive ? @0 : nil);
-            } else {
-                RGLog(@"Unsupported Destination for NSString: %@ on %@", property.name, [self class]);
-                return;
-            }
-        }
-        [self setValue:target forKey:key]; /* Note: setValue: will unwrap the value if the destination is a primitive */
-    } else if ([propertyType isSubclassOfClass:[NSValue self]] && ([target isKindOfClass:[NSNumber self]] ||
-                                                                   [target isKindOfClass:[NSString self]] ||
-                                                                   [target isKindOfClass:[RGXMLNode self]])) {
-        /* NSValue */
-        if ([target isKindOfClass:[RGXMLNode self]]) {
-            NSString* innerXML = [target innerXML];
-            target = innerXML ?: @"";
-        }
-        if ([target isKindOfClass:[NSString self]]) {
-            target = [rg_number_formatter() numberFromString:target];
-        }
-        [self setValue:target forKey:key]; /* NSNumber is a subclass of NSValue hence it's a valid assignment */
-    } else if (!rg_isInlineObject(propertyType) && !rg_isCollectionObject(propertyType) &&
+    if (!rg_isInlineObject(propertyType) && !rg_isCollectionObject(propertyType) &&
                ([target isKindOfClass:[NSDictionary self]] || [target isKindOfClass:[RGXMLNode self]])) {
         /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
         [self setValue:[propertyType objectFromDataSource:target inContext:context] forKey:key];

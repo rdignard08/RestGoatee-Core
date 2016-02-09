@@ -97,27 +97,36 @@
     /* If the array we're given contains objects which we can create, create those too */
     id target = [value isKindOfClass:[NSArray self]] ? rg_unpack_array(value, context) : value;
     
-    if (rg_isStringInitObject(property.type)) {
-        [self rg_initStringProp:property withValue:target];
-    } else if (rg_isCollectionObject(property.type)) {
-        [self rg_initArrayProp:property withValue:target];
-    } else if ([property.type isSubclassOfClass:[NSDictionary self]]) {
-        [self rg_initDictProp:property withValue:target];
-    } else if ([property.type isSubclassOfClass:[NSValue self]]) {
-        [self rg_initValueProp:property withValue:target];
-    } else if (rg_isMetaClassObject(property.type)) {
-        [self rg_initClassProp:property withValue:target];
-    } else if ([property.type isSubclassOfClass:[NSDate self]]) {
-        [self rg_initDateProp:property withValue:target];
-    } else if ([target isKindOfClass:property.type]) {  /* If already a subclass theres no reason to coerce it */
+    if (![self rg_handleBuiltIn:property withValue:target]) {
+        if ([target isKindOfClass:property.type]) {  /* If already a subclass theres no reason to coerce it */
         [self setValue:target forKey:key];
-    } else if ([target isKindOfClass:[NSDictionary self]] || [target isKindOfClass:[RGXMLNode self]]) {
+        } else if ([target isKindOfClass:[NSDictionary self]] || [target isKindOfClass:[RGXMLNode self]]) {
         /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
         [self setValue:[property.type objectFromDataSource:target inContext:context] forKey:key];
+        }
     }
 #ifdef DEBUG
     [self valueForKey:key] ? RG_VOID_NOOP : RGLog(@"FAIL: initialization of property %@ on type %@", key, [self class]);
 #endif
+}
+
+- (BOOL) rg_handleBuiltIn:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {
+    if (rg_isStringInitObject(property.type)) {
+        [self rg_initStringProp:property withValue:value];
+    } else if (rg_isCollectionObject(property.type)) {
+        [self rg_initArrayProp:property withValue:value];
+    } else if ([property.type isSubclassOfClass:[NSDictionary self]]) {
+        [self rg_initDictProp:property withValue:value];
+    } else if ([property.type isSubclassOfClass:[NSValue self]]) {
+        [self rg_initValueProp:property withValue:value];
+    } else if (rg_isMetaClassObject(property.type)) {
+        [self rg_initClassProp:property withValue:value];
+    } else if ([property.type isSubclassOfClass:[NSDate self]]) {
+        [self rg_initDateProp:property withValue:value];
+    } else {
+        return NO;
+    }
+    return YES;
 }
 
 - (void) rg_initStringProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {

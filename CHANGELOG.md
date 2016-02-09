@@ -1,5 +1,27 @@
 # RestGoatee CHANGELOG
 
+## 2.2.0
+- The symbols of the form `rg_...` are now of the form `kRG...`
+- `parentNode` on `RGXMLNode` is now writable
+- `rootNode` on `RGXMLSerializer` is now null resettable
+- Legacy runtime support (Properties encoded as 't...' instead of modern 'T...') is removed
+- `RGPropertyDeclaration` now has properties `isFloatingPoint` and `isIntegral` to describe primitives
+- `readOnly` on `RGPropertyDeclaration` renamed `isReadOnly`
+- Initializing an aggregate primitive type will explicitly fail
+- New symbol `kRGNumberFormatKey` used on `NSThread`'s dictionary
+- The symbol `rg_dateFormats` is now `rg_date_formats`
+- `rg_number_formatter()` is available to return a thread safe `NSNumberFormatter`
+- `rg_is_integral_encoding()`, `rg_is_floating_encoding()`, `rg_to_string()` are available
+- `name` and `innerXML` on `RGXMLNode` are copy to prevent later mutation
+- Rule changes:
+  - A self-closing XML tag targeting an `NSNumber` will leave it `nil` rather than `@0`
+  - A self-closing XML tag targeting an `NSString` will leave it `nil` rather than `@""`
+  - A self-closing XML tag targeting an `NSDecimalNumber` will leave it `nil` rather than `+notANumber`
+  - An `NSArray` may no long initialize an `NSString` / `NSURL` type
+  - `id` and `NSObject` properties now correctly get assigned `NSNull`
+  - An `NSNumber` may now technically intialize an `NSDate` (perhaps useful for timestamps?)
+  - An `RGXMLNode` targeting an `NSArray` property will also have its children unpacked
+
 ## 2.1.5
 - `<objc/runtime.h>` will no longer be included with the public headers
 - `RGXMLSerializer` will now raise exceptions on malformed XML instead of issuing warnings

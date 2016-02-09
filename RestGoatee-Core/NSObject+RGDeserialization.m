@@ -116,9 +116,7 @@
         target = ret;
     }
     
-    if ([propertyType isSubclassOfClass:[NSString self]] ||
-        [propertyType isSubclassOfClass:[NSURL self]] ||
-        [propertyType isSubclassOfClass:[NSDecimalNumber self]]) {
+    if (rg_isStringInitObject(propertyType)) {
         [self rg_initStringProp:property withValue:target];
         return;
     }

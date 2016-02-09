@@ -93,6 +93,12 @@ BOOL rg_isMetaClassObject(id RG_SUFFIX_NULLABLE object) __attribute__((pure, alw
 BOOL rg_isInlineObject(Class RG_SUFFIX_NULLABLE cls) __attribute__((pure, always_inline, warn_unused_result));
 
 /**
+ @param cls the type to be tested for an `NSString` initializer.
+ @return `YES` if the object responds "correctly" to `initWithString:`.
+ */
+BOOL rg_isStringInitObject(Class RG_SUFFIX_NULLABLE cls) __attribute__((pure, always_inline, warn_unused_result));
+
+/**
  @param cls the type to be tested for `NSArray` similarity.
  @return `YES` if the given type can be adequately represented by an `NSArray`.
  */

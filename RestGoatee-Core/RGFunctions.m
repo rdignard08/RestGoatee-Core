@@ -142,6 +142,11 @@ BOOL rg_isInlineObject(Class RG_SUFFIX_NULLABLE cls) {
            [cls isSubclassOfClass:[NSValue self]] || [cls isSubclassOfClass:[NSURL self]];
 }
 
+BOOL rg_isStringInitObject(Class RG_SUFFIX_NULLABLE cls) {
+    return [cls isSubclassOfClass:[NSString self]] || [cls isSubclassOfClass:[NSURL self]] ||
+           [cls isSubclassOfClass:[NSDecimalNumber self]];
+}
+
 BOOL rg_isCollectionObject(Class RG_SUFFIX_NULLABLE cls) {
     return [cls isSubclassOfClass:[NSSet self]] || [cls isSubclassOfClass:[NSArray self]] ||
            [cls isSubclassOfClass:[NSOrderedSet self]];

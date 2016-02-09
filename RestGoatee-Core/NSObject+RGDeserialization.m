@@ -108,6 +108,11 @@
         return;
     }
     
+    if ([propertyType isSubclassOfClass:[NSValue self]]) {
+        [self rg_initValueProp:property withValue:target];
+        return;
+    }
+    
     if (rg_isMetaClassObject(propertyType)) {
         [self rg_initClassProp:property withValue:target];
         return;
@@ -187,7 +192,7 @@
     } else if ([value isKindOfClass:[NSNumber self]]) {
         source = [value stringValue];
     }
-    if ([source isKindOfClass:[NSString self]]) {
+    if (source) {
         [self setValue:[[property.type alloc] initWithString:source] forKey:property.name];
     }
 }
@@ -199,7 +204,7 @@
     } else if ([value isKindOfClass:[NSNumber self]]) {
         source = [value stringValue];
     }
-    if ([source isKindOfClass:[NSString self]]) {
+    if (source) {
         [self setValue:NSClassFromString(source) forKey:propery.name];
     }
 }
@@ -239,7 +244,7 @@
     if ([value isKindOfClass:[RGXMLNode self]]) {
         source = [value childNodes];
     }
-    if ([source isKindOfClass:[NSArray self]]) {
+    if (source) {
         [self setValue:[[property.type alloc] initWithArray:source] forKey:property.name];
     }
 }
@@ -250,13 +255,28 @@
     if ([value isKindOfClass:[RGXMLNode self]]) {
         source = [(RGXMLNode*)value dictionaryRepresentation];
     }
-    if ([source isKindOfClass:[NSDictionary self]]) {
+    if (source) {
         [self setValue:[[property.type alloc] initWithDictionary:source] forKey:property.name];
     }
 }
 
 - (void) rg_initValueProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {
-    id RG_SUFFIX_NULLABLE source = value;
+    NSNumber* source = [value isKindOfClass:[NSNumber self]] ? value : nil;
+    NSString* stringValue = [value isKindOfClass:[NSString self]] ? value : nil;
+    if ([value isKindOfClass:[RGXMLNode self]]) {
+        stringValue = [value innerXML];
+    }
+    if (stringValue) {
+        if (property.isIntegral || property.isFloatingPoint || !property.isPrimitive) {
+            source = [rg_number_formatter() numberFromString:stringValue] ?: (property.isPrimitive ? @0 : nil);
+        } else {
+            RGLog(@"Unsupported Destination for NSString: %@ on %@", property.name, [self class]);
+            return;
+        }
+    }
+    if (source) {
+        [self setValue:source forKey:property.name];
+    }
 }
 
 @end

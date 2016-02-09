@@ -98,26 +98,18 @@
     Class propertyType = property.type;
     id target = value;
     
-    if ([target isKindOfClass:[NSArray self]]) { /* If the array we're given contains objects which we can create,
-                                                  create those too */
-        NSMutableArray RG_GENERIC(id) * ret = [NSMutableArray new];
-        for (__strong id obj in target) {
-            if (rg_isDataSourceClass([obj class])) {
-                NSString* serializationKey = obj[kRGSerializationKey];
-                if (serializationKey) {
-                    Class objectClass = NSClassFromString(serializationKey);
-                    if (!rg_isDataSourceClass(objectClass) && objectClass) {
-                        obj = [objectClass objectFromDataSource:obj inContext:context];
-                    }
-                }
-            }
-            [ret addObject:obj];
-        }
-        target = ret;
+    /* If the array we're given contains objects which we can create, create those too */
+    if ([target isKindOfClass:[NSArray self]]) {
+        target = rg_unpack_array(target, context);
     }
     
     if (rg_isStringInitObject(propertyType)) {
         [self rg_initStringProp:property withValue:target];
+        return;
+    }
+    
+    if (rg_isMetaClassObject(propertyType)) {
+        [self rg_initClassProp:property withValue:target];
         return;
     }
     
@@ -150,13 +142,7 @@
     
     /* Otherwise... this mess */
     
-    if (rg_isMetaClassObject(propertyType)) { /* the property's type is Meta-class so its a reference to Class */
-        if ([target isKindOfClass:[RGXMLNode self]]) {
-            NSString* innerXML = [target innerXML];
-            target = innerXML ?: @"";
-        }
-        [self setValue:NSClassFromString([target description]) forKey:key];
-    } else if ([propertyType isSubclassOfClass:[NSNumber self]] && ([target isKindOfClass:[NSNumber self]] ||
+    if ([propertyType isSubclassOfClass:[NSNumber self]] && ([target isKindOfClass:[NSNumber self]] ||
                                                                     [target isKindOfClass:[NSString self]] ||
                                                                     [target isKindOfClass:[RGXMLNode self]])) {
         /* NSNumber */
@@ -229,6 +215,18 @@
     }
     if ([source isKindOfClass:[NSString self]]) {
         [self setValue:[[property.type alloc] initWithString:source] forKey:property.name];
+    }
+}
+
+- (void) rg_initClassProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)propery withValue:(RG_PREFIX_NONNULL id)value {
+    NSString* source = [value isKindOfClass:[NSString self]] ? value : nil;
+    if ([value isKindOfClass:[RGXMLNode self]]) {
+        source = [value innerXML];
+    } else if ([value isKindOfClass:[NSNumber self]]) {
+        source = [value stringValue];
+    }
+    if ([source isKindOfClass:[NSString self]]) {
+        [self setValue:NSClassFromString(source) forKey:propery.name];
     }
 }
 

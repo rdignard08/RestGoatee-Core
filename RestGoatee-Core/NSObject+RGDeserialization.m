@@ -99,8 +99,8 @@
     id target = value;
     
     /* If the array we're given contains objects which we can create, create those too */
-    if ([target isKindOfClass:[NSArray self]]) {
-        target = rg_unpack_array(target, context);
+    if ([value isKindOfClass:[NSArray self]]) {
+        target = rg_unpack_array(value, context);
     }
     
     if (rg_isStringInitObject(propertyType)) {
@@ -126,13 +126,6 @@
     if ([propertyType isSubclassOfClass:[NSValue self]]) {
         [self rg_initValueProp:property withValue:target];
     }
-    
-    /* __NSCFString -> NSMutableString -> NSString */
-    id mutableVersion = [target respondsToSelector:@selector(mutableCopyWithZone:)] ? [target mutableCopy] : nil;
-    if ([mutableVersion isKindOfClass:propertyType]) { /* if the target is a mutable of a immutable type we have */
-        [self setValue:mutableVersion forKey:key];
-        return;
-    } /* This is the one instance where we can quickly cast down the value */
     
     if ([target isKindOfClass:propertyType]) { /* NSValue */
         [self setValue:target forKey:key];

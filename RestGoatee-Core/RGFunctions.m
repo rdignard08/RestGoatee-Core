@@ -204,3 +204,14 @@ NSMutableArray* RG_SUFFIX_NONNULL rg_unpack_array(NSArray* RG_SUFFIX_NULLABLE ta
     }
     return ret;
 }
+
+NSString* RG_SUFFIX_NULLABLE rg_to_string(id RG_SUFFIX_NULLABLE object) {
+    if ([object isKindOfClass:[NSString self]]) {
+        return object;
+    } else if ([object isKindOfClass:[RGXMLNode self]]) {
+        return [object innerXML];
+    } else if ([object isKindOfClass:[NSNumber self]]) {
+        return [object stringValue];
+    }
+    return nil;
+}

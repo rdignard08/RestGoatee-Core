@@ -139,3 +139,9 @@ BOOL rg_is_floating_encoding(const char* RG_SUFFIX_NONNULL const encoding)
  */
 NSMutableArray* RG_SUFFIX_NONNULL rg_unpack_array(NSArray* RG_SUFFIX_NULLABLE array,
                                                   NSManagedObjectContext* RG_SUFFIX_NULLABLE context);
+
+/**
+ @param object the object to represent as a string if possible.
+ @return An `NSString` representation of `object` or `nil` if no such representation could be formed.
+ */
+NSString* RG_SUFFIX_NULLABLE rg_to_string(id RG_SUFFIX_NULLABLE object);

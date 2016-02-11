@@ -42,11 +42,13 @@ static NSString* RG_SUFFIX_NONNULL const rg_malloc_based_canonical(const char* R
     size_t outputLength = 0;
     for (size_t i = 0; i != length; i++) {
         char letter = utfName[i];
-        /* a digit or lowercase character; no change */
-        if ((letter >= '0' && letter <= '9') || (letter >= 'a' && letter <= 'z')) {
-            canonicalBuffer[outputLength++] = letter;
-        } else if (letter >= 'A' && letter <= 'Z') { /* an uppercase character; to lower */
-            canonicalBuffer[outputLength++] = letter + (const int)('a' - 'A'); /* 'a' - 'A' == 32 */
+        switch (letter) {
+            case '0' ... '9':
+            case 'a' ... 'z': /* a digit or lowercase character; no change */
+                canonicalBuffer[outputLength++] = letter;
+                break;
+            case 'A' ... 'Z': /* an uppercase character; to lower */
+                canonicalBuffer[outputLength++] = letter + (const int)('a' - 'A');
         } /* unicodes, symbols, spaces, etc. are completely skipped */
     }
     return [[NSString alloc] initWithBytesNoCopy:canonicalBuffer
@@ -61,11 +63,13 @@ static NSString* RG_SUFFIX_NONNULL const rg_static_based_canonical(const char* R
     size_t outputLength = 0;
     for (size_t i = 0; i != length; i++) {
         char letter = utfName[i];
-        /* a digit or lowercase character; no change */
-        if ((letter >= '0' && letter <= '9') || (letter >= 'a' && letter <= 'z')) {
-            canonicalBuffer[outputLength++] = letter;
-        } else if (letter >= 'A' && letter <= 'Z') { /* an uppercase character; to lower */
-            canonicalBuffer[outputLength++] = letter + (const int)('a' - 'A'); /* 'a' - 'A' == 32 */
+        switch (letter) {
+            case '0' ... '9':
+            case 'a' ... 'z': /* a digit or lowercase character; no change */
+                canonicalBuffer[outputLength++] = letter;
+                break;
+            case 'A' ... 'Z': /* an uppercase character; to lower */
+                canonicalBuffer[outputLength++] = letter + (const int)('a' - 'A');
         } /* unicodes, symbols, spaces, etc. are completely skipped */
     }
     return [[NSString alloc] initWithBytes:canonicalBuffer length:outputLength encoding:NSUTF8StringEncoding];

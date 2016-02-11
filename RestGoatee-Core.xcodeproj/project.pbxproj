@@ -29,6 +29,7 @@
 		BE3636D31C51C80A00A2E00A /* RGTestManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3636D21C51C80A00A2E00A /* RGTestManagedObject.m */; };
 		BE3636D61C51D09B00A2E00A /* RGBartStation.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3636D51C51D09B00A2E00A /* RGBartStation.m */; };
 		BE4237481C647416003E47DF /* RGTestObject5.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4237471C647416003E47DF /* RGTestObject5.m */; };
+		BE5B37D11C6C5CDF0093AA02 /* RGTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5B37D01C6C5CDF0093AA02 /* RGTest.m */; };
 		BE637B7D1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE637B7C1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m */; };
 		BE637B801BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE637B7F1BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m */; };
 		BE63EE6F1C646F0B00D451D2 /* RGTestObject3.m in Sources */ = {isa = PBXBuildFile; fileRef = BE63EE6E1C646F0B00D451D2 /* RGTestObject3.m */; };
@@ -97,6 +98,8 @@
 		BE3636D51C51D09B00A2E00A /* RGBartStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGBartStation.m; sourceTree = "<group>"; };
 		BE4237461C647416003E47DF /* RGTestObject5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTestObject5.h; sourceTree = "<group>"; };
 		BE4237471C647416003E47DF /* RGTestObject5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGTestObject5.m; sourceTree = "<group>"; };
+		BE5B37CF1C6C5CDF0093AA02 /* RGTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTest.h; sourceTree = "<group>"; };
+		BE5B37D01C6C5CDF0093AA02 /* RGTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGTest.m; sourceTree = "<group>"; };
 		BE637B7C1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGPropertyDeclarationSpec.m; sourceTree = "<group>"; };
 		BE637B7F1BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RestGoatee-CoreSpec.m"; sourceTree = "<group>"; };
 		BE63EE6D1C646F0B00D451D2 /* RGTestObject3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTestObject3.h; sourceTree = "<group>"; };
@@ -278,6 +281,8 @@
 				BE63EE771C6471E300D451D2 /* RGDerivedObject1.m */,
 				BE63EE791C64725B00D451D2 /* RGDerivedObject2.h */,
 				BE63EE7A1C64725B00D451D2 /* RGDerivedObject2.m */,
+				BE5B37CF1C6C5CDF0093AA02 /* RGTest.h */,
+				BE5B37D01C6C5CDF0093AA02 /* RGTest.m */,
 				BE3636D11C51C80A00A2E00A /* RGTestManagedObject.h */,
 				BE3636D21C51C80A00A2E00A /* RGTestManagedObject.m */,
 				BE68CA621BCF631200DFEC70 /* RGTestObject1.h */,
@@ -458,6 +463,7 @@
 				BE68CA661BCF631200DFEC70 /* RGTestObject2.m in Sources */,
 				BE63EE6F1C646F0B00D451D2 /* RGTestObject3.m in Sources */,
 				BE2009651BCA27AE00A9E8A0 /* RGXMLNodeSpec.m in Sources */,
+				BE5B37D11C6C5CDF0093AA02 /* RGTest.m in Sources */,
 				BE63EE781C6471E300D451D2 /* RGDerivedObject1.m in Sources */,
 				BE63EE751C64719100D451D2 /* RGBaseObject.m in Sources */,
 				BE2009691BCC29A900A9E8A0 /* NSObject+RGDeserializationSpec.m in Sources */,

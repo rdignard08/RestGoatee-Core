@@ -36,11 +36,11 @@ NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL rg_date_formats(void) {
     return _sDateFormats;
 }
 
-static NSString* RG_SUFFIX_NONNULL const rg_malloc_based_canonical(const char* RG_SUFFIX_NONNULL const utfName,
-                                                                   size_t length) {
-    char* canonicalBuffer = malloc(length);
+static size_t rg_to_lower_and_strip(const char* RG_SUFFIX_NONNULL const utfName,
+                                    size_t length,
+                                    char* RG_SUFFIX_NONNULL canonicalBuffer) {
     size_t outputLength = 0;
-    for (size_t i = 0; i != length; i++) {
+    for (size_t i = 0; i < length; i++) {
         char letter = utfName[i];
         switch (letter) {
             case '0' ... '9':
@@ -51,6 +51,13 @@ static NSString* RG_SUFFIX_NONNULL const rg_malloc_based_canonical(const char* R
                 canonicalBuffer[outputLength++] = letter + (const int)('a' - 'A');
         } /* unicodes, symbols, spaces, etc. are completely skipped */
     }
+    return outputLength;
+}
+
+static NSString* RG_SUFFIX_NONNULL const rg_malloc_based_canonical(const char* RG_SUFFIX_NONNULL const utfName,
+                                                                   size_t length) {
+    char* canonicalBuffer = malloc(length);
+    size_t outputLength = rg_to_lower_and_strip(utfName, length, canonicalBuffer);
     return [[NSString alloc] initWithBytesNoCopy:canonicalBuffer
                                           length:outputLength
                                         encoding:NSUTF8StringEncoding
@@ -60,18 +67,7 @@ static NSString* RG_SUFFIX_NONNULL const rg_malloc_based_canonical(const char* R
 static NSString* RG_SUFFIX_NONNULL const rg_static_based_canonical(const char* RG_SUFFIX_NONNULL const utfName,
                                                                    size_t length) {
     char canonicalBuffer[length];
-    size_t outputLength = 0;
-    for (size_t i = 0; i != length; i++) {
-        char letter = utfName[i];
-        switch (letter) {
-            case '0' ... '9':
-            case 'a' ... 'z': /* a digit or lowercase character; no change */
-                canonicalBuffer[outputLength++] = letter;
-                break;
-            case 'A' ... 'Z': /* an uppercase character; to lower */
-                canonicalBuffer[outputLength++] = letter + (const int)('a' - 'A');
-        } /* unicodes, symbols, spaces, etc. are completely skipped */
-    }
+    size_t outputLength = rg_to_lower_and_strip(utfName, length, canonicalBuffer);
     return [[NSString alloc] initWithBytes:canonicalBuffer length:outputLength encoding:NSUTF8StringEncoding];
 }
 

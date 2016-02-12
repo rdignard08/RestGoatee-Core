@@ -37,6 +37,9 @@
     if (self) {
         [self initializeName:property];
         unsigned int attributeCount = 0;
+        
+//        NSArray* attributes = [[NSString stringWithUTF8String:property_getAttributes(property)] componentsSeparatedByString:@","];
+        
         objc_property_attribute_t* attributes = property_copyAttributeList(property, &attributeCount);
         for (unsigned int i = 0; i < attributeCount; i++) {
             objc_property_attribute_t attribute = attributes[i];

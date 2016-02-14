@@ -79,17 +79,6 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
     return rg_static_based_canonical(utfName, length);
 }
 
-void rg_log(NSString* RG_SUFFIX_NONNULL format,
-            const char* RG_SUFFIX_NONNULL const file,
-            unsigned long line,
-            ...) {
-    va_list arguments;
-    va_start(arguments, line);
-    NSString* output = [[NSString alloc] initWithFormat:format arguments:arguments];
-    fprintf(stderr, "[%s:%lu] %s\n", file, line, output.UTF8String);
-    va_end(arguments);
-}
-
 void rg_swizzle(Class RG_SUFFIX_NULLABLE cls, SEL RG_SUFFIX_NULLABLE original, SEL RG_SUFFIX_NULLABLE replacement) {
     IMP replacementImp = method_setImplementation(class_getInstanceMethod(cls, replacement),
                                                   class_getMethodImplementation(cls, original));

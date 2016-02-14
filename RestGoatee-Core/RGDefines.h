@@ -116,21 +116,31 @@
 #ifndef RGLog
     #ifdef DEBUG
 /**
- @brief A complete `NSLog()` replacement, but does not log in production.
+ @brief A complete `NSLog()` replacement, but does not log in production.  It logs the file name & line number.
+ @param format the format string of the arguments _after_ lineNumber.  It is a programmer error to pass `nil`.
+ @param file the name of the file where the log was called.
+ @param line the line number of the log call.
+ @param ... values that will be called with `format` to generate the output.
+ @throw `NSGenericException` on format being `nil`.
  */
-        #define RGLog(format, ...)                          \
-            rg_log(format, ({                               \
-                const size_t length = sizeof(__FILE__) - 1; \
-                char* ret = __FILE__ + length;              \
-                while (ret != __FILE__) {                   \
-                    char* replacement = ret - 1;            \
-                    if (*replacement == '/') {              \
-                        break;                              \
-                    }                                       \
-                    ret = replacement;                      \
-                }                                           \
-                ret;                                        \
-            }), (unsigned long)__LINE__, ##__VA_ARGS__)
+        #define RGLog(formatVar, ...) ({                                                                \
+            formatVar ? RG_VOID_NOOP : [NSException raise:@"NSGenericException" format:@""];            \
+            const size_t length = sizeof(__FILE__) - 1;                                                 \
+            char* file = __FILE__ + length;                                                             \
+            while (file != __FILE__) {                                                                  \
+                char* replacement = file - 1;                                                           \
+                if (*replacement == '/') {                                                              \
+                    break;                                                                              \
+                }                                                                                       \
+                file = replacement;                                                                     \
+            }                                                                                           \
+            uint64_t formatLength = [formatVar maximumLengthOfBytesUsingEncoding:NSUTF8StringEncoding]; \
+            char fullFormat[formatLength + sizeof("[%s:%lu] ") + sizeof("\n")];                         \
+            strcpy(fullFormat, "[%s:%lu] ");                                                            \
+            strcat(fullFormat, [formatVar UTF8String]);                                                 \
+            strcat(fullFormat, "\n");                                                                   \
+            (void)fprintf(stderr, fullFormat, file, (unsigned long)__LINE__, ## __VA_ARGS__);           \
+        })
     #else /* we define out with `RG_VOID_NOOP` generally this is `NULL` to allow usage in conditional operators. */
 /**
  @brief A complete `NSLog()` replacement, but does not log in production.

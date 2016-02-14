@@ -65,18 +65,6 @@ void rg_swizzle(Class RG_SUFFIX_NULLABLE cls,
                 SEL RG_SUFFIX_NULLABLE replacement) __attribute__((cold));
 
 /**
- @brief This function is the backing debug function of the `RGLog()` macro.  It logs the file name & line number.
- @param format the format string of the arguments _after_ lineNumber.  It is a programmer error to pass `nil`.
- @param file the name of the file where the log was called.
- @param line the line number of the log call.
- @param ... values that will be called with `format` to generate the output.
- */
-void rg_log(NSString* RG_SUFFIX_NONNULL format,
-            const char* RG_SUFFIX_NONNULL const file,
-            unsigned long line,
-            ...) __attribute__((cold, format(__NSString__, 1, 4), nonnull(1, 2)));
-
-/**
  @param object may be any type of object including `nil`.
  @return `YES` if the parameter `object` is of type `Class` but _not_ a meta-class.
  */

@@ -123,8 +123,7 @@
  @param ... values that will be called with `format` to generate the output.
  @throw `NSGenericException` on format being `nil`.
  */
-        #define RGLog(formatVar, ...) ({                                                                \
-            formatVar ? RG_VOID_NOOP : [NSException raise:@"NSGenericException" format:@""];            \
+        #define RGLog(format, ...) ({                                                                   \
             const size_t length = sizeof(__FILE__) - 1;                                                 \
             char* file = __FILE__ + length;                                                             \
             while (file != __FILE__) {                                                                  \

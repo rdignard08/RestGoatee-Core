@@ -14,7 +14,6 @@
 				BE63EE691C633DA300D451D2 /* ShellScript */,
 			);
 			dependencies = (
-				BE63EE6B1C633DB000D451D2 /* PBXTargetDependency */,
 			);
 			name = OCLint;
 			productName = OCLint;
@@ -56,13 +55,6 @@
 
 /* Begin PBXContainerItemProxy section */
 		BE20095B1BCA252000A9E8A0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BEFFB8391BBDB15900EAF95D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BEFFB8401BBDB15900EAF95D;
-			remoteInfo = "RestGoatee-Core";
-		};
-		BE63EE6A1C633DB000D451D2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BEFFB8391BBDB15900EAF95D /* Project object */;
 			proxyType = 1;
@@ -504,11 +496,6 @@
 			isa = PBXTargetDependency;
 			target = BEFFB8401BBDB15900EAF95D /* RestGoatee-Core */;
 			targetProxy = BE20095B1BCA252000A9E8A0 /* PBXContainerItemProxy */;
-		};
-		BE63EE6B1C633DB000D451D2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BEFFB8401BBDB15900EAF95D /* RestGoatee-Core */;
-			targetProxy = BE63EE6A1C633DB000D451D2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

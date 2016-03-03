@@ -8,7 +8,6 @@ fi
  
 cd ${TARGET_TEMP_DIR}
  
-if [ ! -f compile_commands.json ]; then
     echo "[*] compile_commands.json not found, possibly clean was performed"
     echo "[*] starting xcodebuild to rebuild the project.."
     # clean previous output
@@ -18,21 +17,16 @@ if [ ! -f compile_commands.json ]; then
  
     cd ${SRCROOT}
  
-    xcodebuild clean
- 
-    #build xcodebuild.log
-    xcodebuild -project RestGoatee-Core.xcodeproj -scheme RestGoatee-Core | tee ${TARGET_TEMP_DIR}/xcodebuild.log
-    echo 'xcodebuild <options> | tee ${TARGET_TEMP_DIR}/xcodebuild.log'
- 
+xcodebuild clean
+xcodebuild -project RestGoatee-Core.xcodeproj -scheme RestGoatee-Core | xcpretty -r json-compilation-database
+ls 
     echo "[*] transforming xcodebuild.log into compile_commands.json..."
     cd ${TARGET_TEMP_DIR}
     #transform it into compile_commands.json
-    oclint-xcodebuild
  
     echo "[*] copy compile_commands.json to the project root..."
     cp ${TARGET_TEMP_DIR}/compile_commands.json ${SRCROOT}/compile_commands.json
  
-fi
  
 echo "[*] starting analyzing"
 cd ${TARGET_TEMP_DIR}

@@ -49,6 +49,8 @@ static size_t rg_to_lower_and_strip(const char* RG_SUFFIX_NONNULL const utfName,
                 break;
             case 'A' ... 'Z': /* an uppercase character; to lower */
                 canonicalBuffer[outputLength++] = letter + (const int)('a' - 'A');
+            default:
+                ;
         } /* unicodes, symbols, spaces, etc. are completely skipped */
     }
     return outputLength;

@@ -17,8 +17,7 @@ cd ${TARGET_TEMP_DIR}
  
     cd ${SRCROOT}
  
-xcodebuild clean
-xcodebuild -project RestGoatee-Core.xcodeproj -scheme RestGoatee-Core | xcpretty -r json-compilation-database
+xcodebuild -project RestGoatee-Core.xcodeproj -scheme RestGoatee-Core clean build | xcpretty -r json-compilation-database
 ls 
     echo "[*] transforming xcodebuild.log into compile_commands.json..."
     cd ${TARGET_TEMP_DIR}

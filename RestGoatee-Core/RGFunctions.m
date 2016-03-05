@@ -42,15 +42,13 @@ static size_t rg_to_lower_and_strip(const char* RG_SUFFIX_NONNULL const utfName,
     size_t outputLength = 0;
     for (size_t i = 0; i < length; i++) {
         char letter = utfName[i];
-        switch (letter) {
+        switch (letter) { //!OCLINT optimized
             case '0' ... '9':
             case 'a' ... 'z': /* a digit or lowercase character; no change */
                 canonicalBuffer[outputLength++] = letter;
                 break;
             case 'A' ... 'Z': /* an uppercase character; to lower */
                 canonicalBuffer[outputLength++] = letter + (const int)('a' - 'A');
-            default:
-                ;
         } /* unicodes, symbols, spaces, etc. are completely skipped */
     }
     return outputLength;

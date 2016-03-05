@@ -6,9 +6,7 @@ if [ $? -eq 1 ]; then
     exit 1
 fi
  
-cd ${TARGET_TEMP_DIR}
- 
-rm xcodebuild.log
+rm -f ${TARGET_TEMP_DIR}/xcodebuild.log
  
 cd ${SRCROOT}
  

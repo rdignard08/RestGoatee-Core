@@ -27,9 +27,9 @@
 @class NSManagedObjectContext;
 
 /**
- @return the built-in date formats the library supports. Contains: ISO, `-[NSDate description]`.
+ @brief invoking returns the built-in date formats the library supports. Contains: ISO, `-[NSDate description]`.
  */
-NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL rg_date_formats(void) __attribute__((pure, returns_nonnull));
+extern NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL (* RG_SUFFIX_NONNULL rg_date_formats)(void);
 
 /**
  @return a per thread instance of `NSDateFormatter`.  Never pass the returned object between threads.

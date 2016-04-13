@@ -24,17 +24,23 @@
 #import "RestGoatee-Core.h"
 #import <objc/runtime.h>
 
-NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL rg_date_formats(void) {
+static NSArray RG_GENERIC(NSString*) * _sDateFormats;
+static NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL rg_replacement_date_formats(void) {
+    return _sDateFormats;
+}
+
+static NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL rg_original_date_formats(void) {
     static dispatch_once_t onceToken;
-    static NSArray RG_GENERIC(NSString*) * _sDateFormats;
     dispatch_once(&onceToken, ^{
         _sDateFormats = @[ @"yyyy-MM-dd'T'HH:mm:ssZZZZZ",
                            @"yyyy-MM-dd HH:mm:ss ZZZZZ",
                            @"yyyy-MM-dd'T'HH:mm:ssz",
                            @"yyyy-MM-dd" ];
+        rg_date_formats = rg_replacement_date_formats;
     });
     return _sDateFormats;
 }
+NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL (* RG_SUFFIX_NONNULL rg_date_formats)(void) = rg_original_date_formats;
 
 static size_t rg_to_lower_and_strip(const char* RG_SUFFIX_NONNULL const utfName,
                                     size_t length,

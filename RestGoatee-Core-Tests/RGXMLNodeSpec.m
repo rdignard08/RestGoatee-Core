@@ -22,7 +22,7 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RGXMLNode.h"
-#import "RGConstants.h"
+#import "RestGoatee-Core.h"
 
 @implementation NSObject (RGBadInit)
 

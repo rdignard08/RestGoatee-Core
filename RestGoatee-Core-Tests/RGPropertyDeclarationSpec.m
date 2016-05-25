@@ -27,14 +27,31 @@
 #import "NSObject+RGSharedImpl.h"
 #include <objc/runtime.h>
 
+@implementation NSObject (RGBadInit)
+
+- (id)override_init {
+    return nil;
+}
+
+@end
+
 CLASS_SPEC(RGPropertyDeclaration)
 
 - (void) testInit {
     XCTAssertThrows([RGPropertyDeclaration new]);
 }
 
+- (void) testBadInit {
+    rg_swizzle([NSObject self], @selector(init), @selector(override_init));
+    objc_property_t* properties = class_copyPropertyList([RGTestObject1 self], NULL);
+    RGPropertyDeclaration* declaration = [[RGPropertyDeclaration alloc] initWithProperty:*properties];
+    free(properties);
+    XCTAssert(declaration == nil);
+    rg_swizzle([NSObject self], @selector(init), @selector(override_init));
+}
+
 - (void) testDealloc {
-    objc_property_t* properties = class_copyPropertyList([RGTestObject1 class], NULL);
+    objc_property_t* properties = class_copyPropertyList([RGTestObject1 self], NULL);
     RGPropertyDeclaration* declaration = [[RGPropertyDeclaration alloc] initWithProperty:*properties];
     free(properties);
     XCTAssert(declaration);

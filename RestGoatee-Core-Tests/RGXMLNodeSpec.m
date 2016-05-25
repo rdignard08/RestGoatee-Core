@@ -24,6 +24,14 @@
 #import "RGXMLNode.h"
 #import "RGConstants.h"
 
+@implementation NSObject (RGBadInit)
+
+- (id)override_init {
+    return nil;
+}
+
+@end
+
 /**
  Represents the data
  
@@ -61,6 +69,13 @@ static RGXMLNode* childNode4;
 
 - (void) testInit {
     XCTAssertThrows([RGXMLNode new]);
+}
+
+- (void) testBadInit {
+    rg_swizzle([NSObject self], @selector(init), @selector(override_init));
+    RGXMLNode* declaration = [[RGXMLNode alloc] initWithName:@"aName"];
+    XCTAssert(declaration == nil);
+    rg_swizzle([NSObject self], @selector(init), @selector(override_init));
 }
 
 - (void) testParentNode {

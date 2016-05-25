@@ -184,9 +184,8 @@ BOOL rg_is_floating_encoding(const char* RG_SUFFIX_NONNULL const encoding) {
 NSMutableArray* RG_SUFFIX_NONNULL rg_unpack_array(NSArray* RG_SUFFIX_NULLABLE target,
                                                   NSManagedObjectContext* RG_SUFFIX_NULLABLE context) {
     NSMutableArray* ret = [NSMutableArray new];
-    id placementObject;
-    for (id object in target) {
-        placementObject = object;
+    for (NSUInteger i = 0; i < target.count; i++) {
+        id object = target[i];
         NSString* serializationClass;
         if ([object isKindOfClass:[NSDictionary self]]) {
             serializationClass = object[kRGSerializationKey];
@@ -196,10 +195,10 @@ NSMutableArray* RG_SUFFIX_NONNULL rg_unpack_array(NSArray* RG_SUFFIX_NULLABLE ta
         if (serializationClass) {
             Class objectClass = NSClassFromString(serializationClass);
             if (objectClass && !rg_isDataSourceClass(objectClass)) {
-                placementObject = [objectClass objectFromDataSource:object inContext:context];
+                object = [objectClass objectFromDataSource:object inContext:context];
             }
         }
-        [ret addObject:placementObject];
+        [ret addObject:object];
     }
     return ret;
 }

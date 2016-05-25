@@ -97,7 +97,8 @@
                     [replacementContainer addObject:[node dictionaryRepresentation]];
                 }
                 ret[childNode.name] = replacementContainer;
-            } else if ([children isKindOfClass:[RGXMLNode self]]) {
+            } else {
+                NSAssert([children isKindOfClass:[RGXMLNode self]], @"children should not be nil");
                 RGXMLNode* xmlChild = children;
                 NSMutableDictionary RG_GENERIC(NSString*, NSString*) * value = [xmlChild.attributes mutableCopy];
                 [value addEntriesFromDictionary:[xmlChild dictionaryRepresentation]];

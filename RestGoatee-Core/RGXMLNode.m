@@ -50,7 +50,7 @@
 - (RG_PREFIX_NONNULL NSMutableArray RG_GENERIC(NSString*) *) allKeys {
     if (!_allKeys) {
         _allKeys = [self.attributes.allKeys mutableCopy];
-        for (NSUInteger i = 0; i < self.childNodes; i++) {
+        for (NSUInteger i = 0; i < self.childNodes.count; i++) {
             RGXMLNode* child = self.childNodes[i];
             [_allKeys addObject:child.name];
         }

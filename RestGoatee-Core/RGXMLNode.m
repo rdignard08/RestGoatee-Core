@@ -92,7 +92,7 @@
             id children = [self childrenNamed:childNode.name];
             if ([children isKindOfClass:[NSArray self]]) {
                 NSMutableArray* replacementContainer = [NSMutableArray new];
-                for (NSUInteger j = 0; j < children.count; j++) {
+                for (NSUInteger j = 0; j < [(NSArray*)children count]; j++) {
                     RGXMLNode* node = children[j];
                     [replacementContainer addObject:[node dictionaryRepresentation]];
                 }
@@ -110,7 +110,7 @@
 
 - (RG_PREFIX_NULLABLE id) childrenNamed:(RG_PREFIX_NULLABLE NSString*)name {
     NSMutableArray RG_GENERIC(RGXMLNode*) * ret = [NSMutableArray new];
-    for (NSUInteger i = 0; i < self.childNodes; i++) {
+    for (NSUInteger i = 0; i < self.childNodes.count; i++) {
         RGXMLNode* child = self.childNodes[i];
         if ([child.name isEqual:name]) {
             [ret addObject:child];

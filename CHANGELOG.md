@@ -1,5 +1,10 @@
 # RestGoatee CHANGELOG
 
+## 2.2.1
+- The backing symbol of `RGLog()`, `rg_log`, is gone
+- The symbol `rg_date_formats` is a function pointer
+- oclint_run.sh now uses xcpretty
+
 ## 2.2.0
 - The symbols of the form `rg_...` are now of the form `kRG...`
 - `parentNode` on `RGXMLNode` is now writable

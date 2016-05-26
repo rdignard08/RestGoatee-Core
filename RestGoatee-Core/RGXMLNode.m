@@ -50,7 +50,8 @@
 - (RG_PREFIX_NONNULL NSMutableArray RG_GENERIC(NSString*) *) allKeys {
     if (!_allKeys) {
         _allKeys = [self.attributes.allKeys mutableCopy];
-        for (RGXMLNode* child in self.childNodes) {
+        for (NSUInteger i = 0; i < self.childNodes.count; i++) {
+            RGXMLNode* child = self.childNodes[i];
             [_allKeys addObject:child.name];
         }
     }
@@ -83,18 +84,21 @@
         ret[kRGInnerXMLKey] = self.innerXML;
     }
     NSMutableArray RG_GENERIC(NSString*) * handledNames = [NSMutableArray new];
-    for (RGXMLNode* childNode in self.childNodes) {
+    for (NSUInteger i = 0; i < self.childNodes.count; i++) {
+        RGXMLNode* childNode = self.childNodes[i];
         NSAssert(childNode.name, @"%@ name: %@ has a child without a name", self, self.name);
         if (![handledNames containsObject:childNode.name]) {
             [handledNames addObject:childNode.name];
             id children = [self childrenNamed:childNode.name];
             if ([children isKindOfClass:[NSArray self]]) {
                 NSMutableArray* replacementContainer = [NSMutableArray new];
-                for (RGXMLNode* node in children) {
+                for (NSUInteger j = 0; j < [(NSArray*)children count]; j++) {
+                    RGXMLNode* node = children[j];
                     [replacementContainer addObject:[node dictionaryRepresentation]];
                 }
                 ret[childNode.name] = replacementContainer;
-            } else if ([children isKindOfClass:[RGXMLNode self]]) {
+            } else {
+                NSAssert([children isKindOfClass:[RGXMLNode self]], @"children should not be nil");
                 RGXMLNode* xmlChild = children;
                 NSMutableDictionary RG_GENERIC(NSString*, NSString*) * value = [xmlChild.attributes mutableCopy];
                 [value addEntriesFromDictionary:[xmlChild dictionaryRepresentation]];
@@ -107,7 +111,8 @@
 
 - (RG_PREFIX_NULLABLE id) childrenNamed:(RG_PREFIX_NULLABLE NSString*)name {
     NSMutableArray RG_GENERIC(RGXMLNode*) * ret = [NSMutableArray new];
-    for (RGXMLNode* child in self.childNodes) {
+    for (NSUInteger i = 0; i < self.childNodes.count; i++) {
+        RGXMLNode* child = self.childNodes[i];
         if ([child.name isEqual:name]) {
             [ret addObject:child];
         }

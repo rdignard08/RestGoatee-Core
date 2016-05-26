@@ -75,3 +75,11 @@ File scope
   - Prefer simple initializers, preferably `init`
     - Expose properties instead of complex initializers
 
+Loops
+=====
+
+- For in
+  - Do not place `__strong` in the iterator condition
+  - Do not modify the temporary iterator variable
+- For
+  - Should only be used if all statements are need: initial statement, condition, and step statement

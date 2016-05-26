@@ -184,18 +184,21 @@ BOOL rg_is_floating_encoding(const char* RG_SUFFIX_NONNULL const encoding) {
 NSMutableArray* RG_SUFFIX_NONNULL rg_unpack_array(NSArray* RG_SUFFIX_NULLABLE target,
                                                   NSManagedObjectContext* RG_SUFFIX_NULLABLE context) {
     NSMutableArray* ret = [NSMutableArray new];
-    for (__strong id obj in target) {
-        NSString* serializationKey = [obj isKindOfClass:[NSDictionary self]] ? obj[kRGSerializationKey] : nil;
-        if ([obj isKindOfClass:[RGXMLNode self]]) {
-            serializationKey = [obj valueForKey:kRGSerializationKey];
+    for (NSUInteger i = 0; i < target.count; i++) {
+        id object = target[i];
+        NSString* serializationClass;
+        if ([object isKindOfClass:[NSDictionary self]]) {
+            serializationClass = object[kRGSerializationKey];
+        } else if ([object isKindOfClass:[RGXMLNode self]]) {
+            serializationClass = [object valueForKey:kRGSerializationKey];
         }
-        if (serializationKey) {
-            Class objectClass = NSClassFromString(serializationKey);
-            if (!rg_isDataSourceClass(objectClass) && objectClass) {
-                obj = [objectClass objectFromDataSource:obj inContext:context];
+        if (serializationClass) {
+            Class objectClass = NSClassFromString(serializationClass);
+            if (objectClass && !rg_isDataSourceClass(objectClass)) {
+                object = [objectClass objectFromDataSource:object inContext:context];
             }
         }
-        [ret addObject:obj];
+        [ret addObject:object];
     }
     return ret;
 }

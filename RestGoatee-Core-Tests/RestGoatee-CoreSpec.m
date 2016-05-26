@@ -93,5 +93,11 @@ CLASS_SPEC(RestGoatee_Core)
     XCTAssert(formatter != anotherFormatter);
 }
 
+#pragma mark - rg_unpack_array
+- (void) testRGUnpackArrayWithNil {
+    NSArray *values = rg_unpack_array(nil, nil);
+    XCTAssert(values.count == 0);
+}
+
 SPEC_END
 

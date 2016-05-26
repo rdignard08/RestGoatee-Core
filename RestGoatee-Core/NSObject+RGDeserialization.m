@@ -102,8 +102,11 @@
         [self setValue:[property.type objectFromDataSource:value inContext:context] forKey:key];
         }
     }
-#ifdef DEBUG
-    [self valueForKey:key] ? RG_VOID_NOOP : RGLog(@"FAIL: initialization of property %@ on type %@", key, [self class]);
+#ifdef DEBUG /* test on debug if the type system has been violated */
+    id output = [self valueForKey:key];
+    output ? RG_VOID_NOOP : RGLog(@"FAIL: initialization of property %@ on type %@", key, [self class]);
+    BOOL typeSafe = !output || property.isPrimitive || [output isKindOfClass:property.type];
+    NSAssert(typeSafe, @"FAILURE: type system violation: property %@ on type %@", key, [self class]);
 #endif
 }
 

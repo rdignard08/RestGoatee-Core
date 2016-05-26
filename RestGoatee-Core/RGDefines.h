@@ -124,17 +124,20 @@
  @throw `NSGenericException` on format being `nil`.
  */
         #define RGLog(format, ...) ({                                                                   \
-            const size_t length = sizeof(__FILE__) - 1;                                                 \
-            char* file = __FILE__ + length;                                                             \
-            while (file != __FILE__) {                                                                  \
-                char* replacement = file - 1;                                                           \
-                if (*replacement == '/') {                                                              \
+            const size_t RGLog_length = sizeof(__FILE__) - 1;                                           \
+            char* RGLog_file = __FILE__ + RGLog_length;                                                 \
+            while (RGLog_file != __FILE__) {                                                            \
+                char* RGLog_replacement = RGLog_file - 1;                                               \
+                if (*RGLog_replacement == '/') {                                                        \
                     break;                                                                              \
                 }                                                                                       \
-                file = replacement;                                                                     \
+                RGLog_file = RGLog_replacement;                                                         \
             }                                                                                           \
-            NSString* output = [NSString stringWithFormat:format, ## __VA_ARGS__];                      \
-            (void)fprintf(stderr, "[%s:%lu] %s\n", file, (unsigned long)__LINE__, output.UTF8String);   \
+            (void)fprintf(stderr,                                                                       \
+                          "[%s:%lu] %s\n",                                                              \
+                          RGLog_file,                                                                   \
+                          (unsigned long)__LINE__,                                                      \
+                          [NSString stringWithFormat:format, ## __VA_ARGS__].UTF8String);               \
         })
     #else /* we define out with `RG_VOID_NOOP` generally this is `NULL` to allow usage in conditional operators. */
 /**

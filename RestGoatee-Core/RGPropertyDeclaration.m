@@ -105,8 +105,10 @@
     self->_type = propertyType ?: [NSNumber self];
     self->_isPrimitive = !propertyType;
     if (self->_isPrimitive) {
-        self->_isFloatingPoint = rg_is_floating_encoding(value);
         self->_isIntegral = rg_is_integral_encoding(value);
+        if (!self->_isIntegral) {
+            self->_isFloatingPoint = rg_is_floating_encoding(value);
+        }
     }
 }
 

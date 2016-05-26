@@ -194,13 +194,15 @@
 
 - (void) rg_initValueProp:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NONNULL id)value {
     NSNumber* source = [value isKindOfClass:[NSNumber self]] ? value : nil;
-    NSString* stringValue = rg_to_string(value);
-    if (stringValue) {
-        if (property.isIntegral || property.isFloatingPoint || !property.isPrimitive) {
-            source = [rg_number_formatter() numberFromString:stringValue] ?: (property.isPrimitive ? @0 : nil);
-        } else {
-            RGLog(@"Unsupported Destination for NSString: %@ on %@", property.name, [self class]);
-            return;
+    if (!source) {
+        NSString* stringValue = rg_to_string(value);
+        if (stringValue) {
+            if (property.isIntegral || property.isFloatingPoint || !property.isPrimitive) {
+                source = [rg_number_formatter() numberFromString:stringValue] ?: (property.isPrimitive ? @0 : nil);
+            } else {
+                RGLog(@"Unsupported Destination for NSString: %@ on %@", property.name, [self class]);
+                return;
+            }
         }
     }
     if (source) {

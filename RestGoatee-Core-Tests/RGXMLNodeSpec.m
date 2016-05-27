@@ -23,14 +23,7 @@
 
 #import "RGXMLNode.h"
 #import "RestGoatee-Core.h"
-
-@implementation NSObject (RGBadInit)
-
-- (id)override_init {
-    return nil;
-}
-
-@end
+#import "NSObject+RGBadInit.h"
 
 /**
  Represents the data

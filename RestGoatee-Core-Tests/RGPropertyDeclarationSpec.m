@@ -25,15 +25,8 @@
 #import "RestGoatee-Core.h"
 #import "RGTestObject2.h"
 #import "NSObject+RGSharedImpl.h"
+#import "NSObject+RGBadInit.h"
 #include <objc/runtime.h>
-
-@implementation NSObject (RGBadInit)
-
-- (id)override_init {
-    return nil;
-}
-
-@end
 
 CLASS_SPEC(RGPropertyDeclaration)
 
@@ -128,8 +121,10 @@ CLASS_SPEC(RGPropertyDeclaration)
 }
 
 - (void) testLongString {
-    char* str = "sjkdfslkhasajskhdl2746981237JAgkHKJSGFKJHSKJSFHKJAGSd jdksdhflk sdklfh lksdjf l!&#^*&!%$)(!)$*@&@&@&@$&@*$^JKgsdajdajsdhaskdahr";
-    XCTAssert([rg_canonical_form(str) isEqual:@"sjkdfslkhasajskhdl2746981237jagkhkjsgfkjhskjsfhkjagsdjdksdhflksdklfhlksdjfljkgsdajdajsdhaskdahr"]);
+    char* str = "sjkdfslkhasajskhdl2746981237JAgkHKJSGFKJHSKJSFHKJAGSd jdksdhflk sdklfh lksdjf l!&#^*&!%$)(!)$*@&@&@&@$"
+                "&@*$^JKgsdajdajsdhaskdahr";
+    XCTAssert([rg_canonical_form(str) isEqual:@"sjkdfslkhasajskhdl2746981237jagkhkjsgfkjhskjsfhkjagsdjdksdhflksdklfhlks"
+                                              @"djfljkgsdajdajsdhaskdahr"]);
 }
 
 - (void) testMallocBasedString {

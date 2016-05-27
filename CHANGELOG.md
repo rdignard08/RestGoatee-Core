@@ -1,5 +1,11 @@
 # RestGoatee CHANGELOG
 
+## 2.3.0
+- Restored 100% coverage
+- `RGDataSource` objects no longer need to conform to `NSFastEnumeration`
+- `attributes` on `RGXMLNode` is no longer assignable; modify the object itself
+- `objectsFromArraySource:inContext:` now only accepts an `NSArray*` as input
+
 ## 2.2.1
 - The backing symbol of `RGLog()`, `rg_log`, is gone
 - The symbol `rg_date_formats` is a function pointer

@@ -50,7 +50,8 @@
 
 - (RG_PREFIX_NONNULL NSArray*) rg_serializeArrayLike {
     NSMutableArray* ret = [NSMutableArray new];
-    for (NSObject* object in (id<NSFastEnumeration>)self) {
+    NSEnumerator* enumerator = [self performSelector:@selector(objectEnumerator)];
+    for (NSObject* object = enumerator.nextObject; object; object = enumerator.nextObject) {
         [ret addObject:[object rg_dictionaryHelper]];
     }
     return ret;
@@ -58,7 +59,9 @@
 
 - (RG_PREFIX_NONNULL NSDictionary*) rg_serializeDictionaryLike {
     NSMutableDictionary RG_GENERIC(NSString*, id) * ret = [NSMutableDictionary new];
-    for (NSString* key in (id<NSFastEnumeration>)self) {
+    NSArray* allKeys = [self performSelector:@selector(allKeys)];
+    for (NSUInteger i = 0; i < allKeys.count; i++) {
+        NSString* key = allKeys[i];
         NSObject* targetObject = [self valueForKey:key];
         ret[key] = [targetObject rg_dictionaryHelper];
     }
@@ -73,7 +76,8 @@
     } else {
         keys = [[self class] rg_propertyList].allKeys;
     }
-    for (NSString* propertyName in keys) {
+    for (NSUInteger i = 0; i < keys.count; i++) {
+        NSString* propertyName = keys[i];
         SEL target = NSSelectorFromString(propertyName);
         if (![NSObject instancesRespondToSelector:target] && ![kRGNSManagedObject instancesRespondToSelector:target]) {
             NSObject* targetObject = [self valueForKey:propertyName] ?: [NSNull null];

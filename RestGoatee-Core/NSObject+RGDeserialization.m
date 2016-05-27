@@ -159,8 +159,9 @@
             [self setValue:[dateFormatter dateFromString:source] forKey:property.name];
             return; /* Let's not second-guess the developer... */
         }
-        for (NSString* predefinedFormat in rg_date_formats()) {
-            dateFormatter.dateFormat = predefinedFormat;
+        NSArray* dateFormats = rg_date_formats();
+        for (NSUInteger i = 0; i < dateFormats.count; i++) {
+            dateFormatter.dateFormat = dateFormats[i];
             NSDate* date = [dateFormatter dateFromString:source];
             if (date) {
                 [self setValue:date forKey:property.name];

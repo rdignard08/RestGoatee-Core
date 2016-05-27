@@ -30,7 +30,9 @@
 
 @interface NSObject (RGForwardDecl)
 
-- (void) rg_initProperty:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property withValue:(RG_PREFIX_NULLABLE id)value inContext:(RG_PREFIX_NULLABLE id)context;
+- (void) rg_initProperty:(RG_PREFIX_NONNULL RGPropertyDeclaration*)property
+               withValue:(RG_PREFIX_NULLABLE id)value
+               inContext:(RG_PREFIX_NULLABLE id)context;
 
 @end
 
@@ -79,7 +81,8 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     XCTAssert([firstStation.address isEqual:@"1245 Broadway"]);
     XCTAssert(parsedStations.count == 2);
     XCTAssert(innerRoot == rootNode.childNodes.firstObject);
-    XCTAssert([[(RGXMLNode*)[innerRoot valueForKey:@"uri"] innerXML] isEqual:@"http://api.bart.gov/api/stn.aspx?cmd=stns"]);
+    RGXMLNode* node = [innerRoot valueForKey:@"uri"];
+    XCTAssert([node.innerXML isEqual:@"http://api.bart.gov/api/stn.aspx?cmd=stns"]);
     XCTAssert([[innerRoot valueForKey:@"uri"] valueForKey:kRGInnerXMLKey]);
 }
 
@@ -94,6 +97,16 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
     XCTAssert([output.firstObject numberProperty] == nil);
     XCTAssert([output.lastObject stringProperty] == nil);
     XCTAssert([[output.lastObject numberProperty] isEqual:@2]);
+}
+
+- (void) testArraySourceNotData {
+    NSArray* output = [RGTestObject2 objectsFromArraySource:@[ @1, @2 ] inContext:nil];
+    XCTAssert(output.count == 0);
+}
+
+- (void) testArraySourceNil {
+    NSArray* output = [RGTestObject2 objectsFromArraySource:nil inContext:nil];
+    XCTAssert(output.count == 0);
 }
 
 #pragma mark - objectFromDataSource:inContext NSManagedObject

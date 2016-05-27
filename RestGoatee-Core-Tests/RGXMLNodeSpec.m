@@ -73,8 +73,8 @@ static RGXMLNode* childNode4;
 
 - (void) testBadInit {
     rg_swizzle([NSObject self], @selector(init), @selector(override_init));
-    RGXMLNode* declaration = [[RGXMLNode alloc] initWithName:@"aName"];
-    XCTAssert(declaration == nil);
+    RGXMLNode* node = [[RGXMLNode alloc] initWithName:@"aName"];
+    XCTAssert(node == nil);
     rg_swizzle([NSObject self], @selector(init), @selector(override_init));
 }
 
@@ -90,8 +90,6 @@ static RGXMLNode* childNode4;
     XCTAssert([childNode1.attributes[@"attribute"] isEqual:@"value"]);
     XCTAssert(childNode2.attributes != nil);
     XCTAssert(childNode2.attributes.count == 0);
-    childNode1.attributes = nil;
-    XCTAssert([childNode1.attributes isEqual:@{}]);
 }
 
 - (void) testName {

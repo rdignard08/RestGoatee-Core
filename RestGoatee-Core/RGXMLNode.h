@@ -44,7 +44,7 @@ typedef NSMutableDictionary RG_GENERIC(NSString*, NSString*) RGMutableAttributes
    The value can be obtained through `-[RGXMLNode valueForKeyPath:@"object.id"]`, in this example.
  @discussion You may mutate the collection.
  */
-@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong) RGMutableAttributes* attributes;
+@property RG_NONNULL_PROPERTY(nonatomic, readonly) NSMutableDictionary RG_GENERIC(NSString*, NSString*) * attributes;
 
 /**
  @brief The name of the tag.  "foobar" enclosed in angle brackets will have the value of `foobar` here.

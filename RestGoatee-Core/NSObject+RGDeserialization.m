@@ -77,8 +77,8 @@
         NSString* override = overrides[key];
         RGPropertyDeclaration* target = override ? properties[override] : canonicals[rg_canonical_form(key.UTF8String)];
         /* ask if there's a custom implementation, if not proceed to the rules */
+        NSAssert(value, @"value should not be null");
         if (target &&
-            value &&
             (![self respondsToSelector:@selector(shouldTransformValue:forProperty:inContext:)] ||
             [self shouldTransformValue:value forProperty:target.name inContext:context])) {
             [self rg_initProperty:target withValue:value inContext:context];

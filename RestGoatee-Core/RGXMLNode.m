@@ -22,12 +22,7 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RestGoatee-Core.h"
-
-@interface RGXMLNode ()
-
-@property RG_NULL_RESETTABLE_PROPERTY(nonatomic, strong) NSMutableArray RG_GENERIC(NSString*) * allKeys;
-
-@end
+#import "NSObject+RGSharedImpl.h"
 
 @implementation RGXMLNode
 @synthesize attributes = _attributes;
@@ -47,17 +42,6 @@
 }
 
 #pragma mark - Properties
-- (RG_PREFIX_NONNULL NSMutableArray RG_GENERIC(NSString*) *) allKeys {
-    if (!_allKeys) {
-        _allKeys = [self.attributes.allKeys mutableCopy];
-        for (NSUInteger i = 0; i < self.childNodes.count; i++) {
-            RGXMLNode* child = self.childNodes[i];
-            [_allKeys addObject:child.name];
-        }
-    }
-    return _allKeys;
-}
-
 - (RG_PREFIX_NONNULL NSMutableArray RG_GENERIC(RGXMLNode*) *) childNodes {
     if (!_childNodes) {
         _childNodes = [NSMutableArray new];
@@ -121,14 +105,11 @@
 }
 
 #pragma mark - RGDataSource
-- (NSUInteger) countByEnumeratingWithState:(RG_PREFIX_NONNULL NSFastEnumerationState*)state
-                                   objects:(__unsafe_unretained id RG_SUFFIX_NONNULL[])buffer
-                                     count:(NSUInteger)len {
-    NSUInteger ret = [self.allKeys countByEnumeratingWithState:state objects:buffer count:len];
-    if (!ret) {
-        self.allKeys = nil;
-    }
-    return ret;
+- (RG_PREFIX_NONNULL NSArray RG_GENERIC(NSString*) *) allKeys {
+    NSMutableArray *allKeys = [NSMutableArray new];
+    [allKeys addObjectsFromArray:self.attributes.allKeys];
+    [allKeys addObjectsFromArray:[self.childNodes valueForKey:RG_STRING_SEL(name)]];
+    return allKeys;
 }
 
 - (RG_PREFIX_NULLABLE id) valueForKeyPath:(RG_PREFIX_NONNULL NSString*)string {
@@ -142,7 +123,17 @@
 }
 
 - (RG_PREFIX_NULLABLE id) valueForKey:(RG_PREFIX_NONNULL NSString*)key {
-    return [key isEqual:kRGInnerXMLKey] ? self.innerXML : (self.attributes[key] ?: [self childrenNamed:key]);
+    if ([key isEqual:kRGInnerXMLKey]) {
+        return self.innerXML;
+    }
+    if (self.attributes[key]) {
+        return self.attributes[key];
+    }
+    id children = [self childrenNamed:key];
+    if ([children isKindOfClass:[RGXMLNode self]] || [(NSArray *)children count]) {
+        return children;
+    }
+    return [super valueForKey:key];
 }
 
 @end

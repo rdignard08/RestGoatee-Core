@@ -27,9 +27,8 @@
 @brief These are the methods that a data source must implement in order to be consumable by the
    `+[NSObject objectFromDataSource:inContext:]` family of methods.
 @discussion Currently `NSDictionary` and `RGXMLNode` (the parsed output from `NSXMLParser`) are supported implicitly.
-   Must be able to `for X in id<RGDataSource>`
  */
-@protocol RGDataSource <NSObject, NSFastEnumeration>
+@protocol RGDataSource <NSObject>
 
 @required
 
@@ -41,8 +40,9 @@
 - (RG_PREFIX_NULLABLE id) valueForKeyPath:(RG_PREFIX_NONNULL NSString*)string;
 
 /**
- @return an array of the keys which are present in this data source (but NOT sub data sources).
+ @brief an array of the keys which are present in this data source (but NOT sub data sources).  Is not necessarily
+   cached.
  */
-- (RG_PREFIX_NONNULL NSArray RG_GENERIC(NSString*) *) allKeys;
+@property RG_NONNULL_PROPERTY(nonatomic, strong, readonly) NSArray RG_GENERIC(NSString*) * allKeys;
 
 @end

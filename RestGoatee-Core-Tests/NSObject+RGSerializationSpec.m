@@ -24,6 +24,7 @@
 #import "RestGoatee-Core.h"
 #import "RGTestObject2.h"
 #import "RGTestObject5.h"
+#import <objc/runtime.h>
 
 CATEGORY_SPEC(NSObject, RGSerialization)
 
@@ -70,6 +71,10 @@ CATEGORY_SPEC(NSObject, RGSerialization)
     XCTAssert(dictionary[RG_STRING_SEL(arrayProperty)] == nil);
     XCTAssert([dictionary[RG_STRING_SEL(numberProperty)] isEqual:@"3"]);
     XCTAssert([dictionary[RG_STRING_SEL(classProperty)] isEqual:@"NSObject"]);
+    rg_swizzle(object_getClass([RGTestObject5 self]), @selector(serializableKeys), @selector(override_serializableKeys));
+    NSDictionary* otherDict = [obj dictionaryRepresentation];
+    XCTAssert([otherDict[RG_STRING_SEL(arrayProperty)] isEqual:@[ @"aValue" ]]);
+    rg_swizzle(object_getClass([RGTestObject5 self]), @selector(serializableKeys), @selector(override_serializableKeys));
 }
 
 SPEC_END

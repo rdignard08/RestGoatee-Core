@@ -22,6 +22,7 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RGTestObject5.h"
+#import "NSObject+RGSharedImpl.h"
 
 @implementation RGTestObject5
 @dynamic stringProperty;
@@ -31,6 +32,10 @@
 
 + (NSArray*) serializableKeys {
     return @[ RG_STRING_SEL(stringProperty), RG_STRING_SEL(numberProperty), RG_STRING_SEL(classProperty) ];
+}
+
++ (NSArray RG_GENERIC(NSString*) *) override_serializableKeys {
+    return [self rg_propertyList].allKeys;
 }
 
 @end

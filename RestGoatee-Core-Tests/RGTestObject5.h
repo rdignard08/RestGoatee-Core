@@ -31,4 +31,8 @@
 @property (nonatomic, strong) NSNumber* numberProperty;
 @property (nonatomic, strong) Class classProperty;
 
++ (NSArray RG_GENERIC(NSString*) *) serializableKeys;
+
++ (NSArray RG_GENERIC(NSString*) *) override_serializableKeys;
+
 @end

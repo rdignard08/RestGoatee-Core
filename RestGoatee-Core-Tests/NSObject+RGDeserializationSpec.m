@@ -117,6 +117,7 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
 - (void) testGoodContext {
     NSEntityDescription* entity = [NSEntityDescription new];
     entity.name = NSStringFromClass([RGTestManagedObject self]);
+    entity.managedObjectClassName = entity.name;
     NSManagedObjectModel* model = [NSManagedObjectModel new];
     model.entities = @[ entity ];
     NSPersistentStoreCoordinator* store = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];

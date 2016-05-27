@@ -24,6 +24,10 @@
 #import "RGTestObject5.h"
 
 @implementation RGTestObject5
+@dynamic stringProperty;
+@dynamic arrayProperty;
+@dynamic numberProperty;
+@synthesize classProperty = _classProperty;
 
 + (NSArray*) serializableKeys {
     return @[ RG_STRING_SEL(stringProperty), RG_STRING_SEL(numberProperty), RG_STRING_SEL(classProperty) ];

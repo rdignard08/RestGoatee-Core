@@ -39,7 +39,28 @@ CATEGORY_SPEC(NSObject, RGSerialization)
 }
 
 - (void)testRGSerializable {
-    RGTestObject5* obj = [RGTestObject5 new];
+    NSEntityDescription* entity = [NSEntityDescription new];
+    entity.name = NSStringFromClass([RGTestObject5 self]);
+    entity.managedObjectClassName = entity.name;
+    NSAttributeDescription *stringProperty = [NSAttributeDescription new];
+    stringProperty.name = RG_STRING_SEL(stringProperty);
+    stringProperty.attributeType = NSStringAttributeType;
+    NSAttributeDescription *arrayProperty = [NSAttributeDescription new];
+    arrayProperty.name = RG_STRING_SEL(arrayProperty);
+    arrayProperty.attributeType = NSTransformableAttributeType;
+    NSAttributeDescription *numberProperty = [NSAttributeDescription new];
+    numberProperty.name = RG_STRING_SEL(numberProperty);
+    numberProperty.attributeType = NSFloatAttributeType;
+    NSAttributeDescription *classProperty = [NSAttributeDescription new];
+    classProperty.name = RG_STRING_SEL(classProperty);
+    classProperty.attributeType = NSTransformableAttributeType;
+    entity.properties = @[ stringProperty, arrayProperty, numberProperty, classProperty ];
+    NSManagedObjectModel* model = [NSManagedObjectModel new];
+    model.entities = @[ entity ];
+    NSPersistentStoreCoordinator* store = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+    NSManagedObjectContext* context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    context.persistentStoreCoordinator = store;
+    RGTestObject5* obj = [RGTestObject5 objectFromDataSource:nil inContext:context];
     obj.stringProperty = @"abcd";
     obj.arrayProperty = @[ @"aValue" ];
     obj.numberProperty = @3;

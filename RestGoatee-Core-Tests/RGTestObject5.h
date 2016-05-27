@@ -22,8 +22,9 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RGSerializable.h"
+#import <CoreData/CoreData.h>
 
-@interface RGTestObject5 : NSObject <RGSerializable>
+@interface RGTestObject5 : NSManagedObject <RGSerializable>
 
 @property (nonatomic, strong) NSString* stringProperty;
 @property (nonatomic, strong) NSArray* arrayProperty;

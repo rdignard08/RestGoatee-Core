@@ -34,10 +34,11 @@
 @implementation NSObject (RGDeserialization)
 
 + (RG_PREFIX_NONNULL NSMutableArray RG_GENERIC(__kindof NSObject*) *)
-    objectsFromArraySource:(RG_PREFIX_NULLABLE id<NSFastEnumeration>)source
+    objectsFromArraySource:(RG_PREFIX_NULLABLE NSArray*)source
                  inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context {
     NSMutableArray RG_GENERIC(__kindof NSObject*) * objects = [NSMutableArray new];
-    for (id<RGDataSource> object in source) {
+    for (NSUInteger i = 0; i < source.count; i++) {
+        id<RGDataSource> object = source[i];
         if (rg_isDataSourceClass([object class])) {
             [objects addObject:[self objectFromDataSource:object inContext:context]];
         }

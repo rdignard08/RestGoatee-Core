@@ -70,12 +70,15 @@
     NSDictionary* properties = [[self class] rg_propertyList];
     NSDictionary* canonicals = [[self class] rg_canonicalPropertyList];
     /* for each piece of data I have; if there's an override: initialize literally; otherwise initialize canonically */
-    for (NSString* key in source) {
+    NSArray *keys = source.allKeys;
+    for (NSUInteger i = 0; i < keys.count; i++) {
+        NSString *key = keys[i];
         id value = [source valueForKeyPath:key];
         NSString* override = overrides[key];
         RGPropertyDeclaration* target = override ? properties[override] : canonicals[rg_canonical_form(key.UTF8String)];
         /* ask if there's a custom implementation, if not proceed to the rules */
-        if (target && value &&
+        if (target &&
+            value &&
             (![self respondsToSelector:@selector(shouldTransformValue:forProperty:inContext:)] ||
             [self shouldTransformValue:value forProperty:target.name inContext:context])) {
             [self rg_initProperty:target withValue:value inContext:context];

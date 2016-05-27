@@ -28,5 +28,6 @@
 @property (nonatomic, strong) NSString* stringProperty;
 @property (nonatomic, strong) NSArray* arrayProperty;
 @property (nonatomic, strong) NSNumber* numberProperty;
+@property (nonatomic, strong) Class classProperty;
 
 @end

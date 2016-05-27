@@ -26,7 +26,7 @@
 @implementation RGTestObject5
 
 + (NSArray*) serializableKeys {
-    return @[ RG_STRING_SEL(stringProperty), RG_STRING_SEL(numberProperty) ];
+    return @[ RG_STRING_SEL(stringProperty), RG_STRING_SEL(numberProperty), RG_STRING_SEL(classProperty) ];
 }
 
 @end

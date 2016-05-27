@@ -43,10 +43,12 @@ CATEGORY_SPEC(NSObject, RGSerialization)
     obj.stringProperty = @"abcd";
     obj.arrayProperty = @[ @"aValue" ];
     obj.numberProperty = @3;
+    obj.classProperty = [NSObject self];
     NSDictionary* dictionary = [obj dictionaryRepresentation];
     XCTAssert([dictionary[RG_STRING_SEL(stringProperty)] isEqual:@"abcd"]);
     XCTAssert(dictionary[RG_STRING_SEL(arrayProperty)] == nil);
     XCTAssert([dictionary[RG_STRING_SEL(numberProperty)] isEqual:@"3"]);
+    XCTAssert([dictionary[RG_STRING_SEL(classProperty)] isEqual:@"NSObject"]);
 }
 
 SPEC_END

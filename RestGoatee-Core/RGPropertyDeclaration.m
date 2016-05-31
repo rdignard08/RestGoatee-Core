@@ -60,7 +60,7 @@
                 case 'R':
                     self->_isReadOnly = YES;
                 }
-            } else if (parsingType) {
+            } else {
                 if (byte == '"' && quoteIndex) {
                     [self initializeType:attributeString + quoteIndex andLength:i - quoteIndex];
                     parsingType = NO;

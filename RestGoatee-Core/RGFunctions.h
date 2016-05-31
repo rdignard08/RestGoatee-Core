@@ -107,17 +107,19 @@ BOOL rg_isKeyedCollectionObject(Class RG_SUFFIX_NULLABLE cls) __attribute__((pur
 BOOL rg_isDataSourceClass(Class RG_SUFFIX_NULLABLE cls) __attribute__((pure, always_inline, warn_unused_result));
 
 /**
- @param encoding a C string representing an Objective-C type encoding.
+ @param encoding a string representing an Objective-C type encoding.
+ @param length the length of the input string, C strings pass `strlen(encoding)`.
  @return `YES` if the given string matches any of the encodings of a primitive integral type.
  */
-BOOL rg_is_integral_encoding(const char* RG_SUFFIX_NONNULL const encoding)
+BOOL rg_is_integral_encoding(const char* RG_SUFFIX_NONNULL const encoding, unsigned long length)
     __attribute__((pure, always_inline, warn_unused_result));
 
 /**
- @param encoding a C string representing an Objective-C type encoding.
+ @param encoding a string representing an Objective-C type encoding.
+ @param length the length of the input string, C strings pass `strlen(encoding)`.
  @return `YES` if the given string matches any of the encodings of a primitive floating point type.
  */
-BOOL rg_is_floating_encoding(const char* RG_SUFFIX_NONNULL const encoding)
+BOOL rg_is_floating_encoding(const char* RG_SUFFIX_NONNULL const encoding, unsigned long length)
     __attribute__((pure, always_inline, warn_unused_result));
 
 /**

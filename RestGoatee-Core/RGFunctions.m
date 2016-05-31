@@ -155,7 +155,7 @@ BOOL rg_isDataSourceClass(Class RG_SUFFIX_NULLABLE cls) {
     return [cls conformsToProtocol:@protocol(RGDataSource)] || [cls isSubclassOfClass:[NSDictionary self]];
 }
 
-BOOL rg_is_integral_encoding(const char* RG_SUFFIX_NONNULL const encoding) {
+BOOL rg_is_integral_encoding(const char* RG_SUFFIX_NONNULL const encoding, unsigned long length) {
     static const char* const types[] = { @encode(_Bool),
                                          @encode(char),
                                          @encode(unsigned char),
@@ -168,17 +168,17 @@ BOOL rg_is_integral_encoding(const char* RG_SUFFIX_NONNULL const encoding) {
                                          @encode(long long),
                                          @encode(unsigned long long) };
     for (size_t i = 0; i < sizeof(types) / sizeof(const char* const); i++) {
-        if (strcmp(types[i], encoding) == 0) {
+        if (strncmp(types[i], encoding, length) == 0) {
             return YES;
         }
     }
     return NO;
 }
 
-BOOL rg_is_floating_encoding(const char* RG_SUFFIX_NONNULL const encoding) {
-    return strcmp(@encode(float), encoding) == 0 ||
-           strcmp(@encode(double), encoding) == 0 ||
-           strcmp(@encode(long double), encoding) == 0;
+BOOL rg_is_floating_encoding(const char* RG_SUFFIX_NONNULL const encoding, unsigned long length) {
+    return strncmp(@encode(float), encoding, length) == 0 ||
+           strncmp(@encode(double), encoding, length) == 0 ||
+           strncmp(@encode(long double), encoding, length) == 0;
 }
 
 NSMutableArray* RG_SUFFIX_NONNULL rg_unpack_array(NSArray* RG_SUFFIX_NULLABLE target,

@@ -36,16 +36,14 @@
     self = [super init];
     if (self) {
         [self initializeName:property];
-        unsigned int attributeCount = 0;
-        
-//NSArray*attributes=[[NSString stringWithUTF8String:property_getAttributes(property)]componentsSeparatedByString:@","];
-        
-        objc_property_attribute_t* attributes = property_copyAttributeList(property, &attributeCount);
-        for (unsigned int i = 0; i < attributeCount; i++) {
-            objc_property_attribute_t attribute = attributes[i];
-            /* The first character is the type encoding; the other field is a value of some kind (if anything)
-               library/mac/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtPropertyIntrospection.html */
-            switch (attribute.name[0]) {
+        const char* RG_SUFFIX_NONNULL const attributeString = property_getAttributes(property);
+        unsigned long quoteIndex = 0;
+        unsigned long typeIndex = 0;
+        BOOL parsingType = NO;
+        char byte = *attributeString;
+        for (unsigned long i = 0; byte; byte = attributeString[++i]) {
+            if (!parsingType) {
+                switch (byte) {
                 case '&':
                     self->_storageSemantics = kRGPropertyStrong;
                     break;
@@ -56,16 +54,24 @@
                     self->_storageSemantics = kRGPropertyWeak;
                     break;
                 case 'T':
-                    [self initializeType:attribute.value];
+                    parsingType = YES;
+                    typeIndex = i + 1;
                     break;
                 case 'R':
                     self->_isReadOnly = YES;
-                    break;
-                default:
-                    break;
+                }
+            } else if (parsingType) {
+                if (byte == '"' && quoteIndex) {
+                    [self initializeType:attributeString + quoteIndex andLength:i - quoteIndex];
+                    parsingType = NO;
+                } else if (byte == '"') {
+                    quoteIndex = i + 1;
+                } else if (byte == ',') {
+                    [self initializeType:attributeString + typeIndex andLength:i - typeIndex];
+                    parsingType = NO;
+                }
             }
         }
-        free(attributes);
     }
     return self;
 }
@@ -76,38 +82,23 @@
     self->_canonicalName = rg_canonical_form(utfName);
 }
 
-- (void) initializeType:(const char*)value {
-    BOOL isClass = strcmp(@encode(Class), value) == 0;
-    if (isClass || strcmp(@encode(id), value) == 0) {
+- (void) initializeType:(const char*)value andLength:(unsigned long)length {
+    BOOL isClass = strncmp(@encode(Class), value, length) == 0;
+    if (isClass || strncmp(@encode(id), value, length) == 0) {
         self->_type = isClass ? kRGNSObjectMetaClass : kRGNSObjectClass;
         self->_isPrimitive = NO;
         return;
     }
-    const size_t typeLength = strlen(value);
-    size_t outputLength = 0;
-    char* buffer = malloc(typeLength);
-    BOOL foundFirst = NO;
-    for (size_t j = 0; j != typeLength; j++) {
-        char letter = value[j];
-        if (foundFirst) {
-            if (letter == '"') {
-                break;
-            } else {
-                buffer[outputLength++] = letter;
-            }
-        } else if (letter == '"') {
-            foundFirst = YES;
-        }
-    } /* there should be 2 '"' on each end, the class is in the middle */
-    buffer[outputLength] = '\0';
+    char* buffer = calloc(length, 1);
+    memcpy(buffer, value, length);
     Class propertyType = objc_getClass(buffer);
     free(buffer);
     self->_type = propertyType ?: [NSNumber self];
     self->_isPrimitive = !propertyType;
     if (self->_isPrimitive) {
-        self->_isIntegral = rg_is_integral_encoding(value, typeLength);
+        self->_isIntegral = rg_is_integral_encoding(value, length);
         if (!self->_isIntegral) {
-            self->_isFloatingPoint = rg_is_floating_encoding(value, typeLength);
+            self->_isFloatingPoint = rg_is_floating_encoding(value, length);
         }
     }
 }

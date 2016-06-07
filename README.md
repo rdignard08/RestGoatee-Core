@@ -86,9 +86,12 @@ assert(derived.stringValue == nil);
 ```
 The rules are pretty simple, and guarantee you will never break the type system (an `NSURL*` property will always have an `NSURL` or `nil`).
 - If the value provided has the same type or a sub type of the property type it gets set to that value.
+  - As a consequence, properties of type `id` or `NSObject*` will receive any value.
 - If the value can be converted to the type of the property (`NSNumber` => `NSString` through `.stringValue` for example) it gets set to the converted value.
+  - Most rules occur here
+    - `NSString` / `NSNumber` maps to `id`, `NSObject`, `NSNumber`, `NSURL`, `NSDate`, `Class`, and primitives (`int`, `double`, `char`, etc.)
+    - `RGXMLNode` maps to `NSDictionary` then `NSDictionary` maps to `NSDictionary` or an `NSObject` subclass etc.
 - Otherwise the property remains unset and the value is discarded.  You'll receive a runtime warning when this happens.
-- As a consequence, properties of type `id` or `NSObject*` will receive any value.
 - The complete set of rules can be inferred from the test suite in `NSObject+RGDeserializationSpec.m`
 
 ##### What if my API keys are snake case?

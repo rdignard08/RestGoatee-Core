@@ -50,7 +50,7 @@ Example
 ```
 
 
-##### Getting started, let's make an instance of DerivedObject with an NSDictionary:
+##### Getting started, let's make an instance of `DerivedObject` with an `NSDictionary`:
 ```objc
 DerivedObject* derived = [DerivedObject objectFromDataSource:@{
                                                              @"stringValue" : @"aString",
@@ -78,7 +78,7 @@ assert(derived.doubleValue == 0.0);
 ```
 If a value isn't provided it remains the default value.  Likewise, if there are keys which aren't used they'll be ignored.
 
-##### What if my API returns NSNull or the value?
+##### What if my API returns `NSNull` or the value?
 ```objc
 DerivedObject* derived = [DerivedObject objectFromDataSource:@{ @"stringValue" : [NSNull null] } inContext:nil];
 
@@ -89,6 +89,7 @@ The rules are pretty simple, and guarantee you will never break the type system 
 - If the value can be converted to the type of the property (`NSNumber` => `NSString` through `.stringValue` for example) it gets set to the converted value.
 - Otherwise the property remains unset and the value is discarded.  You'll receive a runtime warning when this happens.
 - As a consequence, properties of type `id` or `NSObject*` will receive any value.
+- The complete set of rules can be inferred from the test suite in `NSObject+RGDeserializationSpec.m`
 
 ##### What if my API keys are snake case?
 ```objc

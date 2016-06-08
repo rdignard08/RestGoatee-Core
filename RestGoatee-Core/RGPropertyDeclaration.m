@@ -36,12 +36,16 @@
     self = [super init];
     if (self) {
         [self initializeName:property];
+        self->_isAtomic = YES;
         const char* RG_SUFFIX_NONNULL const attributeString = property_getAttributes(property);
         unsigned long quoteIndex = 0;
         unsigned long typeIndex = 0;
+        unsigned long ivarIndex = 0;
         BOOL parsingType = NO;
+        BOOL parsingIvar = NO;
         char byte = *attributeString;
-        for (unsigned long i = 0; byte; byte = attributeString[++i]) {
+        unsigned long i = 0;
+        for (; byte; byte = attributeString[++i]) {
             if (parsingType) {
                 if (byte == '"' && quoteIndex) {
                     [self initializeType:attributeString + quoteIndex andLength:i - quoteIndex];
@@ -51,6 +55,13 @@
                 } else if (byte == ',') {
                     [self initializeType:attributeString + typeIndex andLength:i - typeIndex];
                     parsingType = NO;
+                }
+            } else if (parsingIvar) {
+                if (byte == ',') {
+                    self->_backingIvar = [[NSString alloc] initWithBytes:attributeString
+                                                                  length:i - ivarIndex
+                                                                encoding:NSUTF8StringEncoding];
+                    parsingIvar = NO;
                 }
             } else if (byte == '&') {
                 self->_storageSemantics = kRGPropertyStrong;
@@ -63,7 +74,21 @@
                 typeIndex = i + 1;
             } else if (byte == 'R') {
                 self->_isReadOnly = YES;
+            } else if (byte == 'D') {
+                self->_isDynamic = YES;
+            } else if (byte == 'N') {
+                self->_isAtomic = NO;
+            } else if (byte == 'V') {
+                parsingIvar = YES;
+                ivarIndex = i + 1;
             }
+        }
+        if (parsingType) {
+            [self initializeType:attributeString + typeIndex andLength:i - typeIndex];
+        } else if (parsingIvar) {
+            self->_backingIvar = [[NSString alloc] initWithBytes:attributeString
+                                                          length:i - ivarIndex
+                                                        encoding:NSUTF8StringEncoding];
         }
     }
     return self;

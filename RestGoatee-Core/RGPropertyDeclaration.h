@@ -51,6 +51,11 @@ typedef struct objc_property* rg_property;
 @property RG_NONNULL_PROPERTY(nonatomic, strong, readonly) Class type;
 
 /**
+ @brief The name of the instance variable (if known) which provides the storage for this property.
+ */
+@property RG_NULLABLE_PROPERTY(nonatomic, strong, readonly) NSString* backingIvar;
+
+/**
  @brief The memory management semantics of the property.  The default is `assign` (`kRGPropertyAssign`).
  */
 @property (nonatomic, assign, readonly) RGStorageSemantics storageSemantics;
@@ -75,6 +80,16 @@ typedef struct objc_property* rg_property;
  @brief Whether or not the property is modifiable.  The default is `NO`.
  */
 @property (nonatomic, assign, readonly) BOOL isReadOnly;
+
+/**
+ @brief `YES` if the property is declared `@dynamic`.
+ */
+@property (nonatomic, assign, readonly) BOOL isDynamic;
+
+/**
+ @brief `YES` if the property is implicitly or explicitly `atomic`.
+ */
+@property (nonatomic, assign, readonly) BOOL isAtomic;
 
 /**
  @brief The designated initializer; it is a programmer error to invoke `-init`.

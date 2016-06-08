@@ -42,25 +42,7 @@
         BOOL parsingType = NO;
         char byte = *attributeString;
         for (unsigned long i = 0; byte; byte = attributeString[++i]) {
-            if (!parsingType) {
-                switch (byte) {
-                case '&':
-                    self->_storageSemantics = kRGPropertyStrong;
-                    break;
-                case 'C':
-                    self->_storageSemantics = kRGPropertyCopy;
-                    break;
-                case 'W':
-                    self->_storageSemantics = kRGPropertyWeak;
-                    break;
-                case 'T':
-                    parsingType = YES;
-                    typeIndex = i + 1;
-                    break;
-                case 'R':
-                    self->_isReadOnly = YES;
-                }
-            } else {
+            if (parsingType) {
                 if (byte == '"' && quoteIndex) {
                     [self initializeType:attributeString + quoteIndex andLength:i - quoteIndex];
                     parsingType = NO;
@@ -70,6 +52,17 @@
                     [self initializeType:attributeString + typeIndex andLength:i - typeIndex];
                     parsingType = NO;
                 }
+            } else if (byte == '&') {
+                self->_storageSemantics = kRGPropertyStrong;
+            } else if (byte == 'C') {
+                self->_storageSemantics = kRGPropertyCopy;
+            } else if (byte == 'W') {
+                self->_storageSemantics = kRGPropertyWeak;
+            } else if (byte == 'T') {
+                parsingType = YES;
+                typeIndex = i + 1;
+            } else if (byte == 'R') {
+                self->_isReadOnly = YES;
             }
         }
     }

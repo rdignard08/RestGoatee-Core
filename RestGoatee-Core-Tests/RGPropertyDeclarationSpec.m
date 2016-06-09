@@ -60,7 +60,7 @@ CLASS_SPEC(RGPropertyDeclaration)
     XCTAssert(stringProperty.isPrimitive == NO);
     XCTAssert(stringProperty.isReadOnly == NO);
     XCTAssert(stringProperty.storageSemantics == kRGPropertyStrong);
-    XCTAssert([stringProperty.backingIvar isEqual:@"_stringProperty"]);
+    XCTAssert(stringProperty.backingIvar == nil);
     XCTAssert(stringProperty.isDynamic == NO);
     XCTAssert(stringProperty.isAtomic == NO);
     RGPropertyDeclaration* numberProperty = properties[RG_STRING_SEL(intProperty)];

@@ -89,6 +89,7 @@
             self->_backingIvar = [[NSString alloc] initWithBytes:attributeString
                                                           length:i - ivarIndex
                                                         encoding:NSUTF8StringEncoding];
+            NSLog(@"backingIvar: %@", self->_backingIvar);
         }
     }
     return self;

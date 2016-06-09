@@ -58,7 +58,7 @@
                 }
             } else if (parsingIvar) {
                 if (byte == ',') {
-                    self->_backingIvar = [[NSString alloc] initWithBytes:attributeString
+                    self->_backingIvar = [[NSString alloc] initWithBytes:attributeString + ivarIndex
                                                                   length:i - ivarIndex
                                                                 encoding:NSUTF8StringEncoding];
                     parsingIvar = NO;
@@ -87,7 +87,7 @@
         if (parsingType) {
             [self initializeType:attributeString + typeIndex andLength:i - typeIndex];
         } else if (parsingIvar) {
-            self->_backingIvar = [[NSString alloc] initWithBytes:attributeString
+            self->_backingIvar = [[NSString alloc] initWithBytes:attributeString + ivarIndex
                                                           length:i - ivarIndex
                                                         encoding:NSUTF8StringEncoding];
             NSLog(@"outer backingIvar: %@ i: %@ index: %@ string: %s", self->_backingIvar, @(i), @(ivarIndex), attributeString);

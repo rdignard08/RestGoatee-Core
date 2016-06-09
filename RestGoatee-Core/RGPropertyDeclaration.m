@@ -62,6 +62,7 @@
                                                                   length:i - ivarIndex
                                                                 encoding:NSUTF8StringEncoding];
                     parsingIvar = NO;
+                    NSLog(@"inner backingIvar: %@ i: %@ index: %@ string: %s", self->_backingIvar, @(i), @(ivarIndex), attributeString);
                 }
             } else if (byte == '&') {
                 self->_storageSemantics = kRGPropertyStrong;
@@ -89,7 +90,7 @@
             self->_backingIvar = [[NSString alloc] initWithBytes:attributeString
                                                           length:i - ivarIndex
                                                         encoding:NSUTF8StringEncoding];
-            NSLog(@"backingIvar: %@", self->_backingIvar);
+            NSLog(@"outer backingIvar: %@ i: %@ index: %@ string: %s", self->_backingIvar, @(i), @(ivarIndex), attributeString);
         }
     }
     return self;

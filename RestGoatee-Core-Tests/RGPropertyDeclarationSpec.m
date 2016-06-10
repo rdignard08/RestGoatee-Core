@@ -81,6 +81,14 @@ CLASS_SPEC(RGPropertyDeclaration)
     XCTAssert(declaration.storageSemantics == kRGPropertyStrong);
 }
 
+- (void) testSetterAtEnd {
+    RGPropertyDeclaration* declaration = [RGPropertyDeclaration alloc];
+    [declaration parseAttributes:"T@,&,SsetName:"];
+    XCTAssert(declaration.setter == @selector(setName:));
+    XCTAssert(declaration.type == [NSObject self]);
+    XCTAssert(declaration.storageSemantics == kRGPropertyStrong);
+}
+
 - (void) testUnknownPrefixes {
     RGPropertyDeclaration* declaration = [RGPropertyDeclaration alloc];
     [declaration parseAttributes:"Qhello,T@\"NSDate\",&,R,V_dateProperty,Enope1234,P"];

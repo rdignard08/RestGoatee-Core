@@ -28,6 +28,12 @@
 #import "NSObject+RGBadInit.h"
 #include <objc/runtime.h>
 
+@interface RGPropertyDeclaration ()
+
+- (void) parseAttributes:(const char * RG_SUFFIX_NONNULL const)attributeString;
+
+@end
+
 CLASS_SPEC(RGPropertyDeclaration)
 
 - (void) testInit {
@@ -48,6 +54,15 @@ CLASS_SPEC(RGPropertyDeclaration)
     RGPropertyDeclaration* declaration = [[RGPropertyDeclaration alloc] initWithProperty:*properties];
     free(properties);
     XCTAssert(declaration);
+}
+
+#pragma mark - arbitrary parseAttributes:
+- (void) testBackingIvarAtFront {
+    RGPropertyDeclaration* declaration = [RGPropertyDeclaration alloc];
+    [declaration parseAttributes:"V_dateProperty,T@\"NSDate\",R"];
+    XCTAssert([declaration.backingIvar isEqual:@"_dateProperty"]);
+    XCTAssert(declaration.type == [NSDate self]);
+    XCTAssert(declaration.isReadOnly == YES);
 }
 
 #pragma mark - properties

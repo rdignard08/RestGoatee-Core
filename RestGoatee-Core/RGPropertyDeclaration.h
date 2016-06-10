@@ -102,6 +102,11 @@ typedef struct objc_property* rg_property;
 @property (nonatomic, assign, readonly) BOOL isAtomic;
 
 /**
+ @brief `YES` if the property is eligible for garbage collection.
+ */
+@property (nonatomic, assign, readonly) BOOL isGarbageCollectible;
+
+/**
  @brief The designated initializer; it is a programmer error to invoke `-init`.
  @param property the property structure to be used in the construction of this object.
  */

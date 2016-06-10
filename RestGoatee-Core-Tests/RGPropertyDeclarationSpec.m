@@ -81,6 +81,16 @@ CLASS_SPEC(RGPropertyDeclaration)
     XCTAssert(declaration.storageSemantics == kRGPropertyStrong);
 }
 
+- (void) testUnknownPrefixes {
+    RGPropertyDeclaration* declaration = [RGPropertyDeclaration alloc];
+    [declaration parseAttributes:"Qhello,T@\"NSDate\",&,R,V_dateProperty,Enope1234,P"];
+    XCTAssert(declaration.type == [NSDate self]);
+    XCTAssert(declaration.storageSemantics == kRGPropertyStrong);
+    XCTAssert(declaration.isReadOnly == YES);
+    XCTAssert([declaration.backingIvar isEqual:@"_dateProperty"]);
+    XCTAssert(declaration.isGarbageCollectible == YES);
+}
+
 #pragma mark - properties
 - (void) testSimpleObject {
     NSDictionary* properties = [RGTestObject2 rg_propertyList];
@@ -109,6 +119,7 @@ CLASS_SPEC(RGPropertyDeclaration)
     RGPropertyDeclaration* readOnlyProperty = properties[RG_STRING_SEL(readOnlyProperty)];
     XCTAssert(readOnlyProperty.isReadOnly == YES);
     XCTAssert(readOnlyProperty.setter == NULL);
+    XCTAssert(readOnlyProperty.isGarbageCollectible == NO);
     RGPropertyDeclaration* floatProperty = properties[RG_STRING_SEL(floatProperty)];
     XCTAssert(floatProperty.type == [NSNumber class]);
     XCTAssert(floatProperty.isPrimitive == YES);

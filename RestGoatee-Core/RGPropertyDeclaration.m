@@ -61,10 +61,15 @@ static NSString* RG_SUFFIX_NONNULL const rg_name_as_setter(NSString* RG_SUFFIX_N
     BOOL parsingIvar = NO;
     BOOL parsingGetter = NO;
     BOOL parsingSetter = NO;
+    BOOL parsingUnknown = NO;
     char byte = *attributeString;
     unsigned long i = 0;
     for (; byte; byte = attributeString[++i]) {
-        if (parsingType) {
+        if (parsingUnknown) {
+            if (byte == ',') {
+                parsingUnknown = NO;
+            }
+        } else if (parsingType) {
             if (byte == '"' && quoteIndex) {
                 [self initializeType:attributeString + quoteIndex andLength:i - quoteIndex];
                 parsingType = NO;
@@ -122,6 +127,10 @@ static NSString* RG_SUFFIX_NONNULL const rg_name_as_setter(NSString* RG_SUFFIX_N
         } else if (byte == 'S') {
             parsingSetter = YES;
             setterIndex = i + 1;
+        } else if (byte == 'P') {
+            self->_isGarbageCollectible = YES;
+        } else if (byte != ',') {
+            parsingUnknown = YES;
         }
     }
     if (parsingType) {

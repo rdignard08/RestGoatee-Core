@@ -53,16 +53,16 @@ CLASS_SPEC(RGPropertyDeclaration)
 #pragma mark - properties
 - (void) testSimpleObject {
     NSDictionary* properties = [RGTestObject2 rg_propertyList];
-    RGPropertyDeclaration* stringProperty = properties[RG_STRING_SEL(dateProperty)];
-    XCTAssert([stringProperty.name isEqual:RG_STRING_SEL(dateProperty)]);
-    XCTAssert([stringProperty.canonicalName isEqual:@"dateproperty"]);
-    XCTAssert(stringProperty.type == [NSDate class]);
-    XCTAssert(stringProperty.isPrimitive == NO);
-    XCTAssert(stringProperty.isReadOnly == NO);
-    XCTAssert(stringProperty.storageSemantics == kRGPropertyStrong);
-    XCTAssert([stringProperty.backingIvar isEqual:@"_stringProperty"]);
-    XCTAssert(stringProperty.isDynamic == NO);
-    XCTAssert(stringProperty.isAtomic == NO);
+    RGPropertyDeclaration* dateProperty = properties[RG_STRING_SEL(dateProperty)];
+    XCTAssert([dateProperty.name isEqual:RG_STRING_SEL(dateProperty)]);
+    XCTAssert([dateProperty.canonicalName isEqual:@"dateproperty"]);
+    XCTAssert(dateProperty.type == [NSDate class]);
+    XCTAssert(dateProperty.isPrimitive == NO);
+    XCTAssert(dateProperty.isReadOnly == NO);
+    XCTAssert(dateProperty.storageSemantics == kRGPropertyStrong);
+    XCTAssert([dateProperty.backingIvar isEqual:@"_dateProperty"]);
+    XCTAssert(dateProperty.isDynamic == NO);
+    XCTAssert(dateProperty.isAtomic == NO);
     RGPropertyDeclaration* numberProperty = properties[RG_STRING_SEL(intProperty)];
     XCTAssert(numberProperty.type == [NSNumber class]);
     XCTAssert(numberProperty.isPrimitive == YES);

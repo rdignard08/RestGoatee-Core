@@ -36,5 +36,8 @@
 @property (nonatomic, assign) uint64_t longProperty;
 @property (nonatomic, assign) double doubleProperty;
 @property (nonatomic, assign) NSRange rangeProperty;
+@property (atomic, setter=setValue:, copy) NSString* synthesizedDefault;
+@property (atomic, getter=synthesized, weak) NSString* synthesizedExplicit;
+@property (strong, readwrite) NSString* dynamic;
 
 @end

@@ -24,5 +24,15 @@
 #import "RGTestObject1.h"
 
 @implementation RGTestObject1
+@synthesize synthesizedDefault;
+@synthesize synthesizedExplicit = _synthesizedExplicit;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wimplicit-atomic-properties"
+@dynamic dynamic;
+#pragma clang diagnostic pop
+
+- (NSString*)dynamic {
+    return @"";
+}
 
 @end

@@ -129,6 +129,34 @@ CLASS_SPEC(RGPropertyDeclaration)
     XCTAssert(floatProperty.setter == @selector(setFloatProperty:));
 }
 
+- (void) testSynthesizing {
+    NSDictionary* properties = [RGTestObject2 rg_propertyList];
+    RGPropertyDeclaration* declaration = properties[RG_STRING_SEL(synthesizedDefault)];
+    XCTAssert(declaration.isAtomic == YES);
+    XCTAssert(declaration.setter == @selector(setValue:));
+    XCTAssert(declaration.getter == @selector(synthesizedDefault));
+    XCTAssert(declaration.storageSemantics == kRGPropertyCopy);
+    XCTAssert([declaration.backingIvar isEqual:@"synthesizedDefault"]);
+    XCTAssert(declaration.isDynamic == NO);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+    declaration = properties[RG_STRING_SEL(synthesizedExplicit)];
+#pragma clang diagnostic pop
+    XCTAssert(declaration.isAtomic == YES);
+    XCTAssert(declaration.setter == @selector(setSynthesizedExplicit:));
+    XCTAssert(declaration.getter == @selector(synthesized));
+    XCTAssert(declaration.storageSemantics == kRGPropertyWeak);
+    XCTAssert([declaration.backingIvar isEqual:@"_synthesizedExplicit"]);
+    XCTAssert(declaration.isDynamic == NO);
+    declaration = properties[RG_STRING_SEL(dynamic)];
+    XCTAssert(declaration.isAtomic == YES);
+    XCTAssert(declaration.setter == @selector(setDynamic:));
+    XCTAssert(declaration.getter == @selector(dynamic));
+    XCTAssert(declaration.storageSemantics == kRGPropertyStrong);
+    XCTAssert(declaration.backingIvar == nil);
+    XCTAssert(declaration.isDynamic == YES);
+}
+
 #pragma mark - rg_canonical
 - (void) testSpeed {
     unsigned char* characters = calloc(256, 1);

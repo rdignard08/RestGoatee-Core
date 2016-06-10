@@ -65,6 +65,22 @@ CLASS_SPEC(RGPropertyDeclaration)
     XCTAssert(declaration.isReadOnly == YES);
 }
 
+- (void) testGetterAtFront {
+    RGPropertyDeclaration* declaration = [RGPropertyDeclaration alloc];
+    [declaration parseAttributes:"Ggetter,T@\"NSDate\",R"];
+    XCTAssert(declaration.getter == @selector(getter));
+    XCTAssert(declaration.type == [NSDate self]);
+    XCTAssert(declaration.isReadOnly == YES);
+}
+
+- (void) testSetterAtFront {
+    RGPropertyDeclaration* declaration = [RGPropertyDeclaration alloc];
+    [declaration parseAttributes:"SsetName:,T@\"NSDate\",&"];
+    XCTAssert(declaration.setter == @selector(setName:));
+    XCTAssert(declaration.type == [NSDate self]);
+    XCTAssert(declaration.storageSemantics == kRGPropertyStrong);
+}
+
 #pragma mark - properties
 - (void) testSimpleObject {
     NSDictionary* properties = [RGTestObject2 rg_propertyList];
@@ -92,11 +108,14 @@ CLASS_SPEC(RGPropertyDeclaration)
     XCTAssert(somethingProperty.storageSemantics == kRGPropertyWeak);
     RGPropertyDeclaration* readOnlyProperty = properties[RG_STRING_SEL(readOnlyProperty)];
     XCTAssert(readOnlyProperty.isReadOnly == YES);
+    XCTAssert(readOnlyProperty.setter == NULL);
     RGPropertyDeclaration* floatProperty = properties[RG_STRING_SEL(floatProperty)];
     XCTAssert(floatProperty.type == [NSNumber class]);
     XCTAssert(floatProperty.isPrimitive == YES);
     XCTAssert(floatProperty.isIntegral == NO);
     XCTAssert(floatProperty.isFloatingPoint == YES);
+    XCTAssert(floatProperty.getter == @selector(floatProperty));
+    XCTAssert(floatProperty.setter == @selector(setFloatProperty:));
 }
 
 #pragma mark - rg_canonical

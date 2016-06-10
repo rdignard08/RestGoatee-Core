@@ -56,6 +56,16 @@ typedef struct objc_property* rg_property;
 @property RG_NULLABLE_PROPERTY(nonatomic, strong, readonly) NSString* backingIvar;
 
 /**
+ @brief the selector identifying the getter method, default is `-name`.
+ */
+@property RG_NULLABLE_PROPERTY(nonatomic, assign, readonly) SEL getter;
+
+/**
+ @brief the selector identifying the setter method, default is `-setName:`. `NULL` if read only.
+ */
+@property RG_NULLABLE_PROPERTY(nonatomic, assign, readonly) SEL setter;
+
+/**
  @brief The memory management semantics of the property.  The default is `assign` (`kRGPropertyAssign`).
  */
 @property (nonatomic, assign, readonly) RGStorageSemantics storageSemantics;

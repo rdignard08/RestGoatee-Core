@@ -25,6 +25,13 @@
 #import "RestGoatee-Core.h"
 #include <objc/runtime.h>
 
+static NSString* RG_SUFFIX_NONNULL const rg_name_as_setter(NSString* RG_SUFFIX_NONNULL const name) {
+    assert(name.length);
+    unichar firstCharacter = [name characterAtIndex:0];
+    firstCharacter = (unichar)toupper(firstCharacter);
+    return [NSString stringWithFormat:@"set%c%@:", firstCharacter, [name substringFromIndex:1]];
+}
+
 @implementation RGPropertyDeclaration
 
 - (RG_PREFIX_NULLABLE instancetype) init {
@@ -37,6 +44,8 @@
     if (self) {
         [self initializeName:property];
         self->_isAtomic = YES;
+        self->_getter = NSSelectorFromString(self.name);
+        self->_setter = NSSelectorFromString(rg_name_as_setter(self.name));
         [self parseAttributes:property_getAttributes(property)];
     }
     return self;
@@ -46,8 +55,12 @@
     unsigned long quoteIndex = 0;
     unsigned long typeIndex = 0;
     unsigned long ivarIndex = 0;
+    unsigned long getterIndex = 0;
+    unsigned long setterIndex = 0;
     BOOL parsingType = NO;
     BOOL parsingIvar = NO;
+    BOOL parsingGetter = NO;
+    BOOL parsingSetter = NO;
     char byte = *attributeString;
     unsigned long i = 0;
     for (; byte; byte = attributeString[++i]) {
@@ -68,6 +81,22 @@
                                                             encoding:NSUTF8StringEncoding];
                 parsingIvar = NO;
             }
+        } else if (parsingGetter) {
+            if (byte == ',') {
+                NSString* getter = [[NSString alloc] initWithBytes:attributeString + getterIndex
+                                                            length:i - getterIndex
+                                                          encoding:NSUTF8StringEncoding];
+                self->_getter = NSSelectorFromString(getter);
+                parsingGetter = NO;
+            }
+        } else if (parsingSetter) {
+            if (byte == ',') {
+                NSString* setter = [[NSString alloc] initWithBytes:attributeString + setterIndex
+                                                            length:i - setterIndex
+                                                          encoding:NSUTF8StringEncoding];
+                self->_setter = NSSelectorFromString(setter);
+                parsingSetter = NO;
+            }
         } else if (byte == '&') {
             self->_storageSemantics = kRGPropertyStrong;
         } else if (byte == 'C') {
@@ -79,6 +108,7 @@
             typeIndex = i + 1;
         } else if (byte == 'R') {
             self->_isReadOnly = YES;
+            self->_setter = NULL;
         } else if (byte == 'D') {
             self->_isDynamic = YES;
         } else if (byte == 'N') {
@@ -86,6 +116,12 @@
         } else if (byte == 'V') {
             parsingIvar = YES;
             ivarIndex = i + 1;
+        } else if (byte == 'G') {
+            parsingGetter = YES;
+            getterIndex = i + 1;
+        } else if (byte == 'S') {
+            parsingSetter = YES;
+            setterIndex = i + 1;
         }
     }
     if (parsingType) {
@@ -94,6 +130,16 @@
         self->_backingIvar = [[NSString alloc] initWithBytes:attributeString + ivarIndex
                                                       length:i - ivarIndex
                                                     encoding:NSUTF8StringEncoding];
+    } else if (parsingGetter) {
+        NSString* getter = [[NSString alloc] initWithBytes:attributeString + getterIndex
+                                                    length:i - getterIndex
+                                                  encoding:NSUTF8StringEncoding];
+        self->_getter = NSSelectorFromString(getter);
+    } else if (parsingSetter) {
+        NSString* setter = [[NSString alloc] initWithBytes:attributeString + setterIndex
+                                                    length:i - setterIndex
+                                                  encoding:NSUTF8StringEncoding];
+        self->_setter = NSSelectorFromString(setter);
     }
 }
 

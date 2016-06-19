@@ -48,7 +48,7 @@
 
 + (RG_PREFIX_NONNULL instancetype) objectFromDataSource:(RG_PREFIX_NULLABLE id<RGDataSource>)source
                                               inContext:(RG_PREFIX_NULLABLE NSManagedObjectContext*)context {
-    NSObject<RGDeserializable>* ret;
+    NSObject* ret;
     if ([self isSubclassOfClass:kRGNSManagedObject]) {
         NSAssert(context, @"A subclass of NSManagedObject must be created within a valid NSManagedObjectContext.");
         NSManagedObjectContext* RG_SUFFIX_NONNULL validContext = (id RG_SUFFIX_NONNULL)context;

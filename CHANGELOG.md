@@ -1,5 +1,10 @@
 # RestGoatee CHANGELOG
 
+## 2.4.0
+- Certain functions taking C strings now take a buffer and length instead
+- `RGPropertyDeclaration` is based on `property_getAttributes` instead of `property_copyAttributeList`
+- `RGPropertyDeclaration` has new properties: `backingIvar`, `isDynamic`, `isAtomic`, `getter`, `setter`, `isGarbageCollectible`
+
 ## 2.3.0
 - Restored 100% coverage
 - `RGDataSource` objects no longer need to conform to `NSFastEnumeration`

@@ -31,7 +31,7 @@
 /**
  @brief invoking returns the built-in date formats the library supports. Contains: ISO, `-[NSDate description]`.
  */
-extern NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL (* RG_SUFFIX_NONNULL rg_date_formats)(void);
+FOUNDATION_EXPORT NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL (* RG_SUFFIX_NONNULL rg_date_formats)(void);
 
 /**
  @return a per thread instance of `NSDateFormatter`.  Never pass the returned object between threads.

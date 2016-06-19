@@ -165,8 +165,9 @@ static NSString* RG_SUFFIX_NONNULL const rg_name_as_setter(NSString* RG_SUFFIX_N
         self->_isPrimitive = NO;
         return;
     }
-    char* buffer = calloc(length, 1);
+    char* buffer = malloc(length + 1);
     memcpy(buffer, value, length);
+    buffer[length] = '\0';
     Class propertyType = objc_getClass(buffer);
     free(buffer);
     self->_type = propertyType ?: [NSNumber self];

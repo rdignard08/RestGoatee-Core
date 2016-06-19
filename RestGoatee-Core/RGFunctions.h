@@ -24,6 +24,8 @@
 #import "RGConstants.h"
 #import "RGXMLNode.h"
 
+/* These functions are subject to change and should not be used directly */
+
 @class NSManagedObjectContext;
 
 /**

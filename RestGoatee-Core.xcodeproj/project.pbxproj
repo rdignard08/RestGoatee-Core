@@ -21,7 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		BE20095A1BCA252000A9E8A0 /* libRestGoatee-Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFFB8411BBDB15900EAF95D /* libRestGoatee-Core.a */; };
 		BE2009651BCA27AE00A9E8A0 /* RGXMLNodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2009641BCA27AE00A9E8A0 /* RGXMLNodeSpec.m */; };
 		BE2009691BCC29A900A9E8A0 /* NSObject+RGDeserializationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2009681BCC29A900A9E8A0 /* NSObject+RGDeserializationSpec.m */; };
 		BE3636CF1C51C79700A2E00A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3636CE1C51C79700A2E00A /* CoreData.framework */; };
@@ -29,6 +28,7 @@
 		BE3636D61C51D09B00A2E00A /* RGBartStation.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3636D51C51D09B00A2E00A /* RGBartStation.m */; };
 		BE4237481C647416003E47DF /* RGTestObject5.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4237471C647416003E47DF /* RGTestObject5.m */; };
 		BE54D7F61D225E44004CDCEA /* RestGoateeCore.h in Headers */ = {isa = PBXBuildFile; fileRef = BE54D7F51D225E1A004CDCEA /* RestGoateeCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE54D7F71D226067004CDCEA /* RestGoateeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE9031D11D22582F00EAA44D /* RestGoateeCore.framework */; };
 		BE5B37D11C6C5CDF0093AA02 /* RGTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5B37D01C6C5CDF0093AA02 /* RGTest.m */; };
 		BE637B7D1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE637B7C1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m */; };
 		BE637B801BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE637B7F1BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m */; };
@@ -84,6 +84,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = BEFFB8401BBDB15900EAF95D;
 			remoteInfo = "RestGoatee-Core";
+		};
+		BE54D7F81D22606E004CDCEA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEFFB8391BBDB15900EAF95D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE9031D01D22582F00EAA44D;
+			remoteInfo = RestGoateeCore;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -171,8 +178,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE54D7F71D226067004CDCEA /* RestGoateeCore.framework in Frameworks */,
 				BE3636CF1C51C79700A2E00A /* CoreData.framework in Frameworks */,
-				BE20095A1BCA252000A9E8A0 /* libRestGoatee-Core.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +438,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BE54D7F91D22606E004CDCEA /* PBXTargetDependency */,
 				BE20095C1BCA252000A9E8A0 /* PBXTargetDependency */,
 			);
 			name = "RestGoatee-Core-Tests";
@@ -616,6 +624,11 @@
 			isa = PBXTargetDependency;
 			target = BEFFB8401BBDB15900EAF95D /* RestGoatee-Core */;
 			targetProxy = BE20095B1BCA252000A9E8A0 /* PBXContainerItemProxy */;
+		};
+		BE54D7F91D22606E004CDCEA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE9031D01D22582F00EAA44D /* RestGoateeCore */;
+			targetProxy = BE54D7F81D22606E004CDCEA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

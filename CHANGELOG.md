@@ -1,5 +1,8 @@
 # RestGoatee CHANGELOG
 
+## 2.4.1
+- Provide a shared scheme and framework target to support Carthage
+
 ## 2.4.0
 - Certain functions taking C strings now take a buffer and length instead
 - `RGPropertyDeclaration` is based on `property_getAttributes` instead of `property_copyAttributeList`

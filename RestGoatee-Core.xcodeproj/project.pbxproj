@@ -28,6 +28,7 @@
 		BE3636D31C51C80A00A2E00A /* RGTestManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3636D21C51C80A00A2E00A /* RGTestManagedObject.m */; };
 		BE3636D61C51D09B00A2E00A /* RGBartStation.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3636D51C51D09B00A2E00A /* RGBartStation.m */; };
 		BE4237481C647416003E47DF /* RGTestObject5.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4237471C647416003E47DF /* RGTestObject5.m */; };
+		BE54D7F61D225E44004CDCEA /* RestGoateeCore.h in Headers */ = {isa = PBXBuildFile; fileRef = BE54D7F51D225E1A004CDCEA /* RestGoateeCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE5B37D11C6C5CDF0093AA02 /* RGTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5B37D01C6C5CDF0093AA02 /* RGTest.m */; };
 		BE637B7D1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE637B7C1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m */; };
 		BE637B801BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE637B7F1BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m */; };
@@ -39,7 +40,29 @@
 		BE68CA661BCF631200DFEC70 /* RGTestObject2.m in Sources */ = {isa = PBXBuildFile; fileRef = BE68CA631BCF631200DFEC70 /* RGTestObject2.m */; };
 		BE68CA671BCF631200DFEC70 /* RGTestObject1.m in Sources */ = {isa = PBXBuildFile; fileRef = BE68CA651BCF631200DFEC70 /* RGTestObject1.m */; };
 		BE7917921CF7E8DF009B366E /* NSObject+RGBadInit.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7917911CF7E8DF009B366E /* NSObject+RGBadInit.m */; };
-		BE7A6FB51BE2FEDA009F5A4F /* RGPropertyDeclaration.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7A6FB41BE2FEDA009F5A4F /* RGPropertyDeclaration.m */; };
+		BE9031D91D22585A00EAA44D /* RestGoatee-Core.h in Headers */ = {isa = PBXBuildFile; fileRef = BEAB13B61BBDB4960027300D /* RestGoatee-Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE9031DA1D22585F00EAA44D /* RGDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = BEAE72311BD9725900F23ABE /* RGDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE9031DB1D22587B00EAA44D /* RGDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = BE20096B1BCC2AA700A9E8A0 /* RGDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE9031DC1D22587E00EAA44D /* RGDeserializable.h in Headers */ = {isa = PBXBuildFile; fileRef = BE20096C1BCC2B1F00A9E8A0 /* RGDeserializable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE9031DD1D22588900EAA44D /* RGSerializable.h in Headers */ = {isa = PBXBuildFile; fileRef = BEB758371BE2134700102415 /* RGSerializable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE9031DE1D22588D00EAA44D /* RGPropertyDeclaration.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7A6FB31BE2FEDA009F5A4F /* RGPropertyDeclaration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE9031DF1D22589000EAA44D /* RGPropertyDeclaration.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7A6FB41BE2FEDA009F5A4F /* RGPropertyDeclaration.m */; };
+		BE9031E01D22589200EAA44D /* RGPropertyDeclaration.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7A6FB41BE2FEDA009F5A4F /* RGPropertyDeclaration.m */; };
+		BE9031E11D22589500EAA44D /* RGXMLNode.h in Headers */ = {isa = PBXBuildFile; fileRef = BEAB13C01BBDB4960027300D /* RGXMLNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE9031E21D22589B00EAA44D /* RGXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13C11BBDB4960027300D /* RGXMLNode.m */; };
+		BE9031E31D22589D00EAA44D /* RGXMLSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = BEAB13C41BBDB4960027300D /* RGXMLSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE9031E41D2258A200EAA44D /* RGXMLSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13C51BBDB4960027300D /* RGXMLSerializer.m */; };
+		BE9031E51D2258A500EAA44D /* NSDictionary+RGDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = BEAB13C21BBDB4960027300D /* NSDictionary+RGDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE9031E61D2258B200EAA44D /* NSObject+RGDeserialization.h in Headers */ = {isa = PBXBuildFile; fileRef = BEAB13B81BBDB4960027300D /* NSObject+RGDeserialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE9031E71D2258B900EAA44D /* NSObject+RGDeserialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13B91BBDB4960027300D /* NSObject+RGDeserialization.m */; };
+		BE9031E81D2258BC00EAA44D /* NSObject+RGSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = BEAB13BC1BBDB4960027300D /* NSObject+RGSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE9031E91D2258C500EAA44D /* NSObject+RGSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BD1BBDB4960027300D /* NSObject+RGSerialization.m */; };
+		BE9031EA1D2258CA00EAA44D /* NSObject+RGSharedImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = BEAB13BE1BBDB4960027300D /* NSObject+RGSharedImpl.h */; };
+		BE9031EB1D2258CE00EAA44D /* NSObject+RGSharedImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BF1BBDB4960027300D /* NSObject+RGSharedImpl.m */; };
+		BE9031EC1D2258D200EAA44D /* RGConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = BE93BB531C5204360043BAAD /* RGConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE9031ED1D2258D800EAA44D /* RGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93BB541C5204360043BAAD /* RGConstants.m */; };
+		BE9031EE1D2258DD00EAA44D /* RGFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = BE93BB561C52045A0043BAAD /* RGFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE9031EF1D2258E300EAA44D /* RGFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93BB571C52045A0043BAAD /* RGFunctions.m */; };
 		BE93BB551C5204360043BAAD /* RGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93BB541C5204360043BAAD /* RGConstants.m */; };
 		BE93BB581C52045A0043BAAD /* RGFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93BB571C52045A0043BAAD /* RGFunctions.m */; };
 		BEAB13C71BBDB4960027300D /* NSObject+RGDeserialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13B91BBDB4960027300D /* NSObject+RGDeserialization.m */; };
@@ -91,6 +114,8 @@
 		BE3636D51C51D09B00A2E00A /* RGBartStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGBartStation.m; sourceTree = "<group>"; };
 		BE4237461C647416003E47DF /* RGTestObject5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTestObject5.h; sourceTree = "<group>"; };
 		BE4237471C647416003E47DF /* RGTestObject5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGTestObject5.m; sourceTree = "<group>"; };
+		BE54D7F41D225E1A004CDCEA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RestGoateeCore/Info.plist; sourceTree = SOURCE_ROOT; };
+		BE54D7F51D225E1A004CDCEA /* RestGoateeCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RestGoateeCore.h; path = RestGoateeCore/RestGoateeCore.h; sourceTree = SOURCE_ROOT; };
 		BE5B37CF1C6C5CDF0093AA02 /* RGTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTest.h; sourceTree = "<group>"; };
 		BE5B37D01C6C5CDF0093AA02 /* RGTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGTest.m; sourceTree = "<group>"; };
 		BE637B7C1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGPropertyDeclarationSpec.m; sourceTree = "<group>"; };
@@ -113,6 +138,7 @@
 		BE7917911CF7E8DF009B366E /* NSObject+RGBadInit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RGBadInit.m"; sourceTree = "<group>"; };
 		BE7A6FB31BE2FEDA009F5A4F /* RGPropertyDeclaration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGPropertyDeclaration.h; sourceTree = "<group>"; };
 		BE7A6FB41BE2FEDA009F5A4F /* RGPropertyDeclaration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGPropertyDeclaration.m; sourceTree = "<group>"; };
+		BE9031D11D22582F00EAA44D /* RestGoateeCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RestGoateeCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE93BB531C5204360043BAAD /* RGConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGConstants.h; sourceTree = "<group>"; };
 		BE93BB541C5204360043BAAD /* RGConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGConstants.m; sourceTree = "<group>"; };
 		BE93BB561C52045A0043BAAD /* RGFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGFunctions.h; sourceTree = "<group>"; };
@@ -147,6 +173,13 @@
 			files = (
 				BE3636CF1C51C79700A2E00A /* CoreData.framework in Frameworks */,
 				BE20095A1BCA252000A9E8A0 /* libRestGoatee-Core.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE9031CD1D22582F00EAA44D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +329,16 @@
 			name = SupportClasses;
 			sourceTree = "<group>";
 		};
+		BE9031D21D22582F00EAA44D /* RestGoateeCore */ = {
+			isa = PBXGroup;
+			children = (
+				BE54D7F41D225E1A004CDCEA /* Info.plist */,
+				BE54D7F51D225E1A004CDCEA /* RestGoateeCore.h */,
+			);
+			name = RestGoateeCore;
+			path = "RestGoatee-Core-Framework";
+			sourceTree = "<group>";
+		};
 		BE93BB521C52041A0043BAAD /* C */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,6 +364,7 @@
 				BEAB13CE1BBDB5370027300D /* SupportingFiles */,
 				BEFFB8431BBDB15900EAF95D /* RestGoatee-Core */,
 				BE2009551BCA252000A9E8A0 /* RestGoatee-Core-Tests */,
+				BE9031D21D22582F00EAA44D /* RestGoateeCore */,
 				BEFFB8421BBDB15900EAF95D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -330,6 +374,7 @@
 			children = (
 				BEFFB8411BBDB15900EAF95D /* libRestGoatee-Core.a */,
 				BE2009541BCA252000A9E8A0 /* RestGoatee-Core-Tests.xctest */,
+				BE9031D11D22582F00EAA44D /* RestGoateeCore.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -349,6 +394,31 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		BE9031CE1D22582F00EAA44D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE9031EE1D2258DD00EAA44D /* RGFunctions.h in Headers */,
+				BE9031DE1D22588D00EAA44D /* RGPropertyDeclaration.h in Headers */,
+				BE9031E11D22589500EAA44D /* RGXMLNode.h in Headers */,
+				BE9031E81D2258BC00EAA44D /* NSObject+RGSerialization.h in Headers */,
+				BE9031EC1D2258D200EAA44D /* RGConstants.h in Headers */,
+				BE9031DB1D22587B00EAA44D /* RGDataSource.h in Headers */,
+				BE9031D91D22585A00EAA44D /* RestGoatee-Core.h in Headers */,
+				BE9031EA1D2258CA00EAA44D /* NSObject+RGSharedImpl.h in Headers */,
+				BE9031E31D22589D00EAA44D /* RGXMLSerializer.h in Headers */,
+				BE9031E51D2258A500EAA44D /* NSDictionary+RGDataSource.h in Headers */,
+				BE9031DC1D22587E00EAA44D /* RGDeserializable.h in Headers */,
+				BE9031DD1D22588900EAA44D /* RGSerializable.h in Headers */,
+				BE54D7F61D225E44004CDCEA /* RestGoateeCore.h in Headers */,
+				BE9031DA1D22585F00EAA44D /* RGDefines.h in Headers */,
+				BE9031E61D2258B200EAA44D /* NSObject+RGDeserialization.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		BE2009531BCA252000A9E8A0 /* RestGoatee-Core-Tests */ = {
 			isa = PBXNativeTarget;
@@ -367,6 +437,24 @@
 			productName = "RestGoatee-Core-Tests";
 			productReference = BE2009541BCA252000A9E8A0 /* RestGoatee-Core-Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BE9031D01D22582F00EAA44D /* RestGoateeCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE9031D61D22582F00EAA44D /* Build configuration list for PBXNativeTarget "RestGoateeCore" */;
+			buildPhases = (
+				BE9031CC1D22582F00EAA44D /* Sources */,
+				BE9031CD1D22582F00EAA44D /* Frameworks */,
+				BE9031CE1D22582F00EAA44D /* Headers */,
+				BE9031CF1D22582F00EAA44D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RestGoateeCore;
+			productName = "RestGoatee-Core-Framework";
+			productReference = BE9031D11D22582F00EAA44D /* RestGoateeCore.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		BEFFB8401BBDB15900EAF95D /* RestGoatee-Core */ = {
 			isa = PBXNativeTarget;
@@ -401,6 +489,9 @@
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 5W2NB69P29;
 					};
+					BE9031D01D22582F00EAA44D = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 					BEFFB8401BBDB15900EAF95D = {
 						CreatedOnToolsVersion = 6.4;
 					};
@@ -421,12 +512,20 @@
 				BEFFB8401BBDB15900EAF95D /* RestGoatee-Core */,
 				BE2009531BCA252000A9E8A0 /* RestGoatee-Core-Tests */,
 				BE63EE651C633D8700D451D2 /* OCLint */,
+				BE9031D01D22582F00EAA44D /* RestGoateeCore */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		BE2009521BCA252000A9E8A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE9031CF1D22582F00EAA44D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -480,17 +579,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BE9031CC1D22582F00EAA44D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE9031E21D22589B00EAA44D /* RGXMLNode.m in Sources */,
+				BE9031E41D2258A200EAA44D /* RGXMLSerializer.m in Sources */,
+				BE9031EF1D2258E300EAA44D /* RGFunctions.m in Sources */,
+				BE9031E71D2258B900EAA44D /* NSObject+RGDeserialization.m in Sources */,
+				BE9031DF1D22589000EAA44D /* RGPropertyDeclaration.m in Sources */,
+				BE9031ED1D2258D800EAA44D /* RGConstants.m in Sources */,
+				BE9031E91D2258C500EAA44D /* NSObject+RGSerialization.m in Sources */,
+				BE9031EB1D2258CE00EAA44D /* NSObject+RGSharedImpl.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BEFFB83D1BBDB15900EAF95D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				BE93BB581C52045A0043BAAD /* RGFunctions.m in Sources */,
 				BEAB13CD1BBDB4960027300D /* RGXMLSerializer.m in Sources */,
-				BE7A6FB51BE2FEDA009F5A4F /* RGPropertyDeclaration.m in Sources */,
 				BEAB13CB1BBDB4960027300D /* RGXMLNode.m in Sources */,
 				BEAB13CA1BBDB4960027300D /* NSObject+RGSharedImpl.m in Sources */,
 				BEAB13C71BBDB4960027300D /* NSObject+RGDeserialization.m in Sources */,
 				BE93BB551C5204360043BAAD /* RGConstants.m in Sources */,
+				BE9031E01D22589200EAA44D /* RGPropertyDeclaration.m in Sources */,
 				BEAB13C91BBDB4960027300D /* NSObject+RGSerialization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -564,6 +678,66 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		BE9031D71D22582F00EAA44D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				INFOPLIST_FILE = RestGoateeCore/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.restgoatee.restgoateecore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BE9031D81D22582F00EAA44D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = RestGoateeCore/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.restgoatee.restgoateecore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -707,6 +881,7 @@
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LLVM_LTO = NO;
+				MACH_O_TYPE = mh_dylib;
 				OTHER_CFLAGS = "-O0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -722,6 +897,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "NS_BLOCK_ASSERTIONS=1";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LLVM_LTO = YES;
+				MACH_O_TYPE = mh_dylib;
 				OTHER_CFLAGS = "-O0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -747,6 +923,15 @@
 			buildConfigurations = (
 				BE63EE661C633D8700D451D2 /* Debug */,
 				BE63EE671C633D8700D451D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE9031D61D22582F00EAA44D /* Build configuration list for PBXNativeTarget "RestGoateeCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE9031D71D22582F00EAA44D /* Debug */,
+				BE9031D81D22582F00EAA44D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

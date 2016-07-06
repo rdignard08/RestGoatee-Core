@@ -22,8 +22,8 @@
 
 /* Begin PBXBuildFile section */
 		BE119C281D2CDB840005E1D2 /* RestGoateeCoreOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = BE119C271D2CDB840005E1D2 /* RestGoateeCoreOSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BE119C351D2CDB930005E1D2 /* RestGoateeCoretvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = BE119C341D2CDB930005E1D2 /* RestGoateeCoretvOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BE119C421D2CDBB60005E1D2 /* RestGoateeCorewatchOS.h in Headers */ = {isa = PBXBuildFile; fileRef = BE119C411D2CDBB60005E1D2 /* RestGoateeCorewatchOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE119C471D2CDE560005E1D2 /* RestGoateeCoretvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = BE119C341D2CDB930005E1D2 /* RestGoateeCoretvOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE119C481D2CDE610005E1D2 /* RestGoateeCorewatchOS.h in Headers */ = {isa = PBXBuildFile; fileRef = BE119C411D2CDBB60005E1D2 /* RestGoateeCorewatchOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE2009651BCA27AE00A9E8A0 /* RGXMLNodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2009641BCA27AE00A9E8A0 /* RGXMLNodeSpec.m */; };
 		BE2009691BCC29A900A9E8A0 /* NSObject+RGDeserializationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2009681BCC29A900A9E8A0 /* NSObject+RGDeserializationSpec.m */; };
 		BE3636CF1C51C79700A2E00A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3636CE1C51C79700A2E00A /* CoreData.framework */; };
@@ -472,8 +472,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE119C421D2CDBB60005E1D2 /* RestGoateeCorewatchOS.h in Headers */,
-				BE119C351D2CDB930005E1D2 /* RestGoateeCoretvOS.h in Headers */,
 				BE119C281D2CDB840005E1D2 /* RestGoateeCoreOSX.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,6 +480,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE119C471D2CDE560005E1D2 /* RestGoateeCoretvOS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +488,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE119C481D2CDE610005E1D2 /* RestGoateeCorewatchOS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

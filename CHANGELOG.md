@@ -1,5 +1,9 @@
 # RestGoatee CHANGELOG
 
+## 2.4.3
+- Added framework targets for OS X, watchOS, and tvOS
+- Podspec now correctly shows support for watchOS 1.0
+
 ## 2.4.2
 - Fixed a warning that appeared when the project is compiled in release configuration
 - Test host is upgraded to iOS 9.2

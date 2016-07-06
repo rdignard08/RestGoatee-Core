@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BE9031D01D22582F00EAA44D"
-               BuildableName = "RestGoateeCore.framework"
-               BlueprintName = "RestGoateeCore"
+               BuildableName = "RestGoateeCoreiOS.framework"
+               BlueprintName = "RestGoateeCoreiOS"
                ReferencedContainer = "container:RestGoatee-Core.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE9031D01D22582F00EAA44D"
-            BuildableName = "RestGoateeCore.framework"
-            BlueprintName = "RestGoateeCore"
+            BuildableName = "RestGoateeCoreiOS.framework"
+            BlueprintName = "RestGoateeCoreiOS"
             ReferencedContainer = "container:RestGoatee-Core.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,8 +64,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE9031D01D22582F00EAA44D"
-            BuildableName = "RestGoateeCore.framework"
-            BlueprintName = "RestGoateeCore"
+            BuildableName = "RestGoateeCoreiOS.framework"
+            BlueprintName = "RestGoateeCoreiOS"
             ReferencedContainer = "container:RestGoatee-Core.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -21,14 +21,17 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		BE119C281D2CDB840005E1D2 /* RestGoateeCoreOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = BE119C271D2CDB840005E1D2 /* RestGoateeCoreOSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE119C351D2CDB930005E1D2 /* RestGoateeCoretvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = BE119C341D2CDB930005E1D2 /* RestGoateeCoretvOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE119C421D2CDBB60005E1D2 /* RestGoateeCorewatchOS.h in Headers */ = {isa = PBXBuildFile; fileRef = BE119C411D2CDBB60005E1D2 /* RestGoateeCorewatchOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE2009651BCA27AE00A9E8A0 /* RGXMLNodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2009641BCA27AE00A9E8A0 /* RGXMLNodeSpec.m */; };
 		BE2009691BCC29A900A9E8A0 /* NSObject+RGDeserializationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2009681BCC29A900A9E8A0 /* NSObject+RGDeserializationSpec.m */; };
 		BE3636CF1C51C79700A2E00A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3636CE1C51C79700A2E00A /* CoreData.framework */; };
 		BE3636D31C51C80A00A2E00A /* RGTestManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3636D21C51C80A00A2E00A /* RGTestManagedObject.m */; };
 		BE3636D61C51D09B00A2E00A /* RGBartStation.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3636D51C51D09B00A2E00A /* RGBartStation.m */; };
 		BE4237481C647416003E47DF /* RGTestObject5.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4237471C647416003E47DF /* RGTestObject5.m */; };
-		BE54D7F61D225E44004CDCEA /* RestGoateeCore.h in Headers */ = {isa = PBXBuildFile; fileRef = BE54D7F51D225E1A004CDCEA /* RestGoateeCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BE54D7F71D226067004CDCEA /* RestGoateeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE9031D11D22582F00EAA44D /* RestGoateeCore.framework */; };
+		BE54D7F61D225E44004CDCEA /* RestGoateeCoreiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = BE54D7F51D225E1A004CDCEA /* RestGoateeCoreiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE54D7F71D226067004CDCEA /* RestGoateeCoreiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE9031D11D22582F00EAA44D /* RestGoateeCoreiOS.framework */; };
 		BE5B37D11C6C5CDF0093AA02 /* RGTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5B37D01C6C5CDF0093AA02 /* RGTest.m */; };
 		BE637B7D1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE637B7C1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m */; };
 		BE637B801BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE637B7F1BFEA4FE000E25E8 /* RestGoatee-CoreSpec.m */; };
@@ -107,6 +110,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE119C251D2CDB840005E1D2 /* RestGoateeCoreOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RestGoateeCoreOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE119C271D2CDB840005E1D2 /* RestGoateeCoreOSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RestGoateeCoreOSX.h; sourceTree = "<group>"; };
+		BE119C291D2CDB840005E1D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE119C321D2CDB930005E1D2 /* RestGoateeCoretvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RestGoateeCoretvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE119C341D2CDB930005E1D2 /* RestGoateeCoretvOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RestGoateeCoretvOS.h; sourceTree = "<group>"; };
+		BE119C361D2CDB930005E1D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE119C3F1D2CDBB60005E1D2 /* RestGoateeCorewatchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RestGoateeCorewatchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE119C411D2CDBB60005E1D2 /* RestGoateeCorewatchOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RestGoateeCorewatchOS.h; sourceTree = "<group>"; };
+		BE119C431D2CDBB60005E1D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE2009541BCA252000A9E8A0 /* RestGoatee-Core-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RestGoatee-Core-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE2009571BCA252000A9E8A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE2009631BCA265F00A9E8A0 /* RestGoatee-Core-Tests.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RestGoatee-Core-Tests.pch"; sourceTree = "<group>"; };
@@ -122,7 +134,7 @@
 		BE4237461C647416003E47DF /* RGTestObject5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTestObject5.h; sourceTree = "<group>"; };
 		BE4237471C647416003E47DF /* RGTestObject5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGTestObject5.m; sourceTree = "<group>"; };
 		BE54D7F41D225E1A004CDCEA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RestGoateeCore/Info.plist; sourceTree = SOURCE_ROOT; };
-		BE54D7F51D225E1A004CDCEA /* RestGoateeCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RestGoateeCore.h; path = RestGoateeCore/RestGoateeCore.h; sourceTree = SOURCE_ROOT; };
+		BE54D7F51D225E1A004CDCEA /* RestGoateeCoreiOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RestGoateeCoreiOS.h; path = RestGoateeCore/RestGoateeCoreiOS.h; sourceTree = SOURCE_ROOT; };
 		BE5B37CF1C6C5CDF0093AA02 /* RGTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTest.h; sourceTree = "<group>"; };
 		BE5B37D01C6C5CDF0093AA02 /* RGTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGTest.m; sourceTree = "<group>"; };
 		BE637B7C1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGPropertyDeclarationSpec.m; sourceTree = "<group>"; };
@@ -145,7 +157,7 @@
 		BE7917911CF7E8DF009B366E /* NSObject+RGBadInit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RGBadInit.m"; sourceTree = "<group>"; };
 		BE7A6FB31BE2FEDA009F5A4F /* RGPropertyDeclaration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGPropertyDeclaration.h; sourceTree = "<group>"; };
 		BE7A6FB41BE2FEDA009F5A4F /* RGPropertyDeclaration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGPropertyDeclaration.m; sourceTree = "<group>"; };
-		BE9031D11D22582F00EAA44D /* RestGoateeCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RestGoateeCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE9031D11D22582F00EAA44D /* RestGoateeCoreiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RestGoateeCoreiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE93BB531C5204360043BAAD /* RGConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGConstants.h; sourceTree = "<group>"; };
 		BE93BB541C5204360043BAAD /* RGConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGConstants.m; sourceTree = "<group>"; };
 		BE93BB561C52045A0043BAAD /* RGFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGFunctions.h; sourceTree = "<group>"; };
@@ -174,11 +186,32 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BE119C211D2CDB840005E1D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE119C2E1D2CDB930005E1D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE119C3B1D2CDBB60005E1D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BE2009511BCA252000A9E8A0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE54D7F71D226067004CDCEA /* RestGoateeCore.framework in Frameworks */,
+				BE54D7F71D226067004CDCEA /* RestGoateeCoreiOS.framework in Frameworks */,
 				BE3636CF1C51C79700A2E00A /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,6 +233,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE119C261D2CDB840005E1D2 /* RestGoateeCoreOSX */ = {
+			isa = PBXGroup;
+			children = (
+				BE119C271D2CDB840005E1D2 /* RestGoateeCoreOSX.h */,
+				BE119C291D2CDB840005E1D2 /* Info.plist */,
+			);
+			path = RestGoateeCoreOSX;
+			sourceTree = "<group>";
+		};
+		BE119C331D2CDB930005E1D2 /* RestGoateeCoretvOS */ = {
+			isa = PBXGroup;
+			children = (
+				BE119C341D2CDB930005E1D2 /* RestGoateeCoretvOS.h */,
+				BE119C361D2CDB930005E1D2 /* Info.plist */,
+			);
+			path = RestGoateeCoretvOS;
+			sourceTree = "<group>";
+		};
+		BE119C401D2CDBB60005E1D2 /* RestGoateeCorewatchOS */ = {
+			isa = PBXGroup;
+			children = (
+				BE119C411D2CDBB60005E1D2 /* RestGoateeCorewatchOS.h */,
+				BE119C431D2CDBB60005E1D2 /* Info.plist */,
+			);
+			path = RestGoateeCorewatchOS;
+			sourceTree = "<group>";
+		};
 		BE2009551BCA252000A9E8A0 /* RestGoatee-Core-Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,13 +396,13 @@
 			name = SupportClasses;
 			sourceTree = "<group>";
 		};
-		BE9031D21D22582F00EAA44D /* RestGoateeCore */ = {
+		BE9031D21D22582F00EAA44D /* RestGoateeCoreiOS */ = {
 			isa = PBXGroup;
 			children = (
 				BE54D7F41D225E1A004CDCEA /* Info.plist */,
-				BE54D7F51D225E1A004CDCEA /* RestGoateeCore.h */,
+				BE54D7F51D225E1A004CDCEA /* RestGoateeCoreiOS.h */,
 			);
-			name = RestGoateeCore;
+			name = RestGoateeCoreiOS;
 			path = "RestGoatee-Core-Framework";
 			sourceTree = "<group>";
 		};
@@ -371,7 +431,10 @@
 				BEAB13CE1BBDB5370027300D /* SupportingFiles */,
 				BEFFB8431BBDB15900EAF95D /* RestGoatee-Core */,
 				BE2009551BCA252000A9E8A0 /* RestGoatee-Core-Tests */,
-				BE9031D21D22582F00EAA44D /* RestGoateeCore */,
+				BE9031D21D22582F00EAA44D /* RestGoateeCoreiOS */,
+				BE119C261D2CDB840005E1D2 /* RestGoateeCoreOSX */,
+				BE119C331D2CDB930005E1D2 /* RestGoateeCoretvOS */,
+				BE119C401D2CDBB60005E1D2 /* RestGoateeCorewatchOS */,
 				BEFFB8421BBDB15900EAF95D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -381,7 +444,10 @@
 			children = (
 				BEFFB8411BBDB15900EAF95D /* libRestGoatee-Core.a */,
 				BE2009541BCA252000A9E8A0 /* RestGoatee-Core-Tests.xctest */,
-				BE9031D11D22582F00EAA44D /* RestGoateeCore.framework */,
+				BE9031D11D22582F00EAA44D /* RestGoateeCoreiOS.framework */,
+				BE119C251D2CDB840005E1D2 /* RestGoateeCoreOSX.framework */,
+				BE119C321D2CDB930005E1D2 /* RestGoateeCoretvOS.framework */,
+				BE119C3F1D2CDBB60005E1D2 /* RestGoateeCorewatchOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -402,6 +468,30 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		BE119C221D2CDB840005E1D2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE119C421D2CDBB60005E1D2 /* RestGoateeCorewatchOS.h in Headers */,
+				BE119C351D2CDB930005E1D2 /* RestGoateeCoretvOS.h in Headers */,
+				BE119C281D2CDB840005E1D2 /* RestGoateeCoreOSX.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE119C2F1D2CDB930005E1D2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE119C3C1D2CDBB60005E1D2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BE9031CE1D22582F00EAA44D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -418,7 +508,7 @@
 				BE9031E51D2258A500EAA44D /* NSDictionary+RGDataSource.h in Headers */,
 				BE9031DC1D22587E00EAA44D /* RGDeserializable.h in Headers */,
 				BE9031DD1D22588900EAA44D /* RGSerializable.h in Headers */,
-				BE54D7F61D225E44004CDCEA /* RestGoateeCore.h in Headers */,
+				BE54D7F61D225E44004CDCEA /* RestGoateeCoreiOS.h in Headers */,
 				BE9031DA1D22585F00EAA44D /* RGDefines.h in Headers */,
 				BE9031E61D2258B200EAA44D /* NSObject+RGDeserialization.h in Headers */,
 			);
@@ -427,6 +517,60 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		BE119C241D2CDB840005E1D2 /* RestGoateeCoreOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE119C2A1D2CDB840005E1D2 /* Build configuration list for PBXNativeTarget "RestGoateeCoreOSX" */;
+			buildPhases = (
+				BE119C201D2CDB840005E1D2 /* Sources */,
+				BE119C211D2CDB840005E1D2 /* Frameworks */,
+				BE119C221D2CDB840005E1D2 /* Headers */,
+				BE119C231D2CDB840005E1D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RestGoateeCoreOSX;
+			productName = RestGoateeCoreOSX;
+			productReference = BE119C251D2CDB840005E1D2 /* RestGoateeCoreOSX.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		BE119C311D2CDB930005E1D2 /* RestGoateeCoretvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE119C371D2CDB930005E1D2 /* Build configuration list for PBXNativeTarget "RestGoateeCoretvOS" */;
+			buildPhases = (
+				BE119C2D1D2CDB930005E1D2 /* Sources */,
+				BE119C2E1D2CDB930005E1D2 /* Frameworks */,
+				BE119C2F1D2CDB930005E1D2 /* Headers */,
+				BE119C301D2CDB930005E1D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RestGoateeCoretvOS;
+			productName = RestGoateeCoretvOS;
+			productReference = BE119C321D2CDB930005E1D2 /* RestGoateeCoretvOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		BE119C3E1D2CDBB60005E1D2 /* RestGoateeCorewatchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE119C441D2CDBB60005E1D2 /* Build configuration list for PBXNativeTarget "RestGoateeCorewatchOS" */;
+			buildPhases = (
+				BE119C3A1D2CDBB60005E1D2 /* Sources */,
+				BE119C3B1D2CDBB60005E1D2 /* Frameworks */,
+				BE119C3C1D2CDBB60005E1D2 /* Headers */,
+				BE119C3D1D2CDBB60005E1D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RestGoateeCorewatchOS;
+			productName = RestGoateeCorewatchOS;
+			productReference = BE119C3F1D2CDBB60005E1D2 /* RestGoateeCorewatchOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		BE2009531BCA252000A9E8A0 /* RestGoatee-Core-Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE20095D1BCA252000A9E8A0 /* Build configuration list for PBXNativeTarget "RestGoatee-Core-Tests" */;
@@ -446,9 +590,9 @@
 			productReference = BE2009541BCA252000A9E8A0 /* RestGoatee-Core-Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		BE9031D01D22582F00EAA44D /* RestGoateeCore */ = {
+		BE9031D01D22582F00EAA44D /* RestGoateeCoreiOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BE9031D61D22582F00EAA44D /* Build configuration list for PBXNativeTarget "RestGoateeCore" */;
+			buildConfigurationList = BE9031D61D22582F00EAA44D /* Build configuration list for PBXNativeTarget "RestGoateeCoreiOS" */;
 			buildPhases = (
 				BE9031CC1D22582F00EAA44D /* Sources */,
 				BE9031CD1D22582F00EAA44D /* Frameworks */,
@@ -459,9 +603,9 @@
 			);
 			dependencies = (
 			);
-			name = RestGoateeCore;
+			name = RestGoateeCoreiOS;
 			productName = "RestGoatee-Core-Framework";
-			productReference = BE9031D11D22582F00EAA44D /* RestGoateeCore.framework */;
+			productReference = BE9031D11D22582F00EAA44D /* RestGoateeCoreiOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		BEFFB8401BBDB15900EAF95D /* RestGoatee-Core */ = {
@@ -490,6 +634,15 @@
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = RestGoatee;
 				TargetAttributes = {
+					BE119C241D2CDB840005E1D2 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					BE119C311D2CDB930005E1D2 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					BE119C3E1D2CDBB60005E1D2 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 					BE2009531BCA252000A9E8A0 = {
 						CreatedOnToolsVersion = 6.4;
 					};
@@ -520,12 +673,36 @@
 				BEFFB8401BBDB15900EAF95D /* RestGoatee-Core */,
 				BE2009531BCA252000A9E8A0 /* RestGoatee-Core-Tests */,
 				BE63EE651C633D8700D451D2 /* OCLint */,
-				BE9031D01D22582F00EAA44D /* RestGoateeCore */,
+				BE9031D01D22582F00EAA44D /* RestGoateeCoreiOS */,
+				BE119C241D2CDB840005E1D2 /* RestGoateeCoreOSX */,
+				BE119C311D2CDB930005E1D2 /* RestGoateeCoretvOS */,
+				BE119C3E1D2CDBB60005E1D2 /* RestGoateeCorewatchOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BE119C231D2CDB840005E1D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE119C301D2CDB930005E1D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE119C3D1D2CDBB60005E1D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BE2009521BCA252000A9E8A0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -559,6 +736,27 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BE119C201D2CDB840005E1D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE119C2D1D2CDB930005E1D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE119C3A1D2CDBB60005E1D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BE2009501BCA252000A9E8A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -627,12 +825,144 @@
 		};
 		BE54D7F91D22606E004CDCEA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BE9031D01D22582F00EAA44D /* RestGoateeCore */;
+			target = BE9031D01D22582F00EAA44D /* RestGoateeCoreiOS */;
 			targetProxy = BE54D7F81D22606E004CDCEA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		BE119C2B1D2CDB840005E1D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RestGoateeCoreOSX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.restgoatee.RestGoateeCoreOSX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BE119C2C1D2CDB840005E1D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RestGoateeCoreOSX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.restgoatee.RestGoateeCoreOSX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		BE119C381D2CDB930005E1D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RestGoateeCoretvOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.restgoatee.RestGoateeCoretvOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BE119C391D2CDB930005E1D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RestGoateeCoretvOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.restgoatee.RestGoateeCoretvOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		BE119C451D2CDBB60005E1D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RestGoateeCorewatchOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.restgoatee.RestGoateeCorewatchOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		BE119C461D2CDBB60005E1D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RestGoateeCorewatchOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.restgoatee.RestGoateeCorewatchOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
 		BE20095E1BCA252000A9E8A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -701,7 +1031,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -730,7 +1059,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -744,7 +1072,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -850,6 +1177,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
+				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_CW_ASM_SYNTAX = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -883,6 +1211,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LLVM_LTO = YES;
 				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
 				WARNING_CFLAGS = "-Wno-gnu";
 			};
 			name = Release;
@@ -920,6 +1249,30 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BE119C2A1D2CDB840005E1D2 /* Build configuration list for PBXNativeTarget "RestGoateeCoreOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE119C2B1D2CDB840005E1D2 /* Debug */,
+				BE119C2C1D2CDB840005E1D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		BE119C371D2CDB930005E1D2 /* Build configuration list for PBXNativeTarget "RestGoateeCoretvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE119C381D2CDB930005E1D2 /* Debug */,
+				BE119C391D2CDB930005E1D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		BE119C441D2CDBB60005E1D2 /* Build configuration list for PBXNativeTarget "RestGoateeCorewatchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE119C451D2CDBB60005E1D2 /* Debug */,
+				BE119C461D2CDBB60005E1D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		BE20095D1BCA252000A9E8A0 /* Build configuration list for PBXNativeTarget "RestGoatee-Core-Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -938,7 +1291,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BE9031D61D22582F00EAA44D /* Build configuration list for PBXNativeTarget "RestGoateeCore" */ = {
+		BE9031D61D22582F00EAA44D /* Build configuration list for PBXNativeTarget "RestGoateeCoreiOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE9031D71D22582F00EAA44D /* Debug */,

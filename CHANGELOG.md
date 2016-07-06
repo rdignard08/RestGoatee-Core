@@ -1,4 +1,7 @@
-# RestGoatee CHANGELOG
+# RestGoatee-Core CHANGELOG
+
+## 2.4.4
+- Fixed building on projects without implicit Foundation
 
 ## 2.4.3
 - Added framework targets for OS X, watchOS, and tvOS

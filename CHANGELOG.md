@@ -1,5 +1,9 @@
 # RestGoatee CHANGELOG
 
+## 2.4.2
+- Fixed a warning that appeared when the project is compiled in release configuration
+- Test host is upgraded to iOS 9.2
+
 ## 2.4.1
 - Provide a shared scheme and framework target to support Carthage
 

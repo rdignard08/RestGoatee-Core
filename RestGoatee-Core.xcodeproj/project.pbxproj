@@ -631,7 +631,7 @@
 		BEFFB8391BBDB15900EAF95D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = RestGoatee;
 				TargetAttributes = {
 					BE119C241D2CDB840005E1D2 = {
@@ -834,6 +834,7 @@
 		BE119C2B1D2CDB840005E1D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -856,6 +857,7 @@
 		BE119C2C1D2CDB840005E1D2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1141,6 +1143,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LLVM_LTO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-Wno-gnu";
@@ -1210,6 +1213,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LLVM_LTO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				WARNING_CFLAGS = "-Wno-gnu";
@@ -1256,6 +1260,7 @@
 				BE119C2C1D2CDB840005E1D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		BE119C371D2CDB930005E1D2 /* Build configuration list for PBXNativeTarget "RestGoateeCoretvOS" */ = {
 			isa = XCConfigurationList;
@@ -1264,6 +1269,7 @@
 				BE119C391D2CDB930005E1D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		BE119C441D2CDBB60005E1D2 /* Build configuration list for PBXNativeTarget "RestGoateeCorewatchOS" */ = {
 			isa = XCConfigurationList;
@@ -1272,6 +1278,7 @@
 				BE119C461D2CDBB60005E1D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		BE20095D1BCA252000A9E8A0 /* Build configuration list for PBXNativeTarget "RestGoatee-Core-Tests" */ = {
 			isa = XCConfigurationList;
@@ -1280,7 +1287,7 @@
 				BE20095F1BCA252000A9E8A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		BE63EE681C633D8700D451D2 /* Build configuration list for PBXAggregateTarget "OCLint" */ = {
 			isa = XCConfigurationList;
@@ -1289,7 +1296,7 @@
 				BE63EE671C633D8700D451D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		BE9031D61D22582F00EAA44D /* Build configuration list for PBXNativeTarget "RestGoateeCoreiOS" */ = {
 			isa = XCConfigurationList;
@@ -1298,7 +1305,7 @@
 				BE9031D81D22582F00EAA44D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		BEFFB83C1BBDB15900EAF95D /* Build configuration list for PBXProject "RestGoatee-Core" */ = {
 			isa = XCConfigurationList;
@@ -1307,7 +1314,7 @@
 				BEFFB8541BBDB15900EAF95D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		BEFFB8551BBDB15900EAF95D /* Build configuration list for PBXNativeTarget "RestGoatee-Core" */ = {
 			isa = XCConfigurationList;
@@ -1316,7 +1323,7 @@
 				BEFFB8571BBDB15900EAF95D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

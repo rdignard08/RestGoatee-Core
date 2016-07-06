@@ -89,7 +89,7 @@ didStartElement:(RG_PREFIX_NONNULL NSString*)elementName
 }
 
 - (void) parser:(RG_PREFIX_NONNULL __unused id)parser
-  didEndElement:(RG_PREFIX_NONNULL NSString*)elementName
+  didEndElement:(RG_PREFIX_NONNULL __unused NSString*)elementName
    namespaceURI:(RG_PREFIX_NULLABLE __unused id)namespaceURI
   qualifiedName:(RG_PREFIX_NULLABLE __unused id)qName {
     RGXMLNode* strongNode = self.currentNode;

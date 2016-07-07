@@ -21,6 +21,14 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		BE12380A1D2E321A0088833E /* RGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93BB541C5204360043BAAD /* RGConstants.m */; };
+		BE12380B1D2E321A0088833E /* RGFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93BB571C52045A0043BAAD /* RGFunctions.m */; };
+		BE12380C1D2E321A0088833E /* NSObject+RGDeserialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13B91BBDB4960027300D /* NSObject+RGDeserialization.m */; };
+		BE12380D1D2E321A0088833E /* NSObject+RGSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BD1BBDB4960027300D /* NSObject+RGSerialization.m */; };
+		BE12380E1D2E321A0088833E /* NSObject+RGSharedImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13BF1BBDB4960027300D /* NSObject+RGSharedImpl.m */; };
+		BE12380F1D2E321A0088833E /* RGPropertyDeclaration.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7A6FB41BE2FEDA009F5A4F /* RGPropertyDeclaration.m */; };
+		BE1238101D2E321A0088833E /* RGXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13C11BBDB4960027300D /* RGXMLNode.m */; };
+		BE1238111D2E321A0088833E /* RGXMLSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAB13C51BBDB4960027300D /* RGXMLSerializer.m */; };
 		BE2009651BCA27AE00A9E8A0 /* RGXMLNodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2009641BCA27AE00A9E8A0 /* RGXMLNodeSpec.m */; };
 		BE2009691BCC29A900A9E8A0 /* NSObject+RGDeserializationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2009681BCC29A900A9E8A0 /* NSObject+RGDeserializationSpec.m */; };
 		BE3636CF1C51C79700A2E00A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3636CE1C51C79700A2E00A /* CoreData.framework */; };
@@ -82,10 +90,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		BE1237FF1D2E31D30088833E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		BE119C251D2CDB840005E1D2 /* RestGoateeCoreOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RestGoateeCoreOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE119C321D2CDB930005E1D2 /* RestGoateeCoretvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RestGoateeCoretvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE119C3F1D2CDBB60005E1D2 /* RestGoateeCorewatchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RestGoateeCorewatchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE1238011D2E31D30088833E /* libRestGoatee-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libRestGoatee-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE2009541BCA252000A9E8A0 /* RestGoatee-Core-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RestGoatee-Core-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE2009571BCA252000A9E8A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE2009631BCA265F00A9E8A0 /* RestGoatee-Core-Tests.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RestGoatee-Core-Tests.pch"; sourceTree = "<group>"; };
@@ -168,6 +189,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BE119C3B1D2CDBB60005E1D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE1237FE1D2E31D30088833E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -377,6 +405,7 @@
 				BE119C251D2CDB840005E1D2 /* RestGoateeCoreOSX.framework */,
 				BE119C321D2CDB930005E1D2 /* RestGoateeCoretvOS.framework */,
 				BE119C3F1D2CDBB60005E1D2 /* RestGoateeCorewatchOS.framework */,
+				BE1238011D2E31D30088833E /* libRestGoatee-Core.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -500,6 +529,23 @@
 			productReference = BE119C3F1D2CDBB60005E1D2 /* RestGoateeCorewatchOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		BE1238001D2E31D30088833E /* RestGoatee-Core */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE1238091D2E31D30088833E /* Build configuration list for PBXNativeTarget "RestGoatee-Core" */;
+			buildPhases = (
+				BE1237FD1D2E31D30088833E /* Sources */,
+				BE1237FE1D2E31D30088833E /* Frameworks */,
+				BE1237FF1D2E31D30088833E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RestGoatee-Core";
+			productName = "RestGoatee-Core";
+			productReference = BE1238011D2E31D30088833E /* libRestGoatee-Core.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		BE2009531BCA252000A9E8A0 /* RestGoatee-Core-Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE20095D1BCA252000A9E8A0 /* Build configuration list for PBXNativeTarget "RestGoatee-Core-Tests" */;
@@ -554,6 +600,9 @@
 					BE119C3E1D2CDBB60005E1D2 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
+					BE1238001D2E31D30088833E = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 					BE2009531BCA252000A9E8A0 = {
 						CreatedOnToolsVersion = 6.4;
 					};
@@ -584,6 +633,7 @@
 				BE119C241D2CDB840005E1D2 /* RestGoateeCoreOSX */,
 				BE119C311D2CDB930005E1D2 /* RestGoateeCoretvOS */,
 				BE119C3E1D2CDBB60005E1D2 /* RestGoateeCorewatchOS */,
+				BE1238001D2E31D30088833E /* RestGoatee-Core */,
 			);
 		};
 /* End PBXProject section */
@@ -661,6 +711,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE1237FD1D2E31D30088833E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE1238111D2E321A0088833E /* RGXMLSerializer.m in Sources */,
+				BE12380C1D2E321A0088833E /* NSObject+RGDeserialization.m in Sources */,
+				BE12380B1D2E321A0088833E /* RGFunctions.m in Sources */,
+				BE12380A1D2E321A0088833E /* RGConstants.m in Sources */,
+				BE12380D1D2E321A0088833E /* NSObject+RGSerialization.m in Sources */,
+				BE12380F1D2E321A0088833E /* RGPropertyDeclaration.m in Sources */,
+				BE1238101D2E321A0088833E /* RGXMLNode.m in Sources */,
+				BE12380E1D2E321A0088833E /* NSObject+RGSharedImpl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,6 +908,37 @@
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		BE1238071D2E31D30088833E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		BE1238081D2E31D30088833E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -1124,6 +1220,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
+		};
+		BE1238091D2E31D30088833E /* Build configuration list for PBXNativeTarget "RestGoatee-Core" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE1238071D2E31D30088833E /* Debug */,
+				BE1238081D2E31D30088833E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		BE20095D1BCA252000A9E8A0 /* Build configuration list for PBXNativeTarget "RestGoatee-Core-Tests" */ = {
 			isa = XCConfigurationList;

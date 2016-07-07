@@ -22,8 +22,6 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RestGoatee-Core.h"
-#import "RGDerivedObject1.h"
-#import "RGDerivedObject2.h"
 
 CLASS_SPEC(RestGoatee_Core)
 
@@ -34,27 +32,6 @@ CLASS_SPEC(RestGoatee_Core)
 
 - (void) testRGLogNil {
     XCTAssertThrows(RGLog((NSString* RG_SUFFIX_NONNULL)nil));
-}
-
-#pragma mark - rg_swizzle
-- (void) testRGSwizzlePresent {
-    RGDerivedObject1* derivedObject = [RGDerivedObject1 new];
-    RGBaseObject* baseObject = [RGBaseObject new];
-    XCTAssert([derivedObject.method isEqual:@"bar"]);
-    XCTAssert([baseObject.method isEqual:@"foo"]);
-    rg_swizzle([RGDerivedObject1 class], @selector(method), @selector(override_method));
-    XCTAssert([derivedObject.method isEqual:@"baz"]);
-    XCTAssert([baseObject.method isEqual:@"foo"]);
-}
-
-- (void) testRGSwizzleNotPresent {
-    RGDerivedObject2* derivedObject = [RGDerivedObject2 new];
-    RGBaseObject* baseObject = [RGBaseObject new];
-    XCTAssert([derivedObject.method isEqual:@"foo"]);
-    XCTAssert([baseObject.method isEqual:@"foo"]);
-    rg_swizzle([RGDerivedObject2 class], @selector(method), @selector(override_method));
-    XCTAssert([derivedObject.method isEqual:@"baz"]);
-    XCTAssert([baseObject.method isEqual:@"foo"]);
 }
 
 #pragma mark - rg_threadsafe_formatter

@@ -53,20 +53,6 @@ NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNUL
     __attribute__((pure, nonnull, returns_nonnull));
 
 /**
- @brief This function implements method swizzling.  Replaces the implementation identified by the selector `original`
-   with the implementation identified by selector `replacement`.  Does not clobber the superclass's implementation of
-   `original` if `cls` does not implement `original`.
- @param cls the class onto which the replacement method selector should be grafted.  Technically allows `Nil`.
- @param original the current selector whose associated implementation is the target of being changed.  Allows `NULL`
-   which places no implementation on the selector identified by `replacement`.
- @param replacement the replacement selector which will provide the new implementation for the original method.
-   Allows `NULL` which places no implementation on the selector identified by `original`.
- */
-void rg_swizzle(Class RG_SUFFIX_NULLABLE cls,
-                SEL RG_SUFFIX_NULLABLE original,
-                SEL RG_SUFFIX_NULLABLE replacement) __attribute__((cold));
-
-/**
  @param object may be any type of object including `nil`.
  @return `YES` if the parameter `object` is of type `Class` but _not_ a meta-class.
  */

@@ -27,7 +27,12 @@
 
 #define CLASS_SPEC(className) \
 @interface className ## Spec : XCTestCase @end \
-@implementation className ## Spec
+@implementation className ## Spec \
+- (void) tearDown { \
+    NSLog(@"tearDown %@", [self class]); \
+    extern void __gcov_flush(void); \
+    __gcov_flush(); \
+}
 
 #define CATEGORY_SPEC(className, categoryName) \
 @interface className ## categoryName ## Spec : XCTestCase @end \

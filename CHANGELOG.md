@@ -1,4 +1,12 @@
-# RestGoatee-Core CHANGELOG
+# Version History
+
+## 2.4.5
+- Duplicated framework Info.plist and umbrella headers have been consolidated to a single set
+- Module map is now explicit
+- Fixed a warning from RGPropertyDeclaration.h not being marked private
+- Removed static lib target
+- Release configuration builds will have optimizations enabled
+- `GCC_SYMBOLS_PRIVATE_EXTERN` is no longer in effect
 
 ## 2.4.4
 - Fixed building on projects without implicit Foundation

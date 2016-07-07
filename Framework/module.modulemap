@@ -1,0 +1,5 @@
+framework module RestGoateeCore {
+    umbrella header "RestGoateeCore.h"
+    export *
+    module * { export * }
+}

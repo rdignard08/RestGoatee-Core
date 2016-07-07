@@ -27,3 +27,17 @@ void rg_compare_performance(void(^ RG_SUFFIX_NONNULL firstFunction)(void),
                             void(^ RG_SUFFIX_NONNULL secondFunction)(void),
                             unsigned long long iterations,
                             void* RG_SUFFIX_NONNULL performanceKey);
+
+/**
+ @brief This function implements method swizzling.  Replaces the implementation identified by the selector `original`
+ with the implementation identified by selector `replacement`.  Does not clobber the superclass's implementation of
+ `original` if `cls` does not implement `original`.
+ @param cls the class onto which the replacement method selector should be grafted.  Technically allows `Nil`.
+ @param original the current selector whose associated implementation is the target of being changed.  Allows `NULL`
+ which places no implementation on the selector identified by `replacement`.
+ @param replacement the replacement selector which will provide the new implementation for the original method.
+ Allows `NULL` which places no implementation on the selector identified by `original`.
+ */
+void rg_swizzle(Class RG_SUFFIX_NULLABLE cls,
+                SEL RG_SUFFIX_NULLABLE original,
+                SEL RG_SUFFIX_NULLABLE replacement) __attribute__((cold));

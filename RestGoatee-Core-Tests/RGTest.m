@@ -22,6 +22,7 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RGTest.h"
+#import <objc/runtime.h>
 
 void rg_compare_performance(void(^ RG_SUFFIX_NONNULL firstFunction)(void),
                             void(^ RG_SUFFIX_NONNULL secondFunction)(void),
@@ -54,5 +55,21 @@ void rg_compare_performance(void(^ RG_SUFFIX_NONNULL firstFunction)(void),
     testAverages[testKey] = @(average);
     testRuns[testKey] = @(count);
     NSLog(@"speedup %+.5f (first over second) average %+.5f", speedup, average);
-    
+}
+
+void rg_swizzle(Class RG_SUFFIX_NULLABLE cls, SEL RG_SUFFIX_NULLABLE original, SEL RG_SUFFIX_NULLABLE replacement) {
+    IMP replacementImp = method_setImplementation(class_getInstanceMethod(cls, replacement),
+                                                  class_getMethodImplementation(cls, original));
+    // get the replacement IMP
+    // we assume swizzle is called on the class with replacement, so we can safety force original onto replacement
+    // set the original IMP on the replacement selector
+    // try to add the replacement IMP directly to the class on original selector
+    // if it succeeds then we're all good (the original before was located on the superclass)
+    // if it doesn't then that means an IMP is already there so we have to overwrite it
+    if (!class_addMethod(cls,
+                         original,
+                         replacementImp,
+                         method_getTypeEncoding(class_getInstanceMethod(cls, replacement)))) {
+        method_setImplementation(class_getInstanceMethod(cls, original), replacementImp);
+    }
 }

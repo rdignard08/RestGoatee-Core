@@ -4,6 +4,6 @@ xcode_project: RestGoatee-Core.xcodeproj
 xcode_scheme: RestGoatee-Core-Tests
 xcode_sdk: iphonesimulator9.2
 script:
-- xctool -project RestGoatee-Core.xcodeproj -scheme RestGoatee-Core-Tests build test -sdk iphonesimulator9.2 GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
+- xctool -project RestGoatee-Core.xcodeproj -scheme RestGoatee-Core-Tests build test -sdk iphonesimulator9.2 GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES CLANG_ENABLE_CODE_COVERAGE=YES
 after_success:
 - bash <(curl -s https://codecov.io/bash)

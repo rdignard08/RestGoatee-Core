@@ -110,7 +110,11 @@
 /**
  @brief Enables selector declarations to be used in place of an `NSString`, provides spell checking.
  */
-    #define RG_STRING_SEL(sel) NSStringFromSelector(@selector(sel))
+    #ifdef DEBUG
+        #define RG_STRING_SEL(sel) (YES ? @ # sel : NSStringFromSelector(@selector(sel)))
+    #else
+        #define RG_STRING_SEL(sel) @ # sel
+    #endif
 #endif
 
 #ifndef RGLog

@@ -92,7 +92,7 @@ typedef struct objc_property* rg_property;
 @property (nonatomic, assign, readonly) BOOL isReadOnly;
 
 /**
- @brief `YES` if the property is declared `@dynamic`.
+ @brief `YES` if the property is declared `dynamic`.
  */
 @property (nonatomic, assign, readonly) BOOL isDynamic;
 

@@ -54,6 +54,8 @@ static NSString* RG_SUFFIX_NONNULL rg_name_as_setter(NSString* RG_SUFFIX_NONNULL
 }
 
 - (void) parseAttributes:(const char * RG_SUFFIX_NONNULL const)attributeString {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdirect-ivar-access"
     unsigned long quoteIndex = 0;
     unsigned long typeIndex = 0;
     unsigned long ivarIndex = 0;
@@ -152,9 +154,12 @@ static NSString* RG_SUFFIX_NONNULL rg_name_as_setter(NSString* RG_SUFFIX_NONNULL
                                                   encoding:NSUTF8StringEncoding];
         self->_setter = NSSelectorFromString(setter);
     }
+#pragma clang diagnostic pop
 }
 
 - (void) initializeType:(const char*)value andLength:(unsigned long)length {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdirect-ivar-access"
     BOOL isClass = strncmp(@encode(Class), value, length) == 0;
     if (isClass || strncmp(@encode(id), value, length) == 0) {
         self->_type = isClass ? kRGNSObjectMetaClass : kRGNSObjectClass;
@@ -174,6 +179,7 @@ static NSString* RG_SUFFIX_NONNULL rg_name_as_setter(NSString* RG_SUFFIX_NONNULL
             self->_isFloatingPoint = rg_is_floating_encoding(value, length);
         }
     }
+#pragma clang diagnostic pop
 }
 
 @end

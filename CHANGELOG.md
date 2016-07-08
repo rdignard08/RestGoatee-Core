@@ -1,5 +1,10 @@
 # Version History
 
+## 2.5.0
+- `rg_swizzle` has been removed from the library's product as it was only used by the test target
+- `const` on return value warnings have been fixed
+- OCLint scheme and script are fixed and buildable
+
 ## 2.4.5
 - Duplicated framework Info.plist and umbrella headers have been consolidated to a single set
 - Module map is now explicit

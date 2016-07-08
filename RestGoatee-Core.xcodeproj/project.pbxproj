@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		BE63EE651C633D8700D451D2 /* OCLint */ = {
+		BE73D2F31D2F641A0045202B /* OCLint */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = BE63EE681C633D8700D451D2 /* Build configuration list for PBXAggregateTarget "OCLint" */;
+			buildConfigurationList = BE73D2F41D2F641A0045202B /* Build configuration list for PBXAggregateTarget "OCLint" */;
 			buildPhases = (
-				BE63EE691C633DA300D451D2 /* ShellScript */,
+				BE73D2F71D2F645A0045202B /* ShellScript */,
 			);
 			dependencies = (
 			);
@@ -542,9 +542,8 @@
 					BE2009531BCA252000A9E8A0 = {
 						CreatedOnToolsVersion = 6.4;
 					};
-					BE63EE651C633D8700D451D2 = {
-						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 5W2NB69P29;
+					BE73D2F31D2F641A0045202B = {
+						CreatedOnToolsVersion = 7.2.1;
 					};
 					BE9031D01D22582F00EAA44D = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -564,7 +563,7 @@
 			projectRoot = "";
 			targets = (
 				BE2009531BCA252000A9E8A0 /* RestGoatee-Core-Tests */,
-				BE63EE651C633D8700D451D2 /* OCLint */,
+				BE73D2F31D2F641A0045202B /* OCLint */,
 				BE9031D01D22582F00EAA44D /* RestGoateeCoreiOS */,
 				BE119C241D2CDB840005E1D2 /* RestGoateeCoreOSX */,
 				BE119C311D2CDB930005E1D2 /* RestGoateeCoretvOS */,
@@ -612,7 +611,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		BE63EE691C633DA300D451D2 /* ShellScript */ = {
+		BE73D2F71D2F645A0045202B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -875,14 +874,14 @@
 			};
 			name = Release;
 		};
-		BE63EE661C633D8700D451D2 /* Debug */ = {
+		BE73D2F51D2F641A0045202B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		BE63EE671C633D8700D451D2 /* Release */ = {
+		BE73D2F61D2F641A0045202B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1132,14 +1131,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		BE63EE681C633D8700D451D2 /* Build configuration list for PBXAggregateTarget "OCLint" */ = {
+		BE73D2F41D2F641A0045202B /* Build configuration list for PBXAggregateTarget "OCLint" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BE63EE661C633D8700D451D2 /* Debug */,
-				BE63EE671C633D8700D451D2 /* Release */,
+				BE73D2F51D2F641A0045202B /* Debug */,
+				BE73D2F61D2F641A0045202B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
 		};
 		BE9031D61D22582F00EAA44D /* Build configuration list for PBXNativeTarget "RestGoateeCoreiOS" */ = {
 			isa = XCConfigurationList;

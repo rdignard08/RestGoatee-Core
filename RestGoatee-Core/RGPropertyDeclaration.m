@@ -25,7 +25,7 @@
 #import "RestGoatee-Core.h"
 #include <objc/runtime.h>
 
-static NSString* RG_SUFFIX_NONNULL const rg_name_as_setter(NSString* RG_SUFFIX_NONNULL const name) {
+static NSString* RG_SUFFIX_NONNULL rg_name_as_setter(NSString* RG_SUFFIX_NONNULL const name) {
     assert(name.length);
     unichar firstCharacter = [name characterAtIndex:0];
     firstCharacter = (unichar)toupper(firstCharacter);

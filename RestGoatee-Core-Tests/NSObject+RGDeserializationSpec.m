@@ -221,7 +221,8 @@ CATEGORY_SPEC(NSObject, RGDeserialization)
 - (void) testStringToDouble {
     RGTestObject2* object = [RGTestObject2 new];
     [object rg_initProperty:(id RG_SUFFIX_NONNULL)[RGTestObject2 rg_propertyList][RG_STRING_SEL(doubleProperty)] withValue:@"1234.54" inContext:nil];
-    XCTAssert(object.doubleProperty == 1234.54);
+    double diff = fabs(object.doubleProperty - 1234.54);
+    XCTAssert(diff < DBL_EPSILON);
 }
 
 - (void) testStringToRange {

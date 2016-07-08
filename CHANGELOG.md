@@ -1,5 +1,8 @@
 # Version History
 
+## 2.5.1
+- `RG_STRING_SEL` macro does not add any runtime overhead, needs `DEBUG` defined to check spelling
+
 ## 2.5.0
 - `rg_swizzle` has been removed from the library's product as it was only used by the test target
 - `const` on return value warnings have been fixed

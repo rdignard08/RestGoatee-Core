@@ -60,8 +60,8 @@ static size_t rg_to_lower_and_strip(const char* RG_SUFFIX_NONNULL const utfName,
     return outputLength;
 }
 
-static NSString* RG_SUFFIX_NONNULL const rg_malloc_based_canonical(const char* RG_SUFFIX_NONNULL const utfName,
-                                                                   size_t length) {
+static NSString* RG_SUFFIX_NONNULL rg_malloc_based_canonical(const char* RG_SUFFIX_NONNULL const utfName,
+                                                             size_t length) {
     char* canonicalBuffer = malloc(length);
     size_t outputLength = rg_to_lower_and_strip(utfName, length, canonicalBuffer);
     return [[NSString alloc] initWithBytesNoCopy:canonicalBuffer
@@ -70,8 +70,8 @@ static NSString* RG_SUFFIX_NONNULL const rg_malloc_based_canonical(const char* R
                                     freeWhenDone:YES];
 }
 
-static NSString* RG_SUFFIX_NONNULL const rg_static_based_canonical(const char* RG_SUFFIX_NONNULL const utfName,
-                                                                   size_t length) {
+static NSString* RG_SUFFIX_NONNULL rg_static_based_canonical(const char* RG_SUFFIX_NONNULL const utfName,
+                                                             size_t length) {
     char canonicalBuffer[length];
     size_t outputLength = rg_to_lower_and_strip(utfName, length, canonicalBuffer);
     return [[NSString alloc] initWithBytes:canonicalBuffer length:outputLength encoding:NSUTF8StringEncoding];

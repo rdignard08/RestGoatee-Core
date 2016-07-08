@@ -31,7 +31,10 @@
 @dynamic dynamic;
 #pragma clang diagnostic pop
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wcustom-atomic-properties"
 - (NSString*)dynamic {
+#pragma clang diagnostic pop
     return @"";
 }
 

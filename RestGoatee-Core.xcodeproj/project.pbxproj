@@ -848,6 +848,16 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.restgoatee.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = (
+					"-Wno-auto-import",
+					"-Wno-objc-missing-property-synthesis",
+					"-Wno-missing-variable-declarations",
+					"-Wno-vla",
+					"-Wno-gnu",
+					"-Wno-documentation-unknown-command",
+					"-Wno-reserved-id-macro",
+					"-Weverything",
+				);
 			};
 			name = Debug;
 		};
@@ -871,6 +881,16 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.restgoatee.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
+				WARNING_CFLAGS = (
+					"-Wno-auto-import",
+					"-Wno-objc-missing-property-synthesis",
+					"-Wno-missing-variable-declarations",
+					"-Wno-vla",
+					"-Wno-gnu",
+					"-Wno-documentation-unknown-command",
+					"-Wno-reserved-id-macro",
+					"-Weverything",
+				);
 			};
 			name = Release;
 		};

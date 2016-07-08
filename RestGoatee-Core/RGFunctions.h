@@ -49,7 +49,7 @@ NSNumberFormatter* RG_SUFFIX_NONNULL rg_number_formatter(void) __attribute__((ho
  @param utf8Input a `\0` terminated C string.  With unicodes must be UTF-8 encoded.  May not be `NULL`.
  @return the property name in its canonical form.
  */
-NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNULL const utf8Input)
+NSString* RG_SUFFIX_NONNULL rg_canonical_form(const char* RG_SUFFIX_NONNULL const utf8Input)
     __attribute__((pure, nonnull, returns_nonnull));
 
 /**

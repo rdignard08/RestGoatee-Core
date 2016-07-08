@@ -77,7 +77,7 @@ static NSString* RG_SUFFIX_NONNULL const rg_static_based_canonical(const char* R
     return [[NSString alloc] initWithBytes:canonicalBuffer length:outputLength encoding:NSUTF8StringEncoding];
 }
 
-NSString* RG_SUFFIX_NONNULL const rg_canonical_form(const char* RG_SUFFIX_NONNULL const utfName) {
+NSString* RG_SUFFIX_NONNULL rg_canonical_form(const char* RG_SUFFIX_NONNULL const utfName) {
     const size_t length = strlen(utfName);
     if (length >= kRGMaxAutoSize) {
         return rg_malloc_based_canonical(utfName, length);

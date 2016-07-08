@@ -9,7 +9,7 @@ before_script:
   - find . -name "*.gcno" -print0 | xargs -0 rm
 
 script:
-  - xctool -project RestGoatee-Core.xcodeproj -scheme RestGoatee-Core-Tests build test -sdk iphonesimulator9.3 GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES CLANG_ENABLE_CODE_COVERAGE=YES
+  - xctool -project RestGoatee-Core.xcodeproj -scheme RestGoatee-Core-Tests build test -sdk iphonesimulator GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES CLANG_ENABLE_CODE_COVERAGE=YES
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

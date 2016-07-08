@@ -42,7 +42,9 @@ static NSString* RG_SUFFIX_NONNULL rg_name_as_setter(NSString* RG_SUFFIX_NONNULL
 - (RG_PREFIX_NONNULL instancetype) initWithProperty:(RG_PREFIX_NONNULL objc_property_t)property {
     self = [super init];
     if (self) {
-        [self initializeName:property];
+        const char* utfName = property_getName(property);
+        self->_name = @(utfName);
+        self->_canonicalName = rg_canonical_form(utfName);
         self->_isAtomic = YES;
         self->_getter = NSSelectorFromString(self.name);
         self->_setter = NSSelectorFromString(rg_name_as_setter(self.name));
@@ -150,12 +152,6 @@ static NSString* RG_SUFFIX_NONNULL rg_name_as_setter(NSString* RG_SUFFIX_NONNULL
                                                   encoding:NSUTF8StringEncoding];
         self->_setter = NSSelectorFromString(setter);
     }
-}
-
-- (void) initializeName:(RG_PREFIX_NULLABLE objc_property_t)property {
-    const char* utfName = property_getName(property);
-    self->_name = @(utfName);
-    self->_canonicalName = rg_canonical_form(utfName);
 }
 
 - (void) initializeType:(const char*)value andLength:(unsigned long)length {

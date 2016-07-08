@@ -93,7 +93,10 @@ didStartElement:(RG_PREFIX_NONNULL NSString*)elementName
    namespaceURI:(RG_PREFIX_NULLABLE __unused id)namespaceURI
   qualifiedName:(RG_PREFIX_NULLABLE __unused id)qName {
     RGXMLNode* strongNode = self.currentNode;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wused-but-marked-unused"
     NSAssert([elementName isEqual:strongNode.name], @"Malformed XML");
+#pragma clang diagnostic pop
     strongNode.innerXML = self->_currentString; /* intentionally using the ivar so that if nil, nil goes to innerXML */
     self.currentString = nil;
     self.currentNode = strongNode.parentNode; /* move up the parse tree */

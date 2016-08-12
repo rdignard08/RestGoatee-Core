@@ -51,7 +51,9 @@
         BOOL parseResult =
 #endif 
         [self.parser parse];
+#ifdef DEBUG
         NSAssert(!self.parser || parseResult, @"XML Parsing failed");
+#endif
     }
     return _rootNode;
 }

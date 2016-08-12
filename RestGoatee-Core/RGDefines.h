@@ -116,37 +116,3 @@
         #define RG_STRING_SEL(sel) @ # sel
     #endif
 #endif
-
-#ifndef RGLog
-    #ifdef DEBUG
-/**
- @brief A complete `NSLog()` replacement, but does not log in production.  It logs the file name & line number.
- @param format the format string of the arguments _after_ lineNumber.  It is a programmer error to pass `nil`.
- @param file the name of the file where the log was called.
- @param line the line number of the log call.
- @param ... values that will be called with `format` to generate the output.
- @throw `NSGenericException` on format being `nil`.
- */
-        #define RGLog(format, ...) ({                                                                   \
-            const size_t RGLog_length = sizeof(__FILE__) - 1;                                           \
-            char* RGLog_file = __FILE__ + RGLog_length;                                                 \
-            while (RGLog_file != __FILE__) {                                                            \
-                char* RGLog_replacement = RGLog_file - 1;                                               \
-                if (*RGLog_replacement == '/') {                                                        \
-                    break;                                                                              \
-                }                                                                                       \
-                RGLog_file = RGLog_replacement;                                                         \
-            }                                                                                           \
-            (void)fprintf(stderr,                                                                       \
-                          "[%s:%lu] %s\n",                                                              \
-                          RGLog_file,                                                                   \
-                          (unsigned long)__LINE__,                                                      \
-                          [NSString stringWithFormat:format, ## __VA_ARGS__].UTF8String);               \
-        })
-    #else /* we define out with `RG_VOID_NOOP` generally this is `NULL` to allow usage in conditional operators. */
-/**
- @brief A complete `NSLog()` replacement, but does not log in production.
- */
-        #define RGLog(...) RG_VOID_NOOP
-    #endif
-#endif

@@ -76,5 +76,41 @@ CLASS_SPEC(RestGoatee_Core)
     XCTAssert(values.count == 0);
 }
 
+#pragma mark - rg_log_severity
+- (void) testTraceMessageLogs {
+    rg_set_logging_severity(kRGLogSeverityTrace);
+    RGLogs(kRGLogSeverityTrace, @"Hello Trace");
+}
+
+- (void) testDebugMessageLogs {
+    rg_set_logging_severity(kRGLogSeverityDebug);
+    RGLogs(kRGLogSeverityDebug, @"Hello Debug");
+}
+
+- (void) testWarnMessageLogs {
+    rg_set_logging_severity(kRGLogSeverityWarning);
+    RGLogs(kRGLogSeverityWarning, @"Hello Warn");
+}
+
+- (void) testWarnMessageDoesntLog {
+    rg_set_logging_severity(kRGLogSeverityError);
+    RGLogs(kRGLogSeverityWarning, @"No Warn");
+}
+
+- (void) testErrorMessageLogs {
+    rg_set_logging_severity(kRGLogSeverityError);
+    RGLogs(kRGLogSeverityError, @"Hello Error");
+}
+
+- (void) testFatalMessageLogs {
+    rg_set_logging_severity(kRGLogSeverityFatal);
+    RGLogs(kRGLogSeverityFatal, @"Hello Fatal");
+}
+
+- (void) testNoneMessageLogs {
+    rg_set_logging_severity(kRGLogSeverityNone);
+    RGLogs(kRGLogSeverityNone, @"Hello None");
+}
+
 SPEC_END
 

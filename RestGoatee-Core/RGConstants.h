@@ -49,6 +49,42 @@ typedef NS_ENUM(NSUInteger, RGStorageSemantics) {
 };
 
 /**
+ @brief Provides levels of logging suitable for different build environments.  Messages with severity greater than or
+   equal to the current system severity will be logged.
+ */
+typedef NS_ENUM(int32_t, RGLogSeverity) {
+    /**
+     @brief Entire set of logging appropriate for debugging the library itself.
+     */
+    kRGLogSeverityTrace = 0,
+    
+    /**
+     @brief Log messages useful for general debug and test builds.
+     */
+    kRGLogSeverityDebug = 1,
+    
+    /**
+     @brief Log messages which might indicate something wrong.
+     */
+    kRGLogSeverityWarning = 2,
+    
+    /**
+     @brief Log messages which indicate the system entered an error state.
+     */
+    kRGLogSeverityError = 3,
+    
+    /**
+     @brief Log messages which indicate an assertion or interrupt should happen.
+     */
+    kRGLogSeverityFatal = 4,
+    
+    /**
+     @brief Log level appropriate for messages which should always appear.
+     */
+    kRGLogSeverityNone = 5
+};
+
+/**
  @brief This is the largest memory allocation that will be made on the stack for a single identifer (VLA).
  */
 FOUNDATION_EXPORT const size_t kRGMaxAutoSize;

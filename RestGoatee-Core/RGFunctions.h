@@ -123,3 +123,41 @@ NSMutableArray* RG_SUFFIX_NONNULL rg_unpack_array(NSArray* RG_SUFFIX_NULLABLE ar
  @return An `NSString` representation of `object` or `nil` if no such representation could be formed.
  */
 NSString* RG_SUFFIX_NULLABLE rg_to_string(id RG_SUFFIX_NULLABLE object);
+
+/**
+ @brief returns the currently set system severity.  When `DEBUG` is defined, defaults to `kRGLogSeverityDebug` otherwise
+ defaults to `kRGLogSeverityNone`.
+ */
+RGLogSeverity rg_logging_severity(void);
+
+/**
+ @brief provide the system logging level for subsequent log messages.
+ */
+void rg_set_logging_severity(RGLogSeverity severity);
+
+/**
+ @brief A complete `NSLog()` replacement.  It logs the file name & line number.
+ @param severity the severity level of this log message
+ @param format the format string of the arguments _after_ lineNumber.  It is a programmer error to pass `nil`.
+ @param file the name of the file where the log was called.  Cannot be `NULL`.
+ @param line the line number of the log call.
+ @param ... values that will be called with `format` to generate the output.
+ */
+void rg_log_severity(RGLogSeverity severity,
+                     NSString* RG_SUFFIX_NONNULL format,
+                     const char* RG_SUFFIX_NONNULL const file,
+                     unsigned long line,
+                     ...);
+
+#ifndef RGLog /* provide this to match the old behavior */
+    #ifdef DEBUG
+        #define RGLog(format, ...) RGLogs(kRGLogSeverityNone, format, ## __VA_ARGS__)
+    #else
+        #define RGLog(...) RG_VOID_NOOP
+    #endif
+#endif
+
+#ifndef RGLogs /* new macro which takes a severity argument */
+    #define RGLogs(severity, format, ...) rg_log_severity(severity, format, __FILE__, __LINE__, ## __VA_ARGS__)
+#endif
+

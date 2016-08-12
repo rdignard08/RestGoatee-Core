@@ -22,7 +22,14 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 #import "RestGoatee-Core.h"
+#import <libkern/OSAtomic.h>
 #import <objc/runtime.h>
+
+#ifdef DEBUG
+static volatile RGLogSeverity rg_systemSeverity = kRGLogSeverityDebug;
+#else
+static volatile RGLogSeverity rg_systemSeverity = kRGLogSeverityNone;
+#endif
 
 static NSArray RG_GENERIC(NSString*) * _sDateFormats;
 static NSArray RG_GENERIC(NSString*) * RG_SUFFIX_NONNULL rg_replacement_date_formats(void) {
@@ -200,3 +207,60 @@ NSString* RG_SUFFIX_NULLABLE rg_to_string(id RG_SUFFIX_NULLABLE object) {
     }
     return nil;
 }
+
+RGLogSeverity rg_logging_severity(void) {
+    return rg_systemSeverity;
+}
+
+void rg_set_logging_severity(RGLogSeverity severity) {
+    rg_systemSeverity = severity;
+    OSMemoryBarrier();
+}
+
+static const char * rg_severityDescription(RGLogSeverity severity) {
+    switch (severity) {
+        case kRGLogSeverityTrace:
+            return "Trace, ";
+        case kRGLogSeverityDebug:
+            return "Debug, ";
+        case kRGLogSeverityWarning:
+            return "Warning, ";
+        case kRGLogSeverityError:
+            return "Error, ";
+        case kRGLogSeverityFatal:
+            return "Fatal, ";
+        case kRGLogSeverityNone:
+            return "";
+    }
+    return "";
+}
+
+static BOOL rg_shouldLog(RGLogSeverity severity) {
+    return severity >= rg_logging_severity();
+}
+
+void rg_log_severity(RGLogSeverity severity,
+                     NSString * RG_SUFFIX_NONNULL format,
+                     const char * RG_SUFFIX_NONNULL const file,
+                     unsigned long line,
+                     ...) {
+    if (rg_shouldLog(severity)) {
+        const char * fileName = file;
+        for (size_t i = strlen(file); i > 0; i--) {
+            if (file[i] == '/') {
+                fileName = file + i + 1;
+                break;
+            }
+        }
+        va_list arguments;
+        va_start(arguments, line);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wformat-nonliteral"
+        NSString* userOutput = [[NSString alloc] initWithFormat:format arguments:arguments];
+#pragma clang diagnostic pop
+        va_end(arguments);
+        const char * const severityDescription = rg_severityDescription(severity);
+        fprintf(stderr, "[%s:%lu] %s%s\n", fileName, line, severityDescription, userOutput.UTF8String);
+    }
+}
+

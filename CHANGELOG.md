@@ -1,5 +1,10 @@
 # Version History
 
+## 2.5.2
+- There is now a new log function `rg_log_severity` with the macro `RGLogs` to better enable use
+- The macro `RGLog` now uses the new log function, but behavior should remain the same
+- Users with release mode builds which use assertions will compile without modification
+
 ## 2.5.1
 - `RG_STRING_SEL` macro does not add any runtime overhead, needs `DEBUG` defined to check spelling
 

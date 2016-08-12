@@ -100,10 +100,10 @@
     NSString* key = property.name;
     if (![self rg_handleBuiltIn:property withValue:value inContext:context]) {
         if ([value isKindOfClass:property.type]) {  /* If already a subclass theres no reason to coerce it */
-        [self setValue:value forKey:key];
+            [self setValue:value forKey:key];
         } else if ([value isKindOfClass:[NSDictionary self]] || [value isKindOfClass:[RGXMLNode self]]) {
-        /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
-        [self setValue:[property.type objectFromDataSource:value inContext:context] forKey:key];
+            /* lhs is some kind of user defined object, since the source has keys, but doesn't match NSDictionary */
+            [self setValue:[property.type objectFromDataSource:value inContext:context] forKey:key];
         }
     }
 #ifdef DEBUG /* test on debug if the type system has been violated */

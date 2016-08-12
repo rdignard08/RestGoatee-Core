@@ -27,11 +27,12 @@ CLASS_SPEC(RestGoatee_Core)
 
 #pragma mark - rg_log
 - (void) testRGLogNormal {
-    XCTAssertNoThrow(RGLog(@"hello"));
+    XCTAssertNoThrow(RGLogs(kRGLogSeverityDebug, @"hello"));
 }
 
 - (void) testRGLogNil {
-    XCTAssertThrows(RGLog((NSString* RG_SUFFIX_NONNULL)nil));
+    rg_set_logging_severity(kRGLogSeverityDebug);
+    XCTAssertThrows(RGLogs(kRGLogSeverityDebug, (NSString* RG_SUFFIX_NONNULL)nil));
 }
 
 #pragma mark - rg_threadsafe_formatter

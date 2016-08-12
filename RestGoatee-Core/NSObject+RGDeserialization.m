@@ -108,7 +108,7 @@
     }
 #ifdef DEBUG /* test on debug if the type system has been violated */
     id output = [self valueForKey:key];
-    output ? RG_VOID_NOOP : RGLog(@"FAIL: initialization of property %@ on type %@", key, [self class]);
+    output ? RG_VOID_NOOP : RGLogs(kRGLogSeverityError, @"initialization of property %@ on type %@", key, [self class]);
     BOOL typeSafe = !output || property.isPrimitive || [output isKindOfClass:property.type];
     NSAssert(typeSafe, @"FAILURE: type system violation: property %@ on type %@", key, [self class]);
 #endif
@@ -208,7 +208,10 @@
             if (property.isIntegral || property.isFloatingPoint || !property.isPrimitive) {
                 source = [rg_number_formatter() numberFromString:stringValue] ?: (property.isPrimitive ? @0 : nil);
             } else {
-                RGLog(@"Unsupported Destination for NSString: %@ on %@", property.name, [self class]);
+                RGLogs(kRGLogSeverityFatal, /* Should this be an assertion? */
+                       @"Unsupported Destination for NSString: %@ on %@",
+                       property.name,
+                       [self class]);
                 return;
             }
         }

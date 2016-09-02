@@ -24,15 +24,15 @@
 #import "RGDefines.h"
 
 /**
- @brief The method here can turn typical (i.e. non-cyclically strong) objects into JSON
-   (specifically a JSON composed solely only of arrays, dictionaries, strings, and null;
-   `true`, `false`, and numeric types are written out as strings).
+ @brief The method here can turn typical (i.e. non-cyclical) objects into JSON (specifically a JSON composed solely of
+   arrays, dictionaries, strings, and null; `true` ("1"), `false` ("0"), and numeric types are written out as strings).
  */
 @interface NSObject (RGSerialization)
 
 /**
  @brief returns the receiver represented as a dictionary with its property names as keys and the values are the values
    of that property.  It is highly recommended for any class you want to serialize implement `RGSerializable`.
+ @throw Raises an exception is the receiver is a string-like `rg_isInlineObject()` or array-like type.
  */
 - (RG_PREFIX_NONNULL NSMutableDictionary RG_GENERIC(NSString*, id) *) dictionaryRepresentation;
 

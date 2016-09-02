@@ -50,14 +50,7 @@
 @implementation NSNumber (RGStringValue)
 
 - (RG_PREFIX_NONNULL NSString*) rg_stringValue {
-    static dispatch_once_t onceToken;
-    static NSNumberFormatter* formatter;
-    dispatch_once(&onceToken, ^{
-        formatter = [NSNumberFormatter new];
-        formatter.numberStyle = NSNumberFormatterDecimalStyle;
-        formatter.usesGroupingSeparator = NO;
-    });
-    return (NSString* RG_SUFFIX_NONNULL)[formatter stringFromNumber:self];
+    return self.stringValue;
 }
 
 @end

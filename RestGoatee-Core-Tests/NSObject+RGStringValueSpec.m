@@ -1,4 +1,4 @@
-/* Copyright (c) 06/10/2014, Ryan Dignard
+/* Copyright (c) 09/01/2015, Ryan Dignard
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -21,22 +21,39 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-/* preprocessor / C */
-#import "RGDefines.h"
-#import "RGConstants.h"
-#import "RGFunctions.h"
+#import "RestGoatee-Core.h"
 
-/* protocols */
-#import "RGDataSource.h"
-#import "RGDeserializable.h"
-#import "RGSerializable.h"
+CATEGORY_SPEC(NSObject, RGStringValue)
 
-/* classes */
-#import "RGXMLNode.h"
-#import "RGXMLSerializer.h"
+- (void) testNormal {
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:1410000000];
+    XCTAssert([date.rg_stringValue isEqual:@"2014-09-06 10:40:00 +0000"]);
+}
 
-/* categories */
-#import "NSDictionary+RGDataSource.h"
-#import "NSObject+RGDeserialization.h"
-#import "NSObject+RGSerialization.h"
-#import "NSObject+RGStringValue.h"
+- (void) testString {
+    NSMutableString* string = [@"myString" mutableCopy];
+    XCTAssert([string.rg_stringValue isEqual:string]);
+    XCTAssert(string.rg_stringValue != string);
+}
+
+- (void) testData {
+    NSData* data = [@"abew" dataUsingEncoding:NSUTF8StringEncoding];
+    XCTAssert([data.rg_stringValue isEqual:@"abew"]);
+}
+
+- (void) testNumber {
+    NSNumber* number = @3333.14;
+    XCTAssert([number.rg_stringValue isEqual:@"3333.14"]);
+    number = @1234;
+    XCTAssert([number.rg_stringValue isEqual:@"1234"]);
+}
+
+- (void) testURL {
+    NSURL* baseURL = [NSURL URLWithString:@"https://www.google.com/"];
+    NSURL* url = [NSURL URLWithString:@"/hello" relativeToURL:baseURL];
+    XCTAssert([url.rg_stringValue isEqual:@"https://www.google.com/hello"]);
+    url = [NSURL URLWithString:@"https://www.google.com/hello2"];
+    XCTAssert([url.rg_stringValue isEqual:@"https://www.google.com/hello2"]);
+}
+
+SPEC_END

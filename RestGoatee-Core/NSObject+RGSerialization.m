@@ -23,6 +23,7 @@
 
 #import "RestGoatee-Core.h"
 #import "NSObject+RGSharedImpl.h"
+#import "NSObject+RGStringValue.h"
 
 @implementation NSObject (RGSerialization)
 
@@ -39,7 +40,7 @@
     if ([[self class] isSubclassOfClass:[NSNull self]] || [[self class] isSubclassOfClass:[NSString self]]) {
         return self;
     } else if (rg_isInlineObject([self class]) || rg_isClassObject(self)) { /* classes can be stored as strings too */
-        return self.description;
+        return self.rg_stringValue;
     } else if (rg_isCollectionObject([self class])) {
         return [self rg_serializeArrayLike];
     } else if (rg_isKeyedCollectionObject([self class])) { /* a dictionary / RGXMLNode */

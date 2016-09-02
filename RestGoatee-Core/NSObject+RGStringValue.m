@@ -1,4 +1,4 @@
-/* Copyright (c) 06/10/2014, Ryan Dignard
+/* Copyright (c) 09/01/2015, Ryan Dignard
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -21,22 +21,51 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-/* preprocessor / C */
-#import "RGDefines.h"
-#import "RGConstants.h"
-#import "RGFunctions.h"
-
-/* protocols */
-#import "RGDataSource.h"
-#import "RGDeserializable.h"
-#import "RGSerializable.h"
-
-/* classes */
-#import "RGXMLNode.h"
-#import "RGXMLSerializer.h"
-
-/* categories */
-#import "NSDictionary+RGDataSource.h"
-#import "NSObject+RGDeserialization.h"
-#import "NSObject+RGSerialization.h"
 #import "NSObject+RGStringValue.h"
+
+@implementation NSObject (RGStringValue)
+
+- (RG_PREFIX_NONNULL NSString*) rg_stringValue {
+    return self.description; /* placeholder implementation as catch all */
+}
+
+@end
+
+@implementation NSString (RGStringValue)
+
+- (RG_PREFIX_NONNULL NSString*) rg_stringValue { /* should be the same but mutable string is tricky */
+    return [self copy];
+}
+
+@end
+
+@implementation NSData (RGStringValue)
+
+- (RG_PREFIX_NONNULL NSString*) rg_stringValue { /* description has <...> */
+    return (NSString* RG_SUFFIX_NONNULL)[[NSString alloc] initWithData:self encoding:NSUTF8StringEncoding];
+}
+
+@end
+
+@implementation NSNumber (RGStringValue)
+
+- (RG_PREFIX_NONNULL NSString*) rg_stringValue {
+    static dispatch_once_t onceToken;
+    static NSNumberFormatter* formatter;
+    dispatch_once(&onceToken, ^{
+        formatter = [NSNumberFormatter new];
+        formatter.numberStyle = NSNumberFormatterDecimalStyle;
+        formatter.usesGroupingSeparator = NO;
+    });
+    return (NSString* RG_SUFFIX_NONNULL)[formatter stringFromNumber:self];
+}
+
+@end
+
+@implementation NSURL (RGStringValue)
+
+- (RG_PREFIX_NONNULL NSString*) rg_stringValue { /* don't trust base vs relative */
+    return (NSString* RG_SUFFIX_NONNULL)self.absoluteString;
+}
+
+@end

@@ -31,6 +31,15 @@
 		BE4522DD1D2E2AD500EBAF97 /* RestGoateeCore.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4522DA1D2E2A9300EBAF97 /* RestGoateeCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE4522DE1D2E2AD600EBAF97 /* RestGoateeCore.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4522DA1D2E2A9300EBAF97 /* RestGoateeCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE4522DF1D2E2AD700EBAF97 /* RestGoateeCore.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4522DA1D2E2A9300EBAF97 /* RestGoateeCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE49D5C21D793E2D00EC21DF /* NSObject+RGStringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = BE49D5C01D793E2D00EC21DF /* NSObject+RGStringValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE49D5C31D793E2D00EC21DF /* NSObject+RGStringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = BE49D5C01D793E2D00EC21DF /* NSObject+RGStringValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE49D5C41D793E2D00EC21DF /* NSObject+RGStringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = BE49D5C01D793E2D00EC21DF /* NSObject+RGStringValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE49D5C51D793E2D00EC21DF /* NSObject+RGStringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = BE49D5C01D793E2D00EC21DF /* NSObject+RGStringValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE49D5C61D793E2D00EC21DF /* NSObject+RGStringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = BE49D5C11D793E2D00EC21DF /* NSObject+RGStringValue.m */; };
+		BE49D5C71D793E2D00EC21DF /* NSObject+RGStringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = BE49D5C11D793E2D00EC21DF /* NSObject+RGStringValue.m */; };
+		BE49D5C81D793E2D00EC21DF /* NSObject+RGStringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = BE49D5C11D793E2D00EC21DF /* NSObject+RGStringValue.m */; };
+		BE49D5C91D793E2D00EC21DF /* NSObject+RGStringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = BE49D5C11D793E2D00EC21DF /* NSObject+RGStringValue.m */; };
+		BE49D5CB1D79425900EC21DF /* NSObject+RGStringValueSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE49D5CA1D79425900EC21DF /* NSObject+RGStringValueSpec.m */; };
 		BE54D7F71D226067004CDCEA /* RestGoateeCoreiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE9031D11D22582F00EAA44D /* RestGoateeCoreiOS.framework */; };
 		BE5B37D11C6C5CDF0093AA02 /* RGTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5B37D01C6C5CDF0093AA02 /* RGTest.m */; };
 		BE637B7D1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BE637B7C1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m */; };
@@ -100,6 +109,9 @@
 		BE4522D81D2E2A9300EBAF97 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Framework/Info.plist; sourceTree = "<group>"; };
 		BE4522D91D2E2A9300EBAF97 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = Framework/module.modulemap; sourceTree = "<group>"; };
 		BE4522DA1D2E2A9300EBAF97 /* RestGoateeCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RestGoateeCore.h; path = Framework/RestGoateeCore.h; sourceTree = "<group>"; };
+		BE49D5C01D793E2D00EC21DF /* NSObject+RGStringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RGStringValue.h"; sourceTree = "<group>"; };
+		BE49D5C11D793E2D00EC21DF /* NSObject+RGStringValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RGStringValue.m"; sourceTree = "<group>"; };
+		BE49D5CA1D79425900EC21DF /* NSObject+RGStringValueSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RGStringValueSpec.m"; sourceTree = "<group>"; };
 		BE5B37CF1C6C5CDF0093AA02 /* RGTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTest.h; sourceTree = "<group>"; };
 		BE5B37D01C6C5CDF0093AA02 /* RGTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGTest.m; sourceTree = "<group>"; };
 		BE637B7C1BFEA141000E25E8 /* RGPropertyDeclarationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGPropertyDeclarationSpec.m; sourceTree = "<group>"; };
@@ -213,6 +225,7 @@
 				BE2009681BCC29A900A9E8A0 /* NSObject+RGDeserializationSpec.m */,
 				BEEC23701C47848900588655 /* NSObject+RGSerializationSpec.m */,
 				BEF4BE6C1BD58BFC00ACDAF7 /* NSObject+RGSharedImplSpec.m */,
+				BE49D5CA1D79425900EC21DF /* NSObject+RGStringValueSpec.m */,
 			);
 			name = CategorySpecs;
 			sourceTree = "<group>";
@@ -250,6 +263,8 @@
 				BEAB13BD1BBDB4960027300D /* NSObject+RGSerialization.m */,
 				BEAB13BE1BBDB4960027300D /* NSObject+RGSharedImpl.h */,
 				BEAB13BF1BBDB4960027300D /* NSObject+RGSharedImpl.m */,
+				BE49D5C01D793E2D00EC21DF /* NSObject+RGStringValue.h */,
+				BE49D5C11D793E2D00EC21DF /* NSObject+RGStringValue.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -386,6 +401,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE49D5C31D793E2D00EC21DF /* NSObject+RGStringValue.h in Headers */,
 				BE4522DD1D2E2AD500EBAF97 /* RestGoateeCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,6 +410,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE49D5C41D793E2D00EC21DF /* NSObject+RGStringValue.h in Headers */,
 				BE4522DE1D2E2AD600EBAF97 /* RestGoateeCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,6 +419,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE49D5C51D793E2D00EC21DF /* NSObject+RGStringValue.h in Headers */,
 				BE4522DF1D2E2AD700EBAF97 /* RestGoateeCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,6 +442,7 @@
 				BE9031DC1D22587E00EAA44D /* RGDeserializable.h in Headers */,
 				BE9031DD1D22588900EAA44D /* RGSerializable.h in Headers */,
 				BE9031DA1D22585F00EAA44D /* RGDefines.h in Headers */,
+				BE49D5C21D793E2D00EC21DF /* NSObject+RGStringValue.h in Headers */,
 				BE9031E61D2258B200EAA44D /* NSObject+RGDeserialization.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -631,6 +650,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE49D5C71D793E2D00EC21DF /* NSObject+RGStringValue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,6 +658,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE49D5C81D793E2D00EC21DF /* NSObject+RGStringValue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,6 +666,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE49D5C91D793E2D00EC21DF /* NSObject+RGStringValue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,6 +675,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE63EE721C64711200D451D2 /* RGTestObject4.m in Sources */,
+				BE49D5CB1D79425900EC21DF /* NSObject+RGStringValueSpec.m in Sources */,
 				BE68CA661BCF631200DFEC70 /* RGTestObject2.m in Sources */,
 				BE63EE6F1C646F0B00D451D2 /* RGTestObject3.m in Sources */,
 				BE2009651BCA27AE00A9E8A0 /* RGXMLNodeSpec.m in Sources */,
@@ -681,6 +704,7 @@
 				BE9031E41D2258A200EAA44D /* RGXMLSerializer.m in Sources */,
 				BE9031EF1D2258E300EAA44D /* RGFunctions.m in Sources */,
 				BE9031E71D2258B900EAA44D /* NSObject+RGDeserialization.m in Sources */,
+				BE49D5C61D793E2D00EC21DF /* NSObject+RGStringValue.m in Sources */,
 				BE9031DF1D22589000EAA44D /* RGPropertyDeclaration.m in Sources */,
 				BE9031ED1D2258D800EAA44D /* RGConstants.m in Sources */,
 				BE9031E91D2258C500EAA44D /* NSObject+RGSerialization.m in Sources */,
@@ -1158,6 +1182,7 @@
 				BE73D2F61D2F641A0045202B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		BE9031D61D22582F00EAA44D /* Build configuration list for PBXNativeTarget "RestGoateeCoreiOS" */ = {
 			isa = XCConfigurationList;

@@ -1,4 +1,4 @@
-/* Copyright (c) 06/10/2014, Ryan Dignard
+/* Copyright (c) 09/01/2015, Ryan Dignard
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -21,22 +21,17 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-/* preprocessor / C */
 #import "RGDefines.h"
-#import "RGConstants.h"
-#import "RGFunctions.h"
 
-/* protocols */
-#import "RGDataSource.h"
-#import "RGDeserializable.h"
-#import "RGSerializable.h"
+/**
+ @brief This is a private category which contains all the of the methods used jointly by the categories
+ `RGDeserialization` and `RGSerialization`.
+ */
+@interface NSObject (RGStringValue)
 
-/* classes */
-#import "RGXMLNode.h"
-#import "RGXMLSerializer.h"
+/**
+ @brief returns the receiver as an `NSString` in programatically useful way.
+ */
+- (RG_PREFIX_NONNULL NSString*) rg_stringValue;
 
-/* categories */
-#import "NSDictionary+RGDataSource.h"
-#import "NSObject+RGDeserialization.h"
-#import "NSObject+RGSerialization.h"
-#import "NSObject+RGStringValue.h"
+@end

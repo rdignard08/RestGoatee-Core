@@ -1,5 +1,8 @@
 # Version History
 
+## 2.5.5
+- `ONLY_ACTIVE_ARCH` is set to `NO` for all debug framework targets
+
 ## 2.5.4
 - `RGLog()` needs to use the GNU block extention for compatibility
 

@@ -1,9 +1,12 @@
 # Version History
 
+## 2.5.4
+- `RGLog()` needs to use the GNU block extention for compatibility
+
 ## 2.5.3
-- new method `-[NSObject rg_stringValue]` which programmatically more predicatable for certain classes
-- replace usage of `-[NSObject description]` with `-[NSObject rg_stringValue]`
-- marked macro `RGLog` as deprecated
+- New method `-[NSObject rg_stringValue]` which is programmatically more predicatable for certain classes
+- Replace usage of `-[NSObject description]` with `-[NSObject rg_stringValue]`
+- Marked macro `RGLog` as deprecated
 - `-[NSObject dictionaryRepresentation]` is now documented to raise an exception for weird receivers
 
 ## 2.5.2

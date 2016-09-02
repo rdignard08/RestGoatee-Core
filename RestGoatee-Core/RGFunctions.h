@@ -151,7 +151,11 @@ void rg_log_severity(RGLogSeverity severity,
 
 #ifndef RGLog /* provide this to match the old behavior */
     #ifdef DEBUG
-        #define RGLog(format, ...) RGLogs(kRGLogSeverityNone, format, ## __VA_ARGS__)
+        #define RGLog(format, ...) {                            \
+            int RGLog __attribute__((deprecated));              \
+            RGLog = 0;                                          \
+            RGLogs(kRGLogSeverityNone, format, ## __VA_ARGS__); \
+        }
     #else
         #define RGLog(...) RG_VOID_NOOP
     #endif
